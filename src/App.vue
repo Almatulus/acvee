@@ -23,6 +23,7 @@ export default {
         InvestorLayout
     }
 }
+/* вфыафыафы */
 </script>
 
 <style lang="scss">
