@@ -12,7 +12,7 @@
                             Удостоверение личности
                         </div>
                         <div class="scoring__document">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi quidem sint nesciunt nemo voluptatem sed incidunt necessitatibus ipsum, perferendis deserunt, sequi id quasi quam enim illum impedit fugit autem repellat.
+                            <FilePreview/>
                         </div>
                     </div>
                     <div class="scoring__item">
@@ -82,6 +82,15 @@
 </template>
 
 
+<script>
+import FilePreview from '@/components/documents/FilePreview.vue'
+export default {
+    components: {
+        FilePreview
+    }
+}
+</script>
+
 <style lang="scss" scoped>
     .scoring {
         margin: 30px 0 0 0;
@@ -103,7 +112,7 @@
             width: 335px;
             height: 360px;
             padding: 30px;
-            background: #746767;
+            background: #FFFFFF;
             box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
             border-radius: 10px;
             margin: 0 0 0 30px;

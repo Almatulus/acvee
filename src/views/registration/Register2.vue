@@ -13,17 +13,22 @@
                         <input 
                         type="password"
                         v-model.trim="form.password"
-                        :class="$v.form.phone.$error ? 'invalid' : ''"
+                        :class="$v.form.password.$error ? 'invalid' : ''"
                         >
-                        <!--<p v-if="$v.form.password.$dirty && !$v.form.password.required" class="invalid-feedback">Обязательное поле для заполнения</p>-->
+                        <p v-if="$v.form.password.$dirty && !$v.form.password.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                        <p v-if="$v.form.password.$dirty && !$v.form.password.minLength" class="invalid-feedback">Данное поле должно содержать больше 7 символов</p>
                     </div>
                     <div class="authentication-template__form-item">
                         <p>Повторите пароль</p>
                         <input 
                         type="password"
                         v-model.trim="form.repeatPassword"
+                        :class="$v.form.repeatPassword.$error ? 'invalid' : ''"
                         >
-                        <!--<p v-if="$v.form.repeatPassword.$dirty && !$v.form.repeatPassword.required" class="invalid-feedback">Обязательное поле для заполнения</p>-->
+                        <p v-if="$v.form.repeatPassword.$dirty && !$v.form.repeatPassword.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                        <p v-if="$v.form.repeatPassword.$dirty && !$v.form.repeatPassword.minLength" class="invalid-feedback">Данное поле должно содержать больше 7 символов</p>
+                        <p v-if="$v.form.repeatPassword.$dirty && !$v.form.repeatPassword.sameAsPassword" class="invalid-feedback">Данное поле должно соответствовать предыдущему</p>
+                        
                     </div>
                     <div class="authentication-template__button">
                         <button class="button" type="submit">
@@ -62,8 +67,10 @@ export default {
         AuthenticationTemplateRoles
     },
     validations: {
-        password: {required},
-        repeatPassword: {required}
+        form: {
+            password: {required, minLength: minLength(8)},
+            repeatPassword: {required, minLength: minLength(8), sameAsPassword: sameAs('form.password')}
+        }
     }
 }
 </script>
