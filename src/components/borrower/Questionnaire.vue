@@ -26,9 +26,9 @@
                 type="choseCountry" 
                 class="questionnaire__questions-input questionnaire__input"
                 v-model.trim="form.choseCountry"
-                :options="choseCountryOptions"
                 >
-                    
+                    <option value="">Выберите страну</option>
+                    <option value=""></option>
                 </select>
                 
                 <select placeholder="Выберите город" type="text" class="questionnaire__questions-input questionnaire__input">
@@ -107,9 +107,10 @@
                             class="questionnaire__input" 
                             type="text"
                             >
-                            <select placeholder="Цена" class="questionnaire__input" type="text">
-                                <option value="">Цена</option>
-                            </select>
+                            <input 
+                            placeholder="Цена" 
+                            class="questionnaire__input" 
+                            type="text">
                         </div>
                     </div>
                 </div>
@@ -118,10 +119,7 @@
                         <h3>Выручка за последние 12 месяцев</h3>
                         <div class="questionnaire__loan-revenue-content questionnaire__loan-content">
                             <input placeholder="Категория продуктов" class="questionnaire__input" type="text">
-                            <select placeholder="Выручка" class="questionnaire__input" type="text">
-                                <option value="">Выручка</option>
-                                <option value=""></option>
-                            </select>
+                            <input placeholder="Выручка" class="questionnaire__input" type="text">
                         </div>
                     </div>
                 </div>
@@ -129,10 +127,7 @@
                     <div class="questionnaire__loan-profit">
                         <h3>Прибыль за последние 12 месяцев</h3>
                         <div class="questionnaire__loan-profit-content questionnaire__loan-content">
-                            <select placeholder="Выручка" class="questionnaire__input" type="text">
-                                <option value="">Прибыль</option>
-                                <option value=""></option>
-                            </select>
+                            <input placeholder="Прибыль" class="questionnaire__input" type="text">
                         </div>
                     </div>
                 </div>
@@ -165,15 +160,9 @@
                         <p v-if="$v.form.credit.$dirty && !$v.form.credit.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
                         <div class="questionnaire__loan-credits-content questionnaire__loan-content" >
                             
-                            <select placeholder="Выручка" class="questionnaire__input" type="text">
-                                <option value="">Сумма</option>
-                                <option value=""></option>
-                            </select>
+                            <input placeholder="Сумма" class="questionnaire__input" type="text">                               
                             <input placeholder="Проценты" class="questionnaire__input" type="text">
-                            <select placeholder="Выручка" class="questionnaire__input" type="text">
-                                <option value="">Ежемесячные выплаты</option>
-                                <option value=""></option>
-                            </select>
+                            <input placeholder="Ежемесячные выплаты" class="questionnaire__input" type="text">
                             <input placeholder="Срок погашения" class="questionnaire__input" type="text">
                         </div>
                     </div>
@@ -182,10 +171,7 @@
                     <div class="questionnaire__loan-price">
                         <h3>Необходимая сумма</h3>
                         <div class="questionnaire__loan-price-content questionnaire__loan-content">
-                            <select class="questionnaire__input" name="" id="">
-                                <option value="">Сумма</option>
-                                <option value=""></option>
-                            </select>
+                            <input placeholder="Сумма" class="questionnaire__input" name="" id="">
                         </div>
                     </div>
                 </div>
@@ -219,6 +205,7 @@
 <script>
 import { required, minLength, email } from 'vuelidate/lib/validators'
 import { IMaskDirective } from 'vue-imask'
+import {mapActions, mapGetters} from 'vuex'
 export default {
     data: () => ({
         form: {
@@ -230,9 +217,22 @@ export default {
             phone: '',
             email: '',
             businessDescription: '',
-            choseCountry: '',
-            productName: '',
-            credit: undefined
+            productsAndServices: {
+                productName: '',
+                productPrice: ''
+            },
+            revenue: {
+                productCategory: '',
+                revenue: ''
+            },
+            profit: '',
+            credit: {
+                sum: '',
+                percent: '',
+                monthlyPayment: '',
+                maturity: ''
+            }
+
         },
         phoneNumberMask: {
             mask: '+{7}(000)000-00-00',
@@ -258,20 +258,38 @@ export default {
         }
     },
     methods: {
+        ...mapActions([
+            'GET_COUNTRIES_FROM_API'
+        ]),
         submitHandler(){
             //this.$v.form.$touch()
             if(!this.$v.form.$error){
-                axios.post(
+                axios.get(
                     'http://localhost:8000/api/v1/borrower/create/',
                     {
                         form: {
                             organizationName: this.form.organizationName,
                             legalFormOrganization: this.form.legalFormOrganization,
-                            creditForm: {
-                                
+                            BIN: this.form.BIN,
+
+                            directorName: this.form.directorName,
+                            UIN: this.form.UIN,
+                            email: this.form.email,
+                            businessDescription: this.form.businessDescription,
+                            productsAndServices: {
+                                productName: this.form.productName,
+                                productPrice: this.form.productPrice
                             },
-                            productAndService: {
-                                
+                            revenue: {
+                                productCategory: this.form.productCategory,
+                                revenue: this.form.revenue
+                            },
+                            profit: this.form.profit,
+                            credit: {
+                                sum: this.form.sum,
+                                percent: this.form.percent,
+                                monthlyPayment: this.form.monthlyPayment,
+                                maturity: this.form.maturity
                             }
                         }
                     }
@@ -280,6 +298,7 @@ export default {
                 }).catch(function(){
                     console.log('FAILURE!!');
                 })
+                //console.log(this.COUNTRIES)
             }
         },
         formValidation(){
@@ -310,10 +329,12 @@ export default {
 
     },
     computed: {
-        
+        ...mapGetters([
+            'COUNTRIES'
+        ]),
     },
     mounted() {
-        axios.get('')
+        this.GET_COUNTRIES_FROM_API()
     },
     directives: {
       imask: IMaskDirective
@@ -395,7 +416,7 @@ export default {
             }
         }
         &__loan-profit{
-            select{
+            input{
                 width: 685px;
             }
         }
@@ -442,7 +463,7 @@ export default {
             }
         }
         &__loan-price{
-            select{
+            input{
                 width: 685px;
             }
         }

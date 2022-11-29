@@ -1,19 +1,68 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  "countries": [
+      {
+          "id": 1,
+          "cities": [
+              {
+                  "id": 1,
+                  "name": "Almaty",
+                  "id_country": 1
+              },
+              {
+                  "id": 2,
+                  "name": "Astana",
+                  "id_country": 1
+              },
+              {
+                  "id": 7,
+                  "name": "Shymkent",
+                  "id_country": 1
+              }
+          ],
+          "name": "Kazakhstan"
+      },
+      {
+          "id": 2,
+          "cities": [
+              {
+                  "id": 3,
+                  "name": "Moscow",
+                  "id_country": 2
+              },
+              {
+                  "id": 4,
+                  "name": "St-Peterburg",
+                  "id_country": 2
+              },
+              {
+                  "id": 8,
+                  "name": "Novosibirsk",
+                  "id_country": 2
+              }
+          ],
+          "name": "Russia"
+      },
+      {
+          "id": 3,
+          "cities": [
+              {
+                  "id": 5,
+                  "name": "Washington",
+                  "id_country": 3
+              }
+          ],
+          "name": "USA"
+      },
+      {
+          "id": 4,
+          "cities": [
+              {
+                  "id": 6,
+                  "name": "London",
+                  "id_country": 4
+              }
+          ],
+          "name": "UK"
+      }
+  ]
 }
