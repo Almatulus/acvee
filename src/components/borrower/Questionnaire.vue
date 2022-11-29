@@ -234,13 +234,6 @@ export default {
             productName: '',
             credit: undefined
         },
-        choseCountryOptions: [
-            {text: 'Выберите страну', value: '', disabled: true, selected: true},
-            {text: 'Казахстан', value: 'Kazakhstan'},
-            {text: 'Россия', value: 'Russia'},
-            {text: 'Украина', value: 'Ukraine'},
-            {text: 'Узбекистан', value: 'Uzbekistan'},
-        ],
         phoneNumberMask: {
             mask: '+{7}(000)000-00-00',
             lazy: true
@@ -272,7 +265,14 @@ export default {
                     'http://localhost:8000/api/v1/borrower/create/',
                     {
                         form: {
-                            organizationName: this.form.organizationName
+                            organizationName: this.form.organizationName,
+                            legalFormOrganization: this.form.legalFormOrganization,
+                            creditForm: {
+                                
+                            },
+                            productAndService: {
+                                
+                            }
                         }
                     }
                 ).then(function(){
@@ -311,6 +311,9 @@ export default {
     },
     computed: {
         
+    },
+    mounted() {
+        axios.get('')
     },
     directives: {
       imask: IMaskDirective
