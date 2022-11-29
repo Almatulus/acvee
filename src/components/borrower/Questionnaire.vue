@@ -268,7 +268,18 @@ export default {
         submitHandler(){
             //this.$v.form.$touch()
             if(!this.$v.form.$error){
-                
+                axios.post(
+                    'http://localhost:8080/borrower/create/',
+                    {
+                        form: {
+                            organizationName: this.form.organizationName
+                        }
+                    }
+                ).then(function(){
+                    console.log('SUCCESS!!');
+                }).catch(function(){
+                    console.log('FAILURE!!');
+                })
             }
         },
         formValidation(){
