@@ -269,7 +269,7 @@ export default {
             //this.$v.form.$touch()
             if(!this.$v.form.$error){
                 axios.post(
-                    'http://localhost:8080/borrower/create/',
+                    'http://localhost:8000/api/v1/borrower/create/',
                     {
                         form: {
                             organizationName: this.form.organizationName
