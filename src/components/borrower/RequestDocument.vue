@@ -32,7 +32,7 @@ export default {
     VueDocPreview
 },
 data: () => ({
-    type: 'text',
+    type: 'doc',
     url: 'https://static-1252421604.cos.ap-guangzhou.myqcloud.com/vdp.docx'
 })
 }

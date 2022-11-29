@@ -32,19 +32,19 @@ const routes = [
     path: '/myrequest',
     name: 'myrequest',
     meta: {layout: 'borrower'},
-    component: () => import('../views/MyRequests.vue')
+    component: () => import('../views/Borrower/BorrowerMyRequests.vue')
   },
   {
     path: '/datarequest',
     name: 'datarequest',
     meta: {layout: 'borrower'},
-    component: () => import('../views/DataRequest.vue')
+    component: () => import('../views/Borrower/BorrowerDataRequest.vue')
   },
   {
     path: '/questionnaire',
     name: 'questionnaire',
     meta: {layout: 'borrower'},
-    component: () => import('../views/QuestionnaireTemplate.vue')
+    component: () => import('../views/Borrower/BorrowerAddRequest.vue')
   },
   {
     path: '/investor/my-projects',

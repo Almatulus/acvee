@@ -20,10 +20,10 @@
 </template>
 
 <script>
-import RequestDocument from '@/components/myrequests/RequestDocument.vue'
+
 export default {
     components: {
-        RequestDocument
+        
     }
 }
 </script>

@@ -5,16 +5,15 @@
             <div class="additional-documents__subtitle">
                 Вам не требуется продоставление дополнительных документов
             </div>
-            <RequestDocument/>
         </div>
     </div>
 </template>
 
 <script>
-import RequestDocument from '@/components/myrequests/RequestDocument.vue'
+
 export default {
     components: {
-        RequestDocument
+        
     }
 }
 </script>

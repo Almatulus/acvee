@@ -2,9 +2,10 @@
    <div class="questionnaire-template">
         <div class="questionnaire-template__inner">
             <div class="questionnaire-template__content">
-                <aaa ref="aaa" class="scroll-anim"/>
+                <Questionnaire ref="aaa" class="scroll-anim"/>
                 <Scoring ref="scoring" class="scroll-anim"/>
                 <AdditionalDocuments ref="additionalDocuments" class="scroll-anim"/>
+                <RequestDocument/>
             </div>
             <div class="questionnaire-nav" v-on="handleScroll">
                 <nav>
@@ -30,9 +31,10 @@
 
 <script>
 import VerticalNumberNav from '@/components/app/VerticalNumberNav.vue'
-import aaa from '@/components/questionnaire/aaa.vue'
-import Scoring from '@/components/questionnaire/Scoring.vue'
-import AdditionalDocuments from '@/components/questionnaire/AdditionalDocuments.vue'
+import Questionnaire from '@/components/borrower/Questionnaire.vue'
+import Scoring from '@/components/borrower/Scoring.vue'
+import RequestDocument from '@/components/borrower/RequestDocument.vue'
+import AdditionalDocuments from '@/components/borrower/AdditionalDocuments.vue'
 export default {
     data: () => ({
         activeEl: 0,
@@ -40,8 +42,9 @@ export default {
     }),
     components: {
         VerticalNumberNav,
-        aaa,
+        Questionnaire,
         Scoring,
+        RequestDocument,
         AdditionalDocuments
     },
     methods: {

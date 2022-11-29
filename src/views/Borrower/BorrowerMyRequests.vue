@@ -10,25 +10,12 @@
 
 <script>
 import RequestSearch from '@/components/myrequests/RequestSearch.vue'
-import RequestFilter from '@/components/myrequests/RequestFilter.vue'
 import RequestTable from '@/components/myrequests/RequestTable.vue'
 
 export default {
     name: 'myrequest',
     components:{
-        RequestSearch, RequestFilter, RequestTable
+        RequestSearch, RequestTable
     }
 }
 </script>
-
-<style lang="scss">
-    .my-requests {
-        
-		&__inner {
-		}
-
-		&__title {
-		}
-}
-
-</style>

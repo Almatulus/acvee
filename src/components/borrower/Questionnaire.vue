@@ -266,9 +266,9 @@ export default {
     },
     methods: {
         submitHandler(){
-            this.$v.form.$touch()
+            //this.$v.form.$touch()
             if(!this.$v.form.$error){
-                alert('Валидация прошла успешно')
+                
             }
         },
         formValidation(){
@@ -299,9 +299,7 @@ export default {
 
     },
     computed: {
-        formValid(){
-            return this.$v.$invalid
-        }
+        
     },
     directives: {
       imask: IMaskDirective
