@@ -21,20 +21,23 @@
                 :class="$v.form.legalFormOrganization.$error ? 'questionnaire-input-invalid' : ''"
                 >
                 <p v-if="$v.form.legalFormOrganization.$dirty && !$v.form.legalFormOrganization.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
-
+                {{form.countryID}}
                 <select 
-                type="choseCountry" 
-                class="questionnaire__questions-input questionnaire__input"
-                v-model="form.choseCountry"
+                    type="choseCountry" 
+                    class="questionnaire__questions-input questionnaire__input"
+                    v-model="form.countryID"
+
                 >
                     <option value="">Выберите страну</option>
-                    <option v-for="country in COUNTRIES" :key="country.id" value="">{{country.name}}</option>
+                    <option v-for="country in COUNTRIES" :key="country.id" :value="country.id">{{country.name}}</option>
                 </select>
                 
                 <select type="text" class="questionnaire__questions-input questionnaire__input">
                     <option value="">Выберите город</option>
-                    <option v-for="city in COUNTRIES" :key="city.cities.id" value="">{{}}</option>
+                    <option v-for="city in cities" :key="city.id" :value="form.cityID">{{city.name}}</option>
+                    
                 </select>
+                {{PRODUCT_CATEGORIES}}
                 
                 <input placeholder="БИН" 
                 type="text" 
@@ -119,7 +122,11 @@
                     <div class="questionnaire__loan-revenue">
                         <h3>Выручка за последние 12 месяцев</h3>
                         <div class="questionnaire__loan-revenue-content questionnaire__loan-content">
-                            <input placeholder="Категория продуктов" class="questionnaire__input" type="text">
+                            <select class="questionnaire__input" type="text">
+                                <option value="">Категория продуктов</option>
+                                <option v-for="category in PRODUCT_CATEGORIES" :key="category.id" :value="form.category.id">{{category.name}}</option>
+                            </select>
+                            
                             <input placeholder="Выручка" class="questionnaire__input" type="text">
                         </div>
                     </div>
@@ -180,6 +187,7 @@
                     <div class="questionnaire__loan-term">
                         <h3>Срок займа</h3>
                         <div class="questionnaire__loan-term-content questionnaire__loan-content">
+                            <input type="range" class="questionnaire__loan-term-range">
                             <div class="questionnaire__loan-term-content-item">
                                 <p>Готовы ли предоставить доступ к кредитной истории учредителя?</p>
                                 <input type="radio" id="creditHistoryYes" value="creditHistoryYes">
@@ -209,6 +217,8 @@ import { IMaskDirective } from 'vue-imask'
 import {mapActions, mapGetters} from 'vuex'
 export default {
     data: () => ({
+        country: '',
+        cities: '',
         form: {
             organizationName: '',
             legalFormOrganization: '',
@@ -218,6 +228,8 @@ export default {
             phone: '',
             email: '',
             businessDescription: '',
+            countryID: '',
+            cityID: '',
             productsAndServices: {
                 productName: '',
                 productPrice: ''
@@ -260,46 +272,23 @@ export default {
     },
     methods: {
         ...mapActions([
-            'GET_COUNTRIES_FROM_API'
+            'GET_COUNTRIES_FROM_API',
+            'GET_PRODUCT_CATEGORIES_FROM_API'
         ]),
         submitHandler(){
             //this.$v.form.$touch()
             if(!this.$v.form.$error){
-                axios.get(
+                axios.post(
                     'http://localhost:8000/api/v1/borrower/create/',
                     {
-                        form: {
-                            organizationName: this.form.organizationName,
-                            legalFormOrganization: this.form.legalFormOrganization,
-                            BIN: this.form.BIN,
-
-                            directorName: this.form.directorName,
-                            UIN: this.form.UIN,
-                            email: this.form.email,
-                            businessDescription: this.form.businessDescription,
-                            productsAndServices: {
-                                productName: this.form.productName,
-                                productPrice: this.form.productPrice
-                            },
-                            revenue: {
-                                productCategory: this.form.productCategory,
-                                revenue: this.form.revenue
-                            },
-                            profit: this.form.profit,
-                            credit: {
-                                sum: this.form.sum,
-                                percent: this.form.percent,
-                                monthlyPayment: this.form.monthlyPayment,
-                                maturity: this.form.maturity
-                            }
-                        }
+                        form: this.form
                     }
                 ).then(function(){
                     console.log('SUCCESS!!');
                 }).catch(function(){
                     console.log('FAILURE!!');
                 })
-                //console.log(this.COUNTRIES)
+                console.log(this.form.country)
             }
         },
         formValidation(){
@@ -331,7 +320,8 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'COUNTRIES'
+            'COUNTRIES',
+            'PRODUCT_CATEGORIES'
         ]),
     },
     mounted() {
@@ -343,6 +333,12 @@ export default {
     watch: {
         picked(){
             this.credit.showBlock = (this.credit.picked == 'creditChoiceYes')
+        },
+        'form.countryID': function(){
+            this.cities = this.COUNTRIES.filter(item => {
+                return item.id == this.form.countryID;
+            })[0].cities;
+        
         }
     }
 }
@@ -492,6 +488,9 @@ export default {
                 width: 20px;
                 height: 20px;
             }
+        }
+        &__loan-term-range{
+            width: 200px;
         }
 }
 
