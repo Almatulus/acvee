@@ -28,7 +28,7 @@
                 v-model.trim="form.choseCountry"
                 >
                     <option value="">Выберите страну</option>
-                    <option value=""></option>
+                    <option v-for="country in COUNTRIES" :key="country.id" value="">{{country.name}}</option>
                 </select>
                 
                 <select placeholder="Выберите город" type="text" class="questionnaire__questions-input questionnaire__input">
