@@ -19,7 +19,7 @@ export default new Vuex.Store({
   },
   actions: {
     GET_COUNTRIES_FROM_API({commit}) {
-        return axios('http://localhost:8000/api/v1/borrower', {
+        return axios('http://localhost:8000/api/v1/borrower/category/', {
             method: "GET"
         })
         .then((countries) => {

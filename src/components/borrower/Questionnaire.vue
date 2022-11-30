@@ -25,14 +25,15 @@
                 <select 
                 type="choseCountry" 
                 class="questionnaire__questions-input questionnaire__input"
-                v-model.trim="form.choseCountry"
+                v-model="form.choseCountry"
                 >
                     <option value="">Выберите страну</option>
                     <option v-for="country in COUNTRIES" :key="country.id" value="">{{country.name}}</option>
                 </select>
                 
-                <select placeholder="Выберите город" type="text" class="questionnaire__questions-input questionnaire__input">
-
+                <select type="text" class="questionnaire__questions-input questionnaire__input">
+                    <option value="">Выберите город</option>
+                    <option v-for="city in COUNTRIES" :key="city.cities.id" value="">{{}}</option>
                 </select>
                 
                 <input placeholder="БИН" 
