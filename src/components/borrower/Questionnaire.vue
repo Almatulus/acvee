@@ -206,6 +206,7 @@
                                     <input type="radio" name="accessCompanyHistory" id="accessCompanyHistory2" v-model="form.accessCompanyHistory" :value="false">
                                     <label for="accessCompanyHistory2">Нет</label>
                                 </div>
+                                <button type="submit">111</button>
                             </div>
                         </div>
                     </div>
@@ -236,7 +237,7 @@
                                 Поставщик – Конечный клиент
                             </div>
                             <div class="scoring__document">
-                                <FilePreview/>
+                                <FilePreview :value="form.registrationCertificate"/>
                             </div>
                         </div>
                         <div class="scoring__item">
@@ -247,7 +248,7 @@
                                 с производителем\дистрибьютером
                             </div>
                             <div class="scoring__document">
-                                <FilePreview/>
+                                <FilePreview :value="form.purchaseAgreement"/>
                             </div>
                         </div>
                     </div>
@@ -263,7 +264,7 @@
                                 Минимум по три акта за один месяц
                             </div>
                             <div class="scoring__document">
-                                <PreviewFile/>
+                                <FilePreview :value="form.firstAct"/>
                             </div>
                         </div>
                         <div class="scoring__item">
@@ -274,7 +275,7 @@
                                 Минимум по три акта за один месяц
                             </div>
                             <div class="scoring__document">
-                                <FilePreview/>
+                                <FilePreview :value="form.secondAct"/>
                             </div>
                         </div>
                         <div class="scoring__item">
@@ -285,7 +286,7 @@
                                 Минимум по три акта за один месяц
                             </div>
                             <div class="scoring__document">
-                                <FilePreview/>
+                                <FilePreview :value="form.ABPConfirm"/>
                             </div>
                         </div>
                         
