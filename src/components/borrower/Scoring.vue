@@ -17,24 +17,24 @@
                     </div>
                     <div class="scoring__item">
                         <div class="scoring__title">
-                            Личные данные
+                            Договор реализации товара
                         </div>
                         <div class="scoring__subtitle">
-                            Удостоверение личности
+                            Поставщик – Конечный клиент
                         </div>
                         <div class="scoring__document">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae facere illo tempore omnis libero esse labore voluptatem, sint architecto! Odio rerum, esse nihil sed sunt vero doloribus quaerat tenetur fuga?
+                            <FilePreview/>
                         </div>
                     </div>
                     <div class="scoring__item">
                         <div class="scoring__title">
-                            Личные данные
+                            Договор закупа
                         </div>
                         <div class="scoring__subtitle">
-                            Удостоверение личности
+                            с производителем\дистрибьютером
                         </div>
                         <div class="scoring__document">
-
+                            <FilePreview/>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                             Минимум по три акта за один месяц
                         </div>
                         <div class="scoring__document">
-
+                            <FilePreview/>
                         </div>
                     </div>
                     <div class="scoring__item">
@@ -61,7 +61,7 @@
                             Минимум по три акта за один месяц
                         </div>
                         <div class="scoring__document">
-
+                            <FilePreview/>
                         </div>
                     </div>
                     <div class="scoring__item">
@@ -72,10 +72,13 @@
                             Минимум по три акта за один месяц
                         </div>
                         <div class="scoring__document">
-
+                            <FilePreview/>
                         </div>
                     </div>
+                    
                 </div>
+                <h3>ЭСФ подтверждение текущим АВР</h3>
+                <div class="button">Вложить документ</div>
             </div>
         </div>
     </div>

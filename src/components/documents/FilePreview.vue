@@ -1,10 +1,13 @@
 <template>
-  <div class="container">
-    <div class="large-12 medium-12 small-12 cell">
-      <label>File
-        <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+  <div class="document">
+    <div class="document__inner">
+      <label>+ Добавить документ
+        <input class="document__send" type="file" id="file" ref="file" :value="value" v-on:change="handleFileUpload()"/>
       </label>
-        <button v-on:click="submitFile()">Submit</button>
+        <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
+      <div class="document__preview">
+        <img src="" alt="">
+      </div>
     </div>
   </div>
 </template>
@@ -13,9 +16,11 @@
   export default {
     data(){
       return {
-        file: ''
+        file: '',
+
       }
     },
+    props: ['value'],
     methods: {
       handleFileUpload(){
         this.file = this.$refs.file.files[0];
@@ -42,6 +47,31 @@
   }
 </script>
 
-<style>
-  
+<style lang="scss" scoped>
+  .document {
+
+		&__inner {
+      margin: 100px 0 0 0;
+		}
+
+		&__send {
+      opacity: 0;
+		}
+
+		&__button {
+      display: inline-block;
+		}
+
+    label{
+      margin: 30px 0 0 0;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 19px;
+      color: #0345FF;
+      cursor: pointer;
+    }
+}
+.button {
+}
+
 </style>

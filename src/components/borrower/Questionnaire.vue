@@ -1,224 +1,324 @@
 <template>
-    <div class="questionnaire">
-        <div class="questionnaire__questions">
-            <h2 class="questionnaire__title">
-                Анкета
-            </h2>
-            <form action="" @submit.prevent="submitHandler" class="questionnaire__questions-form">
-                <input placeholder="Название ТОО\ИП" 
-                type="text" 
-                class="questionnaire__questions-input questionnaire__input"
-                v-model.trim="form.organizationName"
-                :class="$v.form.organizationName.$error ? 'questionnaire-input-invalid' : ''"
-                >
-                <p v-if="$v.form.organizationName.$dirty && !$v.form.organizationName.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
-                
-                <input 
-                placeholder="Юридическая Форма ТОО/ИП/Ltd" 
-                type="text" 
-                class="questionnaire__questions-input questionnaire__input"
-                v-model.trim="form.legalFormOrganization"
-                :class="$v.form.legalFormOrganization.$error ? 'questionnaire-input-invalid' : ''"
-                >
-                <p v-if="$v.form.legalFormOrganization.$dirty && !$v.form.legalFormOrganization.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
-                
-                <select 
-                    type="choseCountry" 
+    <div class="questionnaire__wrapper">
+        <div class="questionnaire">
+            <div class="questionnaire__questions">
+                <h2 class="questionnaire__title">
+                    Анкета
+                </h2>
+                <form action="" @submit.prevent="submitHandler" class="questionnaire__questions-form">
+                    <input placeholder="Название ТОО\ИП" 
+                    type="text" 
                     class="questionnaire__questions-input questionnaire__input"
-                    v-model="form.countryID"
-
-                >
-                    <option value="">Выберите страну</option>
-                    <option v-for="country in COUNTRIES" :key="country.id" :value="country.id">{{country.name}}</option>
-                </select>
-                
-                <select type="text" class="questionnaire__questions-input questionnaire__input">
-                    <option value="">Выберите город</option>
-                    <option v-for="city in cities" :key="city.id" :value="form.cityID">{{city.name}}</option>
+                    v-model.trim="form.organizationName"
+                    :class="$v.form.organizationName.$error ? 'questionnaire-input-invalid' : ''"
+                    >
+                    <p v-if="$v.form.organizationName.$dirty && !$v.form.organizationName.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                     
-                </select>
-                
-                
-                <input placeholder="БИН" 
-                type="text" 
-                class="questionnaire__questions-input questionnaire__input"
-                maxlength="12"
-                v-model.trim="form.BIN"
-                :class="$v.form.BIN.$error ? 'questionnaire-input-invalid' : ''"
-                @keypress="isNumber">
-                <p v-if="$v.form.BIN.$dirty && !$v.form.BIN.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
-                <p v-if="$v.form.BIN.$dirty && !$v.form.BIN.minLength" class="questionnaire-invalid-feedback">Данное поле должно содержать 12 символов</p>
+                    <input 
+                    placeholder="Юридическая Форма ТОО/ИП/Ltd" 
+                    type="text" 
+                    class="questionnaire__questions-input questionnaire__input"
+                    v-model.trim="form.legalFormOrganization"
+                    :class="$v.form.legalFormOrganization.$error ? 'questionnaire-input-invalid' : ''"
+                    >
+                    <p v-if="$v.form.legalFormOrganization.$dirty && !$v.form.legalFormOrganization.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                    
+                    <select 
+                        type="choseCountry" 
+                        class="questionnaire__questions-input questionnaire__input"
+                        v-model="form.countryID"
 
-                <input 
-                placeholder="ФИО Директора" 
-                type="text" 
-                class="questionnaire__questions-input questionnaire__input"
-                v-model.trim="form.directorName"
-                :class="$v.form.directorName.$error ? 'questionnaire-input-invalid' : ''"
-                @keypress="isLetter"
-                >
-                <p v-if="$v.form.directorName.$dirty && !$v.form.directorName.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                    >
+                        <option value="">Выберите страну</option>
+                        <option v-for="country in COUNTRIES" :key="country.id" :value="country.id">{{country.name}}</option>
+                    </select>
+                    
+                    <select type="text" class="questionnaire__questions-input questionnaire__input">
+                        <option value="">Выберите город</option>
+                        <option v-for="city in cities" :key="city.id" :value="form.cityID">{{city.name}}</option>
+                        
+                    </select>
+                    
+                    
+                    <input placeholder="БИН" 
+                    type="text" 
+                    class="questionnaire__questions-input questionnaire__input"
+                    maxlength="12"
+                    v-model.trim="form.BIN"
+                    :class="$v.form.BIN.$error ? 'questionnaire-input-invalid' : ''"
+                    @keypress="isNumber">
+                    <p v-if="$v.form.BIN.$dirty && !$v.form.BIN.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                    <p v-if="$v.form.BIN.$dirty && !$v.form.BIN.minLength" class="questionnaire-invalid-feedback">Данное поле должно содержать 12 символов</p>
 
-                <input 
-                placeholder="ИИН Директора" 
-                type="text" 
-                class="questionnaire__questions-input questionnaire__input"
-                maxlength="12"
-                v-model.trim="form.UIN"
-                :class="$v.form.UIN.$error ? 'questionnaire-input-invalid' : ''"
-                @keypress="isNumber"
-                >
-                <p v-if="$v.form.UIN.$dirty && !$v.form.UIN.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                    <input 
+                    placeholder="ФИО Директора" 
+                    type="text" 
+                    class="questionnaire__questions-input questionnaire__input"
+                    v-model.trim="form.directorName"
+                    :class="$v.form.directorName.$error ? 'questionnaire-input-invalid' : ''"
+                    @keypress="isLetter"
+                    >
+                    <p v-if="$v.form.directorName.$dirty && !$v.form.directorName.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
 
-                <input placeholder="Контактный номер" 
-                type="text" 
-                class="questionnaire__questions-input questionnaire__input"
-                maxlength="16"
-                v-model.trim="form.phone"
-                :class="$v.form.phone.$error ? 'questionnaire-input-invalid' : ''"
-                v-imask="phoneNumberMask" 
-                @accept="onAccept" 
-                @complete="onComplete"
-                @keypress="isNumber">
-                <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
-                <p v-if="$v.form.phone.$dirty && !$v.form.phone.minLength" class="questionnaire-invalid-feedback">Данное поле должно содержать номер телефона</p>
+                    <input 
+                    placeholder="ИИН Директора" 
+                    type="text" 
+                    class="questionnaire__questions-input questionnaire__input"
+                    maxlength="12"
+                    v-model.trim="form.UIN"
+                    :class="$v.form.UIN.$error ? 'questionnaire-input-invalid' : ''"
+                    @keypress="isNumber"
+                    >
+                    <p v-if="$v.form.UIN.$dirty && !$v.form.UIN.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
 
-                <input 
-                placeholder="Электронная почта" 
-                type="text" 
-                class="questionnaire__questions-input questionnaire__input"
-                v-model.trim="form.email"
-                :class="$v.form.email.$error ? 'questionnaire-input-invalid' : ''"
-                >
-                <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                    <input placeholder="Контактный номер" 
+                    type="text" 
+                    class="questionnaire__questions-input questionnaire__input"
+                    maxlength="16"
+                    v-model.trim="form.phone"
+                    :class="$v.form.phone.$error ? 'questionnaire-input-invalid' : ''"
+                    v-imask="phoneNumberMask" 
+                    @accept="onAccept" 
+                    @complete="onComplete"
+                    @keypress="isNumber">
+                    <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                    <p v-if="$v.form.phone.$dirty && !$v.form.phone.minLength" class="questionnaire-invalid-feedback">Данное поле должно содержать номер телефона</p>
 
-                <input 
-                placeholder="Опишите ваш бизнес" 
-                type="text" 
-                class="questionnaire__questions-input questionnaire__input questionnaire-textarea">
-                
-                <button type="submit">Проверить</button>
-            </form>
-        </div>
-        <div class="questionnaire__loan">
-            <form action="" @submit.prevent="submitHandler" class="questionnaire__loan-form">
-                <div class="questionnaire__loan-item">
-                    <div class="questionnaire__loan-product-service">
-                        <h3>Продукты и услуги</h3>
-                        <div class="questionnaire__loan-product-service-content questionnaire__loan-content">
-                            <input 
-                            placeholder="Название" 
-                            class="questionnaire__input" 
-                            type="text"
-                            >
-                            <input 
-                            placeholder="Цена" 
-                            class="questionnaire__input" 
-                            type="text">
+                    <input 
+                    placeholder="Электронная почта" 
+                    type="text" 
+                    class="questionnaire__questions-input questionnaire__input"
+                    v-model.trim="form.email"
+                    :class="$v.form.email.$error ? 'questionnaire-input-invalid' : ''"
+                    >
+                    <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+
+                    <input 
+                    placeholder="Опишите ваш бизнес" 
+                    type="text" 
+                    class="questionnaire__questions-input questionnaire__input questionnaire-textarea">
+                    
+                    
+                </form>
+            </div>
+            <div class="questionnaire__loan">
+                <form action="" @submit.prevent="submitHandler" class="questionnaire__loan-form">
+                    <div class="questionnaire__loan-item">
+                        <div class="questionnaire__loan-product-service">
+                            <h3>Продукты и услуги</h3>
+                            <div class="questionnaire__loan-product-service-content questionnaire__loan-content">
+                                <input 
+                                placeholder="Название" 
+                                class="questionnaire__input" 
+                                type="text"
+                                >
+                                <input 
+                                placeholder="Цена" 
+                                class="questionnaire__input" 
+                                type="text">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="questionnaire__loan-item">
-                    <div class="questionnaire__loan-revenue">
-                        <h3>Выручка за последние 12 месяцев</h3>
-                        <div class="questionnaire__loan-revenue-content questionnaire__loan-content">
-                            <select class="questionnaire__input" type="text">
-                                <option value="">Категория продуктов</option>
-                                <option v-for="category in PRODUCT_CATEGORIES" :key="category.id" :value="form.category.id">{{category.name}}</option>
+                    <div class="questionnaire__loan-item">
+                        <div class="questionnaire__loan-revenue">
+                            <h3>Выручка за последние 12 месяцев</h3>
+                            <div class="questionnaire__loan-revenue-content questionnaire__loan-content">
+                                <select class="questionnaire__input" type="text">
+                                    <option value="">Категория продуктов</option>
+                                    <option v-for="category in PRODUCT_CATEGORIES" :key="category.id" :value="form.category.id">{{category.name}}</option>
+                                </select>
+                                <input placeholder="Выручка" class="questionnaire__input" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="questionnaire__loan-item">
+                        <div class="questionnaire__loan-profit">
+                            <h3>Прибыль за последние 12 месяцев</h3>
+                            <div class="questionnaire__loan-profit-content questionnaire__loan-content">
+                                <input placeholder="Прибыль" class="questionnaire__input" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="questionnaire__loan-item">
+                        <div class="questionnaire__loan-credits">
+                            <div class="questionnaire__loan-credits-title">
+                                <h3>Есть ли у вас кредиты?</h3>
+                                <div class="questionnaire__loan-credits-title-radios">
+                                    <div class="questionnaire__loan-credits-title-item">
+                                        <input type="radio" 
+                                            name="credit" 
+                                            id="creditChoiceYes" 
+                                            :value="true" 
+                                            v-model="form.hasCredit"
+                                        >
+                                        <label for="creditChoiceYes">Да</label>
+                                    </div>
+                                    <div class="questionnaire__loan-credits-title-item">
+                                        <input 
+                                            type="radio" 
+                                            name="credit" 
+                                            id="creditChoiceNo" 
+                                            :value="false" 
+                                            v-model="form.hasCredit"
+                                        >
+                                        <label for="creditChoiceNo">Нет</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <p v-if="$v.form.credit.$dirty && !$v.form.credit.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
+                            <div class="questionnaire__loan-credits-content questionnaire__loan-content" >
+                                
+                                <input placeholder="Сумма" class="questionnaire__input" type="text">                               
+                                <input placeholder="Проценты" class="questionnaire__input" type="text">
+                                <input placeholder="Ежемесячные выплаты" class="questionnaire__input" type="text">
+                                <input placeholder="Срок погашения" class="questionnaire__input" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="questionnaire__loan-item">
+                        <div class="questionnaire__loan-price">
+                            <h3>Необходимая сумма</h3>
+                            <div class="questionnaire__loan-price-content questionnaire__loan-content">
+                                <input placeholder="Сумма" class="questionnaire__input" name="" id="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="questionnaire__loan-item">
+                        <div class="questionnaire__loan-term">
+                            <h3>Срок займа</h3>
+                            <select v-model="form.isWeek" name="" id="">
+                                <option :value="true">Неделя</option>
+                                <option :value="false">Месяц</option>
                             </select>
-                            <input placeholder="Выручка" class="questionnaire__input" type="text">
-                        </div>
-                    </div>
-                </div>
-                <div class="questionnaire__loan-item">
-                    <div class="questionnaire__loan-profit">
-                        <h3>Прибыль за последние 12 месяцев</h3>
-                        <div class="questionnaire__loan-profit-content questionnaire__loan-content">
-                            <input placeholder="Прибыль" class="questionnaire__input" type="text">
-                        </div>
-                    </div>
-                </div>
-                <div class="questionnaire__loan-item">
-                    <div class="questionnaire__loan-credits">
-                        <div class="questionnaire__loan-credits-title">
-                            <h3>Есть ли у вас кредиты?</h3>
-                            <div class="questionnaire__loan-credits-title-radios">
-                                <div class="questionnaire__loan-credits-title-item">
-                                    <input type="radio" 
-                                        name="credit" 
-                                        id="creditChoiceYes" 
-                                        :value="true" 
-                                        v-model="form.hasCredit"
-                                    >
-                                    <label for="creditChoiceYes">Да</label>
+                            <div class="questionnaire__loan-term-content questionnaire__loan-content">
+                                <input type="range" v-model="form.amount" min="0" max="48" class="questionnaire__loan-term-range">
+                                <div class="questionnaire__loan-term-content-item">
+                                    <p>Готовы ли предоставить доступ к кредитной истории учредителя?</p>
+                                    <input type="radio" name="accessFounderHistory" id="accessFounderHistory1" v-model="form.accessFounderHistory" :value="true">
+                                    <label for="accessFounderHistory1" name="accessFounderHistory1">Да</label>
+                                    <input type="radio" name="accessFounderHistory" id="accessFounderHistory2" v-model="form.accessFounderHistory" :value="false">
+                                    <label for="accessFounderHistory2" name="accessFounderHistory2">Нет</label>
                                 </div>
-                                <div class="questionnaire__loan-credits-title-item">
-                                    <input 
-                                        type="radio" 
-                                        name="credit" 
-                                        id="creditChoiceNo" 
-                                        :value="false" 
-                                        v-model="form.hasCredit"
-                                    >
-                                    <label for="creditChoiceNo">Нет</label>
+                                <div class="questionnaire__loan-term-content-item">
+                                    <p>Готовы ли предоставить доступ к кредитной истории компании?</p>
+                                    <input type="radio" name="accessCompanyHistory" id="accessCompanyHistory1" v-model="form.accessCompanyHistory" :value="true">
+                                    <label for="accessCompanyHistory1">Да</label>
+                                    <input type="radio" name="accessCompanyHistory" id="accessCompanyHistory2" v-model="form.accessCompanyHistory" :value="false">
+                                    <label for="accessCompanyHistory2">Нет</label>
                                 </div>
                             </div>
                         </div>
-                        <p v-if="$v.form.credit.$dirty && !$v.form.credit.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
-                        <div class="questionnaire__loan-credits-content questionnaire__loan-content" >
-                            
-                            <input placeholder="Сумма" class="questionnaire__input" type="text">                               
-                            <input placeholder="Проценты" class="questionnaire__input" type="text">
-                            <input placeholder="Ежемесячные выплаты" class="questionnaire__input" type="text">
-                            <input placeholder="Срок погашения" class="questionnaire__input" type="text">
-                        </div>
                     </div>
-                </div>
-                <div class="questionnaire__loan-item">
-                    <div class="questionnaire__loan-price">
-                        <h3>Необходимая сумма</h3>
-                        <div class="questionnaire__loan-price-content questionnaire__loan-content">
-                            <input placeholder="Сумма" class="questionnaire__input" name="" id="">
-                        </div>
-                    </div>
-                </div>
-                <div class="questionnaire__loan-item">
-                    <div class="questionnaire__loan-term">
-                        <h3>Срок займа</h3>
-                        <select v-model="form.isWeek" name="" id="">
-                            <option :value="true">Неделя</option>
-                            <option :value="false">Месяц</option>
-                        </select>
-                        <div class="questionnaire__loan-term-content questionnaire__loan-content">
-                            <input type="range" v-model="form.amount" min="0" max="48" class="questionnaire__loan-term-range">
-                            <div class="questionnaire__loan-term-content-item">
-                                <p>Готовы ли предоставить доступ к кредитной истории учредителя?</p>
-                                <input type="radio" name="accessFounderHistory" id="accessFounderHistory1" v-model="form.accessFounderHistory" :value="true">
-                                <label for="accessFounderHistory1" name="accessFounderHistory1">Да</label>
-                                <input type="radio" name="accessFounderHistory" id="accessFounderHistory2" v-model="form.accessFounderHistory" :value="false">
-                                <label for="accessFounderHistory2" name="accessFounderHistory2">Нет</label>
-                            </div>
-                            <div class="questionnaire__loan-term-content-item">
-                                <p>Готовы ли предоставить доступ к кредитной истории компании?</p>
-                                <input type="radio" name="accessCompanyHistory" id="accessCompanyHistory1" v-model="form.accessCompanyHistory" :value="true">
-                                <label for="accessCompanyHistory1">Да</label>
-                                <input type="radio" name="accessCompanyHistory" id="accessCompanyHistory2" v-model="form.accessCompanyHistory" :value="false">
-                                <label for="accessCompanyHistory2">Нет</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit">Проверить</button>
-            </form>
+                </form>
+            </div>    
         </div>
-    </div>
+        <div class="scoring">
+            <div class="scoring__inner">
+                <h2>Скоринг</h2>
+                <div class="scoring__item-wrapper">
+                    <div class="scoring__content">
+                        <div class="scoring__item">
+                            <div class="scoring__title">
+                                Личные данные
+                            </div>
+                            <div class="scoring__subtitle">
+                                Удостоверение личности
+                            </div>
+                            <div class="scoring__document">
+                                <FilePreview :value="form.IDCard"/>
+                            </div>
+                        </div>
+                        <div class="scoring__item">
+                            <div class="scoring__title">
+                                Договор реализации товара
+                            </div>
+                            <div class="scoring__subtitle">
+                                Поставщик – Конечный клиент
+                            </div>
+                            <div class="scoring__document">
+                                <FilePreview/>
+                            </div>
+                        </div>
+                        <div class="scoring__item">
+                            <div class="scoring__title">
+                                Договор закупа
+                            </div>
+                            <div class="scoring__subtitle">
+                                с производителем\дистрибьютером
+                            </div>
+                            <div class="scoring__document">
+                                <FilePreview/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scoring__item-wrapper">
+                    <h3>Акты сверок между Поставщиком и Производителем за последние 6 месяцев</h3>
+                    <div class="scoring__content">
+                        <div class="scoring__item">
+                            <div class="scoring__title">
+                                Первый акт
+                            </div>
+                            <div class="scoring__subtitle">
+                                Минимум по три акта за один месяц
+                            </div>
+                            <div class="scoring__document">
+                                <PreviewFile/>
+                            </div>
+                        </div>
+                        <div class="scoring__item">
+                            <div class="scoring__title">
+                                Второй акт
+                            </div>
+                            <div class="scoring__subtitle">
+                                Минимум по три акта за один месяц
+                            </div>
+                            <div class="scoring__document">
+                                <FilePreview/>
+                            </div>
+                        </div>
+                        <div class="scoring__item">
+                            <div class="scoring__title">
+                                Третий акт
+                            </div>
+                            <div class="scoring__subtitle">
+                                Минимум по три акта за один месяц
+                            </div>
+                            <div class="scoring__document">
+                                <FilePreview/>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <h3>ЭСФ подтверждение текущим АВР</h3>
+                    <a class="button esf__button">Вложить документ</a>
+                    <p class="esf__text">Нажимая “Оплатить проверку” вы соглашаетесь с получением данных из открытых источников</p>
+                    <div class="esf__examination">
+                        <div class="esf__examination-text">
+                            Проверка ПКБ и Abis.kz: <span>1000тг</span>
+                        </div>
+                         <button type="submit" class="esf__examination-button button">Оплатить провеку</button>
+                    </div>
+                    <div class="scoring__expectation">
+                        <p class="scoring__expectation-title">Ожидание прохождение скоринга от 1 до 3 дней</p>
+                        <p class="scoring__expectation-text">Мы уведомлим вас в личном кабинете о сборе всех данных</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
 </template>
 
 <script>
 import { required, minLength, email } from 'vuelidate/lib/validators'
 import { IMaskDirective } from 'vue-imask'
 import {mapActions, mapGetters} from 'vuex'
+import FilePreview from '@/components/documents/FilePreview.vue'
+import PreviewFile from '@/components/documents/PreviewFile.vue'
 export default {
+    props: [
+
+    ],
     data: () => ({
         country: '',
         cities: '',
@@ -252,7 +352,15 @@ export default {
             amount: '',
             neededSum: '',
             accessFounderHistory: '',
-            accessCompanyHistory: ''
+            accessCompanyHistory: '',
+            IDCard: '',
+            registrationCertificate: '',
+            contractSale: '',
+            purchaseAgreement: '',
+            firstAct: '',
+            secondAct: '',
+            thirdAct: '',
+            ABPConfirm: ''
         },
         phoneNumberMask: {
             mask: '+{7}(000)000-00-00',
@@ -295,7 +403,7 @@ export default {
                 }).catch(function(){
                     console.log('FAILURE!!');
                 })
-                console.log(this.form.country)
+                console.log(this.PRODUCT_CATEGORIES)
             }
         },
         formValidation(){
@@ -347,6 +455,10 @@ export default {
             })[0].cities;
         
         }
+    },
+    components: {
+        FilePreview,
+        PreviewFile
     }
 }
 </script>
@@ -501,6 +613,55 @@ export default {
         }
 }
 
+.scoring {
+        margin: 30px 0 0 0;
+		&__inner {
+            
+		}
+
+		&__content {
+            margin: 25px 0 0 0;
+            text-align: center;
+            display: flex;
+		}
+
+        &__item-wrapper{
+            margin: 25px 0 0 0;
+        }
+
+		&__item {
+            width: 335px;
+            height: 360px;
+            padding: 30px;
+            background: #FFFFFF;
+            box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
+            border-radius: 10px;
+            margin: 0 0 0 30px;
+            &:first-child{
+                margin: 0;
+            }
+		}
+
+		&__title {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 24px;
+		}
+
+		&__subtitle {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            margin: 5px 0 0 0;
+		}
+
+		&__document {
+            margin: 17px 0 0 0;
+            
+		}
+}
+
+
 .questionnaire-textarea{
     height: 120px;
 }
@@ -512,5 +673,53 @@ export default {
 .questionnaire-invalid-feedback{
     color: #ff0000;
     margin: 4px 0 0 0;
+}
+.esf__button{
+    display: inline-block;
+    padding: 17px 25px;
+    cursor: pointer;
+    margin: 20px 0 0 0;
+}
+
+.esf__text{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    margin: 35px 0 0 0;
+}
+
+.esf__examination{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40px 0 0 0;
+}
+
+.esf__examination-text{
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 29px;
+}
+
+.esf__examination-button{
+    padding: 17px 20px;
+}
+
+.scoring__expectation{
+    margin: 70px 0 0 0;
+}
+
+.scoring__expectation-title{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.scoring__expectation-text{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: rgba(51, 51, 51, 0.6);
 }
 </style>
