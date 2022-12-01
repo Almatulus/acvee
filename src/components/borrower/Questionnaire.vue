@@ -126,7 +126,6 @@
                                 <option value="">Категория продуктов</option>
                                 <option v-for="category in PRODUCT_CATEGORIES" :key="category.id" :value="form.category.id">{{category.name}}</option>
                             </select>
-                            {{PRODUCT_CATEGORIES}}
                             <input placeholder="Выручка" class="questionnaire__input" type="text">
                         </div>
                     </div>
