@@ -25,8 +25,17 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    GET_PRODUCT_CATEGORIES_FROM_API({commit}) {
+      return axios('http://127.0.0.1:8000/api/v1/borrower/category/', {
+            method: "GET"
+      })
+      .then((productCategories) => {
+            commit('SET_PRODUCT_CATEGORIES_TO_STATE', productCategories.data)
+            return productCategories
+      })
+    },
     GET_COUNTRIES_FROM_API({commit}) {
-        return axios('http://localhost:8000/api/v1/borrower/countries/', {
+        return axios('http://127.0.0.1:8000/api/v1/borrower/countries/', {
             method: "GET"
         })
         .then((countries) => {
@@ -34,16 +43,6 @@ export default new Vuex.Store({
             return countries
         })
     },
-    GET_PRODUCT_CATEGORIES_FROM_API({commit}) {
-      return axios('http://localhost:3000/countries', {
-          method: "GET"
-      })
-      .then((productCategories) => {
-          commit('SET_PRODUCT_CATEGORIES_TO_STATE', productCategories.data)
-          console.log(countries, 'dsadasfasfsa')
-          return productCategories
-      })
-    }
   },
   modules: {
     //countries

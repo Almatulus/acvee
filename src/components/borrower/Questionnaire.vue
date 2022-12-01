@@ -21,7 +21,7 @@
                 :class="$v.form.legalFormOrganization.$error ? 'questionnaire-input-invalid' : ''"
                 >
                 <p v-if="$v.form.legalFormOrganization.$dirty && !$v.form.legalFormOrganization.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
-                {{form.countryID}}
+                
                 <select 
                     type="choseCountry" 
                     class="questionnaire__questions-input questionnaire__input"
@@ -37,7 +37,7 @@
                     <option v-for="city in cities" :key="city.id" :value="form.cityID">{{city.name}}</option>
                     
                 </select>
-                {{PRODUCT_CATEGORIES}}
+                
                 
                 <input placeholder="БИН" 
                 type="text" 
@@ -126,7 +126,7 @@
                                 <option value="">Категория продуктов</option>
                                 <option v-for="category in PRODUCT_CATEGORIES" :key="category.id" :value="form.category.id">{{category.name}}</option>
                             </select>
-                            
+                            {{PRODUCT_CATEGORIES}}
                             <input placeholder="Выручка" class="questionnaire__input" type="text">
                         </div>
                     </div>
