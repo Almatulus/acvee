@@ -123,14 +123,13 @@
                         <div class="questionnaire__loan-revenue">
                             <h3>Выручка за последние 12 месяцев</h3>
                             <div class="questionnaire__loan-revenue-content questionnaire__loan-content">
-                                <select class="questionnaire__input" type="text">
+                                <select v-model="form.productCategory" class="questionnaire__input" type="text">
                                     <option value="">Категория продуктов</option>
-                                    <option v-for="category in PRODUCT_CATEGORIES" :key="category.id" :value="form.category.id">{{category.name}}</option>
+                                    <option v-for="category in PRODUCTCATEGORIES" :key="category.id" :value="category.id">{{category.name}}</option>
                                 </select>
                                 <input placeholder="Выручка" class="questionnaire__input" type="text">
                             </div>
                         </div>
-                        {{PRODUCT_CATEGORIES}}
                     </div>
                     <div class="questionnaire__loan-item">
                         <div class="questionnaire__loan-profit">
@@ -392,7 +391,7 @@ export default {
     methods: {
         ...mapActions([
             'GET_COUNTRIES_FROM_API',
-            'GET_PRODUCT_CATEGORIES_FROM_API'
+            'GET_PRODUCTCATEGORIES_FROM_API'
         ]),
         submitHandler(){
             //this.$v.form.$touch()
@@ -440,11 +439,12 @@ export default {
     computed: {
         ...mapGetters([
             'COUNTRIES',
-            'PRODUCT_CATEGORIES'
+            'PRODUCTCATEGORIES'
         ]),
     },
     mounted() {
-        this.GET_COUNTRIES_FROM_API()
+        this.GET_COUNTRIES_FROM_API(),
+        this.GET_PRODUCTCATEGORIES_FROM_API()
     },
     directives: {
       imask: IMaskDirective

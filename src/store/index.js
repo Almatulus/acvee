@@ -12,17 +12,17 @@ export default new Vuex.Store({
     COUNTRIES(state){
         return state.countries
     },
-    PRODUCT_CATEGORIES(state){
-        return state.productCategories
-    }  
+    PRODUCTCATEGORIES(state) {
+      return state.productCategories
+    }
   },
   mutations: {
     SET_COUNTRIES_TO_STATE: (state, countries) => {
         state.countries = countries
     },
-    SET_PRODUCT_CATEGORIES_TO_STATE: (state, productCategories) => {
+    SET_PRODUCTCATEGORIES_TO_STATE: (state, productCategories) => {
         state.productCategories = productCategories
-    },
+    }
   },
   actions: {
     GET_COUNTRIES_FROM_API({commit}) {
@@ -34,19 +34,16 @@ export default new Vuex.Store({
             return countries
         })
     },
-    GET_PRODUCT_CATEGORIES_FROM_API({commit}) {
-      return axios('http://127.0.0.1:8000/api/v1/borrower/category/', {
+    GET_PRODUCTCATEGORIES_FROM_API({commit}) {
+        return axios('http://127.0.0.1:8000/api/v1/borrower/category/', {
             method: "GET"
-      })
-      .then((productCategories) => {
-            commit('SET_PRODUCT_CATEGORIES_TO_STATE', productCategories.data)
-            console.log(productCategories.data)
+        })
+        .then((productCategories) => {
+            commit('SET_PRODUCTCATEGORIES_TO_STATE', productCategories.data)
             return productCategories
-      })
+        })
     }
   },
   modules: {
-    //countries
-    
   }
 })
