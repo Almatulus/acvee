@@ -146,20 +146,20 @@
                             <div class="questionnaire__loan-credits-title-radios">
                                 <div class="questionnaire__loan-credits-title-item">
                                     <input type="radio" 
-                                    name="credit" 
-                                    id="creditChoiceYes" 
-                                    value="creditChoiceYes" 
-                                    v-model="form.credit"
+                                        name="credit" 
+                                        id="creditChoiceYes" 
+                                        :value="true" 
+                                        v-model="form.hasCredit"
                                     >
                                     <label for="creditChoiceYes">Да</label>
                                 </div>
                                 <div class="questionnaire__loan-credits-title-item">
                                     <input 
-                                    type="radio" 
-                                    name="credit" 
-                                    id="creditChoiceNo" 
-                                    value="creditChoiceNo" 
-                                    v-model="form.credit"
+                                        type="radio" 
+                                        name="credit" 
+                                        id="creditChoiceNo" 
+                                        :value="false" 
+                                        v-model="form.hasCredit"
                                     >
                                     <label for="creditChoiceNo">Нет</label>
                                 </div>
@@ -190,17 +190,17 @@
                             <input type="range" class="questionnaire__loan-term-range">
                             <div class="questionnaire__loan-term-content-item">
                                 <p>Готовы ли предоставить доступ к кредитной истории учредителя?</p>
-                                <input type="radio" id="creditHistoryYes" value="creditHistoryYes">
-                                <label for="creditHistoryYes" >Да</label>
-                                <input type="radio" id="creditHistoryNo" value="creditHistoryNo">
-                                <label for="creditHistoryNo">Нет</label>
+                                <input type="radio" name="accessFounderHistory" id="accessFounderHistory1" v-model="form.accessFounderHistory" :value="true">
+                                <label for="accessFounderHistory1" name="accessFounderHistory1">Да</label>
+                                <input type="radio" name="accessFounderHistory" id="accessFounderHistory2" v-model="form.accessFounderHistory" :value="false">
+                                <label for="accessFounderHistory2" name="accessFounderHistory2">Нет</label>
                             </div>
                             <div class="questionnaire__loan-term-content-item">
                                 <p>Готовы ли предоставить доступ к кредитной истории компании?</p>
-                                <input type="radio">
-                                <label for="">Да</label>
-                                <input type="radio">
-                                <label for="">Нет</label>
+                                <input type="radio" name="accessCompanyHistory" id="accessCompanyHistory1" v-model="form.accessCompanyHistory" :value="true">
+                                <label for="accessCompanyHistory1">Да</label>
+                                <input type="radio" name="accessCompanyHistory" id="accessCompanyHistory2" v-model="form.accessCompanyHistory" :value="false">
+                                <label for="accessCompanyHistory2">Нет</label>
                             </div>
                         </div>
                     </div>
@@ -225,7 +225,7 @@ export default {
             BIN: '',
             directorName: '',
             UIN: '',
-            phone: '',
+            phoneNumber: '',
             email: '',
             businessDescription: '',
             countryID: '',
@@ -234,18 +234,22 @@ export default {
                 productName: '',
                 productPrice: ''
             },
-            revenue: {
-                productCategory: '',
-                revenue: ''
-            },
+            categoryID: '',
+            productCategory: '',
+            revenue: '',
             profit: '',
+            hasCredit: '',
             credit: {
                 sum: '',
                 percent: '',
                 monthlyPayment: '',
                 maturity: ''
-            }
-
+            },
+            isWeek: '',
+            amount: '',
+            neededSum: '',
+            accessFounderHistory: '',
+            accessCompanyHistory: ''
         },
         phoneNumberMask: {
             mask: '+{7}(000)000-00-00',
