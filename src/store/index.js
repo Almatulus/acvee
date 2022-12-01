@@ -25,7 +25,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    GET_COUNTRIES_FROM_API({commit}) {
+    async GET_COUNTRIES_FROM_API({commit}) {
         return axios('http://127.0.0.1:8000/api/v1/borrower/countries/', {
             method: "GET"
         })
@@ -34,7 +34,7 @@ export default new Vuex.Store({
             return countries
         })
     },
-    GET_PRODUCT_CATEGORIES_FROM_API({commit}) {
+    async GET_PRODUCT_CATEGORIES_FROM_API({commit}) {
       return axios('http://127.0.0.1:8000/api/v1/borrower/category/', {
             method: "GET"
       })
@@ -46,5 +46,6 @@ export default new Vuex.Store({
   },
   modules: {
     //countries
+    
   }
 })

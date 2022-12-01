@@ -185,8 +185,12 @@
                 <div class="questionnaire__loan-item">
                     <div class="questionnaire__loan-term">
                         <h3>Срок займа</h3>
+                        <select v-model="form.isWeek" name="" id="">
+                            <option :value="true">Неделя</option>
+                            <option :value="false">Месяц</option>
+                        </select>
                         <div class="questionnaire__loan-term-content questionnaire__loan-content">
-                            <input type="range" class="questionnaire__loan-term-range">
+                            <input type="range" v-model="form.amount" min="0" max="48" class="questionnaire__loan-term-range">
                             <div class="questionnaire__loan-term-content-item">
                                 <p>Готовы ли предоставить доступ к кредитной истории учредителя?</p>
                                 <input type="radio" name="accessFounderHistory" id="accessFounderHistory1" v-model="form.accessFounderHistory" :value="true">
