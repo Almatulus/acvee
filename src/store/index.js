@@ -40,6 +40,7 @@ export default new Vuex.Store({
       })
       .then((productCategories) => {
             commit('SET_PRODUCT_CATEGORIES_TO_STATE', productCategories.data)
+            console.log(productCategories.data)
             return productCategories
       })
     }

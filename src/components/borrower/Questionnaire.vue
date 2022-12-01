@@ -130,6 +130,7 @@
                                 <input placeholder="Выручка" class="questionnaire__input" type="text">
                             </div>
                         </div>
+                        {{PRODUCT_CATEGORIES}}
                     </div>
                     <div class="questionnaire__loan-item">
                         <div class="questionnaire__loan-profit">
@@ -215,96 +216,98 @@
         </div>
         <div class="scoring">
             <div class="scoring__inner">
-                <h2>Скоринг</h2>
-                <div class="scoring__item-wrapper">
-                    <div class="scoring__content">
-                        <div class="scoring__item">
-                            <div class="scoring__title">
-                                Личные данные
+                <form action="" @submit.prevent="submitHandler">
+                    <h2>Скоринг</h2>
+                    <div class="scoring__item-wrapper">
+                        <div class="scoring__content">
+                            <div class="scoring__item">
+                                <div class="scoring__title">
+                                    Личные данные
+                                </div>
+                                <div class="scoring__subtitle">
+                                    Удостоверение личности
+                                </div>
+                                <div class="scoring__document">
+                                    <FilePreview :value="form.IDCard"/>
+                                </div>
                             </div>
-                            <div class="scoring__subtitle">
-                                Удостоверение личности
+                            <div class="scoring__item">
+                                <div class="scoring__title">
+                                    Договор реализации товара
+                                </div>
+                                <div class="scoring__subtitle">
+                                    Поставщик – Конечный клиент
+                                </div>
+                                <div class="scoring__document">
+                                    <FilePreview :value="form.registrationCertificate"/>
+                                </div>
                             </div>
-                            <div class="scoring__document">
-                                <FilePreview :value="form.IDCard"/>
-                            </div>
-                        </div>
-                        <div class="scoring__item">
-                            <div class="scoring__title">
-                                Договор реализации товара
-                            </div>
-                            <div class="scoring__subtitle">
-                                Поставщик – Конечный клиент
-                            </div>
-                            <div class="scoring__document">
-                                <FilePreview :value="form.registrationCertificate"/>
-                            </div>
-                        </div>
-                        <div class="scoring__item">
-                            <div class="scoring__title">
-                                Договор закупа
-                            </div>
-                            <div class="scoring__subtitle">
-                                с производителем\дистрибьютером
-                            </div>
-                            <div class="scoring__document">
-                                <FilePreview :value="form.purchaseAgreement"/>
+                            <div class="scoring__item">
+                                <div class="scoring__title">
+                                    Договор закупа
+                                </div>
+                                <div class="scoring__subtitle">
+                                    с производителем\дистрибьютером
+                                </div>
+                                <div class="scoring__document">
+                                    <FilePreview :value="form.purchaseAgreement"/>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="scoring__item-wrapper">
-                    <h3>Акты сверок между Поставщиком и Производителем за последние 6 месяцев</h3>
-                    <div class="scoring__content">
-                        <div class="scoring__item">
-                            <div class="scoring__title">
-                                Первый акт
+                    <div class="scoring__item-wrapper">
+                        <h3>Акты сверок между Поставщиком и Производителем за последние 6 месяцев</h3>
+                        <div class="scoring__content">
+                            <div class="scoring__item">
+                                <div class="scoring__title">
+                                    Первый акт
+                                </div>
+                                <div class="scoring__subtitle">
+                                    Минимум по три акта за один месяц
+                                </div>
+                                <div class="scoring__document">
+                                    <FilePreview :value="form.firstAct"/>
+                                </div>
                             </div>
-                            <div class="scoring__subtitle">
-                                Минимум по три акта за один месяц
+                            <div class="scoring__item">
+                                <div class="scoring__title">
+                                    Второй акт
+                                </div>
+                                <div class="scoring__subtitle">
+                                    Минимум по три акта за один месяц
+                                </div>
+                                <div class="scoring__document">
+                                    <FilePreview :value="form.secondAct"/>
+                                </div>
                             </div>
-                            <div class="scoring__document">
-                                <FilePreview :value="form.firstAct"/>
+                            <div class="scoring__item">
+                                <div class="scoring__title">
+                                    Третий акт
+                                </div>
+                                <div class="scoring__subtitle">
+                                    Минимум по три акта за один месяц
+                                </div>
+                                <div class="scoring__document">
+                                    <FilePreview :value="form.ABPConfirm"/>
+                                </div>
                             </div>
+                            
                         </div>
-                        <div class="scoring__item">
-                            <div class="scoring__title">
-                                Второй акт
+                        <h3>ЭСФ подтверждение текущим АВР</h3>
+                        <a class="button esf__button">Вложить документ</a>
+                        <p class="esf__text">Нажимая “Оплатить проверку” вы соглашаетесь с получением данных из открытых источников</p>
+                        <div class="esf__examination">
+                            <div class="esf__examination-text">
+                                Проверка ПКБ и Abis.kz: <span>1000тг</span>
                             </div>
-                            <div class="scoring__subtitle">
-                                Минимум по три акта за один месяц
-                            </div>
-                            <div class="scoring__document">
-                                <FilePreview :value="form.secondAct"/>
-                            </div>
+                            <button type="submit" class="esf__examination-button button">Оплатить провеку</button>
                         </div>
-                        <div class="scoring__item">
-                            <div class="scoring__title">
-                                Третий акт
-                            </div>
-                            <div class="scoring__subtitle">
-                                Минимум по три акта за один месяц
-                            </div>
-                            <div class="scoring__document">
-                                <FilePreview :value="form.ABPConfirm"/>
-                            </div>
+                        <div class="scoring__expectation">
+                            <p class="scoring__expectation-title">Ожидание прохождение скоринга от 1 до 3 дней</p>
+                            <p class="scoring__expectation-text">Мы уведомлим вас в личном кабинете о сборе всех данных</p>
                         </div>
-                        
                     </div>
-                    <h3>ЭСФ подтверждение текущим АВР</h3>
-                    <a class="button esf__button">Вложить документ</a>
-                    <p class="esf__text">Нажимая “Оплатить проверку” вы соглашаетесь с получением данных из открытых источников</p>
-                    <div class="esf__examination">
-                        <div class="esf__examination-text">
-                            Проверка ПКБ и Abis.kz: <span>1000тг</span>
-                        </div>
-                         <button type="submit" class="esf__examination-button button">Оплатить провеку</button>
-                    </div>
-                    <div class="scoring__expectation">
-                        <p class="scoring__expectation-title">Ожидание прохождение скоринга от 1 до 3 дней</p>
-                        <p class="scoring__expectation-text">Мы уведомлим вас в личном кабинете о сборе всех данных</p>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>    
