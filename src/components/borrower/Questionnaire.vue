@@ -27,13 +27,15 @@
                         type="choseCountry" 
                         class="questionnaire__questions-input questionnaire__input"
                         v-model="form.countryID"
-
                     >
                         <option value="">Выберите страну</option>
                         <option v-for="country in COUNTRIES" :key="country.id" :value="country.id">{{country.name}}</option>
                     </select>
                     
-                    <select type="text" class="questionnaire__questions-input questionnaire__input">
+                    <select 
+                        type="text" 
+                        class="questionnaire__questions-input questionnaire__input"
+                        v-model="form.cityID">
                         <option value="">Выберите город</option>
                         <option v-for="city in cities" :key="city.id" :value="form.cityID">{{city.name}}</option>
                         
@@ -41,55 +43,57 @@
                     
                     
                     <input placeholder="БИН" 
-                    type="text" 
-                    class="questionnaire__questions-input questionnaire__input"
-                    maxlength="12"
-                    v-model.trim="form.BIN"
-                    :class="$v.form.BIN.$error ? 'questionnaire-input-invalid' : ''"
-                    @keypress="isNumber">
+                        type="text" 
+                        class="questionnaire__questions-input questionnaire__input"
+                        maxlength="12"
+                        v-model.trim="form.BIN"
+                        :class="$v.form.BIN.$error ? 'questionnaire-input-invalid' : ''"
+                        @keypress="isNumber"
+                    >
                     <p v-if="$v.form.BIN.$dirty && !$v.form.BIN.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                     <p v-if="$v.form.BIN.$dirty && !$v.form.BIN.minLength" class="questionnaire-invalid-feedback">Данное поле должно содержать 12 символов</p>
 
                     <input 
-                    placeholder="ФИО Директора" 
-                    type="text" 
-                    class="questionnaire__questions-input questionnaire__input"
-                    v-model.trim="form.directorName"
-                    :class="$v.form.directorName.$error ? 'questionnaire-input-invalid' : ''"
-                    @keypress="isLetter"
+                        placeholder="ФИО Директора" 
+                        type="text" 
+                        class="questionnaire__questions-input questionnaire__input"
+                        v-model.trim="form.directorName"
+                        :class="$v.form.directorName.$error ? 'questionnaire-input-invalid' : ''"
+                        @keypress="isLetter"
                     >
                     <p v-if="$v.form.directorName.$dirty && !$v.form.directorName.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
 
                     <input 
-                    placeholder="ИИН Директора" 
-                    type="text" 
-                    class="questionnaire__questions-input questionnaire__input"
-                    maxlength="12"
-                    v-model.trim="form.UIN"
-                    :class="$v.form.UIN.$error ? 'questionnaire-input-invalid' : ''"
-                    @keypress="isNumber"
+                        placeholder="ИИН Директора" 
+                        type="text" 
+                        class="questionnaire__questions-input questionnaire__input"
+                        maxlength="12"
+                        v-model.trim="form.UIN"
+                        :class="$v.form.UIN.$error ? 'questionnaire-input-invalid' : ''"
+                        @keypress="isNumber"
                     >
                     <p v-if="$v.form.UIN.$dirty && !$v.form.UIN.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
 
                     <input placeholder="Контактный номер" 
-                    type="text" 
-                    class="questionnaire__questions-input questionnaire__input"
-                    maxlength="16"
-                    v-model.trim="form.phone"
-                    :class="$v.form.phone.$error ? 'questionnaire-input-invalid' : ''"
-                    v-imask="phoneNumberMask" 
-                    @accept="onAccept" 
-                    @complete="onComplete"
-                    @keypress="isNumber">
+                        type="text" 
+                        class="questionnaire__questions-input questionnaire__input"
+                        maxlength="16"
+                        v-model.trim="form.phone"
+                        :class="$v.form.phone.$error ? 'questionnaire-input-invalid' : ''"
+                        v-imask="phoneNumberMask" 
+                        @accept="onAccept" 
+                        @complete="onComplete"
+                        @keypress="isNumber"
+                    >
                     <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                     <p v-if="$v.form.phone.$dirty && !$v.form.phone.minLength" class="questionnaire-invalid-feedback">Данное поле должно содержать номер телефона</p>
 
                     <input 
-                    placeholder="Электронная почта" 
-                    type="text" 
-                    class="questionnaire__questions-input questionnaire__input"
-                    v-model.trim="form.email"
-                    :class="$v.form.email.$error ? 'questionnaire-input-invalid' : ''"
+                        placeholder="Электронная почта" 
+                        type="text" 
+                        class="questionnaire__questions-input questionnaire__input"
+                        v-model.trim="form.email"
+                        :class="$v.form.email.$error ? 'questionnaire-input-invalid' : ''"
                     >
                     <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
 
@@ -97,8 +101,6 @@
                     placeholder="Опишите ваш бизнес" 
                     type="text" 
                     class="questionnaire__questions-input questionnaire__input questionnaire-textarea">
-                    
-                    
                 </form>
             </div>
             <div class="questionnaire__loan">
@@ -108,14 +110,17 @@
                             <h3>Продукты и услуги</h3>
                             <div class="questionnaire__loan-product-service-content questionnaire__loan-content">
                                 <input 
-                                placeholder="Название" 
-                                class="questionnaire__input" 
-                                type="text"
+                                    placeholder="Название" 
+                                    class="questionnaire__input" 
+                                    type="text"
+                                    v-model.trim="form.productName"
                                 >
                                 <input 
-                                placeholder="Цена" 
-                                class="questionnaire__input" 
-                                type="text">
+                                    placeholder="Цена" 
+                                    class="questionnaire__input" 
+                                    type="text"
+                                    v-model.trim="form.productPrice"
+                                >
                             </div>
                         </div>
                     </div>
@@ -127,7 +132,12 @@
                                     <option value="">Категория продуктов</option>
                                     <option v-for="category in PRODUCTCATEGORIES" :key="category.id" :value="category.id">{{category.name}}</option>
                                 </select>
-                                <input placeholder="Выручка" class="questionnaire__input" type="text">
+                                <input 
+                                    placeholder="Выручка" 
+                                    class="questionnaire__input" 
+                                    type="text"
+                                    v-model.trim="form.revenue"
+                                >
                             </div>
                         </div>
                     </div>
@@ -135,7 +145,12 @@
                         <div class="questionnaire__loan-profit">
                             <h3>Прибыль за последние 12 месяцев</h3>
                             <div class="questionnaire__loan-profit-content questionnaire__loan-content">
-                                <input placeholder="Прибыль" class="questionnaire__input" type="text">
+                                <input 
+                                    placeholder="Прибыль" 
+                                    class="questionnaire__input" 
+                                    type="text"
+                                    v-model.trim="form.profit"
+                                >
                             </div>
                         </div>
                     </div>
@@ -145,11 +160,12 @@
                                 <h3>Есть ли у вас кредиты?</h3>
                                 <div class="questionnaire__loan-credits-title-radios">
                                     <div class="questionnaire__loan-credits-title-item">
-                                        <input type="radio" 
+                                        <input 
+                                            type="radio" 
                                             name="credit" 
                                             id="creditChoiceYes" 
                                             :value="true" 
-                                            v-model="form.hasCredit"
+                                            v-model.trim="form.hasCredit"
                                         >
                                         <label for="creditChoiceYes">Да</label>
                                     </div>
@@ -159,7 +175,7 @@
                                             name="credit" 
                                             id="creditChoiceNo" 
                                             :value="false" 
-                                            v-model="form.hasCredit"
+                                            v-model.trim="form.hasCredit"
                                         >
                                         <label for="creditChoiceNo">Нет</label>
                                     </div>
@@ -168,10 +184,30 @@
                             <p v-if="$v.form.credit.$dirty && !$v.form.credit.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
                             <div class="questionnaire__loan-credits-content questionnaire__loan-content" >
                                 
-                                <input placeholder="Сумма" class="questionnaire__input" type="text">                               
-                                <input placeholder="Проценты" class="questionnaire__input" type="text">
-                                <input placeholder="Ежемесячные выплаты" class="questionnaire__input" type="text">
-                                <input placeholder="Срок погашения" class="questionnaire__input" type="text">
+                                <input 
+                                    placeholder="Сумма" 
+                                    class="questionnaire__input" 
+                                    type="text"
+                                    v-model.trim="form.credit.sum"
+                                >                               
+                                <input 
+                                    placeholder="Проценты" 
+                                    class="questionnaire__input" 
+                                    type="text"
+                                    v-model.trim="form.credit.percent"
+                                >
+                                <input 
+                                    placeholder="Ежемесячные выплаты" 
+                                    class="questionnaire__input" 
+                                    type="text"
+                                    v-model.trim="form.credit.monthlyPayment"
+                                >
+                                <input 
+                                    placeholder="Срок погашения" 
+                                    class="questionnaire__input" 
+                                    type="text"
+                                    v-model.trim="form.credit.maturity"
+                                >
                             </div>
                         </div>
                     </div>
@@ -179,7 +215,12 @@
                         <div class="questionnaire__loan-price">
                             <h3>Необходимая сумма</h3>
                             <div class="questionnaire__loan-price-content questionnaire__loan-content">
-                                <input placeholder="Сумма" class="questionnaire__input" name="" id="">
+                                <input 
+                                    placeholder="Сумма" 
+                                    class="questionnaire__input" 
+                                    name=""
+                                    v-model.trim="form.neededSum"
+                                >
                             </div>
                         </div>
                     </div>
@@ -336,10 +377,10 @@ export default {
             businessDescription: '',
             countryID: '',
             cityID: '',
-            productsAndServices: {
-                productName: '',
-                productPrice: ''
-            },
+
+            productName: '',
+            productPrice: '',
+
             categoryID: '',
             productCategory: '',
             revenue: '',
