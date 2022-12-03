@@ -9,7 +9,7 @@
     <div class="large-12 medium-12 small-12 cell">
       <label>File Preview
         <input type="file" id="file" ref="file" accept=
-"application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.slideshow, application/vnd.openxmlformats-officedocument.presentationml.presentation" v-on:change="handleFileUpload()"/>
+          "application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.slideshow, application/vnd.openxmlformats-officedocument.presentationml.presentation" v-on:change="handleFileUpload()"/>
       </label>
       <img v-bind:src="imagePreview" v-show="showPreview"/>
       <button v-on:click="submitFile()">Submit</button>

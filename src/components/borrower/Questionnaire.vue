@@ -291,8 +291,16 @@
                                 <div class="scoring__subtitle">
                                     Удостоверение личности
                                 </div>
-                                <div class="scoring__document">
-                                    <FilePreview :value="form.IDCard"/>
+                                <div class="document">
+                                    <div class="document__inner">
+                                        <label>+ Добавить документ
+                                            <input class="document__send" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+                                        </label>
+                                            <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
+                                        <div class="document__preview">
+                                            <img src="" alt="">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="scoring__item">
@@ -364,7 +372,7 @@
                             <div class="esf__examination-text">
                                 Проверка ПКБ и Abis.kz: <span>1000тг</span>
                             </div>
-                            <button type="submit" class="esf__examination-button button">Оплатить провеку</button>
+                            <button type="submit" @click.prevent="submitHandler()" class="esf__examination-button button">Оплатить провеку</button>
                         </div>
                         <div class="scoring__expectation">
                             <p class="scoring__expectation-title">Ожидание прохождение скоринга от 1 до 3 дней</p>
@@ -421,6 +429,8 @@ export default {
             neededSum: '',
             accessFounderHistory: '',
             accessCompanyHistory: '',
+        },
+        scoring: {
             IDCard: '',
             registrationCertificate: '',
             contractSale: '',
@@ -428,7 +438,8 @@ export default {
             firstAct: '',
             secondAct: '',
             thirdAct: '',
-            ABPConfirm: ''
+            ABPConfirm: '',
+            consentVerification: ''
         },
         phoneNumberMask: {
             mask: '+{7}(000)000-00-00',
@@ -460,11 +471,14 @@ export default {
         ]),
         submitHandler(){
             //this.$v.form.$touch()
+            let formData = new FormData();
+            formData.append('file', this.file);
             if(!this.$v.form.$error){
                 axios.post(
                     'http://localhost:8000/api/v1/borrower/create/',
                     {
-                        form: this.form
+                        form: this.form,
+                        scoring: this.scoring
                     }
                 ).then(function(){
                     console.log('SUCCESS!!');
@@ -473,6 +487,9 @@ export default {
                 })
                 console.log(form.isWeek)
             }
+        },
+        handleFileUpload(){
+            this.file = this.$refs.file.files[0];
         },
         formValidation(){
             this.$v.form.$touch()
