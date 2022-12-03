@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 
-                <div v-for="myproject in MYPROJECTS" :key="myproject.id" class="request-table__row request-table__data">
+                <div v-for="myproject in MYPROJECTS" :key="myproject.id" class="request-table__row request-table__data" @click.prevent ="activeEl = myproject" :class="{'active-el': activeEl === myproject}">
                     <div class="request-table__item">
                         {{myproject.request_number}}
                     </div>
@@ -51,13 +51,16 @@
 <script>
 import {mapActions, mapGetters} from 'vuex'
 export default {
+    data: () => ({
+        activeEl: 0
+    }),
     methods: {
         ...mapActions([
             'GET_MYPROJECTS_FROM_API'
         ]),
-        aaa(){
-            console.log(MYPROJECTS)
-        }
+        makeActive: function(item){
+            this.active = item;
+        },
     },
     mounted(){
         this.GET_MYPROJECTS_FROM_API()
@@ -87,6 +90,7 @@ export default {
 		&__row {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
+            cursor: pointer;
 		}
 
 		&__title {
@@ -115,5 +119,10 @@ export default {
                 margin-top: 27px;
             }
         }
+}
+
+.active-el{
+    background: #0345FF;
+    color: #FFFFFF;
 }
 </style>
