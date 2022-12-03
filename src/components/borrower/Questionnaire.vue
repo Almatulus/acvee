@@ -477,7 +477,10 @@ export default {
                     'http://localhost:8000/api/v1/borrower/create/',
                     {
                         form: this.form,
-                        formData
+                        scoring: {
+                            IDCard: formData
+                        }
+                        
                     }
                 ).then(function(){
                     console.log('SUCCESS!!');
