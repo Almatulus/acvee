@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     countries: [],
-    productCategories: []
+    productCategories: [],
+    myProjects : []
   },
   getters: {
     COUNTRIES(state){
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     PRODUCTCATEGORIES(state) {
       return state.productCategories
+    },
+    MYPROJECTS(state){
+      return state.myProjects
     }
   },
   mutations: {
@@ -22,6 +26,9 @@ export default new Vuex.Store({
     },
     SET_PRODUCTCATEGORIES_TO_STATE: (state, productCategories) => {
         state.productCategories = productCategories
+    },
+    SET_MYPROJECTS_TO_STATE: (state, myProjects) => {
+        state.myProjects = myProjects
     }
   },
   actions: {
@@ -42,6 +49,15 @@ export default new Vuex.Store({
             commit('SET_PRODUCTCATEGORIES_TO_STATE', productCategories.data)
             return productCategories
         })
+    },
+    GET_MYPROJECTS_FROM_API({commit}){
+      return axios('http://127.0.0.1:8000/api/v1/borrower/my-projects/', {
+          method: "GET"
+      })
+      .then((myProjects) => {
+          commit('SET_MYPROJECTS_TO_STATE', myProjects.data)
+          return myProjects
+      })
     }
   },
   modules: {

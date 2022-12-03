@@ -22,51 +22,53 @@
                         Статус
                     </div>
                 </div>
-                <div class="request-table__row request-table__data">
-                    <div class="request-table__item">
-                        1
-                    </div>
-                    <div class="request-table__item">
-                        1
-                    </div>
-                    <div class="request-table__item">
-                        Lorem Ipsum is simple... 
-                    </div>
-                    <div class="request-table__item">
-                        22/02/2022
-                    </div>
-                    <div class="request-table__item">
-                        50.000.000тг
-                    </div>
-                    <div class="request-table__item">
-                        Одобренно
-                    </div>
-                </div>
-                <div class="request-table__row request-table__data">
-                    <div class="request-table__item">
-                        1
-                    </div>
-                    <div class="request-table__item">
-                        1
-                    </div>
-                    <div class="request-table__item">
-                        Lorem Ipsum is simple... 
-                    </div>
-                    <div class="request-table__item">
-                        22/02/2022
-                    </div>
-                    <div class="request-table__item">
-                        50.000.000тг
-                    </div>
-                    <div class="request-table__item">
-                        Одобренно
-                    </div>
-                </div>
                 
+                <div v-for="myproject in MYPROJECTS" :key="myproject.id" class="request-table__row request-table__data">
+                    <div class="request-table__item">
+                        {{myproject.request_number}}
+                    </div>
+                    <div class="request-table__item">
+                        {{myproject.contract_number}}
+                    </div>
+                    <div class="request-table__item">
+                        {{myproject.project_name}}
+                    </div>
+                    <div class="request-table__item">
+                        {{myproject.request_date}}
+                    </div>
+                    <div class="request-table__item">
+                        {{myproject.get_needed_sum}}тг
+                    </div>
+                    <div class="request-table__item">
+                        {{myproject.get_status_name}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+import {mapActions, mapGetters} from 'vuex'
+export default {
+    methods: {
+        ...mapActions([
+            'GET_MYPROJECTS_FROM_API'
+        ]),
+        aaa(){
+            console.log(MYPROJECTS)
+        }
+    },
+    mounted(){
+        this.GET_MYPROJECTS_FROM_API()
+    },
+    computed: {
+        ...mapGetters([
+            'MYPROJECTS'
+        ])
+    }
+}
+</script>
 
 <style lang="scss" scoped>
 .request-table {
