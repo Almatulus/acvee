@@ -294,7 +294,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input class="document__send" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+                                            <input class="document__send" type="file" id="file" ref="IDCard" v-on:change="uploadFile()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -310,8 +310,16 @@
                                 <div class="scoring__subtitle">
                                     Поставщик – Конечный клиент
                                 </div>
-                                <div class="scoring__document">
-                                    <FilePreview :value="form.registrationCertificate"/>
+                                <div class="document">
+                                    <div class="document__inner">
+                                        <label>+ Добавить документ
+                                            <input class="document__send" type="file" id="file" ref="registrationCertificate" v-on:change="uploadFile()"/>
+                                        </label>
+                                            <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
+                                        <div class="document__preview">
+                                            <img src="" alt="">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="scoring__item">
@@ -363,7 +371,6 @@
                                     <FilePreview :value="form.ABPConfirm"/>
                                 </div>
                             </div>
-                            
                         </div>
                         <h3>ЭСФ подтверждение текущим АВР</h3>
                         <a class="button esf__button">Вложить документ</a>
@@ -468,7 +475,7 @@ export default {
             'GET_COUNTRIES_FROM_API',
             'GET_PRODUCTCATEGORIES_FROM_API'
         ]),
-        submitHandler(){
+        /*submitHandler(){
             //this.$v.form.$touch()
             let formData = new FormData();
             formData.append('file', this.scoring.IDCard);
@@ -481,7 +488,6 @@ export default {
                         scoring: {
                             IDCard: formData
                         },
-                        headers
                     })
                 .then(function(){
                     console.log('SUCCESS!!');})
@@ -489,9 +495,32 @@ export default {
                     console.log('FAILURE!!');})
                 
             }
+        },*/
+        submitHandler(){
+            const IDCard = new FormData();
+            IDCard.append('file', this.scoring.IDCard);
+            const registrationCertificate = new FormData();
+            IDCard.append('file', this.scoring.registrationCertificate);
+            const headers = { 'Content-Type': 'multipart/form-data' };
+            axios.post('http://localhost:8000/api/v1/borrower/create/', 
+                
+                //{data:[IDCard]}
+                {
+                    IDCard,
+                    registrationCertificate
+                }
+            )
+            .then(function(){
+                console.log('SUCCESS!!');
+            })
+            .catch(function(){
+                console.log('FAILURE!!');
+            })
+            console.log(IDCard)
         },
-        handleFileUpload(){
-            this.scoring.IDCard = this.$refs.file.files[0];
+        uploadFile() {
+            this.scoring.IDCard = this.$refs.IDCard.files[0];
+            this.scoring.registrationCertificate = this.$refs.registrationCertificate.files[0]
         },
         formValidation(){
             this.$v.form.$touch()
