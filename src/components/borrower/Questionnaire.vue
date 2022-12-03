@@ -472,6 +472,7 @@ export default {
             //this.$v.form.$touch()
             let formData = new FormData();
             formData.append('file', this.scoring.IDCard);
+            const headers = { 'Content-Type': 'multipart/form-data' };
             if(!this.$v.form.$error){
                 axios.post(
                     'http://localhost:8000/api/v1/borrower/create/',
@@ -479,14 +480,13 @@ export default {
                         form: this.form,
                         scoring: {
                             IDCard: formData
-                        }
-                        
-                    }
-                ).then(function(){
-                    console.log('SUCCESS!!');
-                }).catch(function(){
-                    console.log('FAILURE!!');
-                })
+                        },
+                        headers
+                    })
+                .then(function(){
+                    console.log('SUCCESS!!');})
+                .catch(function(){
+                    console.log('FAILURE!!');})
                 
             }
         },

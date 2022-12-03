@@ -29,6 +29,7 @@
       submitFile(){
         let formData = new FormData();
         formData.append('file', this.file);
+        
         axios.post( '/test',
           formData,
           {
