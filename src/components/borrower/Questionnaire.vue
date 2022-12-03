@@ -414,7 +414,6 @@ export default {
             productPrice: '',
 
             categoryID: '',
-            productCategory: '',
             revenue: '',
             profit: '',
             hasCredit: '',
@@ -471,14 +470,14 @@ export default {
         ]),
         submitHandler(){
             //this.$v.form.$touch()
-            let IDCard = new FormData();
-            IDCard.append('file', this.scoring.IDCard);
+            let formData = new FormData();
+            formData.append('file', this.scoring.IDCard);
             if(!this.$v.form.$error){
                 axios.post(
                     'http://localhost:8000/api/v1/borrower/create/',
                     {
                         form: this.form,
-                        scoring: this.scoring
+                        formData
                     }
                 ).then(function(){
                     console.log('SUCCESS!!');
