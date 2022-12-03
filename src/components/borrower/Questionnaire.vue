@@ -294,7 +294,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input class="document__send" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+                                            <input class="document__send" type="file" id="file" :ref="scoring.IDCard" v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -472,7 +472,7 @@ export default {
         submitHandler(){
             //this.$v.form.$touch()
             let formData = new FormData();
-            formData.append('file', this.file);
+            formData.append('file', this.scoring.IDCard);
             if(!this.$v.form.$error){
                 axios.post(
                     'http://localhost:8000/api/v1/borrower/create/',
