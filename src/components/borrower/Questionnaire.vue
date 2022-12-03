@@ -231,8 +231,32 @@
                                 <option :value="true">Неделя</option>
                                 <option :value="false">Месяц</option>
                             </select>
+                            
                             <div class="questionnaire__loan-term-content questionnaire__loan-content">
-                                <input type="range" v-model="form.amount" min="0" max="48" class="questionnaire__loan-term-range">
+                                <div>
+                                    Current value: <span id="value"></span>
+                                </div>
+                                <div>
+                                    Current step: <span id="step"></span>
+                                </div>
+                                <div v-show="form.isWeek">
+                                    <input v-model="form.amount" id="weeks" type="range" value="0" min="0" max="48" />
+                                </div>
+                                <!--<fieldset class="formSlider">
+                                    <legend class="applicationForm__text">Выберите количество серебра (млн)</legend>
+                                    <div class="__range __range-step">
+                                        <input v-model="form.amount" id="weeks" value="0" type="range" max="48" min="0" >
+                                        <datalist id="ticks1">
+                                            <option value="1">1 млн</option>
+                                            <option value="2">2 млн</option>
+                                            <option value="3">3 млн</option>
+                                            <option value="4">4 млн</option>
+                                            <option value="5">5 млн</option>
+                                        </datalist>
+                                        
+                                    </div>
+                                </fieldset>-->
+                                <p>{{form.amount}}</p>
                                 <div class="questionnaire__loan-term-content-item">
                                     <p>Готовы ли предоставить доступ к кредитной истории учредителя?</p>
                                     <input type="radio" name="accessFounderHistory" id="accessFounderHistory1" v-model="form.accessFounderHistory" :value="true">
@@ -392,8 +416,8 @@ export default {
                 monthlyPayment: '',
                 maturity: ''
             },
-            isWeek: '',
-            amount: '',
+            isWeek: true,
+            amount: 0,
             neededSum: '',
             accessFounderHistory: '',
             accessCompanyHistory: '',
@@ -447,7 +471,7 @@ export default {
                 }).catch(function(){
                     console.log('FAILURE!!');
                 })
-                console.log(this.PRODUCT_CATEGORIES)
+                console.log(form.isWeek)
             }
         },
         formValidation(){
@@ -475,7 +499,9 @@ export default {
             if (e.preventDefault) e.preventDefault();
             }
         },
-
+        inputRangeSteps(){
+            
+        }
     },
     computed: {
         ...mapGetters([
@@ -485,7 +511,47 @@ export default {
     },
     mounted() {
         this.GET_COUNTRIES_FROM_API(),
-        this.GET_PRODUCTCATEGORIES_FROM_API()
+        this.GET_PRODUCTCATEGORIES_FROM_API(),
+        $(function() {
+
+	$('#weeks').on("input change", function() {
+
+		var
+			element = $('#weeks'),
+			value = element.val(),
+			step;
+			
+		/* 
+			Map your rules 
+		*/
+		if (value < 10) {
+
+			step = 10;
+		}
+        else if (value => 11){
+    	    step = 5
+        }
+		
+    else if(value > 30){
+				
+			step = 18;
+
+		}
+    
+    if(value == 5){
+    	value = 10
+    }
+    
+   if(value > 30){
+    	value = 48
+    }
+
+		element.attr('step', step);
+
+		$('#value').text(value);
+		$('#step').text(step);
+	});
+});
     },
     directives: {
       imask: IMaskDirective
@@ -767,4 +833,8 @@ export default {
     line-height: 24px;
     color: rgba(51, 51, 51, 0.6);
 }
+
+
+//Input range
+
 </style>
