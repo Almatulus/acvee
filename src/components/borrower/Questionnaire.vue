@@ -98,9 +98,10 @@
                     <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
 
                     <input 
-                    placeholder="Опишите ваш бизнес" 
-                    type="text" 
-                    class="questionnaire__questions-input questionnaire__input questionnaire-textarea">
+                        placeholder="Опишите ваш бизнес" 
+                        type="text" 
+                        class="questionnaire__questions-input questionnaire__input questionnaire-textarea">
+                        
                 </form>
             </div>
             <div class="questionnaire__loan">
@@ -120,6 +121,7 @@
                                     class="questionnaire__input" 
                                     type="text"
                                     v-model.trim="form.productPrice"
+                                    @keypress="isNumber"
                                 >
                             </div>
                         </div>
@@ -137,6 +139,7 @@
                                     class="questionnaire__input" 
                                     type="text"
                                     v-model.trim="form.revenue"
+                                    @keypress="isNumber"
                                 >
                             </div>
                         </div>
@@ -150,6 +153,7 @@
                                     class="questionnaire__input" 
                                     type="text"
                                     v-model.trim="form.profit"
+                                    @keypress="isNumber"
                                 >
                             </div>
                         </div>
@@ -183,29 +187,32 @@
                             </div>
                             <p v-if="$v.form.credit.$dirty && !$v.form.credit.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
                             <div class="questionnaire__loan-credits-content questionnaire__loan-content" >
-                                
+
                                 <input 
                                     placeholder="Сумма" 
                                     class="questionnaire__input" 
                                     type="text"
                                     v-model.trim="form.credit.sum"
+                                    @keypress="isNumber"
                                 >                               
                                 <input 
                                     placeholder="Проценты" 
                                     class="questionnaire__input" 
                                     type="text"
                                     v-model.trim="form.credit.percent"
+                                    @keypress="isNumber"
                                 >
                                 <input 
                                     placeholder="Ежемесячные выплаты" 
                                     class="questionnaire__input" 
                                     type="text"
                                     v-model.trim="form.credit.monthlyPayment"
+                                    @keypress="isNumber"
                                 >
                                 <input 
                                     placeholder="Срок погашения" 
                                     class="questionnaire__input" 
-                                    type="text"
+                                    type="date"
                                     v-model.trim="form.credit.maturity"
                                 >
                             </div>
@@ -220,17 +227,20 @@
                                     class="questionnaire__input" 
                                     name=""
                                     v-model.trim="form.neededSum"
+                                    @keypress="isNumber"
                                 >
                             </div>
                         </div>
                     </div>
                     <div class="questionnaire__loan-item">
                         <div class="questionnaire__loan-term">
-                            <h3>Срок займа</h3>
-                            <select v-model="form.isWeek" name="" id="">
-                                <option :value="true">Неделя</option>
-                                <option :value="false">Месяц</option>
-                            </select>
+                            <div class="questionnaire-select-div">
+                                <h3>Срок займа</h3>
+                                <select v-model="form.isWeek" name="" id="">
+                                    <option :value="true">Неделя</option>
+                                    <option :value="false">Месяц</option>
+                                </select>
+                            </div>
                             
                             <div class="questionnaire__loan-term-content questionnaire__loan-content">
                                 <div>
@@ -271,123 +281,12 @@
                                     <input type="radio" name="accessCompanyHistory" id="accessCompanyHistory2" v-model="form.accessCompanyHistory" :value="false">
                                     <label for="accessCompanyHistory2">Нет</label>
                                 </div>
-                                <button type="submit">111</button>
+                                <button :disabled="formValid" class="button questionnaire__btn" type="submit">Отправить</button>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>    
-        </div>
-        <div class="scoring">
-            <div class="scoring__inner">
-                <form action="" @submit.prevent="submitHandler">
-                    <h2>Скоринг</h2>
-                    <div class="scoring__item-wrapper">
-                        <div class="scoring__content">
-                            <div class="scoring__item">
-                                <div class="scoring__title">
-                                    Личные данные
-                                </div>
-                                <div class="scoring__subtitle">
-                                    Удостоверение личности
-                                </div>
-                                <div class="document">
-                                    <div class="document__inner">
-                                        <label>+ Добавить документ
-                                            <input class="document__send" type="file" id="file" ref="IDCard" v-on:change="uploadFile()"/>
-                                        </label>
-                                            <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
-                                        <div class="document__preview">
-                                            <img src="" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="scoring__item">
-                                <div class="scoring__title">
-                                    Договор реализации товара
-                                </div>
-                                <div class="scoring__subtitle">
-                                    Поставщик – Конечный клиент
-                                </div>
-                                <div class="document">
-                                    <div class="document__inner">
-                                        <label>+ Добавить документ
-                                            <input class="document__send" type="file" id="file" ref="registrationCertificate" v-on:change="uploadFile()"/>
-                                        </label>
-                                            <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
-                                        <div class="document__preview">
-                                            <img src="" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="scoring__item">
-                                <div class="scoring__title">
-                                    Договор закупа
-                                </div>
-                                <div class="scoring__subtitle">
-                                    с производителем\дистрибьютером
-                                </div>
-                                <div class="scoring__document">
-                                    <FilePreview :value="form.purchaseAgreement"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="scoring__item-wrapper">
-                        <h3>Акты сверок между Поставщиком и Производителем за последние 6 месяцев</h3>
-                        <div class="scoring__content">
-                            <div class="scoring__item">
-                                <div class="scoring__title">
-                                    Первый акт
-                                </div>
-                                <div class="scoring__subtitle">
-                                    Минимум по три акта за один месяц
-                                </div>
-                                <div class="scoring__document">
-                                    <FilePreview :value="form.firstAct"/>
-                                </div>
-                            </div>
-                            <div class="scoring__item">
-                                <div class="scoring__title">
-                                    Второй акт
-                                </div>
-                                <div class="scoring__subtitle">
-                                    Минимум по три акта за один месяц
-                                </div>
-                                <div class="scoring__document">
-                                    <FilePreview :value="form.secondAct"/>
-                                </div>
-                            </div>
-                            <div class="scoring__item">
-                                <div class="scoring__title">
-                                    Третий акт
-                                </div>
-                                <div class="scoring__subtitle">
-                                    Минимум по три акта за один месяц
-                                </div>
-                                <div class="scoring__document">
-                                    <FilePreview :value="form.ABPConfirm"/>
-                                </div>
-                            </div>
-                        </div>
-                        <h3>ЭСФ подтверждение текущим АВР</h3>
-                        <a class="button esf__button">Вложить документ</a>
-                        <p class="esf__text">Нажимая “Оплатить проверку” вы соглашаетесь с получением данных из открытых источников</p>
-                        <div class="esf__examination">
-                            <div class="esf__examination-text">
-                                Проверка ПКБ и Abis.kz: <span>1000тг</span>
-                            </div>
-                            <button type="submit" @click.prevent="submitHandler()" class="esf__examination-button button">Оплатить провеку</button>
-                        </div>
-                        <div class="scoring__expectation">
-                            <p class="scoring__expectation-title">Ожидание прохождение скоринга от 1 до 3 дней</p>
-                            <p class="scoring__expectation-text">Мы уведомлим вас в личном кабинете о сборе всех данных</p>
-                        </div>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>    
 </template>
@@ -399,9 +298,6 @@ import {mapActions, mapGetters} from 'vuex'
 import FilePreview from '@/components/documents/FilePreview.vue'
 import PreviewFile from '@/components/documents/PreviewFile.vue'
 export default {
-    props: [
-
-    ],
     data: () => ({
         country: '',
         cities: '',
@@ -476,7 +372,7 @@ export default {
             'GET_PRODUCTCATEGORIES_FROM_API'
         ]),
         /*submitHandler(){
-            //this.$v.form.$touch()
+            this.$v.form.$touch()
             let formData = new FormData();
             formData.append('file', this.scoring.IDCard);
             const headers = { 'Content-Type': 'multipart/form-data' };
@@ -497,33 +393,17 @@ export default {
             }
         },*/
         submitHandler(){
-            const IDCard = new FormData();
-            IDCard.append('file', this.scoring.IDCard);
-            const registrationCertificate = new FormData();
-            IDCard.append('file', this.scoring.registrationCertificate);
-            const headers = { 'Content-Type': 'multipart/form-data' };
-            axios.post('http://localhost:8000/api/v1/borrower/create/', 
-                
-                //{data:[IDCard]}
-                {
-                    IDCard,
-                    registrationCertificate
-                }
-            )
-            .then(function(){
-                console.log('SUCCESS!!');
-            })
-            .catch(function(){
-                console.log('FAILURE!!');
-            })
-            console.log(IDCard)
+            this.$v.form.$touch()
+            if(!this.$v.form.$error){
+                alert('Валидация прошла успешно')
+            }
         },
         uploadFile() {
             this.scoring.IDCard = this.$refs.IDCard.files[0];
             this.scoring.registrationCertificate = this.$refs.registrationCertificate.files[0]
         },
         formValidation(){
-            this.$v.form.$touch()
+            return this.$v.form.$touch()
         },
         onAccept(e){
             const maskRef = e.detail
@@ -556,6 +436,9 @@ export default {
             'COUNTRIES',
             'PRODUCTCATEGORIES'
         ]),
+        formValid(){
+            return this.$v.$invalid
+        }
     },
     mounted() {
         this.GET_COUNTRIES_FROM_API(),
@@ -882,7 +765,19 @@ export default {
     color: rgba(51, 51, 51, 0.6);
 }
 
+.questionnaire__btn{
+    padding: 17px 20px;
+    float: right;
+    margin: 10px 0 0 0;
+}
 
+.questionnaire-select-div{
+    display: flex;
+    select{
+        border-radius: 0;
+        background: inherit;
+    }
+}
 //Input range
 
 </style>

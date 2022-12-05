@@ -12,7 +12,6 @@
                 <a href="" class="request-search__add-btn button">+ Добавить заявку</a>
             </router-link>
         </div>
-        {{SEARCH_VALUE}}
         <RequestFilter v-show="isVisible"/>
     </div>
 </template>

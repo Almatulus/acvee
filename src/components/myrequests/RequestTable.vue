@@ -134,15 +134,9 @@ export default {
                     return item.project_name.toLowerCase().includes(value.toLowerCase())
                 }) 
             }   else{
-                    this.sortedProjects = this.PRODUCTS;
+                    this.sortedProjects = this.MYPROJECTS;
                 }
-            /*this.sortedProjects = this.sortedProjects.filter(function(item) {
-                if(value){
-                    return item.name.toLowerCase().includes(value.toLowerCase())
-                } else{
-                    this.sortedProjects = this.MYPROJECTS
-                }
-            })*/
+            
         }
     },
     watch:{

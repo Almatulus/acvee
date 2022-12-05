@@ -7,7 +7,7 @@
                 <AdditionalDocuments ref="additionalDocuments" class="scroll-anim"/>
                 <RequestDocument/>
             </div>
-            <div class="questionnaire-nav" v-on="handleScroll">
+            <div class="questionnaire-nav" ><!-- v-on="handleScroll" -->
                 <nav>
                     <ul class="questionnaire-nav__menu">
                         <li>
