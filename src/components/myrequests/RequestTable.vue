@@ -1,4 +1,57 @@
 <template>
+<div class="">
+    <div v-if="this.showDescription == true" class="request-description">
+        <div class="request-description__inner">
+            <h2 class="request-description__title">
+                {{selectedProject.project_name}}
+            </h2>
+            <div class="request-description__content">
+                <div class="request-description__item">
+                    <div class="request-description__item-item">
+                        № запроса: {{selectedProject.request_number}}
+                    </div>
+                    <div class="request-description__item-item">
+                        № договора: {{selectedProject.contract_number}}
+                    </div>
+                </div>
+                <div class="request-description__item">
+                    <div class="request-description__item-item">
+                        Необходимая сумма: {{selectedProject.get_needed_sum}}
+                    </div>
+                    <div class="request-description__item-item">
+                        Сумма: {{selectedProject.get_amount}}
+                    </div>
+                </div>
+                <div class="request-description__item">
+                    <div class="request-description__item-item">
+                        Дата: {{selectedProject.request_date}}
+                    </div>
+                    <div class="request-description__item-item">
+                        Срок: {{selectedProject.get_is_week}} недель
+                    </div>
+                </div>
+                <div class="request-description__item">
+                    <div class="request-description__item-item">
+                        Статус: {{selectedProject.get_status_name}}
+                    </div>
+                </div>
+            </div>
+            <div class="request-description__buttons">
+                <div class="request-description__button">
+
+                </div>
+                <div class="request-description__button button">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<RequestDesciption 
+        v-show="showDescription"
+        v-for="description in MYPROJECTS" :key="description.id"
+        
+    />-->
+    
     <div class="request-table">
         <div class="request-table__inner">
             <div class="request-table__content">
@@ -22,8 +75,7 @@
                         Статус
                     </div>
                 </div>
-                
-                <div v-for="myproject in MYPROJECTS" :key="myproject.id" class="request-table__row request-table__data" @click.prevent ="activeEl = myproject" :class="{'active-el': activeEl === myproject}">
+                <div v-for="myproject in MYPROJECTS" :key="myproject.id" class="request-table__row request-table__data" @click.prevent ="activeEl = myproject, updateDescription(myproject)" :class="{'active-el': activeEl === myproject}">
                     <div class="request-table__item">
                         {{myproject.request_number}}
                     </div>
@@ -46,13 +98,20 @@
             </div>
         </div>
     </div>
+</div>
 </template>
-
+<!-- @click.prevent ="activeEl = myproject, showDescription = true" :class="{'active-el': activeEl === myproject}" -->
 <script>
 import {mapActions, mapGetters} from 'vuex'
+import RequestDesciption from '@/components/myrequests/RequestDescription.vue'
+import RequestTableElement from '@/components/myrequests/RequestTableElement.vue'
 export default {
     data: () => ({
-        activeEl: 0
+        activeEl: 0,
+        showDescription: false,
+        myProjectId: '',
+        selectedProject: {},
+        sortedProjects: []
     }),
     methods: {
         ...mapActions([
@@ -61,19 +120,45 @@ export default {
         makeActive: function(item){
             this.active = item;
         },
+        console(){
+            console.log(this.MYPROJECTS)
+        },
+        updateDescription(selectedProject){
+            this.selectedProject = selectedProject
+            this.showDescription = true
+        },
+        sortProjectsBySearchValue(value){
+            this.sortedProjects = this.sortedProjects.filter(function(item) {
+                if(value){
+                    return item.name.toLowerCase().includes(value.toLowerCase())
+                } else{
+                    this.sortedProjects = this.MYPROJECTS
+                }
+            })
+        }
+    },
+    watch:{
+        SEARCH_VALUE(){
+            this.sortProjectsBySearchValue(this.SEARCH_VALUE)
+        }
     },
     mounted(){
         this.GET_MYPROJECTS_FROM_API()
     },
     computed: {
         ...mapGetters([
-            'MYPROJECTS'
+            'MYPROJECTS',
+            'SEARCH_VALUE'
         ])
+    },
+    components: {
+        RequestDesciption,
+        RequestTableElement
     }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .request-table {
         background: #fff;
         box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);

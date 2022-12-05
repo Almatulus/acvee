@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     countries: [],
     productCategories: [],
-    myProjects : []
+    myProjects : [],
+    searchValue: ''
   },
   getters: {
     COUNTRIES(state){
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     MYPROJECTS(state){
       return state.myProjects
+    },
+    SEARCH_VALUE(state){
+      return state.searchValue
     }
   },
   mutations: {
@@ -29,6 +33,9 @@ export default new Vuex.Store({
     },
     SET_MYPROJECTS_TO_STATE: (state, myProjects) => {
         state.myProjects = myProjects
+    },
+    SET_SEARCH_VALUE_TO_VUEX: (state, value) => {
+       state.searchValue = value
     }
   },
   actions: {
@@ -58,6 +65,27 @@ export default new Vuex.Store({
           commit('SET_MYPROJECTS_TO_STATE', myProjects.data)
           return myProjects
       })
+    },
+    GET_MYPROJECTS_SORT_BY_ALPHABET({commit}){
+      return axios('http://127.0.0.1:8000/api/v1/borrower/my-projects/?/ordering=project_name', {
+          method: "GET"
+      })
+      .then((myProjects) => {
+          commit('SET_MYPROJECTS_TO_STATE', myProjects.data)
+          return myProjects
+      })
+    },
+    GET_MYPROJECTS_SORT_BY_ALPHABET_REVERSE({commit}){
+      return axios('http://127.0.0.1:8000/api/v1/borrower/my-projects/?/ordering=-project_name', {
+          method: "GET"
+      })
+      .then((myProjects) => {
+          commit('SET_MYPROJECTS_TO_STATE', myProjects.data)
+          return myProjects
+      })
+    },
+    GET_SEARCH_VALUE_TO_VUEX({commit}, value){
+      commit('SET_SEARCH_VALUE_TO_VUEX', value)
     }
   },
   modules: {

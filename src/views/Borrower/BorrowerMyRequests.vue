@@ -16,6 +16,16 @@ export default {
     name: 'myrequest',
     components:{
         RequestSearch, RequestTable
-    }
+    },
+    data () {
+        return {
+            isVisible: false
+        }
+    },
+    provide() {
+        return {
+            isVisible: this.isVisible
+        }
+    },
 }
 </script>

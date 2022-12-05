@@ -2,9 +2,9 @@
     <div id='request-search' class="request-search">
         <div class="request-search__inner">
             <form action="" class="request-search__form">
-                <input placeholder="Вводите название запроса" type="text" class="request-search__input">
-                <a v-on:click='isVisible = !isVisible' :class="{'filter-active':isVisible}" @click.prevent="" href="" class="request-search__filter icon-filter"></a>
-                <button class="request-search__btn button">
+                <input v-model="searchValue" placeholder="Вводите название запроса" type="text" class="request-search__input">
+                <a v-on:click.prevent='isVisible = !isVisible' :class="{'filter-active':isVisible}" href="" class="request-search__filter icon-filter"></a>
+                <button @click.prevent="search(searchValue)" class="request-search__btn button">
                     <img src="../../assets/img/icons/search.svg" alt="search">
                 </button>
             </form>
@@ -12,19 +12,20 @@
                 <a href="" class="request-search__add-btn button">+ Добавить заявку</a>
             </router-link>
         </div>
+        {{SEARCH_VALUE}}
         <RequestFilter v-show="isVisible"/>
     </div>
 </template>
 
 <script>
 import RequestFilter from '@/components/myrequests/RequestFilter.vue'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
-    data () {
-        return {
-            isVisible: false
-        }
-    },
+    data: () => ({
+        isVisible: false,
+        searchValue: ''
+    }),
     components:{
         RequestFilter
     },
@@ -36,7 +37,18 @@ export default {
     methods:{
         onClick(){
             document.getElementById('sidebar').classList.toggle('hide');
-        }
+        },
+        search(value){
+            this.GET_SEARCH_VALUE_TO_VUEX(value)
+        },
+        ...mapActions([
+            'GET_SEARCH_VALUE_TO_VUEX'
+        ])
+    },
+    computed:{
+        ...mapGetters([
+            'SEARCH_VALUE'
+        ])
     }
 
 }
