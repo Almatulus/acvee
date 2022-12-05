@@ -75,7 +75,7 @@
                         Статус
                     </div>
                 </div>
-                <div v-for="myproject in MYPROJECTS" :key="myproject.id" class="request-table__row request-table__data" @click.prevent ="activeEl = myproject, updateDescription(myproject)" :class="{'active-el': activeEl === myproject}">
+                <div v-for="myproject in filteredProjects" :key="myproject.id" class="request-table__row request-table__data" @click.prevent ="activeEl = myproject, updateDescription(myproject)" :class="{'active-el': activeEl === myproject}">
                     <div class="request-table__item">
                         {{myproject.request_number}}
                     </div>
@@ -128,13 +128,21 @@ export default {
             this.showDescription = true
         },
         sortProjectsBySearchValue(value){
-            this.sortedProjects = this.sortedProjects.filter(function(item) {
+            this.sortedProjects = [...this.MYPROJECTS]
+            if(value){
+                this.sortedProjects = this.sortedProjects.filter(function(item){
+                    return item.project_name.toLowerCase().includes(value.toLowerCase())
+                }) 
+            }   else{
+                    this.sortedProjects = this.PRODUCTS;
+                }
+            /*this.sortedProjects = this.sortedProjects.filter(function(item) {
                 if(value){
                     return item.name.toLowerCase().includes(value.toLowerCase())
                 } else{
                     this.sortedProjects = this.MYPROJECTS
                 }
-            })
+            })*/
         }
     },
     watch:{
@@ -149,7 +157,15 @@ export default {
         ...mapGetters([
             'MYPROJECTS',
             'SEARCH_VALUE'
-        ])
+        ]),
+        filteredProjects(){
+            if(this.sortedProjects.length){
+                return this.sortedProjects
+            }
+            else{
+                return this.MYPROJECTS
+            }
+        }
     },
     components: {
         RequestDesciption,
