@@ -362,17 +362,6 @@ export default {
             accessFounderHistory: '',
             accessCompanyHistory: '',
         },
-        scoring: {
-            IDCard: '',
-            registrationCertificate: '',
-            contractSale: '',
-            purchaseAgreement: '',
-            firstAct: '',
-            secondAct: '',
-            thirdAct: '',
-            ABPConfirm: '',
-            consentVerification: ''
-        },
         phoneNumberMask: {
             mask: '+{7}(000)000-00-00',
             lazy: true
