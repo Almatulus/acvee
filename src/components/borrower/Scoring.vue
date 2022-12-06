@@ -2,84 +2,86 @@
     <div class="scoring">
         <div class="scoring__inner">
             <h2>Скоринг</h2>
-            <div class="scoring__item-wrapper">
-                <div class="scoring__content">
-                    <div class="scoring__item">
-                        <div class="scoring__title">
-                            Личные данные
+            <form action="" @submit.prevent="submitHandler()">
+                <div class="scoring__item-wrapper">
+                    <div class="scoring__content">
+                        <div class="scoring__item">
+                            <div class="scoring__title">
+                                Личные данные
+                            </div>
+                            <div class="scoring__subtitle">
+                                Удостоверение личности
+                            </div>
+                            <div class="scoring__document">
+                                <FilePreview/>
+                            </div>
                         </div>
-                        <div class="scoring__subtitle">
-                            Удостоверение личности
+                        <div class="scoring__item">
+                            <div class="scoring__title">
+                                Договор реализации товара
+                            </div>
+                            <div class="scoring__subtitle">
+                                Поставщик – Конечный клиент
+                            </div>
+                            <div class="scoring__document">
+                                <FilePreview/>
+                            </div>
                         </div>
-                        <div class="scoring__document">
-                            <FilePreview/>
-                        </div>
-                    </div>
-                    <div class="scoring__item">
-                        <div class="scoring__title">
-                            Договор реализации товара
-                        </div>
-                        <div class="scoring__subtitle">
-                            Поставщик – Конечный клиент
-                        </div>
-                        <div class="scoring__document">
-                            <FilePreview/>
-                        </div>
-                    </div>
-                    <div class="scoring__item">
-                        <div class="scoring__title">
-                            Договор закупа
-                        </div>
-                        <div class="scoring__subtitle">
-                            с производителем\дистрибьютером
-                        </div>
-                        <div class="scoring__document">
-                            <FilePreview/>
+                        <div class="scoring__item">
+                            <div class="scoring__title">
+                                Договор закупа
+                            </div>
+                            <div class="scoring__subtitle">
+                                с производителем\дистрибьютером
+                            </div>
+                            <div class="scoring__document">
+                                <FilePreview/>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="scoring__item-wrapper">
-                <h3>Акты сверок между Поставщиком и Производителем за последние 6 месяцев</h3>
-                <div class="scoring__content">
-                    <div class="scoring__item">
-                        <div class="scoring__title">
-                            Первый акт
+                <div class="scoring__item-wrapper">
+                    <h3>Акты сверок между Поставщиком и Производителем за последние 6 месяцев</h3>
+                    <div class="scoring__content">
+                        <div class="scoring__item">
+                            <div class="scoring__title">
+                                Первый акт
+                            </div>
+                            <div class="scoring__subtitle">
+                                Минимум по три акта за один месяц
+                            </div>
+                            <div class="scoring__document">
+                                <FilePreview/>
+                            </div>
                         </div>
-                        <div class="scoring__subtitle">
-                            Минимум по три акта за один месяц
+                        <div class="scoring__item">
+                            <div class="scoring__title">
+                                Второй акт
+                            </div>
+                            <div class="scoring__subtitle">
+                                Минимум по три акта за один месяц
+                            </div>
+                            <div class="scoring__document">
+                                <FilePreview/>
+                            </div>
                         </div>
-                        <div class="scoring__document">
-                            <FilePreview/>
+                        <div class="scoring__item">
+                            <div class="scoring__title">
+                                Третий акт
+                            </div>
+                            <div class="scoring__subtitle">
+                                Минимум по три акта за один месяц
+                            </div>
+                            <div class="scoring__document">
+                                <FilePreview/>
+                            </div>
                         </div>
+                        
                     </div>
-                    <div class="scoring__item">
-                        <div class="scoring__title">
-                            Второй акт
-                        </div>
-                        <div class="scoring__subtitle">
-                            Минимум по три акта за один месяц
-                        </div>
-                        <div class="scoring__document">
-                            <FilePreview/>
-                        </div>
-                    </div>
-                    <div class="scoring__item">
-                        <div class="scoring__title">
-                            Третий акт
-                        </div>
-                        <div class="scoring__subtitle">
-                            Минимум по три акта за один месяц
-                        </div>
-                        <div class="scoring__document">
-                            <FilePreview/>
-                        </div>
-                    </div>
-                    
+                    <h3>ЭСФ подтверждение текущим АВР</h3>
+                    <div class="button">Вложить документ</div>
                 </div>
-                <h3>ЭСФ подтверждение текущим АВР</h3>
-                <div class="button">Вложить документ</div>
-            </div>
+            </form>
         </div>
     </div>
 </template>

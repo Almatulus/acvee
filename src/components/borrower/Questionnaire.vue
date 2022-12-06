@@ -5,7 +5,7 @@
                 <h2 class="questionnaire__title">
                     Анкета
                 </h2>
-                <form action="" @submit.prevent="submitHandler" class="questionnaire__questions-form">
+                <form action="" @submit.prevent="submitHandler(form)" class="questionnaire__questions-form">
                     <input placeholder="Название ТОО\ИП" 
                     type="text" 
                     class="questionnaire__questions-input questionnaire__input"
@@ -108,7 +108,7 @@
                 </form>
             </div>
             <div class="questionnaire__loan">
-                <form action="" @submit.prevent="submitHandler" class="questionnaire__loan-form">
+                <form action="" @submit.prevent="submitHandler(form)" class="questionnaire__loan-form">
                     <div class="questionnaire__loan-item">
                         <div class="questionnaire__loan-product-service">
                             <h3>Продукты и услуги</h3>
@@ -414,7 +414,8 @@ export default {
     methods: {
         ...mapActions([
             'GET_COUNTRIES_FROM_API',
-            'GET_PRODUCTCATEGORIES_FROM_API'
+            'GET_PRODUCTCATEGORIES_FROM_API',
+            'GET_QUESTIONNAIREFORMSTATE_TO_VUEX'
         ]),
         /*submitHandler(){
             this.$v.form.$touch()
@@ -437,10 +438,10 @@ export default {
                 
             }
         },*/
-        submitHandler(){
-            this.$v.form.$touch()
+        submitHandler(value){
+            //this.$v.form.$touch()
             if(!this.$v.form.$error){
-                alert('Валидация прошла успешно')
+                this.GET_QUESTIONNAIREFORMSTATE_TO_VUEX(value)
             }
         },
         uploadFile() {
@@ -479,7 +480,8 @@ export default {
     computed: {
         ...mapGetters([
             'COUNTRIES',
-            'PRODUCTCATEGORIES'
+            'PRODUCTCATEGORIES',
+            'QUESTIONNAIREFORMSTATE'
         ]),
         formValid(){
             return this.$v.$invalid

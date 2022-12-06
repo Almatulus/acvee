@@ -8,11 +8,12 @@ export default new Vuex.Store({
     countries: [],
     productCategories: [],
     myProjects : [],
-    searchValue: ''
+    searchValue: '',
+    questionnaireFormState: {}
   },
   getters: {
     COUNTRIES(state){
-        return state.countries
+      return state.countries
     },
     PRODUCTCATEGORIES(state) {
       return state.productCategories
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     },
     SEARCH_VALUE(state){
       return state.searchValue
+    },
+    QUESTIONNAIREFORMSTATE(state){
+      return state.questionnaireFormState
     }
   },
   mutations: {
@@ -36,6 +40,9 @@ export default new Vuex.Store({
     },
     SET_SEARCH_VALUE_TO_VUEX: (state, value) => {
        state.searchValue = value
+    },
+    SET_QUESTIONNAIREFORM_TO_VUEX: (state, value) => {
+       state.questionnaireFormState = value 
     }
   },
   actions: {
@@ -72,6 +79,9 @@ export default new Vuex.Store({
     },
     GET_SEARCH_VALUE_TO_VUEX({commit}, value){
       commit('SET_SEARCH_VALUE_TO_VUEX', value)
+    },
+    GET_QUESTIONNAIREFORMSTATE_TO_VUEX({commit}, value){
+      commit('SET_QUESTIONNAIREFORM_TO_VUEX', value)
     }
   },
   modules: {
