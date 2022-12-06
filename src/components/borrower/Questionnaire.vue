@@ -27,20 +27,23 @@
                         type="choseCountry" 
                         class="questionnaire__questions-input questionnaire__input"
                         v-model="form.countryID"
+                        :class="$v.form.countryID.$error ? 'questionnaire-input-invalid' : ''"
                     >
                         <option value="">Выберите страну</option>
                         <option v-for="country in COUNTRIES" :key="country.id" :value="country.id">{{country.name}}</option>
                     </select>
+                    <p v-if="$v.form.countryID.$dirty && !$v.form.countryID.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
                     
                     <select 
                         type="text" 
                         class="questionnaire__questions-input questionnaire__input"
-                        v-model="form.cityID">
+                        v-model="form.cityID"
+                        :class="$v.form.cityID.$error ? 'questionnaire-input-invalid' : ''">
                         <option value="">Выберите город</option>
                         <option v-for="city in cities" :key="city.id" :value="form.cityID">{{city.name}}</option>
                         
                     </select>
-                    
+                    <p v-if="$v.form.cityID.$dirty && !$v.form.cityID.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
                     
                     <input placeholder="БИН" 
                         type="text" 
@@ -115,14 +118,18 @@
                                     class="questionnaire__input" 
                                     type="text"
                                     v-model.trim="form.productName"
+                                    :class="$v.form.productName.$error ? 'questionnaire-input-invalid' : ''"
                                 >
+                                <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                                 <input 
                                     placeholder="Цена" 
                                     class="questionnaire__input" 
                                     type="text"
                                     v-model.trim="form.productPrice"
                                     @keypress="isNumber"
+                                    :class="$v.form.productPrice.$error ? 'questionnaire-input-invalid' : ''"
                                 >
+                                <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                             </div>
                         </div>
                     </div>
@@ -130,7 +137,12 @@
                         <div class="questionnaire__loan-revenue">
                             <h3>Выручка за последние 12 месяцев</h3>
                             <div class="questionnaire__loan-revenue-content questionnaire__loan-content">
-                                <select v-model="form.productCategory" class="questionnaire__input" type="text">
+                                <select 
+                                    v-model="form.productCategory" 
+                                    class="questionnaire__input" 
+                                    type="text"
+                                    :class="$v.form.productCategory.$error ? 'questionnaire-input-invalid' : ''">
+                                >
                                     <option selected value="">Категория продуктов</option>
                                     <option v-for="category in PRODUCTCATEGORIES" :key="category.id" :value="category.id">{{category.name}}</option>
                                 </select>
@@ -140,7 +152,9 @@
                                     type="text"
                                     v-model.trim="form.revenue"
                                     @keypress="isNumber"
+                                    :class="$v.form.revenue.$error ? 'questionnaire-input-invalid' : ''"
                                 >
+                                <p v-if="$v.form.revenue.$dirty && !$v.form.revenue.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                             </div>
                         </div>
                     </div>
@@ -154,7 +168,9 @@
                                     type="text"
                                     v-model.trim="form.profit"
                                     @keypress="isNumber"
+                                    :class="$v.form.profit.$error ? 'questionnaire-input-invalid' : ''"
                                 >
+                                <p v-if="$v.form.profit.$dirty && !$v.form.profit.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                             </div>
                         </div>
                     </div>
@@ -170,9 +186,11 @@
                                             id="creditChoiceYes" 
                                             :value="true" 
                                             v-model.trim="form.hasCredit"
+                                            :class="$v.form.hasCredit.$error ? 'questionnaire-input-invalid' : ''"
                                         >
                                         <label for="creditChoiceYes">Да</label>
                                     </div>
+                                    
                                     <div class="questionnaire__loan-credits-title-item">
                                         <input 
                                             type="radio" 
@@ -183,38 +201,46 @@
                                         >
                                         <label for="creditChoiceNo">Нет</label>
                                     </div>
+                                    <p style="margin-left: 20px;" v-if="$v.form.hasCredit.$dirty && !$v.form.hasCredit.required" class="questionnaire-invalid-feedback">Обязательное для выбора</p>
                                 </div>
                             </div>
-                            <p v-if="$v.form.credit.$dirty && !$v.form.credit.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
+                            
                             <div class="questionnaire__loan-credits-content questionnaire__loan-content" >
-
                                 <input 
                                     placeholder="Сумма" 
                                     class="questionnaire__input" 
                                     type="text"
                                     v-model.trim="form.credit.sum"
                                     @keypress="isNumber"
-                                >                               
+                                    :class="$v.form.credit.sum.$error ? 'questionnaire-input-invalid' : ''"
+                                >
+                                <p v-if="$v.form.credit.sum.$dirty && !$v.form.credit.sum.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>                               
                                 <input 
                                     placeholder="Проценты" 
                                     class="questionnaire__input" 
                                     type="text"
                                     v-model.trim="form.credit.percent"
                                     @keypress="isNumber"
+                                    :class="$v.form.credit.percent.$error ? 'questionnaire-input-invalid' : ''"
                                 >
+                                <p v-if="$v.form.credit.percent.$dirty && !$v.form.credit.percentrequired" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                                 <input 
                                     placeholder="Ежемесячные выплаты" 
                                     class="questionnaire__input" 
                                     type="text"
                                     v-model.trim="form.credit.monthlyPayment"
                                     @keypress="isNumber"
+                                    :class="$v.form.credit.monthlyPayment.$error ? 'questionnaire-input-invalid' : ''"
                                 >
+                                <p v-if="$v.form.credit.monthlyPayment.$dirty && !$v.form.credit.monthlyPayment.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                                 <input 
                                     placeholder="Срок погашения" 
                                     class="questionnaire__input" 
                                     type="date"
                                     v-model.trim="form.credit.maturity"
+                                    :class="$v.form.credit.maturity.$error ? 'questionnaire-input-invalid' : ''"
                                 >
+                                <p v-if="$v.form.credit.maturity.$dirty && !$v.form.credit.maturity.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                             </div>
                         </div>
                     </div>
@@ -228,7 +254,9 @@
                                     name=""
                                     v-model.trim="form.neededSum"
                                     @keypress="isNumber"
+                                    :class="$v.form.neededSum.$error ? 'questionnaire-input-invalid' : ''"
                                 >
+                                <p v-if="$v.form.neededSum.$dirty && !$v.form.neededSum.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                             </div>
                         </div>
                     </div>
@@ -274,6 +302,7 @@
                                     <input type="radio" name="accessFounderHistory" id="accessFounderHistory2" v-model="form.accessFounderHistory" :value="false">
                                     <label for="accessFounderHistory2" name="accessFounderHistory2">Нет</label>
                                 </div>
+                                <p v-if="$v.form.accessFounderHistory.$dirty && !$v.form.accessFounderHistory.required" class="questionnaire-invalid-feedback">Обязательное для выбора</p>
                                 <div class="questionnaire__loan-term-content-item">
                                     <p>Готовы ли предоставить доступ к кредитной истории компании?</p>
                                     <input type="radio" name="accessCompanyHistory" id="accessCompanyHistory1" v-model="form.accessCompanyHistory" :value="true">
@@ -281,7 +310,8 @@
                                     <input type="radio" name="accessCompanyHistory" id="accessCompanyHistory2" v-model="form.accessCompanyHistory" :value="false">
                                     <label for="accessCompanyHistory2">Нет</label>
                                 </div>
-                                <button :disabled="formValid" class="button questionnaire__btn" type="submit">Отправить</button>
+                                <p v-if="$v.form.accessCompanyHistory.$dirty && !$v.form.accessCompanyHistory.required" class="questionnaire-invalid-feedback">Обязательное для выбора</p>
+                                <button class="button questionnaire__btn" type="submit">Отправить</button>
                             </div>
                         </div>
                     </div>
@@ -362,8 +392,23 @@ export default {
             phone: {required},
             email: {required, email},
             businessDescription: {},
-            credit: {required},
             productName: {required},
+            productPrice: {required},
+            productCategory: {required},
+            countryID: {required},
+            cityID: {required},
+            revenue: {required},
+            profit: {required},
+            credit: {
+                sum: {required},
+                percent: {required},
+                monthlyPayment: {required},
+                maturity: {required}
+            },
+            neededSum: {required},
+            hasCredit: {required},
+            accessFounderHistory: {required},
+            accessCompanyHistory: {required}
         }
     },
     methods: {
