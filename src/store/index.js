@@ -57,30 +57,13 @@ export default new Vuex.Store({
             return productCategories
         })
     },
-    GET_MYPROJECTS_FROM_API({commit}){
+    GET_MYPROJECTS_FROM_API({commit}, value){
+      
       return axios('http://127.0.0.1:8000/api/v1/borrower/my-projects/', {
           method: "GET",
-          params: {
-            
-          }
-      })
-      .then((myProjects) => {
-          commit('SET_MYPROJECTS_TO_STATE', myProjects.data)
-          return myProjects
-      })
-    },
-    GET_MYPROJECTS_SORT_BY_ALPHABET({commit}){
-      return axios('http://127.0.0.1:8000/api/v1/borrower/my-projects/?/ordering=project_name', {
-          method: "GET"
-      })
-      .then((myProjects) => {
-          commit('SET_MYPROJECTS_TO_STATE', myProjects.data)
-          return myProjects
-      })
-    },
-    GET_MYPROJECTS_SORT_BY_ALPHABET_REVERSE({commit}){
-      return axios('http://127.0.0.1:8000/api/v1/borrower/my-projects/?/ordering=-project_name', {
-          method: "GET"
+          params: 
+            value
+          
       })
       .then((myProjects) => {
           commit('SET_MYPROJECTS_TO_STATE', myProjects.data)

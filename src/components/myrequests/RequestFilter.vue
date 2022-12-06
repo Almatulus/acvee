@@ -7,12 +7,11 @@
                         Статус
                     </div>
                     <div class="filter__filters">
-                        <a href="#" class="filter__el">
-                            Одобренно
-                        </a>
-                        <a href="#" class="filter__el">
-                            В ожидании
-                        </a>
+                        <input v-model="filter.ordering" type="radio" @click="filterHandler()" value="-project_name" href="#" class="filter__el">
+                        <label for="">Одобренно</label>
+                        <input v-model="filter.ordering" type="radio" @click="filterHandler()" value="project_name" href="#" class="filter__el">
+                        <label for="">В ожидании</label>
+    
                     </div>
                 </div>
                 <div class="filter__column">
@@ -33,9 +32,8 @@
                         Сумма
                     </div>
                     <div class="filter__filters">
-                        <a href="#" class="filter__el">
-                            до 500.000
-                        </a>
+                        <!--<input v-model="filter.rangeSum" type="radio" @click="filterHandler()" value[0]="0" value[1]="500000" href="#" class="filter__el">
+                        <label for="">до 500.000</label>-->
                         <a href="#" class="filter__el">
                             В 500.000 - 1.000.000 тг
                         </a>
@@ -89,8 +87,35 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex'
 export default {
-   
+   data:() => ({
+    filter: {
+        ordering: '',
+        rangeSum: [0, 500000],
+
+    },
+
+   }),
+   methods: {
+    filterHandler(){ 
+        this.GET_MYPROJECTS_FROM_API(this.filter)
+    },
+    ...mapActions([
+        'GET_MYPROJECTS_FROM_API'
+    ]),
+    resetFilter(){
+        this.filter.ordering = '',
+        rangeSum = null
+    }
+   },
+   computed: {
+        
+        
+    },
+    mounted(){
+        
+    },
 }
 </script>
 

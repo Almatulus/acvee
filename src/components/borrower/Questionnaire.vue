@@ -131,7 +131,7 @@
                             <h3>Выручка за последние 12 месяцев</h3>
                             <div class="questionnaire__loan-revenue-content questionnaire__loan-content">
                                 <select v-model="form.productCategory" class="questionnaire__input" type="text">
-                                    <option value="">Категория продуктов</option>
+                                    <option selected value="">Категория продуктов</option>
                                     <option v-for="category in PRODUCTCATEGORIES" :key="category.id" :value="category.id">{{category.name}}</option>
                                 </select>
                                 <input 
@@ -312,7 +312,7 @@ export default {
             businessDescription: '',
             countryID: '',
             cityID: '',
-
+            productCategory: '',
             productName: '',
             productPrice: '',
 
