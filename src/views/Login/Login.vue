@@ -13,10 +13,10 @@
                             maxlength="16"
                             :class="$v.phone.$error ? 'invalid' : ''"
                             v-model.trim="phone"
-                            v-imask="phoneNumberMask" 
+                            
                             @accept="onAccept" 
                             @complete="onComplete"
-                            @keypress="isNumber"
+                            
                         >
                         <p v-if="$v.phone.$dirty && !$v.phone.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                         <p v-if="$v.phone.$dirty && !$v.phone.minLength" class="invalid-feedback">Данное поле должно содержать номер телефона</p>
@@ -39,6 +39,9 @@
                         </button>
                     </div>
                 </form>
+                @keypress="isNumber"
+                
+                v-imask="phoneNumberMask" 
             </div>
         </div>
     </div>
@@ -76,24 +79,31 @@ export default {
     },
     methods: {
         submitHandler(){
-            this.$v.$touch()
+            //this.$v.$touch()
             if(!this.$v.$error){
+                const{phone, password} = this
                 //this.$router.push('/')
                 axios.post('http://127.0.0.1:8000/api/v1/auth/token/login/',
                     {
-                        
-                    }
-                )
+                        phone,
+                        password
+                    },
+                   
+                ). 
+                then(function (response){
+                    //console.log(response)
+                    
+                })
             }
             
         },
         onAccept(e){
             const maskRef = e.detail
-            this.form.phone = maskRef.value
+            this.phone = maskRef.value
         },
         onComplete(e){
             const maskRef = e.detail
-            this.form.userPhone = maskRef.unmaskedValue
+            this.userPhone = maskRef.unmaskedValue
         },
         isNumber (e) {
         const regex = /[0-9]/
