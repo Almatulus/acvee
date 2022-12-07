@@ -1,16 +1,23 @@
 <template>
     <div class="authentication-template__roles">
+        <form action="">
         <ul>
             <li 
-            v-for="role in roles"
-            :key="role.title"
-            :class="{'active-role': activeEl === role}"
-            @click="activeEl = role"
+                v-for="role in roles"
+                :key="role.title"
+                :class="{'active-role': activeEl === role}"
+                @click="activeEl = role"
             >
-               <a href="#" class="authentication-template__link"
-               >{{ role.title }}</a>
+                <input :id="role.id" type="radio" :value="role.value">
+                <label :for="role.id" class="authentication-template__link"
+    
+                >
+                    {{ role.title }}
+                </label>
+            
             </li>
         </ul>
+        </form>
     </div>
 </template>
 
@@ -19,16 +26,10 @@ export default {
     data: () => ({
         roles: [
             {
-                title: 'Заемщик'
+                title: 'Заемщик', value: 2, id: "Borrower"
             },
             {
-                title: 'Fulfillment'
-            },
-            {
-                title: 'Админ'
-            },
-            {
-                title: 'Инвестор'
+                title: 'Инвестор', value: 3, id: "Investor"
             }
         ],
         activeEl: 0

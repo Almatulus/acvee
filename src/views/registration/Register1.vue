@@ -1,7 +1,19 @@
 <template>
     <div class="authentication-template">
         <div class="authentication-template__inner">
-            <AuthenticationTemplateRoles/>
+            
+            <div class="authentication-template__roles">
+                <ul>
+                    <li>
+                        <input v-model="user_type" value="2" name="role" id="Borrower" class="radio-hide" type="radio">
+                        <label for="Borrower">Заемщик</label>
+                    </li>
+                    <li>
+                        <input v-model="user_type" value="3" name="role" id="Investor" class="radio-hide" type="radio">
+                        <label for="Investor">Инвестор</label>
+                    </li>
+                </ul>
+            </div>
             <div class="authentication-template__content">
                 <div class="authentication-template__form-stage">
                     Этап 1 из 2
@@ -67,13 +79,15 @@ export default {
         phoneNumberMask: {
             mask: '+{7}(000)000-00-00',
             lazy: true
-        }
+        },
+        user_type: ''
     }),
     methods: {
         submitHandler(){
             //this.$v.$touch()
             if(!this.$v.$error){
                 localStorage.setItem('phone', this.phone)
+                localStorage.setItem('userType', this.user_type)
                 this.$router.push('/register/2')
             }
             

@@ -11,22 +11,22 @@
                         <p>Пароль</p>
                         <input 
                         type="password"
-                        v-model.trim="form.password"
-                        :class="$v.form.password.$error ? 'invalid' : ''"
+                        v-model.trim="password"
+                        :class="$v.password.$error ? 'invalid' : ''"
                         >
-                        <p v-if="$v.form.password.$dirty && !$v.form.password.required" class="invalid-feedback">Обязательное поле для заполнения</p>
-                        <p v-if="$v.form.password.$dirty && !$v.form.password.minLength" class="invalid-feedback">Данное поле должно содержать больше 7 символов</p>
+                        <p v-if="$v.password.$dirty && !$v.password.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                        <p v-if="$v.password.$dirty && !$v.password.minLength" class="invalid-feedback">Данное поле должно содержать больше 7 символов</p>
                     </div>
                     <div class="authentication-template__form-item">
                         <p>Повторите пароль</p>
                         <input 
                         type="password"
-                        v-model.trim="form.repeatPassword"
-                        :class="$v.form.repeatPassword.$error ? 'invalid' : ''"
+                        v-model.trim="repeatPassword"
+                        :class="$v.repeatPassword.$error ? 'invalid' : ''"
                         >
-                        <p v-if="$v.form.repeatPassword.$dirty && !$v.form.repeatPassword.required" class="invalid-feedback">Обязательное поле для заполнения</p>
-                        <p v-if="$v.form.repeatPassword.$dirty && !$v.form.repeatPassword.minLength" class="invalid-feedback">Данное поле должно содержать больше 7 символов</p>
-                        <p v-if="$v.form.repeatPassword.$dirty && !$v.form.repeatPassword.sameAsPassword" class="invalid-feedback">Данное поле должно соответствовать предыдущему</p>
+                        <p v-if="$v.repeatPassword.$dirty && !$v.repeatPassword.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                        <p v-if="$v.repeatPassword.$dirty && !$v.repeatPassword.minLength" class="invalid-feedback">Данное поле должно содержать больше 7 символов</p>
+                        <p v-if="$v.repeatPassword.$dirty && !$v.repeatPassword.sameAsPassword" class="invalid-feedback">Данное поле должно соответствовать предыдущему</p>
                         
                     </div>
                     <div class="authentication-template__button">
@@ -49,16 +49,26 @@ export default {
         name: 'registration2',
         title: 'Регистрация',
         buttonText: 'Зарегистрироваться',
-        form: {
             password: '',
             repeatPassword: ''
-        }
     }),
     methods: {
         submitHandler(){
-            this.$v.form.$touch()
-            if(!this.$v.form.$error){
-                this.$router.push('/')
+            //this.$v.$touch()
+            if(!this.$v.$error){
+                axios.post('http://127.0.0.1:8000/api/v1/registr/',
+                    {
+                        phone_number: localStorage.getItem('phone'),
+                        user_type: localStorage.getItem('userType'),
+                        password: this.password,
+                        password2: this.repeatPassword
+                    }
+                ). 
+                then(function (response){
+                    localStorage.removeItem('phone')
+                    console.log(response)
+                    
+                })
             }
         }
     },
@@ -66,10 +76,8 @@ export default {
         AuthenticationTemplateRoles
     },
     validations: {
-        form: {
             password: {required, minLength: minLength(8)},
             repeatPassword: {required, minLength: minLength(8), sameAsPassword: sameAs('form.password')}
-        }
     }
 }
 </script>
