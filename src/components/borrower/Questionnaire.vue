@@ -311,7 +311,7 @@
                                     <label for="accessCompanyHistory2">Нет</label>
                                 </div>
                                 <p v-if="$v.form.accessCompanyHistory.$dirty && !$v.form.accessCompanyHistory.required" class="questionnaire-invalid-feedback">Обязательное для выбора</p>
-                                <button class="button questionnaire__btn" type="submit">Отправить</button>
+                                <button class="button questionnaire__btn" type="submit">Далее</button>
                             </div>
                         </div>
                     </div>

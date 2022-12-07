@@ -8,7 +8,7 @@
                     </div>
                     <div class="filter__filters">
                         <input v-model="filter.ordering" type="radio" @click="filterHandler()" value="-project_name" href="#" class="filter__el">
-                        <label for="">Одобренно</label>
+                        <label class="filter__el" for="">Одобренно</label>
                         <input v-model="filter.ordering" type="radio" @click="filterHandler()" value="project_name" href="#" class="filter__el">
                         <label for="">В ожидании</label>
     
@@ -19,12 +19,10 @@
                         Название
                     </div>
                     <div class="filter__filters">
-                        <a href="#" class="filter__el">
-                            Порядок: А-Я
-                        </a>
-                        <a href="#" class="filter__el">
-                            Порядок: Я-А
-                        </a>
+                        <input v-model="filter.ordering" type="radio" @click="filterHandler()" value="project_name" href="#" class="filter__el">
+                        <label class="filter__el" for="">Порядок: А-Я</label>
+                        <input v-model="filter.ordering" type="radio" @click="filterHandler()" value="-project_name" href="#" class="filter__el">
+                        <label for="">Порядок: Я-А</label>
                     </div>
                 </div>
                 <div class="filter__column">

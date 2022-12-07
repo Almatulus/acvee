@@ -2,7 +2,7 @@
     <div class="scoring">
         <div class="scoring__inner">
             <h2>Скоринг</h2>
-            <form action="" @submit.prevent="submitHandler()">
+            <form id="docForm" ref="docForm" action="" @submit.prevent="submitHandler()">
                 <div class="scoring__item-wrapper">
                     <div class="scoring__content">
                         <div class="scoring__item">
@@ -16,7 +16,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input class="document__send" type="file" id="file" ref="file" :value="value" v-on:change="handleFileUpload()"/>
+                                            <input name="IDCard" class="document__send" type="file" id="file" ref="IDCard" v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -37,7 +37,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input class="document__send" type="file" id="file" ref="file" :value="value" v-on:change="handleFileUpload()"/>
+                                            <input name="registrationCertificate" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -58,7 +58,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input class="document__send" type="file" id="file" ref="file" :value="value" v-on:change="handleFileUpload()"/>
+                                            <input name="contractSale" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -84,7 +84,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input class="document__send" type="file" id="file" ref="file" :value="value" v-on:change="handleFileUpload()"/>
+                                            <input name="firstAct" class="document__send" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -105,7 +105,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input class="document__send" type="file" id="file" ref="file" :value="value" v-on:change="handleFileUpload()"/>
+                                            <input name="secondAct" class="document__send" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -126,7 +126,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input class="document__send" type="file" id="file" ref="file" :value="value" v-on:change="handleFileUpload()"/>
+                                            <input name="thirdAct" class="document__send" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -143,8 +143,8 @@
                         <label for="">Вложить документ</label>
                     </div>
                     <div class="scoring__agreement">
-                        <input type="checkbox"> 
-                        <label for="">Нажимая “Оплатить проверку” вы соглашаетесь с получением данных из открытых источников</label>
+                        <input v-model="scoring.purchaseAgreement" value="" id="agreement" type="checkbox"> 
+                        <label for="agreement">Нажимая “Оплатить проверку” вы соглашаетесь с получением данных из открытых источников</label>
                     </div>
                     <div class="scoring__examination">
                         <p>Проверка ПКБ и Abis.kz: <span>1000тг</span></p>
@@ -156,6 +156,7 @@
                     </div>
                 </div>
             </form>
+            {{scoring.IDCard}}
         </div>
     </div>
 </template>
@@ -164,8 +165,10 @@
 <script>
 import FilePreview from '@/components/documents/FilePreview.vue'
 import {mapActions, mapGetters} from 'vuex'
+import { required } from 'vuelidate/lib/validators'
 export default {
     data: () => ({
+        file: '',
         scoring: {
             IDCard: '',
             registrationCertificate: '',
@@ -183,15 +186,50 @@ export default {
     },
     methods:{
         submitHandler(){
-            
+            let docForm = document.getElementById('docForm')
+            //console.log(this.QUESTIONNAIREFORMSTATE.organizationName, this.QUESTIONNAIREFORMSTATE)
+            let formData = new FormData(docForm);
+            //formData.append('file', this.scoring.IDCard);
+            //formData.append('dsad', 'ddsad' )
+            for(var i in this.QUESTIONNAIREFORMSTATE){formData.append(i, this.QUESTIONNAIREFORMSTATE[i])};
+            //formData.append('form', this.QUESTIONNAIREFORMSTATE);
+            //formData.append('', this.scoring.registrationCertificate)
+            axios.post( 'http://localhost:8000/api/v1/borrower/create/',    
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+                
+            ).then(function(){
+            console.log('SUCCESS!!');
+            })
+            .catch(function(){
+            console.log('FAILURE!!');
+            });
+        },
+        handleFileUpload(){
+            this.scoring.IDCard = this.$refs.IDCard.files[0];
+            this.scoring.registrationCertificate = this.$refs.registrationCertificate.files[0];
+            this.scoring.contractSale = this.$refs.registrationCertificate.files[0];
+            console.log(this.scoring.IDCard)
         }
     },
     computed:{
         ...mapGetters([
             'QUESTIONNAIREFORMSTATE'
         ]),
+    },
+    validations: {
+
     }
 }
+
+//form: this.QUESTIONNAIREFORMSTATE,
+                    /*scoring: {
+                        IDCard: IDCard,
+                    }*/
 </script>
 
 <style lang="scss" scoped>
@@ -313,3 +351,4 @@ export default {
 }
 
 </style>
+

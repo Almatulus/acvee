@@ -4,7 +4,7 @@
       <label>+ Добавить документ
         <input class="document__send" type="file" id="file" ref="file" :value="value" v-on:change="handleFileUpload()"/>
       </label>
-        <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
+        <button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>
       <div class="document__preview">
         <img src="" alt="">
       </div>
@@ -24,13 +24,12 @@
     methods: {
       handleFileUpload(){
         this.file = this.$refs.file.files[0];
-        
       },
       submitFile(){
         let formData = new FormData();
         formData.append('file', this.file);
         
-        axios.post( '/test',
+        axios.post( 'http://localhost:8000/api/v1/borrower/create/',
           formData,
           {
             headers: {
