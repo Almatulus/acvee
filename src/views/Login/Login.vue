@@ -40,7 +40,7 @@
                     </div>
                 </form>
                 @keypress="isNumber"
-                
+                {{this.USERTOKEN}}
                 v-imask="phoneNumberMask" 
             </div>
         </div>
@@ -52,6 +52,7 @@ import { required, minLength } from 'vuelidate/lib/validators'
 import { IMaskDirective } from 'vue-imask'
 import AuthenticationTemplateRoles from '@/components/authentication/authentication-template-roles.vue'
 import AuthenticationTemplateContent from '@/components/authentication/authentication-template-content.vue'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
     data: () => ({
@@ -81,18 +82,16 @@ export default {
         submitHandler(){
             //this.$v.$touch()
             if(!this.$v.$error){
-                const{phone, password} = this
                 //this.$router.push('/')
                 axios.post('http://127.0.0.1:8000/api/v1/auth/token/login/',
                     {
-                        phone,
-                        password
-                    },
-                   
+                        phone_number: this.phone,
+                        password: this.password
+                    }
                 ). 
                 then(function (response){
-                    //console.log(response)
-                    
+                    console.log(response)
+                    this.GET_USERTOKEN_TO_VUEX(response)
                 })
             }
             
@@ -112,10 +111,18 @@ export default {
             if (e.preventDefault) e.preventDefault();
             }
         },
+        ...mapActions([
+            'GET_USERTOKEN_TO_VUEX'
+        ])
     },
     directives: {
       imask: IMaskDirective
     },
+    computed: {
+        ...mapGetters([
+            'USERTOKEN'
+        ]),
+    }
 }
 </script>
 

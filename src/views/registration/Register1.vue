@@ -14,23 +14,23 @@
                             type="text"
                             placeholder="+7(921)123-45-67"
                             maxlength="16"
-                            :class="$v.form.phone.$error ? 'invalid' : ''"
-                            v-model.trim="form.phone"
+                            :class="$v.phone.$error ? 'invalid' : ''"
+                            v-model.trim="phone"
                             v-imask="phoneNumberMask"
                             @accept="onAccept" 
                             @complete="onComplete"
                             @keypress="isNumber"
                         >
-                        <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="invalid-feedback">Обязательное поле для заполнения</p>
-                        <p v-if="$v.form.phone.$dirty && !$v.form.phone.minLength" class="invalid-feedback">Данное поле должно содержать номер телефона</p>
+                        <p v-if="$v.phone.$dirty && !$v.phone.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                        <p v-if="$v.phone.$dirty && !$v.phone.minLength" class="invalid-feedback">Данное поле должно содержать номер телефона</p>
                     </div>
                     <div class="authentication-template__form-item">
                         <p>СМС код подтверждение</p>
                         <input type="password"
                         maxlength="4"
-                        v-model.trim="form.sms"                                                                    
+                        v-model.trim="sms"                                                                    
                         >
-                        <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                        <p v-if="$v.phone.$dirty && !$v.phone.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                         <div class="authentication-template__sms">
                             Повторно <a href="#">отправить код</a> 
                         </div>
@@ -61,12 +61,9 @@ export default {
         title: 'Регистрация',
         url: '/login',
         buttonText: 'Продолжить',
-        form: {
-            phone: '',
-            userPhone: '',
-            sms: '',
-
-        },
+        phone: '',
+        userPhone: '',
+        sms: '',
         phoneNumberMask: {
             mask: '+{7}(000)000-00-00',
             lazy: true
@@ -74,19 +71,20 @@ export default {
     }),
     methods: {
         submitHandler(){
-            this.$v.form.$touch()
-            if(!this.$v.form.$error){
+            //this.$v.$touch()
+            if(!this.$v.$error){
+                localStorage.setItem('phone', this.phone)
                 this.$router.push('/register/2')
             }
             
         },
         onAccept(e){
             const maskRef = e.detail
-            this.form.phone = maskRef.value
+            this.phone = maskRef.value
         },
         onComplete(e){
             const maskRef = e.detail
-            this.form.userPhone = maskRef.unmaskedValue
+            this.userPhone = maskRef.unmaskedValue
         },
         isNumber (e) {
         const regex = /[0-9]/
@@ -96,11 +94,9 @@ export default {
             }
         },
     },
-    validations: {
-        form: {
-            phone: {required, minLength: minLength(16)},
-            sms: {required}
-        }
+    validations: {      
+        phone: {required, minLength: minLength(16)},
+        sms: {required}
     },
     directives: {
         imask: IMaskDirective
@@ -138,6 +134,4 @@ export default {
             color: #ff0000;
         }
     }
-
-    
 </style>

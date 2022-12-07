@@ -9,7 +9,8 @@ export default new Vuex.Store({
     productCategories: [],
     myProjects : [],
     searchValue: '',
-    questionnaireFormState: {}
+    questionnaireFormState: {},
+    userToken: ''
   },
   getters: {
     COUNTRIES(state){
@@ -26,7 +27,10 @@ export default new Vuex.Store({
     },
     QUESTIONNAIREFORMSTATE(state){
       return state.questionnaireFormState
-    }
+    },
+    USERTOKEN(state){
+      return state.userToken
+    },
   },
   mutations: {
     SET_COUNTRIES_TO_STATE: (state, countries) => {
@@ -43,6 +47,9 @@ export default new Vuex.Store({
     },
     SET_QUESTIONNAIREFORM_TO_VUEX: (state, value) => {
        state.questionnaireFormState = value 
+    },
+    SET_USERTOKEN_TO_VUEX: (state, value) => {
+      state.userToken = value 
     }
   },
   actions: {
@@ -82,6 +89,9 @@ export default new Vuex.Store({
     },
     GET_QUESTIONNAIREFORMSTATE_TO_VUEX({commit}, value){
       commit('SET_QUESTIONNAIREFORM_TO_VUEX', value)
+    },
+    GET_USERTOKEN_TO_VUEX({commit}, value){
+      commit('SET_USERTOKEN_TO_VUEX', value)
     }
   },
   modules: {

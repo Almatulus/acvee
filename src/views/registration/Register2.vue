@@ -1,7 +1,6 @@
 <template>
     <div class="authentication-template">
         <div class="authentication-template__inner">
-            <AuthenticationTemplateRoles/>
             <div class="authentication-template__content">
                 <div class="authentication-template__form-stage">
                     Этап 2 из 2
