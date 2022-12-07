@@ -8,26 +8,27 @@
                     <div class="authentication-template__form-item">
                         <p>Номер телефона</p>
                         <input
-                        type="text"
-                        placeholder="+7(921)123-45-67"
-                        maxlength="16"
-                        :class="$v.form.phone.$error ? 'invalid' : ''"
-                        v-model.trim="form.phone"
-                        v-imask="phoneNumberMask" 
-                        @accept="onAccept" 
-                        @complete="onComplete"
-                        @keypress="isNumber"
+                            type="text"
+                            placeholder="+7(921)123-45-67"
+                            maxlength="16"
+                            :class="$v.phone.$error ? 'invalid' : ''"
+                            v-model.trim="phone"
+                            v-imask="phoneNumberMask" 
+                            @accept="onAccept" 
+                            @complete="onComplete"
+                            @keypress="isNumber"
                         >
-                        <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="invalid-feedback">Обязательное поле для заполнения</p>
-                        <p v-if="$v.form.phone.$dirty && !$v.form.phone.minLength" class="invalid-feedback">Данное поле должно содержать номер телефона</p>
+                        <p v-if="$v.phone.$dirty && !$v.phone.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                        <p v-if="$v.phone.$dirty && !$v.phone.minLength" class="invalid-feedback">Данное поле должно содержать номер телефона</p>
                     </div>
                     <div class="authentication-template__form-item">
                         <p>Пароль</p>
                         <input type="password"
-                        :class="$v.form.password.$error ? 'invalid' : ''"
-                        v-model.trim="form.password">
-                        <p v-if="$v.form.password.$dirty && !$v.form.password.required" class="invalid-feedback">Обязательное поле для заполнения</p>
-                        <p v-if="$v.form.password.$dirty && !$v.form.password.minLength" class="invalid-feedback">Пароль должен иметь больше 8 символов</p>
+                            :class="$v.password.$error ? 'invalid' : ''"
+                            v-model.trim="password"
+                        >
+                        <p v-if="$v.password.$dirty && !$v.password.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                        <p v-if="$v.password.$dirty && !$v.password.minLength" class="invalid-feedback">Пароль должен иметь больше 8 символов</p>
                     </div>
                     <div class="authentication-template__enter">
                         Еще нет аккаунта? <router-link tag="a" :to="url"><a href="#">Зарегистрироваться</a></router-link>
@@ -53,11 +54,9 @@ export default {
     data: () => ({
         name: 'login',
         title: 'Войти',
-        form: {
-            phone: '',
-            userPhone: '',
-            password: '',
-        },
+        phone: '',
+        userPhone: '',
+        password: '',        
         phoneNumberMask: {
             mask: '+{7}(000)000-00-00',
             lazy: true
@@ -68,10 +67,8 @@ export default {
         errors: []
     }),
     validations:{
-        form: {
-            phone: {required, minLength: minLength(16)},
-            password: {required, minLength: minLength(8)}
-        }
+        phone: {required, minLength: minLength(16)},
+        password: {required, minLength: minLength(8)}
     },
     components: {
         AuthenticationTemplateRoles,
@@ -79,9 +76,14 @@ export default {
     },
     methods: {
         submitHandler(){
-            this.$v.form.$touch()
-            if(!this.$v.form.$error){
-                this.$router.push('/')
+            this.$v.$touch()
+            if(!this.$v.$error){
+                //this.$router.push('/')
+                axios.post('http://127.0.0.1:8000/api/v1/auth/token/login/',
+                    {
+                        
+                    }
+                )
             }
             
         },

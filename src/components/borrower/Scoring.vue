@@ -156,7 +156,6 @@
                     </div>
                 </div>
             </form>
-            {{scoring.IDCard}}
         </div>
     </div>
 </template>
@@ -192,6 +191,7 @@ export default {
             //formData.append('file', this.scoring.IDCard);
             //formData.append('dsad', 'ddsad' )
             for(var i in this.QUESTIONNAIREFORMSTATE){formData.append(i, this.QUESTIONNAIREFORMSTATE[i])};
+            //formData.append(this.QUESTIONNAIREFORMSTATE.organizationName)
             //formData.append('form', this.QUESTIONNAIREFORMSTATE);
             //formData.append('', this.scoring.registrationCertificate)
             axios.post( 'http://localhost:8000/api/v1/borrower/create/',    

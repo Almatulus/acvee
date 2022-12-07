@@ -47,6 +47,12 @@ const routes = [
     component: () => import('../views/Borrower/BorrowerAddRequest.vue')
   },
   {
+    path: '/myrequest/questionnaire',
+    name: 'myrequest-questionnaire',
+    meta: {layout: 'borrower'},
+    component: () => import('../views/Borrower/Questionnaire.vue')
+  },
+  {
     path: '/investor/my-projects',
     name: 'investor-myProjects',
     meta: {layout: 'investor'},
