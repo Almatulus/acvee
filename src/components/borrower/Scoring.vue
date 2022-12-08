@@ -189,8 +189,21 @@ export default {
             //console.log(this.QUESTIONNAIREFORMSTATE.organizationName, this.QUESTIONNAIREFORMSTATE)
             let formData = new FormData(docForm);
             //formData.append('file', this.scoring.IDCard);
-            //formData.append('dsad', 'ddsad' )
-            for(var i in this.QUESTIONNAIREFORMSTATE){formData.append(i, this.QUESTIONNAIREFORMSTATE[i])};
+            //let localitems = localStorage.getItem('questionnaire')
+            //for(var i in this.QUESTIONNAIREFORMSTATE){formData.append(i, this.QUESTIONNAIREFORMSTATE[i])};
+            //for(var i in localitems){formData.append(i, localitems[i])}
+            
+            const data = JSON.parse(localStorage.getItem('questionnaire'))
+            for (let k in data) {
+                if(typeof data[k] == 'object'){
+                    for(let i in data[k]) formData.append(k+'['+i+']', data[k][i])
+                }
+                else formData.append(k, data[k]);
+            }
+
+            console.log(data)
+            //formData.append(JSON.parse(localStorage.getItem('questionnaire')))
+
             //formData.append(this.QUESTIONNAIREFORMSTATE.organizationName)
             //formData.append('form', this.QUESTIONNAIREFORMSTATE);
             //formData.append('', this.scoring.registrationCertificate)

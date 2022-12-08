@@ -60,14 +60,15 @@ export default {
                     {
                         phone_number: localStorage.getItem('phone'),
                         user_type: localStorage.getItem('userType'),
+                
                         password: this.password,
                         password2: this.repeatPassword
                     }
                 ). 
                 then(function (response){
                     localStorage.removeItem('phone')
-                    console.log(response)
-                    
+                    //console.log(response)
+                    console.log(localStorage.getItem('userType'))
                 })
             }
         }

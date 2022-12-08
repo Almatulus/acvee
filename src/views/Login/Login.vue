@@ -82,7 +82,7 @@ export default {
         submitHandler(){
             //this.$v.$touch()
             if(!this.$v.$error){
-                //this.$router.push('/')
+                this.$router.push('/')
                 axios.post('http://127.0.0.1:8000/api/v1/auth/token/login/',
                     {
                         phone_number: this.phone,

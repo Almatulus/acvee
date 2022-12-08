@@ -345,7 +345,6 @@ export default {
             productCategory: '',
             productName: '',
             productPrice: '',
-
             categoryID: '',
             revenue: '',
             profit: '',
@@ -430,7 +429,9 @@ export default {
         submitHandler(value){
             //this.$v.form.$touch()
             if(!this.$v.form.$error){
-                this.GET_QUESTIONNAIREFORMSTATE_TO_VUEX(value)
+                //this.GET_QUESTIONNAIREFORMSTATE_TO_VUEX(value)
+                localStorage.setItem('questionnaire', JSON.stringify(value))
+                console.log(value)
             }
         },
         uploadFile() {
