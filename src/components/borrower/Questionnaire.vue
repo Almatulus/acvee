@@ -210,37 +210,37 @@
                                     placeholder="Сумма" 
                                     class="questionnaire__input" 
                                     type="text"
-                                    v-model.trim="form.credit.sum"
+                                    v-model.trim="form.creditSum"
                                     @keypress="isNumber"
-                                    :class="$v.form.credit.sum.$error ? 'questionnaire-input-invalid' : ''"
+                                    :class="$v.form.creditSum.$error ? 'questionnaire-input-invalid' : ''"
                                 >
-                                <p v-if="$v.form.credit.sum.$dirty && !$v.form.credit.sum.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>                               
+                                <p v-if="$v.form.creditSum.$dirty && !$v.form.creditSum.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>                               
                                 <input 
                                     placeholder="Проценты" 
                                     class="questionnaire__input" 
                                     type="text"
-                                    v-model.trim="form.credit.percent"
+                                    v-model.trim="form.creditPercent"
                                     @keypress="isNumber"
-                                    :class="$v.form.credit.percent.$error ? 'questionnaire-input-invalid' : ''"
+                                    :class="$v.form.creditPercent.$error ? 'questionnaire-input-invalid' : ''"
                                 >
-                                <p v-if="$v.form.credit.percent.$dirty && !$v.form.credit.percentrequired" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                                <p v-if="$v.form.creditPercent.$dirty && !$v.form.creditPercent.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                                 <input 
                                     placeholder="Ежемесячные выплаты" 
                                     class="questionnaire__input" 
                                     type="text"
-                                    v-model.trim="form.credit.monthlyPayment"
+                                    v-model.trim="form.creditMonthlyPayment"
                                     @keypress="isNumber"
-                                    :class="$v.form.credit.monthlyPayment.$error ? 'questionnaire-input-invalid' : ''"
+                                    :class="$v.form.creditMonthlyPayment.$error ? 'questionnaire-input-invalid' : ''"
                                 >
-                                <p v-if="$v.form.credit.monthlyPayment.$dirty && !$v.form.credit.monthlyPayment.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                                <p v-if="$v.form.creditMonthlyPayment.$dirty && !$v.form.creditMonthlyPayment.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                                 <input 
                                     placeholder="Срок погашения" 
                                     class="questionnaire__input" 
                                     type="date"
-                                    v-model.trim="form.credit.maturity"
-                                    :class="$v.form.credit.maturity.$error ? 'questionnaire-input-invalid' : ''"
+                                    v-model.trim="form.creditMaturity"
+                                    :class="$v.form.creditMaturity.$error ? 'questionnaire-input-invalid' : ''"
                                 >
-                                <p v-if="$v.form.credit.maturity.$dirty && !$v.form.credit.maturity.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                                <p v-if="$v.form.creditMaturity.$dirty && !$v.form.creditMaturity.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                             </div>
                         </div>
                     </div>
@@ -349,12 +349,12 @@ export default {
             revenue: '',
             profit: '',
             hasCredit: '',
-            credit: {
-                sum: '',
-                percent: '',
-                monthlyPayment: '',
-                maturity: ''
-            },
+            
+            creditSum: '',
+            creditPercent: '',
+            creditMaturity: '',
+            creditMonthlyPayment: '',
+            
             isWeek: true,
             amount: 0,
             neededSum: '',
@@ -387,12 +387,12 @@ export default {
             cityID: {required},
             revenue: {required},
             profit: {required},
-            credit: {
-                sum: {required},
-                percent: {required},
-                monthlyPayment: {required},
-                maturity: {required}
-            },
+            
+            creditSum: {required},
+            creditPercent: {required},
+            creditMonthlyPayment: {required},
+            creditMaturity: {required},
+            
             neededSum: {required},
             hasCredit: {required},
             accessFounderHistory: {required},
@@ -431,7 +431,7 @@ export default {
             if(!this.$v.form.$error){
                 //this.GET_QUESTIONNAIREFORMSTATE_TO_VUEX(value)
                 localStorage.setItem('questionnaire', JSON.stringify(value))
-                console.log(value)
+                console.log(localStorage.getItem('questionnaire'))
             }
         },
         uploadFile() {

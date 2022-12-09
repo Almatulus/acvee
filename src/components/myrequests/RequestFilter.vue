@@ -7,9 +7,9 @@
                         Статус
                     </div>
                     <div class="filter__filters">
-                        <input v-model="filter.ordering" type="radio" @click="filterHandler()" value="-project_name" href="#" class="filter__el">
+                        <input v-model="filter.status" type="radio" name="status" @click="filterHandler()" value="approved" href="#" class="filter__el">
                         <label class="filter__el" for="">Одобренно</label>
-                        <input v-model="filter.ordering" type="radio" @click="filterHandler()" value="project_name" href="#" class="filter__el">
+                        <input v-model="filter.status" name="status" type="radio"  @click="filterHandler()" value="denied" href="#" class="filter__el">
                         <label for="">В ожидании</label>
     
                     </div>
@@ -19,11 +19,12 @@
                         Название
                     </div>
                     <div class="filter__filters">
-                        <input v-model="filter.ordering" type="radio" @click="filterHandler()" value="project_name" href="#" class="filter__el">
+                        <input v-model.trim="filter.ordering" type="radio" name="alphabet" @click="filterHandler()" value="project_name" href="#" class="filter__el">
                         <label class="filter__el" for="">Порядок: А-Я</label>
-                        <input v-model="filter.ordering" type="radio" @click="filterHandler()" value="-project_name" href="#" class="filter__el">
+                        <input v-model.trim="filter.ordering" name="alphabet" type="radio" @click="filterHandler()" value="-project_name" href="#" class="filter__el">
                         <label for="">Порядок: Я-А</label>
                     </div>
+                    {{filter.ordering}}
                 </div>
                 <div class="filter__column">
                     <div class="filter__title">
@@ -90,7 +91,7 @@ export default {
    data:() => ({
     filter: {
         ordering: '',
-        rangeSum: [0, 500000],
+        status: ''
 
     },
 

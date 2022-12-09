@@ -5,11 +5,11 @@
             <div class="authentication-template__roles">
                 <ul>
                     <li>
-                        <input v-model="user_type" value=2 name="role" id="Borrower" class="radio-hide" type="radio">
+                        <input v-model="user_type" value="borrower" name="role" id="Borrower" class="radio-hide" type="radio">
                         <label for="Borrower">Заемщик</label>
                     </li>
                     <li>
-                        <input v-model="user_type" value=3 name="role" id="Investor" class="radio-hide" type="radio">
+                        <input v-model="user_type" value="investor" name="role" id="Investor" class="radio-hide" type="radio">
                         <label for="Investor">Инвестор</label>
                     </li>
                 </ul>

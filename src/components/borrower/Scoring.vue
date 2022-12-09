@@ -190,18 +190,20 @@ export default {
             let formData = new FormData(docForm);
             //formData.append('file', this.scoring.IDCard);
             //let localitems = localStorage.getItem('questionnaire')
-            //for(var i in this.QUESTIONNAIREFORMSTATE){formData.append(i, this.QUESTIONNAIREFORMSTATE[i])};
+            //let questionnaire = JSON.parse(localStorage.getItem('questionnaire'))
+            formData.append('form',localStorage.getItem('questionnaire'))
+            //for(var i in questionnaire){formData.append(i, questionnaire[i])};
             //for(var i in localitems){formData.append(i, localitems[i])}
             
-            const data = JSON.parse(localStorage.getItem('questionnaire'))
+            /*const data = JSON.parse(localStorage.getItem('questionnaire'))
             for (let k in data) {
                 if(typeof data[k] == 'object'){
                     for(let i in data[k]) formData.append(k+'['+i+']', data[k][i])
                 }
                 else formData.append(k, data[k]);
-            }
-
-            console.log(data)
+            }*/
+            console.log(localStorage.getItem('questionnaire'))
+            //console.log(data)
             //formData.append(JSON.parse(localStorage.getItem('questionnaire')))
 
             //formData.append(this.QUESTIONNAIREFORMSTATE.organizationName)
@@ -211,7 +213,7 @@ export default {
                 formData,
                 {
                     headers: {
-                        'Content-Type': 'multipart/form-data'
+                        
                     }
                 }
                 

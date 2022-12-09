@@ -60,6 +60,7 @@ export default {
                     {
                         phone_number: localStorage.getItem('phone'),
                         user_type: localStorage.getItem('userType'),
+                    
                 
                         password: this.password,
                         password2: this.repeatPassword

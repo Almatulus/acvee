@@ -92,7 +92,7 @@
                         {{myproject.get_needed_sum}}тг
                     </div>
                     <div class="request-table__item">
-                        {{myproject.get_status_name}}
+                        {{myproject.status}}
                     </div>
                 </div>
             </div>
