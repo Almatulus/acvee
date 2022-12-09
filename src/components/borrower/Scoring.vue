@@ -139,8 +139,8 @@
                     </div>
                     <h3>ЭСФ подтверждение текущим АВР</h3>
                     <div class="scoring__add-doc">
-                        <input type="file">
-                        <label for="">Вложить документ</label>
+                        <input name="ABPConfirm" id="ABPConfirm" type="file">
+                        <label for="ABPConfirm">Вложить документ</label>
                     </div>
                     <div class="scoring__agreement">
                         <input v-model="scoring.purchaseAgreement" value="" id="agreement" type="checkbox"> 
@@ -209,7 +209,7 @@ export default {
             //formData.append(this.QUESTIONNAIREFORMSTATE.organizationName)
             //formData.append('form', this.QUESTIONNAIREFORMSTATE);
             //formData.append('', this.scoring.registrationCertificate)
-            axios.post( 'http://localhost:8000/api/v1/borrower/create/',    
+            axios.post( 'http://127.0.0.1:8000/api/v1/borrower/create/',    
                 formData,
                 {
                     headers: {

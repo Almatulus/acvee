@@ -40,6 +40,7 @@
                         v-model="form.cityID"
                         :class="$v.form.cityID.$error ? 'questionnaire-input-invalid' : ''">
                         <option value="">Выберите город</option>
+                        <option value="1"></option>
                         <option v-for="city in cities" :key="city.id" :value="form.cityID">{{city.name}}</option>
                         
                     </select>
