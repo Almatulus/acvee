@@ -4,7 +4,7 @@
             <h2>Подписание Договора Факторинга</h2>
             <div class="request-document__content">
                 <div class="request-document__document">
-                    <VueDocPreview :value="url" :type="type" />
+
                 </div>
                 <div class="request-document__buttons">
                     <div class="request-document__buttons-top">

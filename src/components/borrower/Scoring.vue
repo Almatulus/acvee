@@ -190,8 +190,18 @@ export default {
             let formData = new FormData(docForm);
             //formData.append('file', this.scoring.IDCard);
             //let localitems = localStorage.getItem('questionnaire')
+            console.log(formData)
             //let questionnaire = JSON.parse(localStorage.getItem('questionnaire'))
-            formData.append('form',localStorage.getItem('questionnaire'))
+            //let questionnaireData = JSON.parse(localStorage.getItem('questionnaire'))
+
+            //console.log(questionnaireData)
+
+            //var obj = Object.assign(formData, questionnaireData)
+
+            //console.log(obj)
+            let form = JSON.parse(localStorage.getItem('questionnaire'))
+            for(let i in form) {formData.append(i, form[i]);}
+            //formData.append('form', localStorage.getItem('questionnaire'))
             //for(var i in questionnaire){formData.append(i, questionnaire[i])};
             //for(var i in localitems){formData.append(i, localitems[i])}
             
@@ -202,15 +212,16 @@ export default {
                 }
                 else formData.append(k, data[k]);
             }*/
-            console.log(localStorage.getItem('questionnaire'))
+            //console.log(localStorage.getItem('questionnaire'))
             //console.log(data)
             //formData.append(JSON.parse(localStorage.getItem('questionnaire')))
 
             //formData.append(this.QUESTIONNAIREFORMSTATE.organizationName)
             //formData.append('form', this.QUESTIONNAIREFORMSTATE);
             //formData.append('', this.scoring.registrationCertificate)
-            axios.post( 'http://127.0.0.1:8000/api/v1/borrower/create/',    
+            axios.post( 'http://127.0.0.1:8000/api/v1/borrower/create/', 
                 formData,
+                //obj,
                 {
                     headers: {
                         

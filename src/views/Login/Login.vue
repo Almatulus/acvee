@@ -1,7 +1,18 @@
 <template>
     <div class="authentication-template">
         <div class="authentication-template__inner">
-            <AuthenticationTemplateRoles/>
+            <!--<div class="authentication-template__roles">
+                <ul>
+                    <li>
+                        <input v-model="user_type" value="borrower" name="role" id="Borrower" class="radio-hide" type="radio">
+                        <label for="Borrower">Заемщик</label>
+                    </li>
+                    <li>
+                        <input v-model="user_type" value="investor" name="role" id="Investor" class="radio-hide" type="radio">
+                        <label for="Investor">Инвестор</label>
+                    </li>
+                </ul>
+            </div>-->
             <div class="authentication-template__content">
                 <h2>{{ title }}</h2>
                 <form @submit.prevent="submitHandler" action="" class="authentication-template__form">
@@ -40,7 +51,7 @@
                     </div>
                 </form>
                 @keypress="isNumber"
-                {{this.USERTOKEN}}
+                {{USERTOKEN}}
                 v-imask="phoneNumberMask" 
             </div>
         </div>
@@ -82,7 +93,7 @@ export default {
         submitHandler(){
             //this.$v.$touch()
             if(!this.$v.$error){
-                this.$router.push('/')
+                //this.$router.push('/')
                 axios.post('http://127.0.0.1:8000/api/v1/auth/token/login/',
                     {
                         phone_number: this.phone,
@@ -91,7 +102,9 @@ export default {
                 ). 
                 then(function (response){
                     console.log(response)
-                    this.GET_USERTOKEN_TO_VUEX(response)
+                    //this.GET_USERTOKEN_TO_VUEX()
+                    localStorage.setItem('usertoken', response)
+                    console.log(JSON.parse(localStorage.getItem('usertoken')))
                 })
             }
             
