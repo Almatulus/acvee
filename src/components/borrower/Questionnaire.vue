@@ -82,15 +82,15 @@
                         type="text" 
                         class="questionnaire__questions-input questionnaire__input"
                         maxlength="16"
-                        v-model.trim="form.phone"
-                        :class="$v.form.phone.$error ? 'questionnaire-input-invalid' : ''"
+                        v-model.trim="form.phoneNumber"
+                        :class="$v.form.phoneNumber.$error ? 'questionnaire-input-invalid' : ''"
                         v-imask="phoneNumberMask" 
                         @accept="onAccept" 
                         @complete="onComplete"
                         @keypress="isNumber"
                     >
-                    <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
-                    <p v-if="$v.form.phone.$dirty && !$v.form.phone.minLength" class="questionnaire-invalid-feedback">Данное поле должно содержать номер телефона</p>
+                    <p v-if="$v.form.phoneNumber.$dirty && !$v.form.phoneNumber.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                    <p v-if="$v.form.phoneNumber.$dirty && !$v.form.phoneNumber.minLength" class="questionnaire-invalid-feedback">Данное поле должно содержать номер телефона</p>
 
                     <input 
                         placeholder="Электронная почта" 
@@ -102,6 +102,7 @@
                     <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
 
                     <input 
+                        v-model="form.businessDescription"
                         placeholder="Опишите ваш бизнес" 
                         type="text" 
                         class="questionnaire__questions-input questionnaire__input questionnaire-textarea">

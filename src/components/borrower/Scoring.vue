@@ -28,6 +28,27 @@
                         </div>
                         <div class="scoring__item">
                             <div class="scoring__title">
+                                Личные данные
+                            </div>
+                            <div class="scoring__subtitle">
+                                Справка регистрации ТОО или ИП
+                            </div>
+                            <div class="scoring__document">
+                                <div class="document">
+                                    <div class="document__inner">
+                                        <label>+ Добавить документ
+                                            <input name="registrationCertificate" class="document__send" type="file" id="file" ref="IDCard" v-on:change="handleFileUpload()"/>
+                                        </label>
+                                            <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
+                                        <div class="document__preview">
+                                            <img src="" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scoring__item">
+                            <div class="scoring__title">
                                 Договор реализации товара
                             </div>
                             <div class="scoring__subtitle">
@@ -37,7 +58,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input name="registrationCertificate" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
+                                            <input name="contractSale" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -58,7 +79,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input name="contractSale" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
+                                            <input name="purchaseAgreement" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -143,7 +164,7 @@
                         <label for="ABPConfirm">Вложить документ</label>
                     </div>
                     <div class="scoring__agreement">
-                        <input name="purchaseAgreement" v-model="scoring.purchaseAgreement" value="" id="agreement" type="checkbox"> 
+                        <input name="consentVerification" v-model="scoring.purchaseAgreement" :value="true" id="agreement" type="checkbox"> 
                         <label for="agreement">Нажимая “Оплатить проверку” вы соглашаетесь с получением данных из открытых источников</label>
                     </div>
                     <div class="scoring__examination">
