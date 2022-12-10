@@ -140,10 +140,10 @@
                             <h3>Выручка за последние 12 месяцев</h3>
                             <div class="questionnaire__loan-revenue-content questionnaire__loan-content">
                                 <select 
-                                    v-model="form.productCategory" 
+                                    v-model="form.categoryID" 
                                     class="questionnaire__input" 
                                     type="text"
-                                    :class="$v.form.productCategory.$error ? 'questionnaire-input-invalid' : ''">
+                                    :class="$v.form.categoryID.$error ? 'questionnaire-input-invalid' : ''">
                                 >
                                     <option selected value="">Категория продуктов</option>
                                     <option v-for="category in PRODUCTCATEGORIES" :key="category.id" :value="category.id">{{category.name}}</option>
@@ -385,6 +385,7 @@ export default {
             productName: {required},
             productPrice: {required},
             productCategory: {required},
+            categoryID: {required},
             countryID: {required},
             cityID: {required},
             revenue: {required},
