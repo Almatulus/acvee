@@ -93,7 +93,7 @@ export default {
         submitHandler(){
             //this.$v.$touch()
             if(!this.$v.$error){
-                //this.$router.push('/')
+                this.$router.push('/')
                 axios.post('http://127.0.0.1:8000/api/v1/auth/token/login/',
                     {
                         phone_number: this.phone,
@@ -101,10 +101,11 @@ export default {
                     }
                 ). 
                 then(function (response){
-                    console.log(response)
+                    //console.log(response)
                     //this.GET_USERTOKEN_TO_VUEX()
-                    localStorage.setItem('usertoken', response)
-                    console.log(JSON.parse(localStorage.getItem('usertoken')))
+                    localStorage.setItem('usertoken', response.data.auth_token)
+                    console.log(localStorage.getItem('usertoken'))
+                    //console.log(JSON.parse(localStorage.getItem('usertoken')))
                 })
             }
             

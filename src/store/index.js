@@ -74,9 +74,11 @@ export default new Vuex.Store({
     GET_MYPROJECTS_FROM_API({commit}, value){
       
       return axios('http://127.0.0.1:8000/api/v1/borrower/my-projects/', {
-          method: "GET",
-          params: 
-            value
+          method: "GET", 
+          params: value,
+          headers:{
+            Authorization: 'Token ' + localStorage.getItem('usertoken')
+          }
           
       })
       .then((myProjects) => {

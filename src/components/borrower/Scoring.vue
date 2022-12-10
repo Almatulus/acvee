@@ -143,7 +143,7 @@
                         <label for="ABPConfirm">Вложить документ</label>
                     </div>
                     <div class="scoring__agreement">
-                        <input v-model="scoring.purchaseAgreement" value="" id="agreement" type="checkbox"> 
+                        <input name="purchaseAgreement" v-model="scoring.purchaseAgreement" value="" id="agreement" type="checkbox"> 
                         <label for="agreement">Нажимая “Оплатить проверку” вы соглашаетесь с получением данных из открытых источников</label>
                     </div>
                     <div class="scoring__examination">
