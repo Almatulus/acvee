@@ -99,7 +99,7 @@
                         v-model.trim="form.email"
                         :class="$v.form.email.$error ? 'questionnaire-input-invalid' : ''"
                     >
-                    <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                    <p v-if="$v.form.email.$dirty && !$v.form.email.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
 
                     <input 
                         v-model="form.businessDescription"
@@ -122,7 +122,7 @@
                                     v-model.trim="form.productName"
                                     :class="$v.form.productName.$error ? 'questionnaire-input-invalid' : ''"
                                 >
-                                <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                                <p v-if="$v.form.productName.$dirty && !$v.form.productName.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                                 <input 
                                     placeholder="Цена" 
                                     class="questionnaire__input" 
@@ -131,7 +131,7 @@
                                     @keypress="isNumber"
                                     :class="$v.form.productPrice.$error ? 'questionnaire-input-invalid' : ''"
                                 >
-                                <p v-if="$v.form.phone.$dirty && !$v.form.phone.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                                <p v-if="$v.form.productPrice.$dirty && !$v.form.productPrice.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                             </div>
                         </div>
                     </div>
@@ -379,7 +379,7 @@ export default {
             BIN: {required, minLength: minLength(12)},
             directorName: {required},
             UIN: {required, minLength: minLength(12)},
-            phone: {required},
+            phoneNumber: {required},
             email: {required, email},
             businessDescription: {},
             productName: {required},
