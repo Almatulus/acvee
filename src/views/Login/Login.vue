@@ -51,7 +51,6 @@
                     </div>
                 </form>
                 @keypress="isNumber"
-                {{USERTOKEN}}
                 v-imask="phoneNumberMask" 
             </div>
         </div>

@@ -56,6 +56,7 @@ export default {
         submitHandler(){
             //this.$v.$touch()
             if(!this.$v.$error){
+                
                 axios.post('http://127.0.0.1:8000/api/v1/registr/',
                     {
                         phone_number: localStorage.getItem('phone'),
@@ -70,6 +71,7 @@ export default {
                     localStorage.removeItem('phone')
                     //console.log(response)
                     console.log(localStorage.getItem('userType'))
+                    this.$router.push('/register/2')
                 })
             }
         }
@@ -78,8 +80,8 @@ export default {
         AuthenticationTemplateRoles
     },
     validations: {
-            password: {required, minLength: minLength(8)},
-            repeatPassword: {required, minLength: minLength(8), sameAsPassword: sameAs('form.password')}
+        password: {required, minLength: minLength(8)},
+        repeatPassword: {required, minLength: minLength(8), sameAsPassword: sameAs('form.password')}
     }
 }
 </script>

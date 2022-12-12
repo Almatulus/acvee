@@ -4,7 +4,7 @@
             <div class="questionnaire-template__content">
                 <Questionnaire ref="aaa" class="scroll-anim"/>
                 <Scoring ref="scoring" class="scroll-anim"/>
-                <AdditionalDocuments ref="additionalDocuments" class="scroll-anim"/>
+                <!--<AdditionalDocuments ref="additionalDocuments" class="scroll-anim"/>-->
                 <RequestDocument/>
             </div>
             <div class="questionnaire-nav" ><!-- v-on="handleScroll" -->
