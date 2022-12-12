@@ -1,8 +1,11 @@
 <template>
     <div class="investor-questionnaire">
         <div class="investor-questionnaire__inner">
-            <h2 class="investor-questionnaire__title">Индивидуальный предприниматель<span>/Физическое лицо</span></h2>
             <form @submit.prevent="submitHandler" class="investor-questionnaire__form" action="">
+                    <input v-model="investor_type" type="radio">
+                    <label for="">Индивидуальный предприниматель</label>
+                    <input v-model="investor_type" type="radio">
+                    <label for="">Физическое лицо</label>
                 <div class="investor-questionnaire__form-body">
                     <div class="investor-questionnaire__form-column">
                         <p class="investor-questionnaire__form-label">Наименование ИП<span>/Ф.И.О</span></p>
@@ -10,10 +13,10 @@
                         placeholder="Нурлан" 
                         class="investor-questionnaire__form-input" 
                         type="text"
-                        v-model.trim="form.IE"
-                        :class="$v.form.IE.$error ? 'invalid' : ''"
+                        v-model.trim="form.name"
+                        :class="$v.form.name.$error ? 'invalid' : ''"
                         @keypress="isLetter">
-                        <p v-if="$v.form.IE.$dirty && !$v.form.IE.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                        <p v-if="$v.form.name.$dirty && !$v.form.name.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                         
                         <p class="investor-questionnaire__form-label">ИИН/БИН</p>
                         <input 
@@ -21,14 +24,14 @@
                         class="investor-questionnaire__form-input" 
                         type="text"
                         maxlength="12"
-                        v-model.trim="form.IID"
-                        :class="$v.form.IID.$error ? 'invalid' : ''"
+                        v-model.trim="form.UID_BIN"
+                        :class="$v.form.UID_BIN.$error ? 'invalid' : ''"
                         @keypress="isNumber">
-                        <p v-if="$v.form.IID.$dirty && !$v.form.IID.required" class="invalid-feedback">Обязательное поле для заполнения</p>
-                        <p v-if="$v.form.IID.$dirty && !$v.form.IID.minLength" class="invalid-feedback">Данное поле должно содержать 12 символов</p>
+                        <p v-if="$v.form.UID_BIN.$dirty && !$v.form.UID_BIN.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                        <p v-if="$v.form.UID_BIN.$dirty && !$v.form.UID_BIN.minLength" class="invalid-feedback">Данное поле должно содержать 12 символов</p>
 
                         <p class="investor-questionnaire__form-label">Срок инвестирования</p>
-                        <input type="range" min="2" max="25">
+                        <input v-model="investment_term" type="range" min="2" max="25">
                         <p class="investor-questionnaire__form-label">Почему вы решили инвестирвать в Acvee</p>
                     </div>
                     <div class="investor-questionnaire__form-column">
@@ -37,10 +40,10 @@
                         placeholder="Астана" 
                         class="investor-questionnaire__form-input" 
                         type="text"
-                        v-model.trim="form.registrationCity"
-                        :class="$v.form.registrationCity.$error ? 'invalid' : ''"
+                        v-model.trim="form.city"
+                        :class="$v.form.city.$error ? 'invalid' : ''"
                         @keypress="isLetter">
-                        <p v-if="$v.form.registrationCity.$dirty && !$v.form.registrationCity.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                        <p v-if="$v.form.city.$dirty && !$v.form.city.required" class="invalid-feedback">Обязательное поле для заполнения</p>
 
                         <p class="investor-questionnaire__form-label">Электронная почта</p>
                         <input 
@@ -53,7 +56,7 @@
                         <p v-if="$v.form.email.$dirty && !$v.form.email.email" class="invalid-feedback">Данное поле должно содержать адрес электронной почты</p>
 
                         <p class="investor-questionnaire__form-label">Сумма инвестирования</p>
-                        <select class="investor-questionnaire__form-input" name="" id="">
+                        <!--<select class="investor-questionnaire__form-input" name="" id="">
                             <option value="5000">
                                 от 500 000 до 5 000 000 тенге 
                             </option>
@@ -66,7 +69,10 @@
                             <option value="">
                                 свыше 50 000 000 тенге
                             </option>
-                        </select>
+                        </select>-->
+                        <input v-model="investment_sum" type="text"
+                        class="investor-questionnaire__form-input"
+                        placeholder="Сумма инвестирования">
 
                         <br>
 
@@ -74,18 +80,16 @@
                         placeholder="Желаемая сумма" 
                         class="investor-questionnaire__form-input" 
                         type="text"
-                        v-model.trim="form.desiredAmount"
-                        :class="$v.form.desiredAmount.$error ? 'invalid' : ''"
+                        v-model.trim="form.desired_sum"
+                        :class="$v.form.desired_sum.$error ? 'invalid' : ''"
                         @keypress="isNumber"
                         >
-                        <p v-if="$v.form.desiredAmount.$dirty && !$v.form.desiredAmount.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                        <p v-if="$v.form.desired_sum.$dirty && !$v.form.desired_sum.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                     </div>
                 </div>
-                <input placeholder="Причина" class="investor-questionnaire__form-input investor-questionnaire__form-textarea" type="text">
+                <input v-model="description" placeholder="Причина" class="investor-questionnaire__form-input investor-questionnaire__form-textarea" type="text">
                 <br>
-                <button class="button button-certify">
-                    Удостоверение личности
-                </button>
+                <input type="file">
                 <br>
                 <button type="submit" class="button investor-questionnaire__form-button">
                     Сохранить
@@ -101,22 +105,30 @@ import { IMaskDirective } from 'vue-imask'
 export default {
     data: () => ({
         form:{
-            IE: '',
+            investor_type: '',
             name: '',
             IID: '',
-            registrationCity: '',
+            investment_term: '',
+            city: '',
+            investment_sum: '',
+            desired_sum: '',
             residenceCity: '',
             email: '',
-            desiredAmount: ''
+            desiredAmount: '',
+            description: '',
+            ID_card_img: ''
         }
     }),
     validations: {
         form:{
-            IE: {required},
-            IID: {required, minLength: minLength(12)},
-            registrationCity: {required},
+            investor_type: {required},
+            name: {required},
+            UID_BIN: {required, minLength: minLength(12)},
+            city: {required},
+            investment_sum: {required},
             email: {required, email},
-            desiredAmount: {required}
+            desired_sum: {required},
+            ID_card_img: {required}
         }
     },
     methods: {
@@ -135,9 +147,9 @@ export default {
             }
         },
         submitHandler(){
-            this.$v.form.$touch()
+            //this.$v.form.$touch()
             if(!this.$v.form.$error){
-                alert('Валидация прошла успешно')
+                
             }
         },
     },
