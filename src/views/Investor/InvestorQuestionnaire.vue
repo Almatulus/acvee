@@ -1,11 +1,11 @@
 <template>
     <div class="investor-questionnaire">
         <div class="investor-questionnaire__inner">
-            <form @submit.prevent="submitHandler" class="investor-questionnaire__form" action="">
-                    <input v-model="investor_type" type="radio">
-                    <label for="">Индивидуальный предприниматель</label>
-                    <input v-model="investor_type" type="radio">
-                    <label for="">Физическое лицо</label>
+            <form id="docForm" @submit.prevent="submitHandler" class="investor-questionnaire__form" action="">
+                    <input id="invesor-type1" name="invesor-type" value="2" v-model="form.investor_type" type="radio">
+                    <label for="invesor-type1">Индивидуальный предприниматель</label>
+                    <input id="invesor-type2" name="invesor-type" value="1" v-model="form.investor_type" type="radio">
+                    <label for="invesor-type2">Физическое лицо</label>
                 <div class="investor-questionnaire__form-body">
                     <div class="investor-questionnaire__form-column">
                         <p class="investor-questionnaire__form-label">Наименование ИП<span>/Ф.И.О</span></p>
@@ -31,7 +31,8 @@
                         <p v-if="$v.form.UID_BIN.$dirty && !$v.form.UID_BIN.minLength" class="invalid-feedback">Данное поле должно содержать 12 символов</p>
 
                         <p class="investor-questionnaire__form-label">Срок инвестирования</p>
-                        <input v-model="investment_term" type="range" min="2" max="25">
+                        <input v-model="form.investment_term" type="range" value="0" min="2" max="25">
+                        
                         <p class="investor-questionnaire__form-label">Почему вы решили инвестирвать в Acvee</p>
                     </div>
                     <div class="investor-questionnaire__form-column">
@@ -70,7 +71,7 @@
                                 свыше 50 000 000 тенге
                             </option>
                         </select>-->
-                        <input v-model="investment_sum" type="text"
+                        <input v-model="form.investment_sum" type="text"
                         class="investor-questionnaire__form-input"
                         placeholder="Сумма инвестирования">
 
@@ -87,9 +88,10 @@
                         <p v-if="$v.form.desired_sum.$dirty && !$v.form.desired_sum.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                     </div>
                 </div>
-                <input v-model="description" placeholder="Причина" class="investor-questionnaire__form-input investor-questionnaire__form-textarea" type="text">
+                <input v-model="form.description" placeholder="Причина" class="investor-questionnaire__form-input investor-questionnaire__form-textarea" type="text">
                 <br>
-                <input type="file">
+                <input name="ID_card_img" id="ID_card_img" style="display: none;" type="file" v-on:change="handleFileUpload()">
+                <label class="button-certify btn" for="ID_card_img" id="ID_card_img" ref="ID_card_img">Удостоверение личности</label>
                 <br>
                 <button type="submit" class="button investor-questionnaire__form-button">
                     Сохранить
@@ -107,14 +109,12 @@ export default {
         form:{
             investor_type: '',
             name: '',
-            IID: '',
+            UID_BIN: '',
             investment_term: '',
             city: '',
             investment_sum: '',
             desired_sum: '',
-            residenceCity: '',
             email: '',
-            desiredAmount: '',
             description: '',
             ID_card_img: ''
         }
@@ -148,10 +148,32 @@ export default {
         },
         submitHandler(){
             //this.$v.form.$touch()
+            let docForm = document.getElementById('docForm')
+            let formData = new FormData(docForm)
+            for(let i in this.form) {formData.append(i, this.form[i])}
+            
             if(!this.$v.form.$error){
+                axios.post( 'http://127.0.0.1:8000/api/v1/borrower/create/', 
+                formData,
+                //obj,
+                {
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken'),
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
                 
+                ).then(function(){
+                console.log('SUCCESS!!');
+                })
+                .catch(function(){
+                console.log('FAILURE!!');
+                });
             }
         },
+        handleFileUpload(){
+            this.form.ID_card_img = this.$refs.ID_card_img.files[0];
+        }
     },
     directives: {
       imask: IMaskDirective
