@@ -4,7 +4,7 @@
             <h2>Подписание Договора Факторинга</h2>
             <div class="request-document__content">
                 <div class="request-document__document">
-
+                    
                 </div>
                 <div class="request-document__buttons">
                     <div class="request-document__buttons-top">
@@ -27,6 +27,7 @@
 
 <script>
 import VueDocPreview from 'vue-doc-preview'
+import {mapActions, mapGetters} from 'vuex'
 export default {
  components: {
     VueDocPreview
@@ -36,7 +37,19 @@ data: () => ({
     url: 'https://static-1252421604.cos.ap-guangzhou.myqcloud.com/vdp.docx'
 }),
 mounted() {
-    
+    getStatus: {
+        axios({
+            method: "GET",
+            url: "http://127.0.0.1:8000/api/v1/borrower/third-step/",
+        }).then(function(response){
+            console.log(response.data)
+        })
+    }
+},
+computed:{
+    ...mapGetters([
+            'PROJECTSTATUS'
+        ]),
 }
 }
 </script>

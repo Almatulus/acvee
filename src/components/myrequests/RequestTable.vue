@@ -32,7 +32,7 @@
                 </div>
                 <div class="request-description__item">
                     <div class="request-description__item-item">
-                        Статус: {{selectedProject.get_status_name}}
+                        Статус: {{selectedProject.status}}
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 <div class="request-description__button button">
 
                 </div>
-                <router-link :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
+                <router-link v-if="selectedProject.status == 'approved'" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
                     Проверить договор
                 </router-link>
             </div>
@@ -118,7 +118,8 @@ export default {
     }),
     methods: {
         ...mapActions([
-            'GET_MYPROJECTS_FROM_API'
+            'GET_MYPROJECTS_FROM_API',
+            'GET_PROJECTSTATUS_TO_VUEX'
         ]),
         makeActive: function(item){
             this.active = item;
@@ -129,6 +130,7 @@ export default {
         updateDescription(selectedProject){
             this.selectedProject = selectedProject
             this.showDescription = true
+            this.GET_PROJECTSTATUS_TO_VUEX(this.selectedProject.status)
         },
         sortProjectsBySearchValue(value){
             this.sortedProjects = [...this.MYPROJECTS]
@@ -149,11 +151,13 @@ export default {
     },
     mounted(){
         this.GET_MYPROJECTS_FROM_API()
+        
     },
     computed: {
         ...mapGetters([
             'MYPROJECTS',
-            'SEARCH_VALUE'
+            'SEARCH_VALUE',
+            'PROJECTSTATUS'
         ]),
         filteredProjects(){
             if(this.sortedProjects.length){
