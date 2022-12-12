@@ -43,6 +43,9 @@
                 <div class="request-description__button button">
 
                 </div>
+                <router-link :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
+                    Проверить договор
+                </router-link>
             </div>
         </div>
     </div>

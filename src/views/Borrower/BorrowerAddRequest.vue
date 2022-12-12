@@ -33,7 +33,7 @@
 import VerticalNumberNav from '@/components/app/VerticalNumberNav.vue'
 import Questionnaire from '@/components/borrower/Questionnaire.vue'
 import Scoring from '@/components/borrower/Scoring.vue'
-import RequestDocument from '@/components/borrower/RequestDocument.vue'
+import RequestDocument from '@/views/Borrower/RequestDocument.vue'
 import AdditionalDocuments from '@/components/borrower/AdditionalDocuments.vue'
 export default {
     data: () => ({
