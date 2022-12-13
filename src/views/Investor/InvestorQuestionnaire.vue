@@ -2,10 +2,10 @@
     <div class="investor-questionnaire">
         <div class="investor-questionnaire__inner">
             <form id="docForm" @submit.prevent="submitHandler" class="investor-questionnaire__form" action="">
-                    <input id="invesor-type1" name="invesor-type" value="2" v-model="form.investor_type" type="radio">
-                    <label for="invesor-type1">Индивидуальный предприниматель</label>
-                    <input id="invesor-type2" name="invesor-type" value="1" v-model="form.investor_type" type="radio">
-                    <label for="invesor-type2">Физическое лицо</label>
+                    <input style="width: 20px; height: 20px;" id="invesor-type1" name="invesor-type" value="2" v-model="form.investor_type" type="radio">
+                    <label style="margin-left: 10px; font-size: 20px; font-weight: 600;" for="invesor-type1">Индивидуальный предприниматель</label>
+                    <input style="margin-left: 20px; width: 20px; height: 20px;" id="invesor-type2" name="invesor-type" value="1" v-model="form.investor_type" type="radio">
+                    <label style="margin-left: 10px; font-size: 20px; font-weight: 600;" for="invesor-type2">Физическое лицо</label>
                 <div class="investor-questionnaire__form-body">
                     <div class="investor-questionnaire__form-column">
                         <p class="investor-questionnaire__form-label">Наименование ИП<span>/Ф.И.О</span></p>
@@ -31,7 +31,13 @@
                         <p v-if="$v.form.UID_BIN.$dirty && !$v.form.UID_BIN.minLength" class="invalid-feedback">Данное поле должно содержать 12 символов</p>
 
                         <p class="investor-questionnaire__form-label">Срок инвестирования</p>
-                        <input v-model="form.investment_term" type="range" value="0" min="2" max="25">
+                        <!--<input v-model="form.investment_term" type="range" value="0" min="2" max="25">-->
+                        <div style="margin-top: 10px;" class="">
+                            <input style="width: 17px; height: 17px;" v-model="form.investment_term" type="radio" name="investment" id="investment1">
+                            <label style="margin-left: 10px; font-size: 17px;" for="investment1">6 месяцев</label>
+                            <input style="margin-left: 30px; width: 17px; height: 17px;" v-model="form.investment_term" type="radio" name="investment" id="investment2">
+                            <label style="margin-left: 10px; font-size: 17px;" for="investment2">12 месяцев</label>
+                        </div>
                         
                         <p class="investor-questionnaire__form-label">Почему вы решили инвестирвать в Acvee</p>
                     </div>
@@ -71,6 +77,8 @@
                                 свыше 50 000 000 тенге
                             </option>
                         </select>-->
+                        <div style="margin: 10px 0 0 0; font-weight: 600;" class="">От 500000 до 1000000</div>
+                        <br>
                         <input v-model="form.investment_sum" type="text"
                         class="investor-questionnaire__form-input"
                         placeholder="Сумма инвестирования">
@@ -90,9 +98,60 @@
                 </div>
                 <input v-model="form.description" placeholder="Причина" class="investor-questionnaire__form-input investor-questionnaire__form-textarea" type="text">
                 <br>
-                <input name="ID_card_img" id="ID_card_img" style="display: none;" type="file" v-on:change="handleFileUpload()">
-                <label class="button-certify btn" for="ID_card_img" id="ID_card_img" ref="ID_card_img">Удостоверение личности</label>
-                <br>
+                <!--<input name="ID_card_img" id="ID_card_img" style="display: none;" type="file" v-on:change="handleFileUpload()">
+                <label class="button-certify btn" for="ID_card_img" id="ID_card_img" ref="ID_card_img">Удостоверение личности</label>-->
+                <div style="display: flex; align-items: center; margin-top: 10px" class="">
+                    <input style="width: 29px; height: 25px;" type="checkbox" id="confirmation1">
+                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation1">Настоящим даю согласие на сбор, обработку и использование моих персональных данных в соответствие с законом Республики Казахстана "О персональных данных и их защите",в том числе на получение информации обо мне и из любых возможных публичных источников.</label>
+                </div>
+                <div style="display: flex; align-items: center; margin-top: 10px" class="">
+                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation2">
+                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation2">Я подтверждаю, что деньги, которые я предполагаю инвестировать являются легальными и не получены в результате незаконной деятельности</label>
+                </div>
+                <div style="display: flex; align-items: center; margin-top: 10px" class="">
+                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation3">
+                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation3">Я подтверждаю, что не являюсь политически значимой личностью (PEP)</label>
+                </div>
+                <div style="display: flex; align-items: center; margin-top: 10px" class="">
+                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation4">
+                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation4">Я подтверждаю, что предоставленная мною информация является точной и не вводит в заблуждение;</label>
+                </div>
+                <div style="display: flex; align-items: center; margin-top: 10px" class="">
+                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation5">
+                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation5">Я подтверждаю, что никто не будет иметь доступа к предоставленным мне данным о Компании;</label>
+                </div>
+                <div style="display: flex; align-items: center; margin-top: 10px" class="">
+                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation6">
+                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation6">Я подтверждаю, что я дееспособен и могу вступать в юридически обязывающие меня отношения с Компанией;</label>
+                </div>
+                <div style="display: flex; align-items: center; margin-top: 10px" class="">
+                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation7">
+                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation7">Я подтверждаю, что действую от своего лица и не представляю ничьи интересы;</label>
+                </div>
+                <div style="display: flex; align-items: center; margin-top: 10px" class="">
+                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation8">
+                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation8">Я подтверждаю, что лично принимаю решение по предоставлению финансирования Компании;</label>
+                </div>
+                <div style="display: flex; align-items: center; margin-top: 10px" class="">
+                    <input style="width: 21px; height: 25px;" type="checkbox" id="confirmation9">
+                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation9">Я подтверждаю, что понимаю, что, подписывая Договор Инвестиции или Займа через краудфандинговую платформу Acvee Crowdfinding, я предоставляю финансирование Компании напрямую;</label>
+                </div>
+                <div style="display: flex; align-items: center; margin-top: 10px" class="">
+                    <input style="width: 34px; height: 25px;" type="checkbox" id="confirmation10">
+                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation10">Я подтверждаю, что Компании, представленные на краудфандинговой платформе Acvee Crowdfinding, могут понести убытки либо обанкротиться, и, соответственно, Инвестиция или Заем такой Компании является рискованной, включая риск потери части либо всех моих денег, задержки платежей или получения прочих выгод от Компании;</label>
+                </div>
+                <div style="display: flex; align-items: center; margin-top: 10px" class="">
+                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation11">
+                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation11">Я подтверждаю, что если не диверсифицировать портфолио инвестиций и займов это может привести к большим потерям в случае дефолта одной конкретной Компании;</label>
+                </div>
+                <div style="display: flex; align-items: center; margin-top: 10px" class="">
+                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation12">
+                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation12">Я подтверждаю, что Я могу не иметь возможности уступить выданный заём или продать инвестиции третьим лицам в момент, когда я этого захочу;</label>
+                </div>
+                <div style="display: flex; align-items: center; margin-top: 10px" class="">
+                    <input style="width: 28px; height: 25px;" type="checkbox" id="confirmation13">
+                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation13">Я подтверждаю, что если по любой причине краудфандинговая платформа Acvee Crowdfinding не сможет продолжать свою деятельность, я могу потерять свои деньги, понести дополнительные затраты либо испытать задержки в получении выплат;</label>
+                </div>
                 <button type="submit" class="button investor-questionnaire__form-button">
                     Сохранить
                 </button>
@@ -196,6 +255,7 @@ export default {
 
 		&__form-body {
             display: flex;
+            margin: 10px 0 0 0;
 		}
 
 		&__form-column {

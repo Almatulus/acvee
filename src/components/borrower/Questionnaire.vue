@@ -273,9 +273,9 @@
                                     <option :value="false">Месяц</option>
                                 </select>
                             </div>
-                            
+                            <input style="margin-left: 0; margin-top: 10px;" class="questionnaire__input" v-model="form.amount" type="text">
                             <div class="questionnaire__loan-term-content questionnaire__loan-content">
-                                <div>
+                                <!--<div>
                                     Current value: <span id="value"></span>
                                 </div>
                                 <div>
@@ -283,7 +283,7 @@
                                 </div>
                                 <div v-show="form.isWeek">
                                     <input v-model="form.amount" id="weeks" type="range" value="0" min="0" max="48" />
-                                </div>
+                                </div>-->
                                 <!--<fieldset class="formSlider">
                                     <legend class="applicationForm__text">Выберите количество серебра (млн)</legend>
                                     <div class="__range __range-step">
@@ -298,7 +298,6 @@
                                         
                                     </div>
                                 </fieldset>-->
-                                <p>{{form.amount}}</p>
                                 <div class="questionnaire__loan-term-content-item">
                                     <p>Готовы ли предоставить доступ к кредитной истории учредителя?</p>
                                     <input type="radio" name="accessFounderHistory" id="accessFounderHistory1" v-model="form.accessFounderHistory" :value="true">

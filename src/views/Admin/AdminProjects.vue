@@ -36,30 +36,29 @@
                                 Статус
                             </div>
                         </div>
-                        <div v-for="myproject in ADMINPROJECTS" :key="myproject.id" class="request-table__row request-table__data" @click.prevent ="activeEl = myproject, updateDescription(myproject)" :class="{'active-el': activeEl === myproject}">
+                        <div v-for="adminproject in ADMINPROJECTS" :key="adminproject.id" class="request-table__row request-table__data" @click.prevent ="activeEl = myproject, updateDescription(myproject)" :class="{'active-el': activeEl === myproject}">
                             <div class="request-table__item">
-                                {{myproject.request_number}}
+                                {{adminproject.request_number}}
                             </div>
                             <div class="request-table__item">
-                                {{myproject.contract_number}}
+                                {{adminproject.contract_number}}
                             </div>
                             <div class="request-table__item">
-                                {{myproject.project_name}}
+                                {{adminproject.project_name}}
                             </div>
                             <div class="request-table__item">
-                                {{myproject.request_date}}
+                                {{adminproject.request_date}}
                             </div>
                             <div class="request-table__item">
-                                {{myproject.get_needed_sum}}тг
+                                {{adminproject.get_needed_sum}}тг
                             </div>
                             <div class="request-table__item">
-                                {{myproject.status}}
+                                {{adminproject.status}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{this.ADMINPROJECTS}}
         </div>
     </div>
 </template>
@@ -79,6 +78,7 @@ export default {
     },
     mounted(){
         this.GET_ADMINPROJECTS_FROM_API()
+        console.log(this.ADMINPROJECTS)
     }
 }
 </script>

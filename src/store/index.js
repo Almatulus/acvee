@@ -121,8 +121,10 @@ export default new Vuex.Store({
           }
       })
       .then((adminProjects) => {
-          commit('SET_PRODUCTCATEGORIES_TO_STATE', adminProjects.data)
+          commit('SET_ADMINPROJECTS_TO_STATE', adminProjects.data)
+          console.log(adminProjects)
           return adminProjects
+          
       })
   },
   },
