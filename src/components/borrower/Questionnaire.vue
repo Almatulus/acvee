@@ -435,6 +435,7 @@ export default {
                 //this.GET_QUESTIONNAIREFORMSTATE_TO_VUEX(value)
                 localStorage.setItem('questionnaire', JSON.stringify(value))
                 console.log(localStorage.getItem('questionnaire'))
+                this.$router.push('/scoring')
             }
         },
         uploadFile() {

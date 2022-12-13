@@ -294,6 +294,7 @@ export default {
 
         &__item-wrapper{
             margin: 25px 0 0 0;
+            
         }
 
 		&__item {
