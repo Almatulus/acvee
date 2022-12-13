@@ -50,7 +50,7 @@ const routes = [
     path: '/questionnaire',
     name: 'questionnaire',
     meta: {layout: 'borrower'},
-    component: () => import('../views/Borrower/BorrowerAddRequest.vue')
+    component: () => import('../components/borrower/Questionnaire.vue')
   },
   {
     path: '/myrequest/questionnaire',
