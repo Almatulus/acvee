@@ -1,10 +1,20 @@
 <template>
     <div class="scoring">
         <div class="scoring__inner">
+            <div class="modal__wrapper">
+                <div v-if="modal" class="scoring__modal">
+                    <div class="scoring__text">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae nesciunt repellat maxime facilis quidem culpa quia neque magni veniam animi natus necessitatibus odio, atque beatae eos dignissimos deserunt explicabo quos.
+                    </div>
+                    <a @click.prevent="hideModal()" class="modal__button button">
+                        Ок
+                    </a>
+                </div>
+            </div>
             <h2>Скоринг</h2>
             <form id="docForm" ref="docForm" action="" @submit.prevent="submitHandler()">
                 <div class="scoring__item-wrapper">
-                    <div class="scoring__content">
+                    <div class="scoring__content flex-wrap">
                         <div class="scoring__item">
                             <div class="scoring__title">
                                 Личные данные
@@ -93,69 +103,36 @@
                 </div>
                 <div class="scoring__item-wrapper">
                     <h3>Акты сверок между Поставщиком и Производителем за последние 6 месяцев</h3>
-                    <div class="scoring__content">
-                        <div class="scoring__item">
-                            <div class="scoring__title">
-                                Первый акт
-                            </div>
-                            <div class="scoring__subtitle">
-                                Минимум по три акта за один месяц
-                            </div>
-                            <div class="scoring__document">
-                                <div class="document">
-                                    <div class="document__inner">
-                                        <label>+ Добавить документ
-                                            <input name="firstAct" class="document__send" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
-                                        </label>
-                                            <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
-                                        <div class="document__preview">
-                                            <img src="" alt="">
+                    <div class="scoring__content flex-wrap">
+                        <div style="display: flex; align-items: center;" v-for="(act, i) in acts" :key="i" class="scoring__item">
+                            <div class="">
+                                <div class="scoring__title">
+                                    Акт
+                                </div>
+                                <div class="scoring__subtitle">
+                                    Минимум по три акта за один месяц
+                                </div>
+                                <div class="scoring__document">
+                                    <div class="document">
+                                        <div class="document__inner">
+                                            <label>+ Добавить документ
+                                                <input name="firstAct" class="document__send" type="file" id="file" ref="file" v-on:change="handleFileUpload(i, $event)"/>
+                                            </label>
+                                                <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
+                                            <div class="document__preview">
+                                                <img src="" alt="">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="scoring__item">
-                            <div class="scoring__title">
-                                Второй акт
+                            <template v-if="i<5">
+                            <div v-if="acts.length - 1 == i " style="text-align: center; flex-direction: column; display:flex; justify-content: center;" class="scoring__item">
+                                <a style="color: #0345FF; cursor: pointer; font-size: 50px;"  @click.prevent="addAct()" class="">
+                                    +
+                                </a>
                             </div>
-                            <div class="scoring__subtitle">
-                                Минимум по три акта за один месяц
-                            </div>
-                            <div class="scoring__document">
-                                <div class="document">
-                                    <div class="document__inner">
-                                        <label>+ Добавить документ
-                                            <input name="secondAct" class="document__send" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
-                                        </label>
-                                            <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
-                                        <div class="document__preview">
-                                            <img src="" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="scoring__item">
-                            <div class="scoring__title">
-                                Третий акт
-                            </div>
-                            <div class="scoring__subtitle">
-                                Минимум по три акта за один месяц
-                            </div>
-                            <div class="scoring__document">
-                                <div class="document">
-                                    <div class="document__inner">
-                                        <label>+ Добавить документ
-                                            <input name="thirdAct" class="document__send" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
-                                        </label>
-                                            <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
-                                        <div class="document__preview">
-                                            <img src="" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </template>
                         </div>
                     </div>
                     <h3>ЭСФ подтверждение текущим АВР</h3>
@@ -188,7 +165,11 @@ import {mapActions, mapGetters} from 'vuex'
 import { required } from 'vuelidate/lib/validators'
 export default {
     data: () => ({
+        modal: true,
+        
         file: '',
+        acts: [{}],
+        document: '',
         scoring: {
             IDCard: '',
             registrationCertificate: '',
@@ -211,6 +192,7 @@ export default {
             let formData = new FormData(docForm);
             //formData.append('file', this.scoring.IDCard);
             //let localitems = localStorage.getItem('questionnaire')
+            for(let i in this.acts){formData.append(i, this.acts[i])}
             console.log(formData)
             //let questionnaire = JSON.parse(localStorage.getItem('questionnaire'))
             //let questionnaireData = JSON.parse(localStorage.getItem('questionnaire'))
@@ -256,11 +238,19 @@ export default {
                 console.log('FAILURE!!');
             });
         },
-        handleFileUpload(){
-            this.scoring.IDCard = this.$refs.IDCard.files[0];
+        handleFileUpload(value, e){
+            this.acts[value] = e.target.files[0]
+            console.log(this.acts[this.acts.length - 1])
+            /*this.scoring.IDCard = this.$refs.IDCard.files[0];
             this.scoring.registrationCertificate = this.$refs.registrationCertificate.files[0];
             this.scoring.contractSale = this.$refs.registrationCertificate.files[0];
-            console.log(this.scoring.IDCard)
+            console.log(this.scoring.IDCard)*/
+        },
+        addAct(){
+            this.acts.push({})
+        },
+        hideModal(){
+            this.modal = false
         }
     },
     computed:{
@@ -304,7 +294,8 @@ export default {
             background: #FFFFFF;
             box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
             border-radius: 10px;
-            margin: 0 0 0 30px;
+            flex: 0 0 33.3333%;
+            //margin: 0 0 0 30px;
             &:first-child{
                 margin: 0;
             }
@@ -397,6 +388,34 @@ export default {
             }
         }
 }
+.flex-wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
 
+.scoring__modal{
+    position: fixed;
+    z-index: 10;
+    top: 20%;
+    left: 40%;
+    width: 500px;
+    height: 500px;
+    background: #958a8a;
+    box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
+    border-radius: 10px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.modal__button{
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+    margin: 0 auto;
+    padding: 16px;
+    text-align: center;
+}
 </style>
 
