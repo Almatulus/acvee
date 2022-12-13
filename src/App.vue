@@ -10,6 +10,7 @@
 import AuthLayout from '@/layouts/AuthLayout.vue'
 import BorrowerLayout from '@/layouts/BorrowerLayout.vue'
 import InvestorLayout from '@/layouts/InvestorLayout.vue'
+import AdminLayout from '@/layouts/AdminLayout.vue'
 
 export default {
     computed: {
@@ -20,7 +21,8 @@ export default {
     components: {
         AuthLayout, 
         BorrowerLayout,
-        InvestorLayout
+        InvestorLayout,
+        AdminLayout
     }
 }
 /* вфыафыафы */

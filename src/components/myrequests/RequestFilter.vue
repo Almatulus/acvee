@@ -118,7 +118,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .filter {
         background: #FFFFFF;
         box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);

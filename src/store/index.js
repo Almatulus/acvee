@@ -11,7 +11,8 @@ export default new Vuex.Store({
     searchValue: '',
     questionnaireFormState: {},
     userToken: '',
-    projectStatus: {}
+    projectStatus: {},
+    adminProjects: []
   },
   getters: {
     COUNTRIES(state){
@@ -34,6 +35,9 @@ export default new Vuex.Store({
     },
     PROJECTSTATUS(state){
       return state.projectStatus
+    },
+    ADMINPROJECTS(state){
+      return state.adminProjects
     }
   },
   mutations: {
@@ -57,7 +61,10 @@ export default new Vuex.Store({
     },
     SET_PROJECTSTATUS_NAME_TO_STATE: (state, value) => {
       state.projectStatus = value
-    }
+    },
+    SET_ADMINPROJECTS_TO_STATE: (state, value) => {
+      state.adminProjects = value
+    },
   },
   actions: {
     GET_COUNTRIES_FROM_API({commit}) {
@@ -105,7 +112,19 @@ export default new Vuex.Store({
     GET_PROJECTSTATUS_TO_VUEX({commit}, value){
       commit('SET_PROJECTSTATUS_NAME_TO_STATE', value)
       console.log(value)
-    }
+    },
+    GET_ADMINPROJECTS_FROM_API({commit}) {
+      return axios('http://127.0.0.1:8000/api/v1/admin/project-list/', {
+          method: "GET",
+          headers:{
+            Authorization: 'Token ' + localStorage.getItem('usertoken')
+          }
+      })
+      .then((adminProjects) => {
+          commit('SET_PRODUCTCATEGORIES_TO_STATE', adminProjects.data)
+          return adminProjects
+      })
+  },
   },
   modules: {
   }

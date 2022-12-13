@@ -83,6 +83,12 @@ const routes = [
     meta: {layout: 'investor'},
     component: () => import('../views/Investor/InvestorQuestionnaire.vue')
   },
+  {
+    path: '/admin/projects',
+    name: 'admin-projects',
+    meta: {layout: 'admin'},
+    component: () => import('../views/Admin/AdminProjects.vue')
+  },
 ]
 
 const router = new VueRouter({
