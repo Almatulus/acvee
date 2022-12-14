@@ -137,7 +137,7 @@
                     </div>
                     <div class="questionnaire__loan-item">
                         <div class="questionnaire__loan-revenue">
-                            {{this.form.categoryID}}
+                            
                             <h3>Выручка за последние 12 месяцев</h3>
                             <div class="questionnaire__loan-revenue-content questionnaire__loan-content">
                                 <select 
@@ -319,6 +319,20 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class="questionnaire-nav" ><!-- v-on="handleScroll" -->
+                <nav>
+                    <ul class="questionnaire-nav__menu">
+                        
+                        <li>
+                            <a style="color: #0345FF;" @click.prevent="scrollTo('scoring'), activeEl = 2" href="#" :class="{'active-template': activeEl === 2}" class="questionnaire-nav__menu-link">1</a>
+                        </li>
+                        <li>
+                            <a  @click.prevent="scrollTo('scoring'), activeEl = 2" href="#" :class="{'active-template': activeEl === 2}" class="questionnaire-nav__menu-link">2</a>
+                        </li>
+        
+                    </ul>
+                </nav>
             </div>    
         </div>
     </div>    
@@ -818,6 +832,33 @@ export default {
         border-radius: 0;
         background: inherit;
     }
+}
+
+.questionnaire-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+		&__menu {
+            position: fixed;
+            right: 55px;
+            top: 40%;
+		}
+
+        li{
+            margin: 25px 0 0 0;
+        }
+
+		&__menu-link {
+            font-weight: 600;
+            font-size: 30px;
+            line-height: 36px;
+            &:hover{
+                color: #0345FF;
+                //font-size: 36px;
+                transition: 1s;
+            }
+		}
 }
 //Input range
 

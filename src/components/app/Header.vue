@@ -2,7 +2,7 @@
     <div class="header">
         <div class="header__inner">
             <div class="header__user">
-                <img src="" alt="avatar" class="header__avatar">
+                <img src="../../assets/img/icons/413-4139803_unknown-profile-profile-picture-unknown.jpg" alt="avatar" class="header__avatar">
                 <div class="header__data">
                     <div class="header__name">
                         Адилет Адилбеков

@@ -24,7 +24,7 @@
                         <input v-model.trim="filter.ordering" name="alphabet" type="radio" @click="filterHandler()" value="-project_name" href="#" class="filter__el">
                         <label for="">Порядок: Я-А</label>
                     </div>
-                    {{filter.ordering}}
+                    
                 </div>
                 <div class="filter__column">
                     <div class="filter__title">
@@ -33,12 +33,18 @@
                     <div class="filter__filters">
                         <!--<input v-model="filter.rangeSum" type="radio" @click="filterHandler()" value[0]="0" value[1]="500000" href="#" class="filter__el">
                         <label for="">до 500.000</label>-->
-                        <a href="#" class="filter__el">
+                        <input v-model="filter.neededSum_max" type="radio" name="status" @click="filterHandler()" value="neededSum_max=500000" href="#" class="filter__el">
+                        <label class="filter__el" for="">до 500.000</label>
+                        <input v-model="filter.status" type="radio" name="status" @click="filterHandler()" value="approved" href="#" class="filter__el">
+                        <label class="filter__el" for="">В 500.000 - 1.000.000 тг</label>
+                        <input v-model="filter.status" type="radio" name="status" @click="filterHandler()" value="approved" href="#" class="filter__el">
+                        <label class="filter__el" for="">от 1.000.000</label>
+                        <!--<a href="#" class="filter__el">
                             В 500.000 - 1.000.000 тг
                         </a>
                         <a href="#" class="filter__el">
                             от 1.000.000
-                        </a>
+                        </a>-->
                     </div>
                 </div>
                 <div class="filter__column">
@@ -91,8 +97,8 @@ export default {
    data:() => ({
     filter: {
         ordering: '',
-        status: ''
-
+        status: '',
+        neededSum_max: ''
     },
 
    }),

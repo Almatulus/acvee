@@ -7,7 +7,7 @@
                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae nesciunt repellat maxime facilis quidem culpa quia neque magni veniam animi natus necessitatibus odio, atque beatae eos dignissimos deserunt explicabo quos.
                     </div>
                     <a @click.prevent="hideModal()" class="modal__button button">
-                        Ок
+                        Я соглашаюсь со всеми условиями
                     </a>
                 </div>
             </div>
@@ -99,6 +99,27 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="scoring__item">
+                            <div class="scoring__title">
+                                Счет на оплату / Invoice
+                            </div>
+                            <div class="scoring__subtitle">
+                                Заявка на закуп товара
+                            </div>
+                            <div class="scoring__document">
+                                <div class="document">
+                                    <div class="document__inner">
+                                        <label>+ Добавить документ
+                                            <input name="purchaseAgreement" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
+                                        </label>
+                                            <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
+                                        <div class="document__preview">
+                                            <img src="" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="scoring__item-wrapper">
@@ -107,11 +128,11 @@
                         <div style="display: flex; align-items: center;" v-for="(act, i) in acts" :key="i" class="scoring__item">
                             <div class="">
                                 <div class="scoring__title">
-                                    Акт
+                                    Акт сверок № {{i + 1}}
                                 </div>
-                                <div class="scoring__subtitle">
+                                <!--<div class="scoring__subtitle">
                                     Минимум по три акта за один месяц
-                                </div>
+                                </div>-->
                                 <div class="scoring__document">
                                     <div class="document">
                                         <div class="document__inner">
@@ -135,25 +156,40 @@
                             </template>
                         </div>
                     </div>
-                    <h3>ЭСФ подтверждение текущим АВР</h3>
+                    <h3>Электронная счет фактура (подтверждение текущим актам сверкам)</h3>
                     <div class="scoring__add-doc">
                         <input name="ABPConfirm" id="ABPConfirm" type="file">
                         <label for="ABPConfirm">Вложить документ</label>
                     </div>
-                    <div class="scoring__agreement">
+                    <!--<div class="scoring__agreement">
                         <input name="consentVerification" v-model="scoring.purchaseAgreement" :value="true" id="agreement" type="checkbox"> 
                         <label for="agreement">Нажимая “Оплатить проверку” вы соглашаетесь с получением данных из открытых источников</label>
-                    </div>
-                    <div class="scoring__examination">
+                    </div>-->
+                    <!--<div class="scoring__examination">
                         <p>Проверка ПКБ и Abis.kz: <span>1000тг</span></p>
                         <button class="button" type="submit">Оплатить провеку</button>
-                    </div>
+                    </div>-->
+                    <button class="button" type="submit">Отправить на проверку</button>
                     <div class="scoring__expectation">
                         <p>Ожидание прохождение скоринга от 1 до 3 дней</p>
                         <p>Мы уведомлим вас в личном кабинете о сборе всех данных</p>
                     </div>
                 </div>
             </form>
+            <div class="questionnaire-nav" ><!-- v-on="handleScroll" -->
+                <nav>
+                    <ul class="questionnaire-nav__menu">
+                        
+                        <li>
+                            <a @click.prevent="scrollTo('scoring'), activeEl = 2" href="#" :class="{'active-template': activeEl === 2}" class="questionnaire-nav__menu-link">1</a>
+                        </li>
+                        <li>
+                            <a style="color: #0345FF;" @click.prevent="scrollTo('scoring'), activeEl = 2" href="#" :class="{'active-template': activeEl === 2}" class="questionnaire-nav__menu-link">2</a>
+                        </li>
+        
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
 </template>
@@ -218,7 +254,7 @@ export default {
             //console.log(localStorage.getItem('questionnaire'))
             //console.log(data)
             //formData.append(JSON.parse(localStorage.getItem('questionnaire')))
-
+            this.$router.push('/scoring/after')
             //formData.append(this.QUESTIONNAIREFORMSTATE.organizationName)
             //formData.append('form', this.QUESTIONNAIREFORMSTATE);
             //formData.append('', this.scoring.registrationCertificate)
@@ -232,6 +268,7 @@ export default {
                 }
                 
             ).then(function(){
+                this.$router.push('/scoring/after')
                 console.log('SUCCESS!!');
             })
             .catch(function(){
@@ -316,7 +353,14 @@ export default {
 
 		&__document {
             margin: 17px 0 0 0;
-            
+            label{
+                
+                input{
+                    opacity: 1;
+                    border-radius: 0;
+                    margin: 25px 0 0 0;
+                }
+            }
 		}
 
         &__agreement{
@@ -416,6 +460,32 @@ export default {
     margin: 0 auto;
     padding: 16px;
     text-align: center;
+}
+.questionnaire-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+		&__menu {
+            position: fixed;
+            right: 55px;
+            top: 40%;
+		}
+
+        li{
+            margin: 25px 0 0 0;
+        }
+
+		&__menu-link {
+            font-weight: 600;
+            font-size: 30px;
+            line-height: 36px;
+            &:hover{
+                color: #0345FF;
+                //font-size: 36px;
+                transition: 1s;
+            }
+		}
 }
 </style>
 

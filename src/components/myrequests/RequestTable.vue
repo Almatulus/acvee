@@ -11,41 +11,56 @@
                         № запроса: {{selectedProject.request_number}}
                     </div>
                     <div class="request-description__item-item">
-                        № договора: {{selectedProject.contract_number}}
+                        № договора: {{selectedProject.id}}
                     </div>
                 </div>
                 <div class="request-description__item">
                     <div class="request-description__item-item">
-                        Необходимая сумма: {{selectedProject.get_needed_sum}}
+                        Необходимая сумма: {{selectedProject.get_needed_sum}} тг
                     </div>
-                    <div class="request-description__item-item">
+                    <!--<div class="request-description__item-item">
                         Сумма: {{selectedProject.get_amount}}
-                    </div>
+                    </div>-->
                 </div>
                 <div class="request-description__item">
                     <div class="request-description__item-item">
-                        Дата: {{selectedProject.request_date}}
+                        Дата заявки: {{selectedProject.request_date}}
                     </div>
                     <div class="request-description__item-item">
-                        Срок: {{selectedProject.get_is_week}} недель
+                        Срок займа: {{selectedProject.get_amount}} <span v-if="selectedProject.get_is_week == true">недель</span> <span v-if="selectedProject.get_is_week == false">месяцев</span>
                     </div>
                 </div>
                 <div class="request-description__item">
-                    <div class="request-description__item-item">
-                        Статус: {{selectedProject.status}}
+                    <div v-if="selectedProject.status == 'pending'" class="request-description__item-item">
+                        Статус: <!--{{selectedProject.status}}--> в ожидании
+                    </div>
+                    <div v-if="selectedProject.status == 'approved'" class="request-description__item-item">
+                        Статус: <!--{{selectedProject.status}}--> Одобрено
+                    </div>
+                    <div v-if="selectedProject.status == 'denied'" class="request-description__item-item">
+                        Статус: <!--{{selectedProject.status}}--> отказано
                     </div>
                 </div>
             </div>
             <div class="request-description__buttons">
                 <div class="request-description__button">
-
+                    <router-link class="request-button button" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
+                        Перейти к документам
+                    </router-link>
                 </div>
                 <div class="request-description__button button">
-
+                    <router-link class="request-button button" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
+                        Просмотреть этапы
+                    </router-link>
                 </div>
-                <router-link v-if="selectedProject.status == 'approved'" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
+                <div class="request-description__button button">
+                    <router-link class="request-button button" v-if="selectedProject.status == 'approved'" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
+                        Проверить договор
+                    </router-link>
+                </div>
+                <!--<router-link class="request-button button" v-if="selectedProject.status == 'approved'" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
                     Проверить договор
-                </router-link>
+                </router-link>-->
             </div>
         </div>
     </div>
@@ -94,8 +109,17 @@
                     <div class="request-table__item">
                         {{myproject.get_needed_sum}}тг
                     </div>
-                    <div class="request-table__item">
-                        {{myproject.status}}
+                    <div v-if="myproject.status == 'pending'" class="request-table__item">
+                        <!--{{myproject.status}}-->
+                        В ожидании
+                    </div>
+                    <div v-if="myproject.status == 'denied'" class="request-table__item">
+                        <!--{{myproject.status}}-->
+                        Отказано
+                    </div>
+                    <div v-if="myproject.status == 'approved'" class="request-table__item">
+                        <!--{{myproject.status}}-->
+                        Одобрено
                     </div>
                 </div>
             </div>
@@ -221,6 +245,21 @@ export default {
                 margin-top: 27px;
             }
         }
+}
+
+.request-description__buttons{
+    display: flex;
+    margin: 25px 0 0 0;
+    float: right;
+}
+
+.request-description__button{
+    margin-left: 25px;
+}
+
+.request-button{
+    padding: 17px 15px;
+    display: inline-block;
 }
 
 .active-el{

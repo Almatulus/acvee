@@ -59,6 +59,12 @@ const routes = [
     component: () => import('../components/borrower/Scoring')
   },
   {
+    path: '/scoring/after',
+    name: 'questionnaire',
+    meta: {layout: 'borrower'},
+    component: () => import('../views/Borrower/BorrowerAfterQuestionnaire.vue')
+  },
+  {
     path: '/myrequest/questionnaire',
     name: 'myrequest-questionnaire',
     meta: {layout: 'borrower'},
