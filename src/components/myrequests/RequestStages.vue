@@ -8,34 +8,31 @@
 
             </div>
             <h2 style="margin: 30px 0 0 0;">Статус проекта</h2>
-            <p class="stages__status">
-                1. Одобрено
-            </p>
-            <p class="stages__status">
-                2. Ожидание сбора денежных средств
-            </p>
-            <p class="stages__status">
-                3. Отгрузка товара
-            </p>
-            <p class="stages__status">
-                4. Товар на складе Acvee Fullfilment
-            </p>
-            <p class="stages__status">
-                5. Доставка товара конечному клиенту
-            </p>
-            <p class="stages__status">
-                6. Выплата денежных средств конечным клиентам за товар
-            </p>
-            <p class="stages__status">
-                7. Выплата вознаграждений Поставщику
-            </p>
-            <p class="stages__status">
-                8. Сделка закрыта
-            </p>
+            <p v-for="stage in PROJECTSTAGES" :key="stage.id">{{stage.step}}. {{stage.stage_name}}</p>
+            
         </div>
     </div>
 </template>
 
+
+<script>
+import {mapActions, mapGetters} from 'vuex'
+export default {
+    computed: {
+        ...mapGetters([
+            'PROJECTSTAGES'
+        ]),
+    },
+    mounted(){
+        this.GET_PROJECTSTAGES_FROM_API()
+    },
+    methods:{
+        ...mapActions([
+            'GET_PROJECTSTAGES_FROM_API'
+        ]),
+    }
+}
+</script>
 
 <style lang="scss" scoped>
     p{
@@ -48,3 +45,4 @@
         color: rgba(3, 69, 255, 1);
     }
 </style>
+

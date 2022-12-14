@@ -12,7 +12,8 @@ export default new Vuex.Store({
     questionnaireFormState: {},
     userToken: '',
     projectStatus: {},
-    adminProjects: []
+    adminProjects: [],
+    projectStages: []
   },
   getters: {
     COUNTRIES(state){
@@ -38,6 +39,9 @@ export default new Vuex.Store({
     },
     ADMINPROJECTS(state){
       return state.adminProjects
+    },
+    PROJECTSTAGES(state){
+      return state.projectStages
     }
   },
   mutations: {
@@ -64,6 +68,9 @@ export default new Vuex.Store({
     },
     SET_ADMINPROJECTS_TO_STATE: (state, value) => {
       state.adminProjects = value
+    },
+    SET_PROJECTSSTAGES_TO_STATE: (state, value) => {
+      state.projectStages = value
     },
   },
   actions: {
@@ -126,7 +133,21 @@ export default new Vuex.Store({
           return adminProjects
           
       })
-  },
+    },
+    GET_PROJECTSTAGES_FROM_API({commit}) {
+      return axios('http://127.0.0.1:8000/api/v1/borrower/stages-list/', {
+          method: "GET",
+          headers:{
+            Authorization: 'Token ' + localStorage.getItem('usertoken')
+          }
+      })
+      .then((projectStages) => {
+          commit('SET_PROJECTSSTAGES_TO_STATE', projectStages.data)
+          console.log(projectStages)
+          return projectStages
+          
+      })
+    },
   },
   modules: {
   }
