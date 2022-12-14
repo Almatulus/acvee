@@ -43,21 +43,21 @@
                 </div>
             </div>
             <div class="request-description__buttons">
-                <div class="request-description__button">
-                    <router-link class="request-button button" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
+                
+                    <router-link class="request-description__button request-button button" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
                         Перейти к документам
                     </router-link>
-                </div>
-                <div class="request-description__button button">
-                    <router-link class="request-button button" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
+                
+                
+                    <router-link class="request-description__button request-button button" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
                         Просмотреть этапы
                     </router-link>
-                </div>
-                <div class="request-description__button button">
-                    <router-link class="request-button button" v-if="selectedProject.status == 'approved'" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
+                
+                
+                    <router-link class="request-description__button request-button button" v-if="selectedProject.status == 'approved'" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
                         Проверить договор
                     </router-link>
-                </div>
+                
                 <!--<router-link class="request-button button" v-if="selectedProject.status == 'approved'" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
                     Проверить договор
                 </router-link>-->
@@ -250,7 +250,7 @@ export default {
 .request-description__buttons{
     display: flex;
     margin: 25px 0 0 0;
-    float: right;
+    justify-content: end;
 }
 
 .request-description__button{
