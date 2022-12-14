@@ -154,7 +154,7 @@ export default {
         updateDescription(selectedProject){
             this.selectedProject = selectedProject
             this.showDescription = true
-            this.GET_PROJECTSTATUS_TO_VUEX(this.selectedProject.status)
+            this.GET_PROJECTSTATUS_TO_VUEX(this.selectedProject.id)
         },
         sortProjectsBySearchValue(value){
             this.sortedProjects = [...this.MYPROJECTS]

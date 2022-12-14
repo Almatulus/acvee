@@ -4,11 +4,11 @@
             <h2>Подписание Договора Факторинга</h2>
             <div class="request-document__content">
                 <div class="request-document__document">
-                    
+                    {{PROJECTSTATUS}}
                 </div>
                 <div class="request-document__buttons">
                     <div class="request-document__buttons-top">
-                        <a href="#" class="request-document__btn button">
+                        <a @click="openFilePDF()" href="#" class="request-document__btn button">
                             Скачать PDF
                         </a>
                         <a href="#" class="request-document__btn button">
@@ -44,6 +44,16 @@ mounted() {
             
         }).then(function(response){
             console.log(response.data)
+        })
+    }
+},
+methods:{
+    openFilePDF(){
+        axios({
+            method: "GET",
+            url: 'http://127.0.0.1:8000/api/v1/borrower/agreement-factoring-pdf/'
+        }).then(function(response){
+            console.log(response)
         })
     }
 },
