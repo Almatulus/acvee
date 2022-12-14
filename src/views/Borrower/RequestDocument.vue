@@ -20,7 +20,7 @@
                     </a>
                 </div>
             </div>
-            <a href="" class="request-document__btn button request-document__btn-key">Подпись Договора через ЭЦП онлайн</a>
+            <a @click.prevent="singingTheAgreement()" href="" class="request-document__btn button request-document__btn-key">Подпись Договора через ЭЦП онлайн</a>
         </div>
     </div>
 </template>
@@ -55,6 +55,23 @@ methods:{
         }).then(function(response){
             console.log(response)
         })
+    },
+    singingTheAgreement(){
+        axios.post( 'http://127.0.0.1:8000/api/v1/borrower/signing/', 
+                {
+                    id: this.PROJECTSTATUS
+                },
+                {
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                }
+            ).then(function(){
+                console.log('SUCCESS!!');
+            })
+            .catch(function(){
+                console.log('FAILURE!!');
+            });
     }
 },
 computed:{
