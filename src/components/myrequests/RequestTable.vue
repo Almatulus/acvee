@@ -49,7 +49,7 @@
                     </router-link>
                 
                 
-                    <router-link class="request-description__button request-button button" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
+                    <router-link class="request-description__button request-button button" to="/myrequest/stages" >
                         Просмотреть этапы
                     </router-link>
                 
@@ -120,6 +120,12 @@
                     <div v-if="myproject.status == 'approved'" class="request-table__item">
                         <!--{{myproject.status}}-->
                         Одобрено
+                        
+                    </div>
+                    <div v-if="myproject.status == 'approved'" class="request-table__item">
+                        <!--{{myproject.status}}-->
+                        
+                        <router-link to="">Посмотреть детали</router-link>
                     </div>
                 </div>
             </div>
@@ -215,7 +221,7 @@ export default {
 
 		&__row {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(7, 1fr);
             cursor: pointer;
 		}
 
@@ -245,6 +251,10 @@ export default {
                 margin-top: 27px;
             }
         }
+}
+
+.request-description{
+    margin-top: 25px;
 }
 
 .request-description__buttons{
