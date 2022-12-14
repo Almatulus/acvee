@@ -78,7 +78,7 @@ const routes = [
     component: () => import('../views/Borrower/RequestDocument.vue')
   },
   {
-    path: '/myrequest/stages',
+    path: '/myrequest/stages/:id',
     name: 'myrequest-stages',
     params: true,
     meta: {layout: 'borrower'},

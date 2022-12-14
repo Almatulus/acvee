@@ -49,7 +49,7 @@
                     </router-link>
                 
                 
-                    <router-link class="request-description__button request-button button" to="/myrequest/stages" >
+                    <router-link class="request-description__button request-button button" :to="{name: 'myrequest-stages', params: {id: selectedProject.id}}" >
                         Просмотреть этапы
                     </router-link>
                 
