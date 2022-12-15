@@ -125,35 +125,64 @@
                 <div class="scoring__item-wrapper">
                     <h3>Акты сверок между Поставщиком и Производителем за последние 6 месяцев</h3>
                     <div class="scoring__content flex-wrap">
-                        <div style="display: flex; align-items: center;" v-for="(act, i) in acts" :key="i" class="scoring__item">
-                            <div class="">
-                                <div class="scoring__title">
-                                    Акт сверок № {{i + 1}}
-                                </div>
-                                <!--<div class="scoring__subtitle">
-                                    Минимум по три акта за один месяц
-                                </div>-->
-                                <div class="scoring__document">
-                                    <div class="document">
-                                        <div class="document__inner">
-                                            <label>+ Добавить документ
-                                                <input name="firstAct" class="document__send" type="file" id="file" ref="file" v-on:change="handleFileUpload(i, $event)"/>
-                                            </label>
-                                                <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
-                                            <div class="document__preview">
-                                                <img src="" alt="">
-                                            </div>
+                        <div class="scoring__item">
+                            <div class="scoring__title">
+                                Акт № 1
+                            </div>
+                            
+                            <div class="scoring__document">
+                                <div class="document">
+                                    <div class="document__inner">
+                                        <label>+ Добавить документ
+                                            <input name="firstAct" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
+                                        </label>
+                                            <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
+                                        <div class="document__preview">
+                                            <img src="" alt="">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <template v-if="i<5">
-                            <div v-if="acts.length - 1 == i " style="text-align: center; flex-direction: column; display:flex; justify-content: center;" class="scoring__item">
-                                <a style="color: #0345FF; cursor: pointer; font-size: 50px;"  @click.prevent="addAct()" class="">
-                                    +
-                                </a>
+                        </div>
+                        <div style="position: relative;" class="scoring__item">
+                            <div v-if="showActTwo" class="scoring__title">
+                                Акт № 2
                             </div>
-                            </template>
+                            
+                            <div v-if="showActTwo" class="scoring__document">
+                                <div class="document">
+                                    <div class="document__inner">
+                                        <label>+ Добавить документ
+                                            <input name="secondAct" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
+                                        </label>
+                                            <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
+                                        <div class="document__preview">
+                                            <img src="" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a v-if="!showActTwo" @click.prevent="showAct2()" class="showActPlus" href="">+</a>
+                        </div>
+                        <div class="scoring__item">
+                            <div v-if="showActThree" class="scoring__title">
+                                Акт № 3
+                            </div>
+                            
+                            <div class="scoring__document">
+                                <div class="document">
+                                    <div v-if="showActThree" class="document__inner">
+                                        <label>+ Добавить документ
+                                            <input name="thirdAct" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
+                                        </label>
+                                            <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
+                                        <div class="document__preview">
+                                            <img src="" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a v-if="!showActThree" @click.prevent="showAct3()" class="showActPlus" href="">+</a>
                         </div>
                     </div>
                     <h3>Электронная счет фактура (подтверждение текущим актам сверкам)</h3>
@@ -202,7 +231,8 @@ import { required } from 'vuelidate/lib/validators'
 export default {
     data: () => ({
         modal: true,
-        
+        showActTwo: false,
+        showActThree: false,
         file: '',
         acts: [{}],
         document: '',
@@ -228,7 +258,7 @@ export default {
             let formData = new FormData(docForm);
             //formData.append('file', this.scoring.IDCard);
             //let localitems = localStorage.getItem('questionnaire')
-            for(let i in this.acts){formData.append(i, this.acts[i])}
+            //for(let i in this.acts){formData.append(i, this.acts[i])}
             console.log(formData)
             //let questionnaire = JSON.parse(localStorage.getItem('questionnaire'))
             //let questionnaireData = JSON.parse(localStorage.getItem('questionnaire'))
@@ -288,6 +318,12 @@ export default {
         },
         hideModal(){
             this.modal = false
+        },
+        showAct2(){
+            this.showActTwo = true
+        },
+        showAct3(){
+            this.showActThree = true
         }
     },
     computed:{
@@ -435,6 +471,7 @@ export default {
 .flex-wrap{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .scoring__modal{
@@ -454,8 +491,8 @@ export default {
 }
 .modal__button{
     display: inline-block;
-    width: 100px;
-    height: 50px;
+    width: 225px;
+    height: 60px;
     cursor: pointer;
     margin: 0 auto;
     padding: 16px;
@@ -486,6 +523,18 @@ export default {
                 transition: 1s;
             }
 		}
+}
+.showActPlus{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+}
+
+.scoring__item{
+    position: relative;
+    flex: 0 0 32.333%;
+    margin: 20px 0 0  0;
 }
 </style>
 

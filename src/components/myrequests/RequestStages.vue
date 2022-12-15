@@ -8,7 +8,10 @@
             
             </div>
             <h2 style="margin: 30px 0 0 0;">Статус проекта</h2>
-            <p v-for="stage in PROJECTSTAGES" :key="stage.id">{{stage.step}}. {{stage.stage_name}}</p>
+            <template v-for="(stage, index) in PROJECTSTAGES" >
+                <p v-if="index < PROJECTSTAGESINFO.stage" class="active-stage" :key="stage.id" >{{stage.step}}. {{stage.stage_name}} V</p> 
+                <p v-else :key="stage.id" >{{stage.step}}. {{stage.stage_name}}</p>
+            </template>
             
         </div>
     </div>
@@ -46,6 +49,9 @@ export default {
         margin: 20px 0 0 0;
     }
     span{
+        color: rgba(3, 69, 255, 1);
+    }
+    .active-stage{
         color: rgba(3, 69, 255, 1);
     }
 </style>
