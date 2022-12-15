@@ -149,7 +149,8 @@ export default {
     methods: {
         ...mapActions([
             'GET_MYPROJECTS_FROM_API',
-            'GET_PROJECTSTATUS_TO_VUEX'
+            'GET_PROJECTSTATUS_TO_VUEX',
+            'GET_PROJECTSTAGESINFO_FROM_API'
         ]),
         makeActive: function(item){
             this.active = item;
@@ -160,7 +161,8 @@ export default {
         updateDescription(selectedProject){
             this.selectedProject = selectedProject
             this.showDescription = true
-            this.GET_PROJECTSTATUS_TO_VUEX(this.selectedProject.id)
+            this.GET_PROJECTSTATUS_TO_VUEX(this.selectedProject.id),
+            this.GET_PROJECTSTAGESINFO_FROM_API(this.selectedProject.id)
         },
         sortProjectsBySearchValue(value){
             this.sortedProjects = [...this.MYPROJECTS]

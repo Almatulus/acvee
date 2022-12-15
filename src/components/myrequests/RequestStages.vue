@@ -2,10 +2,10 @@
     <div class="stages">
         <div class="stages__inner">
             <h2>Финансы</h2>
-            <p class="">Сумма Финансирования: <span>1000000</span></p>
-            <p class="">Срок финансирования: <span>15.02.2023</span></p>
+            <p class="">Сумма Финансирования: <span>{{PROJECTSTAGESINFO.funding_term}}</span></p>
+            <p class="">Срок финансирования: <span>{{PROJECTSTAGESINFO.get_needed_sum}}</span></p>
             <div class="stages__documents">
-
+            
             </div>
             <h2 style="margin: 30px 0 0 0;">Статус проекта</h2>
             <p v-for="stage in PROJECTSTAGES" :key="stage.id">{{stage.step}}. {{stage.stage_name}}</p>
@@ -20,15 +20,19 @@ import {mapActions, mapGetters} from 'vuex'
 export default {
     computed: {
         ...mapGetters([
-            'PROJECTSTAGES'
+            'PROJECTSTAGES',
+            'PROJECTSTAGESINFO',
+            'PROJECTSTATUS'
         ]),
     },
     mounted(){
-        this.GET_PROJECTSTAGES_FROM_API()
+        this.GET_PROJECTSTAGES_FROM_API(),
+        this.GET_PROJECTSTAGESINFO_FROM_API(this.PROJECTSTATUS)
     },
     methods:{
         ...mapActions([
-            'GET_PROJECTSTAGES_FROM_API'
+            'GET_PROJECTSTAGES_FROM_API',
+            'GET_PROJECTSTAGESINFO_FROM_API'
         ]),
     }
 }

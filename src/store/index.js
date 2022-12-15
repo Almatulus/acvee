@@ -13,7 +13,8 @@ export default new Vuex.Store({
     userToken: '',
     projectStatus: {},
     adminProjects: [],
-    projectStages: []
+    projectStages: [],
+    projectStagesInfo: {}
   },
   getters: {
     COUNTRIES(state){
@@ -42,6 +43,9 @@ export default new Vuex.Store({
     },
     PROJECTSTAGES(state){
       return state.projectStages
+    },
+    PROJECTSTAGESINFO(state){
+      return state.projectStagesInfo
     }
   },
   mutations: {
@@ -71,6 +75,9 @@ export default new Vuex.Store({
     },
     SET_PROJECTSSTAGES_TO_STATE: (state, value) => {
       state.projectStages = value
+    },
+    SET_PROJECTSTAGESINFO_TO_STATE: (state, value) => {
+      state.projectStagesInfo = value
     },
   },
   actions: {
@@ -143,6 +150,21 @@ export default new Vuex.Store({
       })
       .then((projectStages) => {
           commit('SET_PROJECTSSTAGES_TO_STATE', projectStages.data)
+          console.log(projectStages)
+          return projectStages
+          
+      })
+    },
+    GET_PROJECTSTAGESINFO_FROM_API({commit}, value) {
+      return axios('http://127.0.0.1:8000/api/v1/borrower/stage/' + value, {
+          method: "GET",
+          //params: {id: value},
+          headers:{
+            Authorization: 'Token ' + localStorage.getItem('usertoken')
+          }
+      })
+      .then((projectStages) => {
+          commit('SET_PROJECTSTAGESINFO_TO_STATE', projectStages.data)
           console.log(projectStages)
           return projectStages
           
