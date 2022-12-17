@@ -1,6 +1,16 @@
 <template>
     <div class="investor-questionnaire">
         <div class="investor-questionnaire__inner">
+            <div class="modal__wrapper">
+                <div v-if="modal" class="scoring__modal">
+                    <div class="scoring__text">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae nesciunt repellat maxime facilis quidem culpa quia neque magni veniam animi natus necessitatibus odio, atque beatae eos dignissimos deserunt explicabo quos.
+                    </div>
+                    <a @click.prevent="hideModal()" class="modal__button button">
+                        Я соглашаюсь со всеми условиями
+                    </a>
+                </div>
+            </div>
             <form id="docForm" @submit.prevent="submitHandler" class="investor-questionnaire__form" action="">
                     <input style="width: 20px; height: 20px;" id="invesor-type1" name="invesor-type" value="2" v-model="form.investor_type" type="radio">
                     <label style="margin-left: 10px; font-size: 20px; font-weight: 600;" for="invesor-type1">Индивидуальный предприниматель</label>
@@ -55,7 +65,7 @@
                             maxlength="12"
                             v-model.trim="form.bank_name"
                             
-                            @keypress="isNumber">
+                            >
                     </div>
                     <div class="investor-questionnaire__form-column">
                         <p class="investor-questionnaire__form-label">Город регистрации<span>/проживание</span></p>
@@ -182,6 +192,7 @@ import { required, minLength, email } from 'vuelidate/lib/validators'
 import { IMaskDirective } from 'vue-imask'
 export default {
     data: () => ({
+        modal: true,
         form:{
             investor_type: '',
             name: '',
@@ -224,6 +235,9 @@ export default {
             e.returnValue = false;
             if (e.preventDefault) e.preventDefault();
             }
+        },
+        hideModal(){
+            this.modal = false
         },
         submitHandler(){
             //this.$v.form.$touch()
@@ -334,5 +348,30 @@ export default {
     line-height: 24px;
     color: #0345FF;
     margin: 20px 0 0 0;
+}
+
+.scoring__modal{
+    position: fixed;
+    z-index: 10;
+    top: 20%;
+    left: 40%;
+    width: 600px;
+    height: 500px;
+    background: #958a8a;
+    box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
+    border-radius: 10px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.modal__button{
+    display: inline-block;
+    width: 225px;
+    height: 60px;
+    cursor: pointer;
+    margin: 0 auto;
+    padding: 16px;
+    text-align: center;
 }
 </style>

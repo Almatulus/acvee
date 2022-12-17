@@ -479,7 +479,7 @@ export default {
     z-index: 10;
     top: 20%;
     left: 40%;
-    width: 500px;
+    width: 600px;
     height: 500px;
     background: #958a8a;
     box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);

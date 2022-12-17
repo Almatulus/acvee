@@ -6,6 +6,11 @@
         </a>
         <nav class="sidebar__body">
             <ul>
+                <router-link tag="li" active-class="active" to="/investor/questionnaire" >
+                    <a href="" class="sidebar__link">
+                        <span>Анкета</span>
+                    </a>
+                </router-link>
                 <router-link tag="li" active-class="active" to="/investor/my-projects" >
                     <a href="" class="sidebar__link">
                         <span>Мои проекты</span>
