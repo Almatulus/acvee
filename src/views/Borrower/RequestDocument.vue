@@ -10,7 +10,7 @@
                 </div>
                 <div class="request-document__buttons">
                     <div class="request-document__buttons-top">
-                        <a id="pdfdownload" href="http://127.0.0.1:8000/api/v1/borrower/factoring-download/" target="_blank" class="request-document__btn button">
+                        <a id="pdfdownload" href="http://127.0.0.1:8000/api/v1/borrower/factoring-download/"  class="request-document__btn button">
                             Скачать PDF
                         </a>
                         <a href="#" class="request-document__btn button">
