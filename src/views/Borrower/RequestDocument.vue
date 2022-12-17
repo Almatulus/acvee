@@ -53,7 +53,8 @@ methods:{
             method: "GET",
             url: 'http://127.0.0.1:8000/api/v1/borrower/agreement-factoring-pdf/'
         }).then(function(response){
-            console.log(response)
+            //console.log(response)
+            window.open(response)
         })
     },
     singingTheAgreement(){
