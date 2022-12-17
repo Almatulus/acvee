@@ -4,7 +4,7 @@
             <h2>Подписание Договора Факторинга</h2>
             <div class="request-document__content">
                 <div class="request-document__document">
-                    <a href="../../../public/pspdfkit-web-demo.pdf" target="_blank">Посмотреть документ</a>
+                    <a :href="docHref()" target="_blank">Посмотреть документ</a>
                 </div>
                 <div class="request-document__buttons">
                     <div class="request-document__buttons-top">
@@ -79,6 +79,9 @@ computed:{
     ...mapGetters([
             'PROJECTSTATUS'
         ]),
+    docHref() {
+        'http://127.0.0.1:8000/api/v1/borrower/agreement-factoring-pdf/' + this.PROJECTSTATUS
+    }
 }
 }
 </script>
