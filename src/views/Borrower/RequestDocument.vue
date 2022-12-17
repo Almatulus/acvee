@@ -4,11 +4,13 @@
             <h2>Подписание Договора Факторинга</h2>
             <div class="request-document__content">
                 <div class="request-document__document">
-                    <a target="_blank">Посмотреть документ</a>
+                    <a id="pdf" href="http://127.0.0.1:8000/api/v1/borrower/agreement-factoring-pdf/" target="_blank" class="request-document__btn button">
+                            Посмотреть документ
+                    </a>
                 </div>
                 <div class="request-document__buttons">
                     <div class="request-document__buttons-top">
-                        <a id="pdf" href="http://127.0.0.1:8000/api/v1/borrower/agreement-factoring-pdf/" target="_blank" class="request-document__btn button">
+                        <a id="pdf" href="http://127.0.0.1:8000/api/v1/borrower/factoring-download/" target="_blank" class="request-document__btn button">
                             Скачать PDF
                         </a>
                         <a href="#" class="request-document__btn button">
