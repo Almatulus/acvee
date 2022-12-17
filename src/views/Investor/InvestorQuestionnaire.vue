@@ -33,9 +33,9 @@
                         <p class="investor-questionnaire__form-label">Срок инвестирования</p>
                         <!--<input v-model="form.investment_term" type="range" value="0" min="2" max="25">-->
                         <div style="margin-top: 10px;" class="">
-                            <input style="width: 17px; height: 17px;" v-model="form.investment_term" type="radio" name="investment" id="investment1">
+                            <input style="width: 17px; height: 17px;" v-model="form.investment_term" type="radio" value="6" name="investment" id="investment1">
                             <label style="margin-left: 10px; font-size: 17px;" for="investment1">6 месяцев</label>
-                            <input style="margin-left: 30px; width: 17px; height: 17px;" v-model="form.investment_term" type="radio" name="investment" id="investment2">
+                            <input style="margin-left: 30px; width: 17px; height: 17px;" v-model="form.investment_term" value="12" type="radio" name="investment" id="investment2">
                             <label style="margin-left: 10px; font-size: 17px;" for="investment2">12 месяцев</label>
                         </div>
                         <p class="investor-questionnaire__form-label">Номер счета</p>
@@ -192,7 +192,7 @@ export default {
             desired_sum: '',
             email: '',
             description: '',
-            ID_card_img: '',
+            //ID_card_img: '',
             IBAN: '',
             bank_name: ''
             
