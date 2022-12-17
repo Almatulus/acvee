@@ -38,8 +38,24 @@
                             <input style="margin-left: 30px; width: 17px; height: 17px;" v-model="form.investment_term" type="radio" name="investment" id="investment2">
                             <label style="margin-left: 10px; font-size: 17px;" for="investment2">12 месяцев</label>
                         </div>
-                        
-                        <p class="investor-questionnaire__form-label">Почему вы решили инвестирвать в Acvee</p>
+                        <p class="investor-questionnaire__form-label">Номер счета</p>
+                        <input 
+                            placeholder="IBAN" 
+                            class="investor-questionnaire__form-input" 
+                            type="text"
+                            maxlength="12"
+                            v-model.trim="form.IBAN"
+                            
+                            @keypress="isNumber">
+                        <p class="investor-questionnaire__form-label">Название банка</p>
+                        <input 
+                            placeholder="Название банка" 
+                            class="investor-questionnaire__form-input" 
+                            type="text"
+                            maxlength="12"
+                            v-model.trim="form.bank_name"
+                            
+                            @keypress="isNumber">
                     </div>
                     <div class="investor-questionnaire__form-column">
                         <p class="investor-questionnaire__form-label">Город регистрации<span>/проживание</span></p>
@@ -96,6 +112,7 @@
                         <p v-if="$v.form.desired_sum.$dirty && !$v.form.desired_sum.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                     </div>
                 </div>
+                <p class="investor-questionnaire__form-label">Почему вы решили инвестирвать в Acvee</p>
                 <input v-model="form.description" placeholder="Причина" class="investor-questionnaire__form-input investor-questionnaire__form-textarea" type="text">
                 <br>
                 <!--<input name="ID_card_img" id="ID_card_img" style="display: none;" type="file" v-on:change="handleFileUpload()">
@@ -175,7 +192,10 @@ export default {
             desired_sum: '',
             email: '',
             description: '',
-            ID_card_img: ''
+            ID_card_img: '',
+            IBAN: '',
+            bank_name: ''
+            
         }
     }),
     validations: {
@@ -207,13 +227,14 @@ export default {
         },
         submitHandler(){
             //this.$v.form.$touch()
-            let docForm = document.getElementById('docForm')
+            /*let docForm = document.getElementById('docForm')
             let formData = new FormData(docForm)
-            for(let i in this.form) {formData.append(i, this.form[i])}
+            for(let i in this.form) {formData.append(i, this.form[i])}*/
             
             if(!this.$v.form.$error){
                 axios.post( 'http://127.0.0.1:8000/api/v1/investor/save-form/', 
-                formData,
+                //formData,
+                form,
                 //obj,
                 {
                     headers:{

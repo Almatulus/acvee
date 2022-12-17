@@ -4,7 +4,7 @@
             <h2>Подписание Договора Факторинга</h2>
             <div class="request-document__content">
                 <div class="request-document__document">
-                    {{PROJECTSTATUS}}
+                    <a href="../../../public/pspdfkit-web-demo.pdf" target="_blank">Посмотреть документ</a>
                 </div>
                 <div class="request-document__buttons">
                     <div class="request-document__buttons-top">

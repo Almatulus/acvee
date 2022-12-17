@@ -85,6 +85,13 @@ const routes = [
     component: () => import('../components/myrequests/RequestStages.vue')
   },
   {
+    path: '/myrequest/documents/:id',
+    name: 'myrequest-documents',
+    params: true,
+    meta: {layout: 'borrower'},
+    component: () => import('../components/myrequests/RequestStages.vue')
+  },
+  {
     path: '/investor/my-projects',
     name: 'investor-myProjects',
     meta: {layout: 'investor'},
