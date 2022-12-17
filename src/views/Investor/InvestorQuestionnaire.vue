@@ -234,12 +234,12 @@ export default {
             if(!this.$v.form.$error){
                 axios.post( 'http://127.0.0.1:8000/api/v1/investor/save-form/', 
                 //formData,
-                form,
+                this.form,
                 //obj,
                 {
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken'),
-                        'Content-Type': 'multipart/form-data'
+                        //'Content-Type': 'multipart/form-data'
                     }
                 }
                 
