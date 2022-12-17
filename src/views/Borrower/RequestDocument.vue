@@ -8,7 +8,7 @@
                 </div>
                 <div class="request-document__buttons">
                     <div class="request-document__buttons-top">
-                        <a @click="openFilePDF()" href="#" class="request-document__btn button">
+                        <a id="pdf" @click="openFilePDF()" href="#" class="request-document__btn button">
                             Скачать PDF
                         </a>
                         <a href="#" class="request-document__btn button">
@@ -37,14 +37,9 @@ data: () => ({
     url: 'https://static-1252421604.cos.ap-guangzhou.myqcloud.com/vdp.docx'
 }),
 mounted() {
-    getStatus: {
-        axios({
-            method: "GET",
-            url: "http://127.0.0.1:8000/api/v1/borrower/third-step/",
-            
-        }).then(function(response){
-            console.log(response.data)
-        })
+    getTagA:{
+        var a = document.getElementById('pdf')
+        a.href = a.href + PROJECTSTATUS
     }
 },
 methods:{
