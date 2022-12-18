@@ -110,6 +110,18 @@ const routes = [
     component: () => import('../views/Investor/InvestorQuestionnaire.vue')
   },
   {
+    path: '/investor/agreements',
+    name: 'investor-agreements',
+    meta: {layout: 'investor'},
+    component: () => import('../views/Investor/InvestorDocuments.vue')
+  },
+  {
+    path: '/investor/notifications',
+    name: 'investor-notifications',
+    meta: {layout: 'investor'},
+    component: () => import('../views/Investor/InvestorNotifications.vue')
+  },
+  {
     path: '/admin/projects',
     name: 'admin-projects',
     meta: {layout: 'admin'},

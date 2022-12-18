@@ -246,7 +246,7 @@ export default {
             for(let i in this.form) {formData.append(i, this.form[i])}*/
             
             if(!this.$v.form.$error){
-                axios.post( 'http://127.0.0.1:8000/api/v1/investor/save-form/', 
+                axios.post('http://127.0.0.1:8000/api/v1/investor/save-form/', 
                 //formData,
                 this.form,
                 //obj,

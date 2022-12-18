@@ -21,9 +21,14 @@
                         <span>Фин информация</span>
                     </a>
                 </router-link>
-                <router-link tag="li" active-class="active" to="/investor/financial-information" >
+                <router-link tag="li" active-class="active" to="/investor/agreements" >
                     <a href="" class="sidebar__link">
                         <span>Договора</span>
+                    </a>
+                </router-link>
+                <router-link tag="li" active-class="active" to="/investor/notifications" >
+                    <a href="" class="sidebar__link">
+                        <span>Уведомления</span>
                     </a>
                 </router-link>
             </ul>
