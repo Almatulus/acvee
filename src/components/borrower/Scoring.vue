@@ -481,13 +481,15 @@ export default {
     left: 40%;
     width: 600px;
     height: 500px;
-    background: #958a8a;
+    background: #fff;
     box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
     border-radius: 10px;
-    padding: 50px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border: 4px solid #0345FF;
+    font-size: 17px;
 }
 .modal__button{
     display: inline-block;
