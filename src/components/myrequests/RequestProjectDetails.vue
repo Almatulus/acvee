@@ -39,10 +39,10 @@
                 </div>
                 <div class="project-details__tables">
                     <ul class="table-tabs">
-                        <li @click="financing = true, warehouse = false, shipments = false, earnings = false">Финансирование</li>
+                        <li class="first-tab" @click="financing = true, warehouse = false, shipments = false, earnings = false">Финансирование</li>
                         <li @click="financing = false, warehouse = true, shipments = false, earnings = false">Склад</li>
                         <li @click="financing = false, warehouse = false, shipments = true, earnings = false">Отгрузки</li>
-                        <li @click="financing = false, warehouse = false, shipments = false, earnings = true">Заработок</li>
+                        <li class="last-tab" @click="financing = false, warehouse = false, shipments = false, earnings = true">Заработок</li>
                     </ul>
                     <div v-if="financing == true" class="project-details__financing">
                         <h3>Платежи по долгу</h3>
@@ -234,9 +234,12 @@ export default {
     margin: 30px 0 0 0;
     font-size: 16px;
     font-weight: 500;
+    background: #fff;
     li{
-        margin-left: 15px;
+        
         cursor: pointer;
+        padding: 10px;
+        border: 2px solid #0345FF;
     }
 }
 
@@ -274,6 +277,15 @@ export default {
 
 .project-details__financing{
     margin: 20px 0 0 0;
+}
+
+.first-tab{
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.last-tab{
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 </style>
