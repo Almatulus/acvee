@@ -92,7 +92,7 @@ const routes = [
     component: () => import('../components/myrequests/RequestStages.vue')
   },
   {
-    path: '/myrequest/project-details',
+    path: '/myrequest/project-details/:id',
     name: 'myrequest-project-details',
     params: true,
     meta: {layout: 'borrower'},
@@ -127,6 +127,18 @@ const routes = [
     name: 'investor-notifications',
     meta: {layout: 'investor'},
     component: () => import('../views/Investor/InvestorNotifications.vue')
+  },
+  {
+    path: '/investor/requests',
+    name: 'investor-requests',
+    meta: {layout: 'investor'},
+    component: () => import('../views/Investor/InvestorRequests.vue')
+  },
+  {
+    path: '/investor/questionnaire/after',
+    name: 'investor-questionnaire-after',
+    meta: {layout: 'investor'},
+    component: () => import('../views/Investor/InvestorAfterQuestionnaire.vue')
   },
   {
     path: '/admin/projects',

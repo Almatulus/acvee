@@ -125,7 +125,7 @@
                     <div v-if="myproject.status == 'approved'" class="request-table__item">
                         <!--{{myproject.status}}-->
                         
-                        <router-link to="/myrequest/project-details">Посмотреть детали</router-link>
+                        <router-link :to="{name: 'myrequest-project-details', params: {id: myproject.id}}">Посмотреть детали</router-link>
                     </div>
                 </div>
             </div>

@@ -244,7 +244,7 @@ export default {
             /*let docForm = document.getElementById('docForm')
             let formData = new FormData(docForm)
             for(let i in this.form) {formData.append(i, this.form[i])}*/
-            
+            this.$router.push('/investor/questionnaire/after')
             if(!this.$v.form.$error){
                 axios.post('http://127.0.0.1:8000/api/v1/investor/save-form/', 
                 //formData,
@@ -258,6 +258,7 @@ export default {
                 }
                 
                 ).then(function(){
+                    //this.$router.push('/investor/questionnaire/after')
                 console.log('SUCCESS!!');
                 })
                 .catch(function(){
