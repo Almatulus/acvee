@@ -183,7 +183,6 @@ export default {
     },
     mounted(){
         this.GET_MYPROJECTS_FROM_API()
-        
     },
     computed: {
         ...mapGetters([
