@@ -56,7 +56,7 @@
                             maxlength="12"
                             v-model.trim="form.IBAN"
                             
-                            @keypress="isNumber">
+                           >
                         <p class="investor-questionnaire__form-label">Название банка</p>
                         <input 
                             placeholder="Название банка" 
@@ -127,57 +127,55 @@
                 <br>
                 <!--<input name="ID_card_img" id="ID_card_img" style="display: none;" type="file" v-on:change="handleFileUpload()">
                 <label class="button-certify btn" for="ID_card_img" id="ID_card_img" ref="ID_card_img">Удостоверение личности</label>-->
-                <div style="display: flex; align-items: center; margin-top: 10px" class="">
-                    <input style="width: 29px; height: 25px;" type="checkbox" id="confirmation1">
-                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation1">Настоящим даю согласие на сбор, обработку и использование моих персональных данных в соответствие с законом Республики Казахстана "О персональных данных и их защите",в том числе на получение информации обо мне и из любых возможных публичных источников.</label>
-                </div>
-                <div style="display: flex; align-items: center; margin-top: 10px" class="">
-                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation2">
-                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation2">Я подтверждаю, что деньги, которые я предполагаю инвестировать являются легальными и не получены в результате незаконной деятельности</label>
-                </div>
-                <div style="display: flex; align-items: center; margin-top: 10px" class="">
-                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation3">
-                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation3">Я подтверждаю, что не являюсь политически значимой личностью (PEP)</label>
-                </div>
-                <div style="display: flex; align-items: center; margin-top: 10px" class="">
-                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation4">
-                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation4">Я подтверждаю, что предоставленная мною информация является точной и не вводит в заблуждение;</label>
-                </div>
-                <div style="display: flex; align-items: center; margin-top: 10px" class="">
-                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation5">
-                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation5">Я подтверждаю, что никто не будет иметь доступа к предоставленным мне данным о Компании;</label>
-                </div>
-                <div style="display: flex; align-items: center; margin-top: 10px" class="">
-                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation6">
-                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation6">Я подтверждаю, что я дееспособен и могу вступать в юридически обязывающие меня отношения с Компанией;</label>
-                </div>
-                <div style="display: flex; align-items: center; margin-top: 10px" class="">
-                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation7">
-                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation7">Я подтверждаю, что действую от своего лица и не представляю ничьи интересы;</label>
-                </div>
-                <div style="display: flex; align-items: center; margin-top: 10px" class="">
-                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation8">
-                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation8">Я подтверждаю, что лично принимаю решение по предоставлению финансирования Компании;</label>
-                </div>
-                <div style="display: flex; align-items: center; margin-top: 10px" class="">
-                    <input style="width: 21px; height: 25px;" type="checkbox" id="confirmation9">
-                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation9">Я подтверждаю, что понимаю, что, подписывая Договор Инвестиции или Займа через краудфандинговую платформу Acvee Crowdfinding, я предоставляю финансирование Компании напрямую;</label>
-                </div>
-                <div style="display: flex; align-items: center; margin-top: 10px" class="">
-                    <input style="width: 34px; height: 25px;" type="checkbox" id="confirmation10">
-                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation10">Я подтверждаю, что Компании, представленные на краудфандинговой платформе Acvee Crowdfinding, могут понести убытки либо обанкротиться, и, соответственно, Инвестиция или Заем такой Компании является рискованной, включая риск потери части либо всех моих денег, задержки платежей или получения прочих выгод от Компании;</label>
-                </div>
-                <div style="display: flex; align-items: center; margin-top: 10px" class="">
-                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation11">
-                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation11">Я подтверждаю, что если не диверсифицировать портфолио инвестиций и займов это может привести к большим потерям в случае дефолта одной конкретной Компании;</label>
-                </div>
-                <div style="display: flex; align-items: center; margin-top: 10px" class="">
-                    <input style="width: 18px; height: 25px;" type="checkbox" id="confirmation12">
-                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation12">Я подтверждаю, что Я могу не иметь возможности уступить выданный заём или продать инвестиции третьим лицам в момент, когда я этого захочу;</label>
-                </div>
-                <div style="display: flex; align-items: center; margin-top: 10px" class="">
-                    <input style="width: 28px; height: 25px;" type="checkbox" id="confirmation13">
-                    <label style="font-weight: 600; font-size: 16px; margin-left: 10px" for="confirmation13">Я подтверждаю, что если по любой причине краудфандинговая платформа Acvee Crowdfinding не сможет продолжать свою деятельность, я могу потерять свои деньги, понести дополнительные затраты либо испытать задержки в получении выплат;</label>
+                <div  class="investor-questionnaire__chechboxes">
+                    <div class="investor-questionnaire__checbox">
+                        <input type="checkbox" id="confirmation1">
+                        <label for="confirmation1">Настоящим даю согласие на сбор, обработку и использование моих персональных данных в соответствие с законом Республики Казахстана "О персональных данных и их защите",в том числе на получение информации обо мне и из любых возможных публичных источников.</label>
+                    </div>
+                    <div class="investor-questionnaire__checbox">
+                        <input type="checkbox" id="confirmation2">
+                        <label for="confirmation2">Я подтверждаю, что деньги, которые я предполагаю инвестировать являются легальными и не получены в результате незаконной деятельности</label>
+                    </div>
+                    <div class="investor-questionnaire__checbox">
+                        <input type="checkbox" id="confirmation3">
+                        <label for="confirmation3">Я подтверждаю, что не являюсь политически значимой личностью (PEP)</label>
+                    </div>
+                    <div class="investor-questionnaire__checbox">
+                        <input type="checkbox" id="confirmation4">
+                        <label for="confirmation4">Я подтверждаю, что предоставленная мною информация является точной и не вводит в заблуждение;</label>
+                    </div>
+                    <div class="investor-questionnaire__checbox">
+                        <input type="checkbox" id="confirmation5">
+                        <label for="confirmation5">Я подтверждаю, что никто не будет иметь доступа к предоставленным мне данным о Компании;</label>
+                    </div>
+                    <div class="investor-questionnaire__checbox">
+                        <input type="checkbox" id="confirmation6">
+                        <label for="confirmation6">Я подтверждаю, что я дееспособен и могу вступать в юридически обязывающие меня отношения с Компанией;</label>
+                    </div>
+                    <div class="investor-questionnaire__checbox">
+                        <input type="checkbox" id="confirmation7">
+                        <label for="confirmation7">Я подтверждаю, что действую от своего лица и не представляю ничьи интересы;</label>
+                    </div>
+                    <div class="investor-questionnaire__checbox">
+                        <input type="checkbox" id="confirmation9">
+                        <label for="confirmation9">Я подтверждаю, что понимаю, что, подписывая Договор Инвестиции или Займа через краудфандинговую платформу Acvee Crowdfinding, я предоставляю финансирование Компании напрямую;</label>
+                    </div>
+                    <div class="investor-questionnaire__checbox">
+                        <input type="checkbox" id="confirmation10">
+                        <label for="confirmation10">Я подтверждаю, что Компании, представленные на краудфандинговой платформе Acvee Crowdfinding, могут понести убытки либо обанкротиться, и, соответственно, Инвестиция или Заем такой Компании является рискованной, включая риск потери части либо всех моих денег, задержки платежей или получения прочих выгод от Компании;</label>
+                    </div>
+                    <div class="investor-questionnaire__checbox">
+                        <input type="checkbox" id="confirmation11">
+                        <label for="confirmation11">Я подтверждаю, что если не диверсифицировать портфолио инвестиций и займов это может привести к большим потерям в случае дефолта одной конкретной Компании;</label>
+                    </div>
+                    <div class="investor-questionnaire__checbox">
+                        <input type="checkbox" id="confirmation12">
+                        <label for="confirmation12">Я подтверждаю, что Я могу не иметь возможности уступить выданный заём или продать инвестиции третьим лицам в момент, когда я этого захочу;</label>
+                    </div>
+                    <div class="investor-questionnaire__checbox">
+                        <input type="checkbox" id="confirmation13">
+                        <label for="confirmation13">Я подтверждаю, что если по любой причине краудфандинговая платформа Acvee Crowdfinding не сможет продолжать свою деятельность, я могу потерять свои деньги, понести дополнительные затраты либо испытать задержки в получении выплат;</label>
+                    </div>
                 </div>
                 <button type="submit" class="button investor-questionnaire__form-button">
                     Сохранить
@@ -206,8 +204,20 @@ export default {
             //ID_card_img: '',
             IBAN: '',
             bank_name: ''
-            
-        }
+        },
+        confirmation1: '',
+        confirmation2: '',
+        confirmation3: '',
+        confirmation4: '',
+        confirmation5: '',
+        confirmation6: '',
+        confirmation7: '',
+        confirmation8: '',
+        confirmation9: '',
+        confirmation10: '',
+        confirmation11: '',
+        confirmation12: '',
+        confirmation13: '',
     }),
     validations: {
         form:{
@@ -376,5 +386,23 @@ export default {
     margin: 0 auto;
     padding: 16px;
     text-align: center;
+}
+.investor-questionnaire__chechboxes{
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.investor-questionnaire__checbox{
+    align-items: center;
+    margin: 10px 0 0 0;
+    input{
+        width: 16px;
+        height: 16px;
+    }
+    label{
+        margin-left: 10px;
+    }
 }
 </style>

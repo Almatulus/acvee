@@ -39,10 +39,10 @@
                 </div>
                 <div class="project-details__tables">
                     <ul class="table-tabs">
-                        <li class="first-tab" @click="financing = true, warehouse = false, shipments = false, earnings = false">Финансирование</li>
-                        <li @click="financing = false, warehouse = true, shipments = false, earnings = false">Склад</li>
-                        <li @click="financing = false, warehouse = false, shipments = true, earnings = false">Отгрузки</li>
-                        <li class="last-tab" @click="financing = false, warehouse = false, shipments = false, earnings = true">Заработок</li>
+                        <li class="first-tab" @click="financing = true, warehouse = false, shipments = false, earnings = false, activeEl = 1" :class="{'active-el': activeEl === 1}">Финансирование</li>
+                        <li @click="financing = false, warehouse = true, shipments = false, earnings = false, activeEl = 2" :class="{'active-el': activeEl === 2}">Склад</li>
+                        <li @click="financing = false, warehouse = false, shipments = true, earnings = false, activeEl = 3" :class="{'active-el': activeEl === 3}">Отгрузки</li>
+                        <li class="last-tab" @click="financing = false, warehouse = false, shipments = false, earnings = true, activeEl = 4" :class="{'active-el': activeEl === 4}">Заработок</li>
                     </ul>
                     <div v-if="financing == true" class="project-details__financing">
                         <h3>Платежи по долгу</h3>
@@ -184,11 +184,16 @@
 <script>
 export default {
     data: () => ({
-        financing: true,
+        financing: false,
         warehouse: false,
         shipments: false,
         earnings: false
-    })
+    }),
+    methods:{
+        makeActive: function(item){
+            this.active = item;
+        },
+    }
 }
 </script>
 
@@ -287,5 +292,8 @@ export default {
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
 }
-
+.active-el{
+    background: #0345FF;
+    color: #FFFFFF;
+}
 </style>

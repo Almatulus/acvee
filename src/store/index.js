@@ -114,6 +114,21 @@ export default new Vuex.Store({
           return myProjects
       })
     },
+    GET_MYPROJECTS_INVESTOR_FROM_API({commit}, value){
+      
+      return axios('http://127.0.0.1:8000/api/v1/borrower/my-projects/', {
+          method: "GET", 
+          params: value,
+          headers:{
+            Authorization: 'Token ' + localStorage.getItem('usertoken')
+          }
+          
+      })
+      .then((myProjects) => {
+          commit('SET_MYPROJECTS_TO_STATE', myProjects.data)
+          return myProjects
+      })
+    },
     GET_SEARCH_VALUE_TO_VUEX({commit}, value){
       commit('SET_SEARCH_VALUE_TO_VUEX', value)
     },
