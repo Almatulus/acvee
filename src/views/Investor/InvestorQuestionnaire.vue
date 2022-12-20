@@ -53,7 +53,7 @@
                             placeholder="IBAN" 
                             class="investor-questionnaire__form-input" 
                             type="text"
-                            maxlength="12"
+                            maxlength="50"
                             v-model.trim="form.IBAN"
                             
                            >
@@ -62,7 +62,7 @@
                             placeholder="Название банка" 
                             class="investor-questionnaire__form-input" 
                             type="text"
-                            maxlength="12"
+                            maxlength="50"
                             v-model.trim="form.bank_name"
                             
                             >
