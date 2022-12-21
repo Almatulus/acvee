@@ -170,6 +170,20 @@ export default new Vuex.Store({
           
       })
     },
+    GET_INVESTOR_PROJECTSTAGES_FROM_API({commit}) {
+      return axios('http://127.0.0.1:8000/api/v1/investor/stage-list/', {
+          method: "GET",
+          headers:{
+            Authorization: 'Token ' + localStorage.getItem('usertoken')
+          }
+      })
+      .then((projectStages) => {
+          commit('SET_PROJECTSSTAGES_TO_STATE', projectStages.data)
+          console.log(projectStages)
+          return projectStages
+          
+      })
+    },
     GET_PROJECTSTAGESINFO_FROM_API({commit}, value) {
       return axios('http://127.0.0.1:8000/api/v1/borrower/stage/' + value, {
           method: "GET",
@@ -185,6 +199,7 @@ export default new Vuex.Store({
           
       })
     },
+    
   },
   modules: {
   }

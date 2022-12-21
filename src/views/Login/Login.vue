@@ -17,6 +17,19 @@
                 <h2>{{ title }}</h2>
                 <form @submit.prevent="submitHandler" action="" class="authentication-template__form">
                     <div class="authentication-template__form-item">
+                        <p>Выберите тип пользователя</p>
+                        <div style="margin: 15px 0 0 0; display: flex;" class="">
+                            <div class="authentication-template__form-item-item">
+                                <input v-model="user_type" value="borrower" name="role" id="Borrower" class="radio-hide" type="radio">
+                                <label for="Borrower">Заемщик</label>
+                            </div>
+                            <div class="authentication-template__form-item-item">
+                                <input v-model="user_type" value="investor" name="role" id="Investor" class="radio-hide" type="radio">
+                                <label for="Investor">Инвестор</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="authentication-template__form-item">
                         <p>Номер телефона</p>
                         <input
                             type="text"
@@ -240,6 +253,22 @@ export default {
         color: #ff0000;
     }
 }
+
+.radio-hide{
+        width: 20px!important;
+        height: 20px!important;
+    }
+    .authentication-template__form-item-item{
+        align-items: center;
+        display: flex;
+        &:last-child{
+            margin-left: 30px;
+        }
+        label{
+            font-size: 18px;
+            margin-left: 10px;
+        }
+    }
 </style>
 
 <!--<AuthenticationTemplateContent 

@@ -11,6 +11,11 @@
                         <span>Анкета</span>
                     </a>
                 </router-link>
+                <router-link tag="li" active-class="active" to="/investor/requests" >
+                    <a href="" class="sidebar__link">
+                        <span>Мои заявки</span>
+                    </a>
+                </router-link>
                 <router-link tag="li" active-class="active" to="/investor/my-projects" >
                     <a href="" class="sidebar__link">
                         <span>Мои проекты</span>
@@ -31,11 +36,7 @@
                         <span>Уведомления</span>
                     </a>
                 </router-link>
-                <router-link tag="li" active-class="active" to="/investor/requests" >
-                    <a href="" class="sidebar__link">
-                        <span>Мои заявки</span>
-                    </a>
-                </router-link>
+                
             </ul>
         </nav>
     </div>

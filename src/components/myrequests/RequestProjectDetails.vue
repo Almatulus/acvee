@@ -268,16 +268,16 @@ export default {
     font-size: 16px;
 	background: #0345FF;
     color: #fff;
-	border: 5px solid #dddddd;
+	border: 5px solid #0345FF;
 
 }
 
 .table td {
 
-	border: 5px solid #dddddd;
+	border: 5px solid #fff;
     background: #fff;
 	padding: 15px;
-
+    text-align: center;
 }
 
 .project-details__financing{

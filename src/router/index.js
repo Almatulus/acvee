@@ -135,11 +135,19 @@ const routes = [
     component: () => import('../views/Investor/InvestorRequests.vue')
   },
   {
+    path: '/investor/requests/stages/:id',
+    name: 'investor-requests-stages',
+    params: true,
+    meta: {layout: 'investor'},
+    component: () => import('../views/Investor/InvestorRequestStages.vue')
+  },
+  {
     path: '/investor/questionnaire/after',
     name: 'investor-questionnaire-after',
     meta: {layout: 'investor'},
     component: () => import('../views/Investor/InvestorAfterQuestionnaire.vue')
   },
+  
   {
     path: '/admin/projects',
     name: 'admin-projects',

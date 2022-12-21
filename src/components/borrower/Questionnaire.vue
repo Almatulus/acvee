@@ -239,7 +239,7 @@
                                 <p v-if="$v.form.creditMonthlyPayment.$dirty && !$v.form.creditMonthlyPayment.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                                 <input 
                                     placeholder="Срок погашения" 
-                                    class="questionnaire__input" 
+                                    class="questionnaire__input questionnaire__input-date" 
                                     type="date"
                                     v-model.trim="form.creditMaturity"
                                     :class="$v.form.creditMaturity.$error ? 'questionnaire-input-invalid' : ''"
@@ -859,6 +859,10 @@ export default {
                 transition: 1s;
             }
 		}
+}
+
+.questionnaire__input-date{
+    margin: 0;
 }
 //Input range
 

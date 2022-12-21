@@ -1,25 +1,25 @@
 <template>
     <div class="authentication-template">
         <div class="authentication-template__inner">
-            
-            <div class="authentication-template__roles">
-                <ul>
-                    <li>
-                        <input v-model="user_type" value="borrower" name="role" id="Borrower" class="radio-hide" type="radio">
-                        <label for="Borrower">Заемщик</label>
-                    </li>
-                    <li>
-                        <input v-model="user_type" value="investor" name="role" id="Investor" class="radio-hide" type="radio">
-                        <label for="Investor">Инвестор</label>
-                    </li>
-                </ul>
-            </div>
             <div class="authentication-template__content">
                 <div class="authentication-template__form-stage">
                     Этап 1 из 2
                 </div>
                 <h2>{{ title }}</h2>
                 <form @submit.prevent="submitHandler" class="authentication-template__form" action="">
+                    <div class="authentication-template__form-item">
+                        <p>Выберите тип пользователя</p>
+                        <div style="margin: 15px 0 0 0; display: flex;" class="">
+                            <div class="authentication-template__form-item-item">
+                                <input v-model="user_type" value="borrower" name="role" id="Borrower" class="radio-hide" type="radio">
+                                <label for="Borrower">Заемщик</label>
+                            </div>
+                            <div class="authentication-template__form-item-item">
+                                <input v-model="user_type" value="investor" name="role" id="Investor" class="radio-hide" type="radio">
+                                <label for="Investor">Инвестор</label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="authentication-template__form-item">
                         <p>Номер телефона</p>
                         <input
@@ -124,6 +124,7 @@ export default {
 
 <style lang="scss" scoped>
     .authentication-template{
+        padding: 0 50px;
         &__sms{
             font-weight: 400;
             font-size: 16px;
@@ -146,6 +147,21 @@ export default {
         }
         .invalid-feedback{
             color: #ff0000;
+        }
+    }
+    .radio-hide{
+        width: 20px;
+        height: 20px;
+    }
+    .authentication-template__form-item-item{
+        align-items: center;
+        display: flex;
+        &:last-child{
+            margin-left: 30px;
+        }
+        label{
+            font-size: 18px;
+            margin-left: 10px;
         }
     }
 </style>

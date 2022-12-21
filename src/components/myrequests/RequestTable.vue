@@ -125,7 +125,7 @@
                     <div v-if="myproject.status == 'approved'" class="request-table__item">
                         <!--{{myproject.status}}-->
                         
-                        <router-link :to="{name: 'myrequest-project-details', params: {id: myproject.id}}">Посмотреть детали</router-link>
+                        <router-link class="request-table__details-link" :to="{name: 'myrequest-project-details', params: {id: myproject.id}}">Посмотреть детали</router-link>
                     </div>
                 </div>
             </div>
@@ -276,5 +276,9 @@ export default {
 .active-el{
     background: #0345FF;
     color: #FFFFFF;
+}
+
+.request-table__details-link{
+    color: rgba(0, 0, 0, 0.6);
 }
 </style>

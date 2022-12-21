@@ -40,17 +40,17 @@
                     </div>
                     <div class="request-description__buttons">
                         
-                            <router-link class="request-description__button request-button button" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
+                            <!--<router-link class="request-description__button request-button button" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
                                 Перейти к документам
+                            </router-link>-->
+                        
+                        
+                            <router-link class="request-description__button request-button button" :to="{name: 'investor-requests-stages', params: {id: selectedProject.id}}" >
+                                Просмотреть статус
                             </router-link>
                         
                         
-                            <router-link class="request-description__button request-button button" :to="{name: 'myrequest-stages', params: {id: selectedProject.id}}" >
-                                Просмотреть этапы
-                            </router-link>
-                        
-                        
-                            <router-link class="request-description__button request-button button" v-if="selectedProject.status == 'approved'" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
+                            <router-link class="request-description__button request-button button" v-if="selectedProject.get_status == 'approved'" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
                                 Проверить договор
                             </router-link>
                         
@@ -109,11 +109,7 @@
                                 Одобрено
                                 
                             </div>
-                            <div v-if="myproject.status == 'approved'" class="request-table__item">
-                                <!--{{myproject.status}}-->
-                                
-                                <router-link :to="{name: 'myrequest-project-details', params: {id: myproject.id}}">Посмотреть детали</router-link>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -155,7 +151,7 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
     .filter-active{
         color: #0345FF;
     }
@@ -326,4 +322,8 @@ export default {
 		}
 }
 
+
+.request-description__content{
+    justify-content: stretch;
+}
 </style>

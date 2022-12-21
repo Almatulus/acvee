@@ -198,7 +198,9 @@
                         <p>Проверка ПКБ и Abis.kz: <span>1000тг</span></p>
                         <button class="button" type="submit">Оплатить провеку</button>
                     </div>-->
-                    <button class="button" type="submit">Отправить на проверку</button>
+                    <div style="display: flex; justify-content: end; margin-top: 10px;">
+                        <button class="scoring__button button" type="submit">Отправить на проверку</button>
+                    </div>
                     <div class="scoring__expectation">
                         <p>Ожидание прохождение скоринга от 1 до 3 дней</p>
                         <p>Мы уведомлим вас в личном кабинете о сборе всех данных</p>
@@ -531,12 +533,17 @@ export default {
     top: 50%;
     left: 50%;
     font-size: 50px;
+    color: #0345FF;
 }
 
 .scoring__item{
     position: relative;
     flex: 0 0 32.333%;
     margin: 20px 0 0  0;
+}
+
+.scoring__button{
+    padding: 17px 20px;
 }
 </style>
 

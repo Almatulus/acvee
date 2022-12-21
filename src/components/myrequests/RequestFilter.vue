@@ -96,7 +96,7 @@ import {mapActions, mapGetters} from 'vuex'
 export default {
    data:() => ({
     filter: {
-        ordering: '',
+        ordering: 'project_name',
         status: '',
         neededSum_max: ''
     },

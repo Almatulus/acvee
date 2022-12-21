@@ -7,8 +7,15 @@
                     <a id="pdf" href="http://127.0.0.1:8000/api/v1/borrower/agreement-factoring-pdf/" target="_blank" class="request-document__btn button">
                         Посмотреть документ
                     </a>
+                    <a id="pdfdownload" href="http://127.0.0.1:8000/api/v1/borrower/factoring-download/"  class="request-document__btn button">
+                            Скачать PDF
+                    </a>
+                    <!--<a href="#" class="request-document__btn button">
+                            Скачать Word
+                    </a>-->
+                    <a @click.prevent="singingTheAgreement()" href="" class="request-document__btn button request-document__btn-key">Подпись Договора через ЭЦП онлайн</a>
                 </div>
-                <div class="request-document__buttons">
+                <!--<div class="request-document__buttons">
                     <div class="request-document__buttons-top">
                         <a id="pdfdownload" href="http://127.0.0.1:8000/api/v1/borrower/factoring-download/"  class="request-document__btn button">
                             Скачать PDF
@@ -20,7 +27,7 @@
                     <a href="#" class="request-document__btn request-document__btn-share">
                         Поделится
                     </a>
-                </div>
+                </div>-->
             </div>
             <a @click.prevent="singingTheAgreement()" href="" class="request-document__btn button request-document__btn-key">Подпись Договора через ЭЦП онлайн</a>
         </div>
@@ -93,22 +100,26 @@ computed:{
 
 		&__content {
             display: flex;
-            margin: 20px 0 40px 0;
+            margin: 35px;
             background: #ffffff;
             box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
             border-radius: 10px;
-            padding: 30px 40px;
-            width: 1142px;
-            height: 555px;
+            padding: 25px 0 25px 40px;
+            width: 790px;
+            height: 200px;
 		}
 
 		&__document {
-            flex: 1 1 850px;
+            flex: 1 1 400px;
             overflow: auto;
             padding: 0 20px 0 0;
-            font-size: 70px;
+            font-size: 16px;
             scrollbar-color: #0345FF rgba(3, 69, 255, 0.6);
             scrollbar-width: thin;
+            padding: 50px 0 0 0;
+            a{
+                margin-left: 10px;
+            }
             &::-webkit-scrollbar{
                 width: 4.5px;
             }
@@ -135,7 +146,7 @@ computed:{
         }
 
 		&__btn {
-            margin: 20px 0 0 0;
+            
             color: #fff;
             padding: 20px;
             background: #0345FF;
@@ -152,7 +163,7 @@ computed:{
 
         &__btn-key{
             display: inline-block;
-            margin: 25px 0 0 0;
+            margin: 25px 0 0 82px;
         }
 }
 .button {
