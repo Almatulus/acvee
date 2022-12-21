@@ -51,7 +51,7 @@ export default {
             //this.$v.$touch()
             if(!this.$v.$error){
                 
-                axios.post('http://127.0.0.1:8000/api/v1/registr/',
+                axios.post('http://127.0.0.1:8000/api/v1/registr-profile/',
                     {
                         first_name: this.firstName,
                         second_name: this.secondName,
