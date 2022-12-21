@@ -49,7 +49,7 @@ export default {
     methods:{
         submitHandler(){
             //this.$v.$touch()
-            if(!this.$v.$error){
+            
                 
                 axios.post('http://127.0.0.1:8000/api/v1/registr-profile/',
                     {
@@ -61,7 +61,7 @@ export default {
                 then(function (response){
                     
                 })
-            }
+           
         },
         validations: {
             password: {required, minLength: minLength(8)},
