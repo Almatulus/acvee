@@ -18,7 +18,7 @@
 
 <script>
 import BorrowerNavbar from '@/components/app/BorrowerNavbar.vue'
-import Header from '@/components/app/Header.vue'
+import Header from '@/components/app/BorrowerHeader.vue'
 
 export default {
     name: 'main-layout',

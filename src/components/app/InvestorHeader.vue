@@ -8,7 +8,7 @@
                         Адилет Адилбеков
                     </div>
                     <div class="header__role">
-                        Поставщик
+                        Инвестор
                     </div>
                 </div>
             </div>

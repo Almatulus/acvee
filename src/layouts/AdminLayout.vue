@@ -16,7 +16,7 @@
 
 <script>
 import AdminNavbar from '@/components/app/AdminNavbar.vue'
-import Header from '@/components/app/Header.vue'
+import Header from '@/components/app/BorrowerHeader.vue'
 export default {
     components: {
         AdminNavbar, Header
