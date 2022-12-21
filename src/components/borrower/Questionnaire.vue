@@ -140,7 +140,7 @@
                             
                             <h3>Выручка за последние 12 месяцев</h3>
                             <div class="questionnaire__loan-revenue-content questionnaire__loan-content">
-                                <select 
+                                <!--<select 
                                     v-model="form.categoryID" 
                                     class="questionnaire__input" 
                                     type="text"
@@ -149,11 +149,12 @@
                                     <option selected value="">Категория продуктов</option>
                                     <option v-for="category in PRODUCTCATEGORIES" :key="category.id" :value="category.id">{{category.name}}</option>
                                     
-                                </select>
+                                </select>-->
                                 <input 
                                     placeholder="Выручка" 
                                     class="questionnaire__input" 
                                     type="text"
+                                    maxlength="10"
                                     v-model.trim="form.revenue"
                                     @keypress="isNumber"
                                     :class="$v.form.revenue.$error ? 'questionnaire-input-invalid' : ''"
@@ -170,6 +171,7 @@
                                     placeholder="Прибыль" 
                                     class="questionnaire__input" 
                                     type="text"
+                                    maxlength="10"
                                     v-model.trim="form.profit"
                                     @keypress="isNumber"
                                     :class="$v.form.profit.$error ? 'questionnaire-input-invalid' : ''"
@@ -188,6 +190,7 @@
                                             type="radio" 
                                             name="credit" 
                                             id="creditChoiceYes" 
+                                            maxlength="10"
                                             :value="true" 
                                             v-model.trim="form.hasCredit"
                                             :class="$v.form.hasCredit.$error ? 'questionnaire-input-invalid' : ''"
@@ -214,6 +217,7 @@
                                     placeholder="Сумма" 
                                     class="questionnaire__input" 
                                     type="text"
+                                    maxlength="10"
                                     v-model.trim="form.creditSum"
                                     @keypress="isNumber"
                                     :class="$v.form.creditSum.$error ? 'questionnaire-input-invalid' : ''"
@@ -223,6 +227,7 @@
                                     placeholder="Проценты" 
                                     class="questionnaire__input" 
                                     type="text"
+                                    maxlength="3"
                                     v-model.trim="form.creditPercent"
                                     @keypress="isNumber"
                                     :class="$v.form.creditPercent.$error ? 'questionnaire-input-invalid' : ''"
@@ -255,7 +260,8 @@
                                 <input 
                                     placeholder="Сумма" 
                                     class="questionnaire__input" 
-                                    name=""
+                                    
+                                    maxlength="10"
                                     v-model.trim="form.neededSum"
                                     @keypress="isNumber"
                                     :class="$v.form.neededSum.$error ? 'questionnaire-input-invalid' : ''"
@@ -273,7 +279,12 @@
                                     <option :value="false">Месяц</option>
                                 </select>
                             </div>
-                            <input style="margin-left: 0; margin-top: 10px;" class="questionnaire__input" v-model="form.amount" type="text">
+                            <input 
+                                style="margin-left: 0; margin-top: 10px;" 
+                                class="questionnaire__input" 
+                                v-model="form.amount" 
+                                type="text"
+                                placeholder="Срок займа">
                             <div class="questionnaire__loan-term-content questionnaire__loan-content">
                                 <!--<div>
                                     Current value: <span id="value"></span>

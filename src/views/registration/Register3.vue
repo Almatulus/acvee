@@ -55,7 +55,7 @@ export default {
                     {
                         first_name: this.firstName,
                         second_name: this.secondName,
-                        user_id: localStorage.getItem('user_id')
+                        user: localStorage.getItem('user_id')
                     }
                 ). 
                 then(function (response){

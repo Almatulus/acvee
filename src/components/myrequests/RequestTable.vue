@@ -16,7 +16,7 @@
                 </div>
                 <div class="request-description__item">
                     <div class="request-description__item-item">
-                        Необходимая сумма: {{selectedProject.get_needed_sum}} тг
+                        Необходимая сумма: {{selectedProject.needed_sum}} тг
                     </div>
                     <!--<div class="request-description__item-item">
                         Сумма: {{selectedProject.get_amount}}
@@ -27,7 +27,7 @@
                         Дата заявки: {{selectedProject.request_date}}
                     </div>
                     <div class="request-description__item-item">
-                        Срок займа: {{selectedProject.get_amount}} <span v-if="selectedProject.get_is_week == true">недель</span> <span v-if="selectedProject.get_is_week == false">месяцев</span>
+                        Срок займа: {{selectedProject.amount}} <span v-if="selectedProject.is_week == true">недель</span> <span v-if="selectedProject.is_week == false">месяцев</span>
                     </div>
                 </div>
                 <div class="request-description__item">
@@ -107,7 +107,7 @@
                         {{myproject.request_date}}
                     </div>
                     <div class="request-table__item">
-                        {{myproject.get_needed_sum}}тг
+                        {{myproject.needed_sum}}тг
                     </div>
                     <div v-if="myproject.status == 'pending'" class="request-table__item">
                         <!--{{myproject.status}}-->

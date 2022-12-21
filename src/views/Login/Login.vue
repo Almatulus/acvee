@@ -37,7 +37,8 @@
                             maxlength="16"
                             :class="$v.phone.$error ? 'invalid' : ''"
                             v-model.trim="phone"
-                            
+                            @keypress="isNumber"
+                            v-imask="phoneNumberMask" 
                             @accept="onAccept" 
                             @complete="onComplete"
                             
@@ -63,8 +64,7 @@
                         </button>
                     </div>
                 </form>
-                @keypress="isNumber"
-                v-imask="phoneNumberMask" 
+                
             </div>
         </div>
     </div>
@@ -108,6 +108,7 @@ export default {
                 this.$router.push('/')
                 axios.post('http://127.0.0.1:8000/api/v1/auth/token/login/',
                     {
+
                         phone_number: this.phone,
                         password: this.password
                     }

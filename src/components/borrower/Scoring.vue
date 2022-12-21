@@ -454,7 +454,7 @@ export default {
         }
         
         &__expectation{
-            margin: 60px 0 0 0;
+            margin: 60px 0;
             p{
                 &:first-child{
                     font-weight: 600;

@@ -17,12 +17,12 @@
             <div v-if="this.showDescription == true" class="request-description">
                 <div class="request-description__inner">
                     <h2 class="request-description__title">
-                        {{selectedProject.get_name}}
+                        {{selectedProject.name}}
                     </h2>
                     <div class="request-description__content">
                         <div class="request-description__item">
                             <div class="request-description__item-item">
-                                № запроса: {{selectedProject.get_request_number}}
+                                № запроса: {{selectedProject.request_number}}
                             </div>
                             <div class="request-description__item-item">
                                 № договора: {{selectedProject.id}}
@@ -34,7 +34,7 @@
                                 Дата заявки: {{selectedProject.create_date}}
                             </div>
                             <div class="request-description__item-item">
-                                Статус: {{selectedProject.get_status}}
+                                Статус: {{selectedProject.status}}
                             </div>
                         </div>
                     </div>
@@ -82,19 +82,19 @@
                         </div>
                         <div v-for="myproject in MYPROJECTS" :key="myproject.id" class="request-table__row request-table__data" @click.prevent ="activeEl = myproject, updateDescription(myproject)" :class="{'active-el': activeEl === myproject}">
                             <div class="request-table__item">
-                                {{myproject.get_request_number}}
+                                {{myproject.request_number}}
                             </div>
                             <div class="request-table__item">
                                 {{myproject.id}}
                             </div>
                             <div class="request-table__item">
-                                {{myproject.get_name}}
+                                {{myproject.name}}
                             </div>
                             <div class="request-table__item">
                                 {{myproject.create_date}}
                             </div>
                             <div class="request-table__item">
-                                {{myproject.get_status}}
+                                {{myproject.status}}
                             </div>
                             <div v-if="myproject.status == 'pending'" class="request-table__item">
                                 <!--{{myproject.status}}-->

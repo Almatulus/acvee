@@ -107,8 +107,10 @@
                         <br>
                         <input v-model="form.investment_sum" type="text"
                         class="investor-questionnaire__form-input"
-                        placeholder="Сумма инвестирования">
-
+                        placeholder="Сумма инвестирования"
+                        maxlength="10"
+                        @keypress="isNumber">
+                        
                         <br>
 
                         <input 
@@ -118,6 +120,7 @@
                         v-model.trim="form.desired_sum"
                         :class="$v.form.desired_sum.$error ? 'invalid' : ''"
                         @keypress="isNumber"
+                        maxlength="10"
                         >
                         <p v-if="$v.form.desired_sum.$dirty && !$v.form.desired_sum.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                     </div>
