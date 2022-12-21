@@ -8,19 +8,19 @@
                 <h2>{{ title }}</h2>
                 <form @submit.prevent="submitHandler" class="authentication-template__form" action="">
                     <div class="authentication-template__form-item">
-                        <p>Пароль</p>
+                        <p>Имя</p>
                         <input 
-                        type="password"
-                        v-model.trim="password"
+                        type="text"
+                        v-model.trim="firstName"
                         
                         >
                         
                     </div>
                     <div class="authentication-template__form-item">
-                        <p>Повторите пароль</p>
+                        <p>Фамилия</p>
                         <input 
-                        type="password"
-                        v-model.trim="repeatPassword"
+                        type="text"
+                        v-model.trim="secondName"
                         
                         >
                        
@@ -41,11 +41,10 @@
 import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 export default {
     data: () => ({
-        name: 'registration2',
         title: 'Регистрация',
         buttonText: 'Далее',
-            password: '',
-            repeatPassword: ''
+        firstName: '',
+        secondName: ''
     }),
     methods:{
         submitHandler(){
@@ -54,19 +53,13 @@ export default {
                 
                 axios.post('http://127.0.0.1:8000/api/v1/registr/',
                     {
-                        phone_number: localStorage.getItem('phone'),
-                        user_type: localStorage.getItem('userType'),
-                    
-                
-                        password: this.password,
-                        password2: this.repeatPassword
+                        first_name: this.firstName,
+                        second_name: this.secondName,
+                        user_id: localStorage.getItem('user_id')
                     }
                 ). 
                 then(function (response){
-                    localStorage.removeItem('phone')
-                    console.log(response.data.user_id)
-                    console.log(localStorage.getItem('userType'))
-                    this.$router.push('/register/2')
+                    
                 })
             }
         },
@@ -79,5 +72,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    
+
 </style>

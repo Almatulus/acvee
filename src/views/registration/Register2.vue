@@ -65,12 +65,12 @@ export default {
                 
                         password: this.password,
                         password2: this.repeatPassword,
-                        //this.$router.push('/register/3')
+                        
                     }
                 ). 
                 then((response) => {
                     localStorage.removeItem('phone')
-                    console.log(response.data.user_id)
+                    localStorage.setItem('user_id', response.data)
                     console.log(localStorage.getItem('userType'))
                     this.$router.push('/register/3')
                 })
