@@ -68,7 +68,7 @@ export default {
                         //this.$router.push('/register/3')
                     }
                 ). 
-                then(function (response){
+                then((response) => {
                     localStorage.removeItem('phone')
                     console.log(response.data.user_id)
                     console.log(localStorage.getItem('userType'))
