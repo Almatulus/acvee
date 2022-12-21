@@ -3,7 +3,7 @@
         <div class="authentication-template__inner">
             <div class="authentication-template__content">
                 <div class="authentication-template__form-stage">
-                    Этап 2 из 2
+                    Этап 2 из 3
                 </div>
                 <h2>{{ title }}</h2>
                 <form @submit.prevent="submitHandler" class="authentication-template__form" action="">
@@ -48,7 +48,7 @@ export default {
     data: () => ({
         name: 'registration2',
         title: 'Регистрация',
-        buttonText: 'Зарегистрироваться',
+        buttonText: 'Далее',
             password: '',
             repeatPassword: ''
     }),
@@ -64,14 +64,15 @@ export default {
                     
                 
                         password: this.password,
-                        password2: this.repeatPassword
+                        password2: this.repeatPassword,
+                        //this.$router.push('/register/3')
                     }
                 ). 
                 then(function (response){
                     localStorage.removeItem('phone')
-                    console.log(response)
+                    console.log(response.data.user_id)
                     console.log(localStorage.getItem('userType'))
-                    this.$router.push('/register/2')
+                    this.$router.push('/register/3')
                 })
             }
         }

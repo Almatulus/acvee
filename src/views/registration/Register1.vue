@@ -3,7 +3,7 @@
         <div class="authentication-template__inner">
             <div class="authentication-template__content">
                 <div class="authentication-template__form-stage">
-                    Этап 1 из 2
+                    Этап 1 из 3
                 </div>
                 <h2>{{ title }}</h2>
                 <form @submit.prevent="submitHandler" class="authentication-template__form" action="">

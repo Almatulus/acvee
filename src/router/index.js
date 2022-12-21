@@ -35,6 +35,12 @@ const routes = [
     component: () => import('../views/registration/Register3.vue')
   },
   {
+    path: '/register/4',
+    name: 'register-4',
+    meta: {layout: 'auth'},
+    component: () => import('../views/registration/Register4.vue')
+  },
+  {
     path: '/myrequest',
     name: 'myrequest',
     meta: {layout: 'borrower'},
