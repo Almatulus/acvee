@@ -14,7 +14,8 @@ export default new Vuex.Store({
     projectStatus: {},
     adminProjects: [],
     projectStages: [],
-    projectStagesInfo: {}
+    projectStagesInfo: {},
+    projectFinancingInfo: []
   },
   getters: {
     COUNTRIES(state){
