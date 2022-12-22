@@ -2,8 +2,8 @@
     <div class="stages">
         <div class="stages__inner">
             <h2>Финансы</h2>
-            <p class="">Сумма Финансирования: <span>{{PROJECTSTAGESINFO.funding_term}}</span></p>
-            <p class="">Срок финансирования: <span>{{PROJECTSTAGESINFO.get_needed_sum}}</span></p>
+            <p class="">Сумма Финансирования: <span>{{funding_term}}</span></p>
+            <p class="">Срок финансирования: <span>{{needed_sum}}</span></p>
             <div class="stages__documents">
             
             </div>
@@ -21,6 +21,10 @@
 <script>
 import {mapActions, mapGetters} from 'vuex'
 export default {
+    data: () => ({
+        funding_term: '',
+        needed_sum: ''
+    }),
     computed: {
         ...mapGetters([
             'PROJECTSTAGES',
@@ -30,7 +34,23 @@ export default {
     },
     mounted(){
         this.GET_PROJECTSTAGES_FROM_API(),
-        this.GET_PROJECTSTAGESINFO_FROM_API(this.PROJECTSTATUS)
+        this.GET_PROJECTSTAGESINFO_FROM_API(this.PROJECTSTATUS),
+        axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/borrower/stage/' + localStorage.getItem('userID'),
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+        )
+        .then((response) => {
+            console.log(response)
+            this.funding_term = response.data.funding_term
+            this.needed_sum = response.data.needed_sum
+        }) 
+
+        
     },
     methods:{
         ...mapActions([

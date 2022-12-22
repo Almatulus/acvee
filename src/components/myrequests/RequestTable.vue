@@ -1,6 +1,5 @@
 <template>
 <div class="">
-    {{}}
     <div v-if="this.showDescription == true" class="request-description">
         <div class="request-description__inner">
             <h2 class="request-description__title">
@@ -156,16 +155,13 @@ export default {
         makeActive: function(item){
             this.active = item;
         },
-        console(){
-            console.log(this.MYPROJECTS)
-        },
         updateDescription(selectedProject){
             this.selectedProject = selectedProject
             this.showDescription = true
             localStorage.setItem('userID', JSON.stringify(selectedProject.id))
             console.log('локалстораге',localStorage.getItem('userID'))
-            this.GET_PROJECTSTATUS_TO_VUEX(this.selectedProject.id),
-            this.GET_PROJECTSTAGESINFO_FROM_API(this.PROJECTSTATUS)
+            //this.GET_PROJECTSTATUS_TO_VUEX(this.selectedProject.id),
+            //this.GET_PROJECTSTAGESINFO_FROM_API(this.PROJECTSTATUS)
             
         },
         sortProjectsBySearchValue(value){

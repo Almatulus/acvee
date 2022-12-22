@@ -115,7 +115,8 @@
                             <tr v-for="shipment in shipmentsData" :key="shipment.id">
                                     <td>{{shipment.purchase_price}}</td>
                                     <td>{{shipment.selling_price}}</td>
-                                    <td>{{shipment.shipped}}</td>
+                                    <td>{{shipment.shipped_amount}}</td>
+                                    <td>{{shipment.shipped_sum}}</td>
                                     <td>{{shipment.cargo_receiver}}</td>
                                     <td>{{shipment.TTH}}</td>
                                     <td>{{shipment.account_number}}</td>
