@@ -4,7 +4,7 @@
         />
         <div class="app__content">
             <div class="app__page">
-                <InvestorHeader/>
+                <BorrowerHeader/>
                 <div class="app__view">
                     <router-view />
                 </div>
@@ -15,7 +15,7 @@
 
 <script>
 import InvestorNavbar from '@/components/app/InvestorNavbar.vue'
-import InvestorHeader from '@/components/app/InvestorHeader.vue'
+import BorrowerHeader from '@/components/app/BorrowerHeader.vue'
 
 export default {
     data: () => ({
@@ -25,7 +25,7 @@ export default {
         ]
     }),
     components:{
-        InvestorNavbar, InvestorHeader
+        InvestorNavbar, BorrowerHeader
     },
 }
 </script>
