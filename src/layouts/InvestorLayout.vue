@@ -15,7 +15,7 @@
 
 <script>
 import InvestorNavbar from '@/components/app/InvestorNavbar.vue'
-import BorrowerHeader from '@/components/app/BorrowerHeader.vue'
+import BorrowerHeader from '@/components/app/Header.vue'
 
 export default {
     data: () => ({
