@@ -5,9 +5,12 @@
                 <img src="../../assets/img/icons/413-4139803_unknown-profile-profile-picture-unknown.jpg" alt="avatar" class="header__avatar">
                 <div class="header__data">
                     <div class="header__name">
-                        Адилет Адилбеков
+                        {{userName}}
                     </div>
-                    <div class="header__role">
+                    <div v-if="userType == 'investor'" class="header__role">
+                        Инвестор
+                    </div>
+                    <div v-if="userType == 'borrower'" class="header__role">
                         Заемщик
                     </div>
                 </div>
@@ -27,15 +30,24 @@
 
 <script>
 export default {
+    data: () => ({
+        userName: '',
+        userType: ''
+    }),
     mounted(){
         axios(
                 {
                     method: 'GET',
                     url: 'http://127.0.0.1:8000/api/v1/current-user/',
-                }
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
         )
-        .then(function(response){
+        .then((response) => {
             console.log(response)
+            this.userName = response.data.full_name
+            this.userType = response.data.user_type
         }) 
 
         
