@@ -1,6 +1,6 @@
 <template>
 <div class="">
-    {{this.PROJECTSTATUS}}
+    {{}}
     <div v-if="this.showDescription == true" class="request-description">
         <div class="request-description__inner">
             <h2 class="request-description__title">
@@ -162,8 +162,10 @@ export default {
         updateDescription(selectedProject){
             this.selectedProject = selectedProject
             this.showDescription = true
+            //localStorage.setItem('userID', JSON.stringify(selectedProject.id))
             this.GET_PROJECTSTATUS_TO_VUEX(this.selectedProject.id),
             this.GET_PROJECTSTAGESINFO_FROM_API(this.PROJECTSTATUS)
+            
         },
         sortProjectsBySearchValue(value){
             this.sortedProjects = [...this.MYPROJECTS]
