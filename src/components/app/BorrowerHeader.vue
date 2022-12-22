@@ -24,3 +24,21 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    mounted(){
+        axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/current-user/',
+                }
+        )
+        .then(function(response){
+            console.log(response)
+        }) 
+
+        
+    }
+}
+</script>
