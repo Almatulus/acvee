@@ -55,31 +55,18 @@
                                     <th>Источник средств</th>
                                     <th>Остаток долга</th>
                                     <th>Статус долга</th>
-                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2800</td>
-                                    <td>300</td>
-                                    <td>15.12.22</td>
-                                    <td>С продажи товара ТТН </td>
-                                    <td>2500</td>
-                                    <td>Открыт</td>
-                                    
-                                    
+                                <tr v-for="finance in financingData" :key="finance.id">
+                                    <td>{{finance.debt_amount}}</td>
+                                    <td>{{finance.income_amount}}</td>
+                                    <td>{{finance.date}}</td>
+                                    <td>{{finance.source_of_funds}}</td>
+                                    <td>{{finance.balance_owed}}</td>
+                                    <td v-if="finance.debt_status == true">открыт</td>
+                                    <td v-if="finance.debt_status == false">закрыт</td>
                                 </tr>
-                                <tr>
-                                    <td>2800</td>
-                                    <td>300</td>
-                                    <td>15.12.22</td>
-                                    <td>С продажи товара ТТН </td>
-                                    <td>2500</td>
-                                    <td>Открыт</td>
-                                    
-                                    
-                                </tr>
-                                
                             </tbody>
                         </table>
                     </div>
@@ -97,18 +84,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>у9127у129у7298</td>
-                                <td>Полотенца бумажные для рук</td>
-                                <td>100</td>
-                                <td>уп</td>
-                                <td>300</td>
-                                <td>14.12.22</td>
-                                <td>240</td>
-                                <td>100</td>
-                                
-                            </tr>
-                            
+                            <tr v-for="warehouse in warehouseData" :key="warehouse.id">
+                                    <td>{{warehouse.vendor_code}}</td>
+                                    <td>{{warehouse.product_name}}</td>
+                                    <td>{{warehouse.product_price}}</td>
+                                    <td>{{warehouse.unit}}</td>
+                                    <td>{{warehouse.amount}}</td>
+                                    <td>{{warehouse.date}}</td>
+                                    <td>{{warehouse.stock_balance}}</td>
+                                    <td>{{warehouse.price}}</td>
+                                </tr>
                         </tbody>
                     </table>
                     <table v-if="shipments == true" class="table">
@@ -127,30 +112,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>100</td>
-                                <td>Полотенца бумажные для рук</td>
-                                <td>140</td>
-                                <td>40</td>
-                                <td>300</td>
-                                <td>2800</td>
-                                <td>240</td>
-                                <td>100</td>
-                                <td>100</td>
-                                <td>100</td>
-                            </tr>
-                            <tr>
-                                <td>100</td>
-                                <td>130</td>
-                                <td>100</td>
-                                <td>20</td>
-                                <td>300</td>
-                                <td>5200</td>
-                                <td>240</td>
-                                <td>100</td>
-                                <td>100</td>
-                                <td>100</td>
-                            </tr>
+                            <tr v-for="shipment in shipmentsData" :key="shipment.id">
+                                    <td>{{shipment.purchase_price}}</td>
+                                    <td>{{shipment.selling_price}}</td>
+                                    <td>{{shipment.shipped}}</td>
+                                    <td>{{shipment.cargo_receiver}}</td>
+                                    <td>{{shipment.TTH}}</td>
+                                    <td>{{shipment.account_number}}</td>
+                                    <td>{{shipment.funds_received}}</td>
+                                    <td>{{shipment.fulfilment_commission}}</td>
+                                    <td>{{shipment.earnings}}</td>
+                                </tr>
                         </tbody>
                     </table>
                     <table v-if="earnings == true" class="table">
@@ -164,12 +136,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1234567</td>
-                                <td>2800</td>
-                                <td>0,08</td>
-                                <td>2799,92</td>
-                            </tr>
+                            <tr v-for="earning in earningsData" :key="earning.id">
+                                    <td>{{earning.TTH}}</td>
+                                    <td>{{earning.shipping_receipt_amount}}</td>
+                                    <td>{{earning.fullfilment_commission}}</td>
+                                    <td>{{earning.earning}}</td>
+                                </tr>
                             
                         </tbody>
                     </table>
@@ -188,7 +160,10 @@ export default {
         warehouse: false,
         shipments: false,
         earnings: false,
-
+        financingData: [],
+        warehouseData: [],
+        shipmentsData: [],
+        earningsData: []
     }),
     methods:{
         makeActive: function(item){
@@ -199,14 +174,18 @@ export default {
         axios(
                 {
                     method: 'GET',
-                    url: 'http://127.0.0.1:8000/api/v1/current-user/' + localStorage.getItem('userID'),
+                    url: 'http://127.0.0.1:8000/api/v1/borrower/financing/' + localStorage.getItem('userID'),
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken')
                     }
                 },
         )
         .then((response) => {
-            
+            this.financingData = response.data.finance
+            this.warehouseData = response.data.warehouse
+            this.shipmentsData = response.data.shipment
+            this.earningsData = response.data.earning
+            console.log(response.data)
         }) 
     }
 }
