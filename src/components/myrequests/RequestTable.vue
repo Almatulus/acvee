@@ -163,7 +163,7 @@ export default {
             this.selectedProject = selectedProject
             this.showDescription = true
             localStorage.setItem('userID', JSON.stringify(selectedProject.id))
-            
+            console.log('локалстораге',localStorage.getItem('userID'))
             this.GET_PROJECTSTATUS_TO_VUEX(this.selectedProject.id),
             this.GET_PROJECTSTAGESINFO_FROM_API(this.PROJECTSTATUS)
             

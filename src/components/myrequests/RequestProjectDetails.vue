@@ -187,12 +187,27 @@ export default {
         financing: false,
         warehouse: false,
         shipments: false,
-        earnings: false
+        earnings: false,
+
     }),
     methods:{
         makeActive: function(item){
             this.active = item;
         },
+    },
+    mounted(){
+        axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/current-user/' + localStorage.getItem('userID'),
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+        )
+        .then((response) => {
+            
+        }) 
     }
 }
 </script>
