@@ -1,8 +1,8 @@
 <template>
     <div id="sidebar" class="sidebar"  >
         <a class="sidebar__logo">
-            <img src="" alt="logo">
-            <div class="sidebar__text">Logo</div>
+            <img src="../../assets/acvee-auth-logo.svg" alt="logo">
+            <div class="sidebar__text">Acvee</div>
         </a>
         <nav class="sidebar__body">
             <ul>
