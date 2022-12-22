@@ -185,21 +185,7 @@ export default new Vuex.Store({
           
       })
     },
-    GET_PROJECTSTAGESINFO_FROM_API({commit}, value) {
-      return axios('http://127.0.0.1:8000/api/v1/borrower/stage/' + value, {
-          method: "GET",
-          //params: {id: value},
-          headers:{
-            Authorization: 'Token ' + localStorage.getItem('usertoken')
-          }
-      })
-      .then((projectStages) => {
-          commit('SET_PROJECTSTAGESINFO_TO_STATE', projectStages.data)
-          console.log(projectStages)
-          return projectStages
-          
-      })
-    },
+    
     
   },
   modules: {

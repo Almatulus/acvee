@@ -9,7 +9,7 @@
             </div>
             <h2 style="margin: 30px 0 0 0;">Статус проекта</h2>
             <template v-for="(stage, index) in PROJECTSTAGES" >
-                <p v-if="index < PROJECTSTAGESINFO.stage" class="active-stage" :key="stage.id" >{{stage.step}}. {{stage.stage_name}} V</p> 
+                <p v-if="index < project_stage" class="active-stage" :key="stage.id" >{{stage.step}}. {{stage.stage_name}} &#10003;</p> 
                 <p v-else :key="stage.id" >{{stage.step}}. {{stage.stage_name}}</p>
             </template>
             
@@ -23,7 +23,8 @@ import {mapActions, mapGetters} from 'vuex'
 export default {
     data: () => ({
         funding_term: '',
-        needed_sum: ''
+        needed_sum: '',
+        project_stage: ''
     }),
     computed: {
         ...mapGetters([
@@ -34,7 +35,6 @@ export default {
     },
     mounted(){
         this.GET_PROJECTSTAGES_FROM_API(),
-        this.GET_PROJECTSTAGESINFO_FROM_API(this.PROJECTSTATUS),
         axios(
                 {
                     method: 'GET',
@@ -48,14 +48,14 @@ export default {
             console.log(response)
             this.funding_term = response.data.funding_term
             this.needed_sum = response.data.needed_sum
+            this.project_stage = response.data.stage
         }) 
 
         
     },
     methods:{
         ...mapActions([
-            'GET_PROJECTSTAGES_FROM_API',
-            'GET_PROJECTSTAGESINFO_FROM_API'
+            'GET_PROJECTSTAGES_FROM_API'
         ]),
     }
 }

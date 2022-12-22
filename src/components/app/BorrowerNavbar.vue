@@ -17,13 +17,6 @@
                     </a>
                 </router-link>
             </ul>
-            <ul>
-                <router-link v-for="link in menu" :key="link.name" tag="li" active-class="active" to="link.url" >
-                    <a href="" class="sidebar__link" :class="link.menuClass">
-                        <span>{{link.name}}</span>
-                    </a>
-                </router-link>
-            </ul>
         </nav>
     </div>
 </template>
