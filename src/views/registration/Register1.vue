@@ -19,6 +19,7 @@
                                 <label for="Investor">Инвестор</label>
                             </div>
                         </div>
+                        <p v-if="$v.user_type.$dirty && !$v.user_type.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                     </div>
                     <div class="authentication-template__form-item">
                         <p>Номер телефона</p>
@@ -110,7 +111,8 @@ export default {
     },
     validations: {      
         phone: {required, minLength: minLength(16)},
-        sms: {required}
+        sms: {required},
+        user_type: {required}
     },
     directives: {
         imask: IMaskDirective
