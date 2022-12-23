@@ -112,6 +112,8 @@ export default {
             //a.href = a.href + String(this.PROJECTSTATUS) + '/'
                 //a.href = a.href + response.data.ABPConfirm
                 this.IDCard = response.data.IDCard
+                var IDCard = document.getElementById('IDCard')
+                IDCard.href =  this.IDCard
                 console.log(response.data.IDCard)
             })
     },
