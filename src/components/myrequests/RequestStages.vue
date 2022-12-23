@@ -2,8 +2,8 @@
     <div class="stages">
         <div class="stages__inner">
             <h2>Финансы</h2>
-            <p class="">Сумма Финансирования: <span>{{funding_term}}</span></p>
-            <p class="">Срок финансирования: <span>{{needed_sum}}</span></p>
+            <p class="">Сумма Финансирования: <span>{{needed_sum}}</span></p>
+            <p class="">Срок финансирования: <span>{{funding_term}}</span></p>
             <div class="stages__documents">
             
             </div>
