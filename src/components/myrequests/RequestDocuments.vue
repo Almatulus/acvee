@@ -167,35 +167,35 @@ export default {
 
                 this.DownloadRegistrationCertificate = response.data.registrationCertificate
                 var DownloadRegistrationCertificate = document.getElementById('DownloadRegistrationCertificate')
-                DownloadRegistrationCertificate.href =  this.DownloadRegistrationCertificate
+                DownloadRegistrationCertificate.href = 'http://127.0.0.1:8000' + this.DownloadRegistrationCertificate
 
                 this.DownloadContractSale = response.data.contractSale
                 var DownloadContractSale = document.getElementById('DownloadContractSale')
-                DownloadContractSale.href =  this.DownloadContractSale
+                DownloadContractSale.href = 'http://127.0.0.1:8000' + this.DownloadContractSale
 
                 this.DownloadPurchaseAgreement = response.data.purchaseAgreement
                 var DownloadPurchaseAgreement = document.getElementById('DownloadPurchaseAgreement')
-                DownloadPurchaseAgreement.href =  this.DownloadPurchaseAgreement
+                DownloadPurchaseAgreement.href = 'http://127.0.0.1:8000' + this.DownloadPurchaseAgreement
 
                 this.DownloadABPConfirm = response.data.ABPConfirm
                 var DownloadABPConfirm = document.getElementById('DownloadABPConfirm')
-                DownloadABPConfirm.href =  this.DownloadABPConfirm
+                DownloadABPConfirm.href = 'http://127.0.0.1:8000' + this.DownloadABPConfirm
                 
                 this.DownloadInvoice = response.data.invoice
                 var DownloadInvoice = document.getElementById('invoice')
-                DownloadInvoice.href =  this.DownloadInvoice
+                DownloadInvoice.href = 'http://127.0.0.1:8000' + this.DownloadInvoice
 
                 this.DownloadFirstAct = response.data.firstAct
                 var DownloadFirstAct = document.getElementById('DownloadFirstAct')
-                DownloadFirstAct.href =  this.DownloadFirstAct
+                DownloadFirstAct.href = 'http://127.0.0.1:8000' + this.DownloadFirstAct
                 
                 this.DownloadSecondAct = response.data.secondAct
                 var DownloadSecondAct = document.getElementById('DownloadSecondAct')
-                DownloadSecondAct.href =  this.DownloadSecondAct
+                DownloadSecondAct.href = 'http://127.0.0.1:8000' + this.DownloadSecondAct
 
                 this.DownloadThirdAct = response.data.thirdAct
                 var DownloadThirdAct = document.getElementById('DownloadThirdAct')
-                DownloadThirdAct.href =  this.DownloadThirdAct
+                DownloadThirdAct.href = 'http://127.0.0.1:8000' + this.DownloadThirdAct
             })
     },
 }
