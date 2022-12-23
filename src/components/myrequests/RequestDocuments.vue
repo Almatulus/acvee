@@ -117,15 +117,8 @@ export default {
     },
     methods:{
         getIDCardAPI(){
-            axios(
-                {
-                    method: 'GET',
-                    url: this.IDCard,
-                    headers:{
-                        Authorization: 'Token ' + localStorage.getItem('usertoken')
-                    }
-                },
-            )
+            var IDCard = document.getElementById('IDCard')
+            IDCard.href = this.IDCard
         }
     }
 }
