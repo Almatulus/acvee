@@ -84,7 +84,10 @@ export default new Vuex.Store({
   actions: {
     GET_COUNTRIES_FROM_API({commit}) {
         return axios('http://127.0.0.1:8000/api/v1/borrower/countries/', {
-            method: "GET"
+            method: "GET",
+            headers:{
+              Authorization: 'Token ' + localStorage.getItem('usertoken')
+            }
         })
         .then((countries) => {
             commit('SET_COUNTRIES_TO_STATE', countries.data)
@@ -93,7 +96,10 @@ export default new Vuex.Store({
     },
     GET_PRODUCTCATEGORIES_FROM_API({commit}) {
         return axios('http://127.0.0.1:8000/api/v1/borrower/category/', {
-            method: "GET"
+            method: "GET",
+            headers:{
+              Authorization: 'Token ' + localStorage.getItem('usertoken')
+          }
         })
         .then((productCategories) => {
             commit('SET_PRODUCTCATEGORIES_TO_STATE', productCategories.data)
