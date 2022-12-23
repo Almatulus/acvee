@@ -41,28 +41,17 @@ export default {
  components: {
     VueDocPreview
 },
-data: () => ({
-    type: 'doc',
-    url: 'https://static-1252421604.cos.ap-guangzhou.myqcloud.com/vdp.docx'
-}),
 mounted() {
     getTagA:{
         var a = document.getElementById('pdf')
-        a.href = a.href + String(this.PROJECTSTATUS) + '/'
+        //a.href = a.href + String(this.PROJECTSTATUS) + '/'
+        a.href = a.href + localStorage.getItem('userID')
         var b = document.getElementById('pdfdownload')
-        b.href = b.href + String(this.PROJECTSTATUS) + '/'
+        b.href = b.href + localStorage.getItem('userID')
+        //b.href = b.href + String(this.PROJECTSTATUS) + '/'
     }
 },
 methods:{
-    openFilePDF(){
-        axios({
-            method: "GET",
-            url: 'http://127.0.0.1:8000/api/v1/borrower/agreement-factoring-pdf/'
-        }).then(function(response){
-            //console.log(response)
-            window.open(response)
-        })
-    },
     singingTheAgreement(){
         axios.post( 'http://127.0.0.1:8000/api/v1/borrower/signing/', 
                 {

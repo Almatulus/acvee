@@ -2,7 +2,7 @@
     <div id="sidebar" class="sidebar"  >
         <a class="sidebar__logo">
             <img src="../../assets/acvee-auth-logo.svg" alt="logo">
-            <div class="sidebar__text">Acvee</div>
+            <!--<div class="sidebar__text">Acvee</div>-->
         </a>
         <nav class="sidebar__body">
             <ul>

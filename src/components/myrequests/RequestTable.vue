@@ -125,7 +125,7 @@
                     <div v-if="myproject.status == 'approved'" class="request-table__item">
                         <!--{{myproject.status}}-->
                         
-                        <router-link class="request-table__details-link" :to="{name: 'myrequest-project-details', params: {id: myproject.id}}">Посмотреть детали</router-link>
+                        <router-link class="request-table__details-link" tag="a" @click="localStorage.setItem('userID', myproject.id)" :to="{name: 'myrequest-project-details', params: {id: myproject.id}}">Посмотреть детали</router-link>
                     </div>
                 </div>
             </div>

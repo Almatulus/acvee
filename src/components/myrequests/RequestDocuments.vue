@@ -19,7 +19,7 @@
                         Удостоверение личности
                     </div>
                     <div class="">
-                        <a href="">Посмотреть документ</a>
+                        <a @click="getIDCardAPI()" target="_blank" href="">Посмотреть документ</a>
                     </div>
                     <div class="">
                         <a href="">Скачать документ</a>
@@ -83,11 +83,53 @@
                         <a href="">Скачать документ</a>
                     </div>
                 </div>
-                
+                {{IDCard}}
             </div>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data: () => ({
+        IDCard: '',
+        ABPConfirm: ''
+    }),
+    mounted() {
+        axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/borrower/documents/' + localStorage.getItem('userID'),
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+            )
+            .then((response) => {
+                console.log('документы',response)
+                //this.ABPConfirm = response.data.ABPConfirm
+                //var a = document.getElementById('ABPConfirm')
+            //a.href = a.href + String(this.PROJECTSTATUS) + '/'
+                //a.href = a.href + response.data.ABPConfirm
+                this.IDCard = response.data.IDCard
+                console.log(response.data.IDCard)
+            })
+    },
+    methods:{
+        getIDCardAPI(){
+            axios(
+                {
+                    method: 'GET',
+                    url: this.IDCard,
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+            )
+        }
+    }
+}
+</script>
 
 <style lang="scss" scoped>
 .request-documents {
