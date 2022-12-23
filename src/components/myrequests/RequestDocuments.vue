@@ -105,7 +105,28 @@
                         <a id="DownloadFirstAct" href="">Скачать документ</a>
                     </div>
                 </div>
-                {{DownloadABPConfirm}}
+                <div v-if="DownloadSecondAct !== null" class="request-documents__item">
+                    <div class="">
+                        Акт №2
+                    </div>
+                    <!--<div class="">
+                        <a href="">Посмотреть документ</a>
+                    </div>-->
+                    <div class="">
+                        <a id="DownloadSecondAct" href="">Скачать документ</a>
+                    </div>
+                </div>
+                <div v-if="DownloadThirdAct !== null" class="request-documents__item">
+                    <div class="">
+                        Акт №3
+                    </div>
+                    <!--<div class="">
+                        <a href="">Посмотреть документ</a>
+                    </div>-->
+                    <div class="">
+                        <a id="DownloadThirdAct" href="">Скачать документ</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -120,8 +141,9 @@ export default {
         DownloadContractSale: '',
         DownloadPurchaseAgreement: '',
         DownloadFirstAct: '',
-        DownloadInvoice: ''
-        
+        DownloadInvoice: '',
+        DownloadSecondAct: '',
+        DownloadThirdAct: ''
     }),
     mounted() {
         axios(
@@ -167,7 +189,13 @@ export default {
                 var DownloadFirstAct = document.getElementById('DownloadFirstAct')
                 DownloadFirstAct.href =  this.DownloadFirstAct
                 
-                
+                this.DownloadSecondAct = response.data.secondAct
+                var DownloadSecondAct = document.getElementById('DownloadSecondAct')
+                DownloadSecondAct.href =  this.DownloadSecondAct
+
+                this.DownloadThirdAct = response.data.thirdAct
+                var DownloadThirdAct = document.getElementById('DownloadThirdAct')
+                DownloadThirdAct.href =  this.DownloadThirdAct
             })
     },
 }

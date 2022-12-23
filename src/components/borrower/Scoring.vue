@@ -153,7 +153,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input name="secondAct" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
+                                            <input name="secondAct" class="document__send" type="file" id="file" ref="file" :value="null"  v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -173,7 +173,7 @@
                                 <div class="document">
                                     <div v-if="showActThree" class="document__inner">
                                         <label>+ Добавить документ
-                                            <input name="thirdAct" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
+                                            <input name="thirdAct" class="document__send" type="file" id="file" ref="file" :value="null"  v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
