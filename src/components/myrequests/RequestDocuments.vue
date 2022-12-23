@@ -7,9 +7,9 @@
                     <div class="">
                         Название документа
                     </div>
-                    <div class="">
+                    <!--<div class="">
                         Просмотр документа
-                    </div>
+                    </div>-->
                     <div class="">
                         Скачивание документа
                     </div>
@@ -18,44 +18,66 @@
                     <div class="">
                         Удостоверение личности
                     </div>
+                    <!--<div class="">
+                        <a target="_blank" href="">Посмотреть документ</a>
+                    </div>-->
                     <div class="">
-                        <a @click="getIDCardAPI()" target="_blank" href="">Посмотреть документ</a>
-                    </div>
-                    <div class="">
-                        <a href="">Скачать документ</a>
+                        <a id="DownloadIDCard" href="">Скачать документ</a>
                     </div>
                 </div>
                 <div class="request-documents__item">
                     <div class="">
-                        Поставщик – Конечный клиент 
+                        Справка регистрации ТОО или ИП
                     </div>
+                    <!--<div class="">
+                        <a target="_blank" href="">Посмотреть документ</a>
+                    </div>-->
                     <div class="">
+                        <a id="DownloadRegistrationCertificate" href="">Скачать документ</a>
+                    </div>
+                </div>
+                <div class="request-documents__item">
+                    <div class="">
+                        Договор реализации товара
+                    </div>
+                    <!--<div class="">
                         <a href="">Посмотреть документ</a>
-                    </div>
+                    </div>-->
                     <div class="">
-                        <a href="">Скачать документ</a>
+                        <a id="DownloadContractSale" href="">Скачать документ</a>
                     </div>
                 </div>
                 <div class="request-documents__item">
                     <div class="">
                          Договор закупа с производителем\дистрибьютером 
                     </div>
-                    <div class="">
+                    <!--<div class="">
                         <a href="">Посмотреть документ</a>
-                    </div>
+                    </div>-->
                     <div class="">
-                        <a href="">Скачать документ</a>
+                        <a id="DownloadPurchaseAgreement" href="">Скачать документ</a>
                     </div>
                 </div>
                 <div class="request-documents__item">
                     <div class="">
                         Счет на оплату / Invoice 
                     </div>
-                    <div class="">
+                    <!--<div class="">
                         <a href="">Посмотреть документ</a>
-                    </div>
+                    </div>-->
                     <div class="">
-                        <a href="">Скачать документ</a>
+                        <a id="invoice" href="">Скачать документ</a>
+                    </div>
+                </div>
+                <div class="request-documents__item">
+                    <div class="">
+                        Электронная счет фактура
+                    </div>
+                    <!--<div class="">
+                        <a href="">Посмотреть документ</a>
+                    </div>-->
+                    <div class="">
+                        <a id="DownloadABPConfirm" href="">Скачать документ</a>
                     </div>
                 </div>
             </div>
@@ -65,9 +87,9 @@
                     <div class="">
                         Название документа
                     </div>
-                    <div class="">
+                    <!--<div class="">
                         Просмотр документа
-                    </div>
+                    </div>-->
                     <div class="">
                         Скачивание документа
                     </div>
@@ -76,14 +98,14 @@
                     <div class="">
                         Акт №1
                     </div>
-                    <div class="">
+                    <!--<div class="">
                         <a href="">Посмотреть документ</a>
-                    </div>
+                    </div>-->
                     <div class="">
-                        <a href="">Скачать документ</a>
+                        <a id="DownloadFirstAct" href="">Скачать документ</a>
                     </div>
                 </div>
-                {{IDCard}}
+                {{DownloadABPConfirm}}
             </div>
         </div>
     </div>
@@ -92,8 +114,14 @@
 <script>
 export default {
     data: () => ({
-        IDCard: '',
-        ABPConfirm: ''
+        DownloadIDCard: '',
+        DownloadABPConfirm: '',
+        DownloadRegistrationCertificate: '',
+        DownloadContractSale: '',
+        DownloadPurchaseAgreement: '',
+        DownloadFirstAct: '',
+        DownloadInvoice: ''
+        
     }),
     mounted() {
         axios(
@@ -109,20 +137,39 @@ export default {
                 console.log('документы',response)
                 //this.ABPConfirm = response.data.ABPConfirm
                 //var a = document.getElementById('ABPConfirm')
-            //a.href = a.href + String(this.PROJECTSTATUS) + '/'
+                //a.href = a.href + String(this.PROJECTSTATUS) + '/'
                 //a.href = a.href + response.data.ABPConfirm
-                this.IDCard = response.data.IDCard
-                var IDCard = document.getElementById('IDCard')
-                IDCard.href =  this.IDCard
-                console.log(response.data.IDCard)
+                this.DownloadIDCard = response.data.IDCard
+                var DownloadIDCard = document.getElementById('DownloadIDCard')
+                DownloadIDCard.href =  this.DownloadIDCard
+
+                this.DownloadRegistrationCertificate = response.data.registrationCertificate
+                var DownloadRegistrationCertificate = document.getElementById('DownloadRegistrationCertificate')
+                DownloadRegistrationCertificate.href =  this.DownloadRegistrationCertificate
+
+                this.DownloadContractSale = response.data.contractSale
+                var DownloadContractSale = document.getElementById('DownloadContractSale')
+                DownloadContractSale.href =  this.DownloadContractSale
+
+                this.DownloadPurchaseAgreement = response.data.purchaseAgreement
+                var DownloadPurchaseAgreement = document.getElementById('DownloadPurchaseAgreement')
+                DownloadPurchaseAgreement.href =  this.DownloadPurchaseAgreement
+
+                this.DownloadABPConfirm = response.data.ABPConfirm
+                var DownloadABPConfirm = document.getElementById('DownloadABPConfirm')
+                DownloadABPConfirm.href =  this.DownloadABPConfirm
+                
+                this.DownloadInvoice = response.data.invoice
+                var DownloadInvoice = document.getElementById('invoice')
+                DownloadInvoice.href =  this.DownloadInvoice
+
+                this.DownloadFirstAct = response.data.firstAct
+                var DownloadFirstAct = document.getElementById('DownloadFirstAct')
+                DownloadFirstAct.href =  this.DownloadFirstAct
+                
+                
             })
     },
-    methods:{
-        getIDCardAPI(){
-            var IDCard = document.getElementById('IDCard')
-            IDCard.href = IDCard.href +  this.IDCard
-        }
-    }
 }
 </script>
 
@@ -142,7 +189,7 @@ export default {
             display: flex;
             justify-content: space-between;
             div{
-                flex: 0 0 25%;
+                flex: 0 0 50%;
             }
             margin: 20px 0 0 0;
             font-size: 18px;

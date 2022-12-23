@@ -110,7 +110,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input name="purchaseAgreement" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
+                                            <input name="invoice" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
