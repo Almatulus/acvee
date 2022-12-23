@@ -42,14 +42,15 @@ export default {
     VueDocPreview
 },
 data: () => ({
-    
+    type: 'doc',
+    url: 'https://static-1252421604.cos.ap-guangzhou.myqcloud.com/vdp.docx'
 }),
 mounted() {
     getTagA:{
         var a = document.getElementById('pdf')
-        a.href = a.href + JSON.stringify(localStorage.getItem('userID')) + '/'
+        a.href = a.href + String(this.PROJECTSTATUS) + '/'
         var b = document.getElementById('pdfdownload')
-        b.href = b.href + localStorage.getItem('userID') + '/'
+        b.href = b.href + String(this.PROJECTSTATUS) + '/'
     }
 },
 methods:{
@@ -65,7 +66,7 @@ methods:{
     singingTheAgreement(){
         axios.post( 'http://127.0.0.1:8000/api/v1/borrower/signing/', 
                 {
-                    id: localStorage.getItem('userID')
+                    id: this.PROJECTSTATUS
                 },
                 {
                     headers:{

@@ -44,7 +44,7 @@
             </div>
             <div class="request-description__buttons">
                 
-                    <router-link class="request-description__button request-button button" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
+                    <router-link class="request-description__button request-button button" :to="{name: 'myrequest-project-documents', params: {id: selectedProject.id}}" >
                         Перейти к документам
                     </router-link>
                 

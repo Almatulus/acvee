@@ -372,7 +372,7 @@ export default {
             flex: 0 0 33.3333%;
             //margin: 0 0 0 30px;
             &:first-child{
-                margin: 0;
+                
             }
 		}
 
