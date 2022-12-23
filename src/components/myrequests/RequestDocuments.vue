@@ -22,7 +22,7 @@
                         <a target="_blank" href="">Посмотреть документ</a>
                     </div>-->
                     <div class="">
-                        <a id="DownloadIDCard" href="">Скачать документ</a>
+                        <a id="DownloadIDCard" target="_self" href="">Скачать документ</a>
                     </div>
                 </div>
                 <div class="request-documents__item">

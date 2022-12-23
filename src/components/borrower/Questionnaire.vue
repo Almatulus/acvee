@@ -114,24 +114,28 @@
                     <div class="questionnaire__loan-item">
                         <div class="questionnaire__loan-product-service">
                             <h3>Продукты и услуги</h3>
-                            <div class="questionnaire__loan-product-service-content questionnaire__loan-content">
-                                <input 
+                            <div style="display: flex;" class="questionnaire__loan-product-service-content questionnaire__loan-content">
+                                <div class="">
+                                    <input 
                                     placeholder="Название" 
                                     class="questionnaire__input" 
                                     type="text"
                                     v-model.trim="form.productName"
                                     :class="$v.form.productName.$error ? 'questionnaire-input-invalid' : ''"
-                                >
-                                <p v-if="$v.form.productName.$dirty && !$v.form.productName.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
-                                <input 
+                                    >
+                                    <p v-if="$v.form.productName.$dirty && !$v.form.productName.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                                </div>
+                                <div style="margin-left: 10px" class="">
+                                    <input 
                                     placeholder="Цена" 
                                     class="questionnaire__input" 
                                     type="text"
                                     v-model.trim="form.productPrice"
                                     @keypress="isNumber"
                                     :class="$v.form.productPrice.$error ? 'questionnaire-input-invalid' : ''"
-                                >
-                                <p v-if="$v.form.productPrice.$dirty && !$v.form.productPrice.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                                    >
+                                    <p v-if="$v.form.productPrice.$dirty && !$v.form.productPrice.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -208,7 +212,7 @@
                                         >
                                         <label for="creditChoiceNo">Нет</label>
                                     </div>
-                                    <p style="margin-left: 20px;" v-if="$v.form.hasCredit.$dirty && !$v.form.hasCredit.required" class="questionnaire-invalid-feedback">Обязательное для выбора</p>
+                                    <p style="margin-left: 20px;" v-if="$v.form.hasCredit.$dirty && !$v.form.hasCredit.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
                                 </div>
                             </div>
                             
@@ -455,7 +459,7 @@ export default {
             }
         },*/
         submitHandler(value){
-            //this.$v.form.$touch()
+            this.$v.form.$touch()
             if(!this.$v.form.$error){
                 //this.GET_QUESTIONNAIREFORMSTATE_TO_VUEX(value)
                 localStorage.setItem('questionnaire', JSON.stringify(value))
