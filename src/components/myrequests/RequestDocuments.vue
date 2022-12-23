@@ -118,7 +118,7 @@ export default {
     methods:{
         getIDCardAPI(){
             var IDCard = document.getElementById('IDCard')
-            IDCard.href = this.IDCard
+            IDCard.href = IDCard.href +  this.IDCard
         }
     }
 }
