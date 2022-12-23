@@ -163,7 +163,7 @@ export default {
                 //a.href = a.href + response.data.ABPConfirm
                 this.DownloadIDCard = response.data.IDCard
                 var DownloadIDCard = document.getElementById('DownloadIDCard')
-                DownloadIDCard.href =  this.DownloadIDCard
+                DownloadIDCard.href = 'http://127.0.0.1:8000' + this.DownloadIDCard
 
                 this.DownloadRegistrationCertificate = response.data.registrationCertificate
                 var DownloadRegistrationCertificate = document.getElementById('DownloadRegistrationCertificate')
