@@ -53,10 +53,7 @@ mounted() {
 },
 methods:{
     singingTheAgreement(){
-        axios.post( 'http://127.0.0.1:8000/api/v1/borrower/signing/', 
-                {
-                    id: this.PROJECTSTATUS
-                },
+        axios.post( 'http://127.0.0.1:8000/api/v1/borrower/signing/' + localStorage.getItem('userID'), 
                 {
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken')
