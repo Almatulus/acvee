@@ -11,11 +11,11 @@
                         <span>Мои заявки</span>
                     </a>
                 </router-link>
-                <router-link tag="li" active-class="active" to="/datarequest" >
+                <!--<router-link tag="li" active-class="active" to="/datarequest" >
                     <a href="" class="sidebar__link icon-data-application">
                         <span>Данные заявки</span>
                     </a>
-                </router-link>
+                </router-link>-->
             </ul>
         </nav>
     </div>
