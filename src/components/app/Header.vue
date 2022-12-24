@@ -20,9 +20,12 @@
                 <span>3</span>
             </a>
             <div class="header__lang">
-                <a href="" class="header__lang-item">ҚАЗ</a>
+                <!--<a href="" class="header__lang-item">ҚАЗ</a>
                 <a href="" class="header__lang-item">РУС</a>
-                <a href="" class="header__lang-item">ENG</a>
+                <a href="" class="header__lang-item">ENG</a>-->
+                <a @click.prevent="exit()" class="exit__button button">
+                    Выйти
+                </a>
             </div>
         </div>
     </div>
@@ -45,12 +48,23 @@ export default {
                 },
         )
         .then((response) => {
-            console.log(response)
             this.userName = response.data.full_name
             this.userType = response.data.user_type
         }) 
 
         
+    },
+    methods:{
+        exit(){
+            
+        }
     }
 }
 </script>
+
+
+<style lang="scss" scoped>
+    .exit__button{
+        padding: 10px 15px;
+    }
+</style>

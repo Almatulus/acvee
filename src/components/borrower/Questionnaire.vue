@@ -217,43 +217,55 @@
                             </div>
                             
                             <div class="questionnaire__loan-credits-content questionnaire__loan-content" >
-                                <input 
-                                    placeholder="Сумма" 
-                                    class="questionnaire__input" 
-                                    type="text"
-                                    maxlength="10"
-                                    v-model.trim="form.creditSum"
-                                    @keypress="isNumber"
-                                    :class="$v.form.creditSum.$error ? 'questionnaire-input-invalid' : ''"
-                                >
-                                <p v-if="$v.form.creditSum.$dirty && !$v.form.creditSum.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>                               
-                                <input 
-                                    placeholder="Проценты" 
-                                    class="questionnaire__input" 
-                                    type="text"
-                                    maxlength="3"
-                                    v-model.trim="form.creditPercent"
-                                    @keypress="isNumber"
-                                    :class="$v.form.creditPercent.$error ? 'questionnaire-input-invalid' : ''"
-                                >
-                                <p v-if="$v.form.creditPercent.$dirty && !$v.form.creditPercent.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
-                                <input 
-                                    placeholder="Ежемесячные выплаты" 
-                                    class="questionnaire__input" 
-                                    type="text"
-                                    v-model.trim="form.creditMonthlyPayment"
-                                    @keypress="isNumber"
-                                    :class="$v.form.creditMonthlyPayment.$error ? 'questionnaire-input-invalid' : ''"
-                                >
-                                <p v-if="$v.form.creditMonthlyPayment.$dirty && !$v.form.creditMonthlyPayment.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
-                                <input 
-                                    placeholder="Срок погашения" 
-                                    class="questionnaire__input questionnaire__input-date" 
-                                    type="date"
-                                    v-model.trim="form.creditMaturity"
-                                    :class="$v.form.creditMaturity.$error ? 'questionnaire-input-invalid' : ''"
-                                >
-                                <p v-if="$v.form.creditMaturity.$dirty && !$v.form.creditMaturity.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                                <div style="display: flex;" class="">
+                                    <div class="">
+                                        <input 
+                                        placeholder="Сумма" 
+                                        class="questionnaire__input" 
+                                        type="text"
+                                        maxlength="10"
+                                        v-model.trim="form.creditSum"
+                                        @keypress="isNumber"
+                                        :class="$v.form.creditSum.$error ? 'questionnaire-input-invalid' : ''"
+                                        >
+                                        <p v-if="$v.form.creditSum.$dirty && !$v.form.creditSum.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>                               
+                                    </div>
+                                    <div style="margin-left: 25px;" class="">
+                                        <input 
+                                        placeholder="Проценты" 
+                                        class="questionnaire__input" 
+                                        type="text"
+                                        maxlength="3"
+                                        v-model.trim="form.creditPercent"
+                                        @keypress="isNumber"
+                                        :class="$v.form.creditPercent.$error ? 'questionnaire-input-invalid' : ''"
+                                        >
+                                        <p v-if="$v.form.creditPercent.$dirty && !$v.form.creditPercent.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                                    </div>
+                                </div>
+                                <div style="display: flex;" class="">
+                                    <div class="">
+                                        <input 
+                                        placeholder="Ежемесячные выплаты" 
+                                        class="questionnaire__input" 
+                                        type="text"
+                                        v-model.trim="form.creditMonthlyPayment"
+                                        @keypress="isNumber"
+                                        :class="$v.form.creditMonthlyPayment.$error ? 'questionnaire-input-invalid' : ''"
+                                        >
+                                        <p v-if="$v.form.creditMonthlyPayment.$dirty && !$v.form.creditMonthlyPayment.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                                    </div>
+                                    <div style="margin-left: 25px;" class="">
+                                        <input 
+                                        placeholder="Срок погашения" 
+                                        class="questionnaire__input questionnaire__input-date" 
+                                        type="date"
+                                        v-model.trim="form.creditMaturity"
+                                        :class="$v.form.creditMaturity.$error ? 'questionnaire-input-invalid' : ''"
+                                        >
+                                        <p v-if="$v.form.creditMaturity.$dirty && !$v.form.creditMaturity.required" class="invalid-feedback questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -288,31 +300,12 @@
                                 class="questionnaire__input" 
                                 v-model="form.amount" 
                                 type="text"
+                                @keypress="isNumber"
+                                :class="$v.form.amount.$error ? 'questionnaire-input-invalid' : ''"
+                                maxlength="10"
                                 placeholder="Срок займа">
+                                <p style="color: #ff0000" v-if="$v.form.amount.$dirty && !$v.form.amount.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
                             <div class="questionnaire__loan-term-content questionnaire__loan-content">
-                                <!--<div>
-                                    Current value: <span id="value"></span>
-                                </div>
-                                <div>
-                                    Current step: <span id="step"></span>
-                                </div>
-                                <div v-show="form.isWeek">
-                                    <input v-model="form.amount" id="weeks" type="range" value="0" min="0" max="48" />
-                                </div>-->
-                                <!--<fieldset class="formSlider">
-                                    <legend class="applicationForm__text">Выберите количество серебра (млн)</legend>
-                                    <div class="__range __range-step">
-                                        <input v-model="form.amount" id="weeks" value="0" type="range" max="48" min="0" >
-                                        <datalist id="ticks1">
-                                            <option value="1">1 млн</option>
-                                            <option value="2">2 млн</option>
-                                            <option value="3">3 млн</option>
-                                            <option value="4">4 млн</option>
-                                            <option value="5">5 млн</option>
-                                        </datalist>
-                                        
-                                    </div>
-                                </fieldset>-->
                                 <div class="questionnaire__loan-term-content-item">
                                     <p>Готовы ли предоставить доступ к кредитной истории учредителя?</p>
                                     <input type="radio" name="accessFounderHistory" id="accessFounderHistory1" v-model="form.accessFounderHistory" :value="true">
@@ -320,7 +313,7 @@
                                     <input type="radio" name="accessFounderHistory" id="accessFounderHistory2" v-model="form.accessFounderHistory" :value="false">
                                     <label for="accessFounderHistory2" name="accessFounderHistory2">Нет</label>
                                 </div>
-                                <p v-if="$v.form.accessFounderHistory.$dirty && !$v.form.accessFounderHistory.required" class="questionnaire-invalid-feedback">Обязательное для выбора</p>
+                                <p style="color: #ff0000" v-if="$v.form.accessFounderHistory.$dirty && !$v.form.accessFounderHistory.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
                                 <div class="questionnaire__loan-term-content-item">
                                     <p>Готовы ли предоставить доступ к кредитной истории компании?</p>
                                     <input type="radio" name="accessCompanyHistory" id="accessCompanyHistory1" v-model="form.accessCompanyHistory" :value="true">
@@ -328,7 +321,7 @@
                                     <input type="radio" name="accessCompanyHistory" id="accessCompanyHistory2" v-model="form.accessCompanyHistory" :value="false">
                                     <label for="accessCompanyHistory2">Нет</label>
                                 </div>
-                                <p v-if="$v.form.accessCompanyHistory.$dirty && !$v.form.accessCompanyHistory.required" class="questionnaire-invalid-feedback">Обязательное для выбора</p>
+                                <p style="color: #ff0000" v-if="$v.form.accessCompanyHistory.$dirty && !$v.form.accessCompanyHistory.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
                                 <button class="button questionnaire__btn" type="submit">Далее</button>
                             </div>
                         </div>
@@ -340,10 +333,10 @@
                     <ul class="questionnaire-nav__menu">
                         
                         <li>
-                            <a style="color: #0345FF;" @click.prevent="scrollTo('scoring'), activeEl = 2" href="#" :class="{'active-template': activeEl === 2}" class="questionnaire-nav__menu-link">1</a>
+                            <a style="color: #0345FF;" class="questionnaire-nav__menu-link">1</a>
                         </li>
                         <li>
-                            <a  @click.prevent="scrollTo('scoring'), activeEl = 2" href="#" :class="{'active-template': activeEl === 2}" class="questionnaire-nav__menu-link">2</a>
+                            <a  class="questionnaire-nav__menu-link">2</a>
                         </li>
         
                     </ul>
@@ -387,7 +380,7 @@ export default {
             creditMonthlyPayment: '',
             
             isWeek: true,
-            amount: 0,
+            amount: '',
             neededSum: '',
             accessFounderHistory: '',
             accessCompanyHistory: '',
@@ -408,7 +401,7 @@ export default {
             BIN: {required, minLength: minLength(12)},
             directorName: {required},
             UIN: {required, minLength: minLength(12)},
-            phoneNumber: {required},
+            phoneNumber: {required, minLength: minLength(16)},
             email: {required, email},
             businessDescription: {},
             productName: {required},
@@ -424,7 +417,7 @@ export default {
             creditPercent: {required},
             creditMonthlyPayment: {required},
             creditMaturity: {required},
-            
+            amount: {required},
             neededSum: {required},
             hasCredit: {required},
             accessFounderHistory: {required},
@@ -512,47 +505,7 @@ export default {
     },
     mounted() {
         this.GET_COUNTRIES_FROM_API(),
-        this.GET_PRODUCTCATEGORIES_FROM_API(),
-        $(function() {
-
-	$('#weeks').on("input change", function() {
-
-		var
-			element = $('#weeks'),
-			value = element.val(),
-			step;
-			
-		/* 
-			Map your rules 
-		*/
-		if (value < 10) {
-
-			step = 10;
-		}
-        else if (value => 11){
-    	    step = 5
-        }
-		
-    else if(value > 30){
-				
-			step = 18;
-
-		}
-    
-    if(value == 5){
-    	value = 10
-    }
-    
-   if(value > 30){
-    	value = 48
-    }
-
-		element.attr('step', step);
-
-		$('#value').text(value);
-		$('#step').text(step);
-	});
-});
+        this.GET_PRODUCTCATEGORIES_FROM_API()
     },
     directives: {
       imask: IMaskDirective
@@ -838,7 +791,7 @@ export default {
 .questionnaire__btn{
     padding: 17px 20px;
     float: right;
-    margin: 10px 0 0 0;
+    margin: 10px 0 30px 0;
 }
 
 .questionnaire-select-div{
@@ -879,6 +832,7 @@ export default {
 .questionnaire__input-date{
     margin: 0;
 }
+
 //Input range
 
 </style>
