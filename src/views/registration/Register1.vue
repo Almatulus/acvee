@@ -36,6 +36,7 @@
                         >
                         <p v-if="$v.phone.$dirty && !$v.phone.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                         <p v-if="$v.phone.$dirty && !$v.phone.minLength" class="invalid-feedback">Данное поле должно содержать номер телефона</p>
+                        <p v-if="phone_status == 'error'">Данный номер телефона уже существует</p>
                     </div>
                     <div class="authentication-template__form-item">
                         <p>СМС код подтверждение</p>
@@ -81,6 +82,7 @@ export default {
             mask: '+{7}(000)000-00-00',
             lazy: true
         },
+        phone_status: ''
         //user_type: ''
     }),
     methods: {
@@ -90,7 +92,16 @@ export default {
                 //localStorage.setItem('phone', this.phone)
                 //localStorage.setItem('userType', this.user_type)
                 //this.$router.push('/register/2')
-                axios.get
+                axios.get('http://127.0.0.1:8000/api/v1/check-number/', 
+                    {
+                        phone_number: this.phone
+                    }
+                ).then((response) => {
+                    this.phone_status = response.status
+                    if(this.phone_status == 'success'){
+                        this.$router.push('/register/2')
+                    }
+                })
             }
             
         },
