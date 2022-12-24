@@ -92,11 +92,9 @@ export default {
                 //localStorage.setItem('phone', this.phone)
                 //localStorage.setItem('userType', this.user_type)
                 //this.$router.push('/register/2')
-                axios.get('http://127.0.0.1:8000/api/v1/check-number/', 
+                axios.post('http://127.0.0.1:8000/api/v1/check-number/', 
                     {
-                        params: {
-                            phone_number: this.phone
-                        }
+                        phone_number: this.phone
                     }
                 ).then((response) => {
                     this.phone_status = response.data.status
