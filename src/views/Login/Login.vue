@@ -114,8 +114,6 @@ export default {
                     }
                 ).then((response) => {
                     console.log('респонсе дата',response.data)
-                    //if "non_field_errors" in request data => вывести сообщения: номер или пароль
-                    //this.GET_USERTOKEN_TO_VUEX()
                     localStorage.setItem('usertoken', response.data.auth_token)
                     this.$router.push('/')
                 }).catch((error) => {
