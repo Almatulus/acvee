@@ -30,6 +30,7 @@
                         </div>-->
                     </div>
                     <div class="authentication-template__form-item">
+                        
                         <p>Номер телефона</p>
                         <input
                             type="text"
@@ -53,6 +54,7 @@
                         >
                         <p v-if="$v.password.$dirty && !$v.password.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                         <p v-if="$v.password.$dirty && !$v.password.minLength" class="invalid-feedback">Пароль должен иметь больше 8 символов</p>
+                        <p class="invalid-feedback" v-if="error != ''">{{error}}</p>
                     </div>
                     <div class="authentication-template__enter">
                         Еще нет аккаунта? <router-link tag="a" :to="url"><a href="#">Зарегистрироваться</a></router-link>
@@ -90,7 +92,7 @@ export default {
         isLoginPage: true,
         url: '/register',
         buttonText: 'Войти в кабинет',
-        errors: []
+        error: ''
     }),
     validations:{
         phone: {required, minLength: minLength(16)},
@@ -104,20 +106,23 @@ export default {
         submitHandler(){
             //this.$v.$touch()
             if(!this.$v.$error){
-                this.$router.push('/')
+                
                 axios.post('http://127.0.0.1:8000/api/v1/auth/token/login/',
                     {
-
                         phone_number: this.phone,
                         password: this.password
                     }
-                ). 
-                then(function (response){
-                    //console.log(response)
+                ).then((response) => {
+                    console.log('респонсе дата',response.data)
+                    //if "non_field_errors" in request data => вывести сообщения: номер или пароль
                     //this.GET_USERTOKEN_TO_VUEX()
                     localStorage.setItem('usertoken', response.data.auth_token)
-                    console.log(localStorage.getItem('usertoken'))
-                    //console.log(JSON.parse(localStorage.getItem('usertoken')))
+                    this.$router.push('/')
+                }).catch((error) => {
+                    if(error.response.data.non_field_errors){
+                        this.error = 'Неверный номер или пароль'
+                    }
+                    
                 })
             }
             
