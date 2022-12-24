@@ -17,8 +17,8 @@
                 <h2>{{ title }}</h2>
                 <form @submit.prevent="submitHandler" action="" class="authentication-template__form">
                     <div class="authentication-template__form-item">
-                        <p>Выберите тип пользователя</p>
-                        <!--<div style="margin: 15px 0 0 0; display: flex;" class="">
+                    <!--<p>Выберите тип пользователя</p>
+                        <div style="margin: 15px 0 0 0; display: flex;" class="">
                             <div class="authentication-template__form-item-item">
                                 <input v-model="user_type" value="borrower" name="role" id="Borrower" class="radio-hide" type="radio">
                                 <label for="Borrower">Заемщик</label>

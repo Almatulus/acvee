@@ -56,7 +56,15 @@ export default {
     },
     methods:{
         exit(){
-            
+            axios.post('http://127.0.0.1:8000/api/v1/auth/token/logout/', 
+                {
+                   headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    } 
+                }
+            ).then(
+                this.$router.push('/login')
+            )
         }
     }
 }
@@ -66,5 +74,6 @@ export default {
 <style lang="scss" scoped>
     .exit__button{
         padding: 10px 15px;
+        cursor: pointer;
     }
 </style>
