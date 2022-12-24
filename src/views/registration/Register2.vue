@@ -16,6 +16,7 @@
                             <input v-model="user_type" value="investor" name="role" id="Investor" class="radio-hide" type="radio">
                             <label for="Investor">Инвестор</label>
                         </div>
+                        <p v-if="$v.user_type.$dirty && !$v.user_type.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                     </div>
                     <div class="authentication-template__form-item">
                         <p>Пароль</p>
@@ -71,9 +72,7 @@ export default {
                 axios.post('http://127.0.0.1:8000/api/v1/registr/',
                     {
                         phone_number: localStorage.getItem('phone'),
-                        user_type: localStorage.getItem('userType'),
-                    
-                
+                        user_type: this.user_type,
                         password: this.password,
                         password2: this.repeatPassword,
                         

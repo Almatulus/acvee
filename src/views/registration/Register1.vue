@@ -99,6 +99,7 @@ export default {
                 ).then((response) => {
                     this.phone_status = response.data.status
                     if(this.phone_status == 'success'){
+                        localStorage.setItem('phone', this.phone)
                         this.$router.push('/register/2')
                     }
                 })
