@@ -7,6 +7,16 @@
                 </div>
                 <h2>{{ title }}</h2>
                 <form @submit.prevent="submitHandler" class="authentication-template__form" action="">
+                    <div style="margin: 15px 0 0 0; display: flex;" class="">
+                        <div class="authentication-template__form-item-item">
+                            <input v-model="user_type" value="borrower" name="role" id="Borrower" class="radio-hide" type="radio">
+                            <label for="Borrower">Заемщик</label>
+                        </div>
+                        <div class="authentication-template__form-item-item">
+                            <input v-model="user_type" value="investor" name="role" id="Investor" class="radio-hide" type="radio">
+                            <label for="Investor">Инвестор</label>
+                        </div>
+                    </div>
                     <div class="authentication-template__form-item">
                         <p>Пароль</p>
                         <input 
@@ -49,8 +59,9 @@ export default {
         name: 'registration2',
         title: 'Регистрация',
         buttonText: 'Далее',
-            password: '',
-            repeatPassword: ''
+        password: '',
+        repeatPassword: '',
+        user_type: ''
     }),
     methods: {
         submitHandler(){
@@ -82,7 +93,8 @@ export default {
     },
     validations: {
         password: {required, minLength: minLength(8)},
-        repeatPassword: {required, minLength: minLength(8), sameAsPassword: sameAs('form.password')}
+        repeatPassword: {required, minLength: minLength(8), sameAsPassword: sameAs('form.password')},
+        user_type: {required}
     }
 }
 </script>
@@ -102,6 +114,22 @@ export default {
         }
         .invalid-feedback{
             color: #ff0000;
+        }
+    }
+
+    .radio-hide{
+        width: 20px;
+        height: 20px;
+    }
+    .authentication-template__form-item-item{
+        align-items: center;
+        display: flex;
+        &:last-child{
+            margin-left: 30px;
+        }
+        label{
+            font-size: 18px;
+            margin-left: 10px;
         }
     }
 </style>

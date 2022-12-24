@@ -7,7 +7,7 @@
                 </div>
                 <h2>{{ title }}</h2>
                 <form @submit.prevent="submitHandler" class="authentication-template__form" action="">
-                    <div class="authentication-template__form-item">
+                    <!--<div class="authentication-template__form-item">
                         <p>Выберите тип пользователя</p>
                         <div style="margin: 15px 0 0 0; display: flex;" class="">
                             <div class="authentication-template__form-item-item">
@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <p v-if="$v.user_type.$dirty && !$v.user_type.required" class="invalid-feedback">Обязательное поле для заполнения</p>
-                    </div>
+                    </div>-->
                     <div class="authentication-template__form-item">
                         <p>Номер телефона</p>
                         <input
@@ -81,15 +81,16 @@ export default {
             mask: '+{7}(000)000-00-00',
             lazy: true
         },
-        user_type: ''
+        //user_type: ''
     }),
     methods: {
         submitHandler(){
             //this.$v.$touch()
             if(!this.$v.$error){
-                localStorage.setItem('phone', this.phone)
-                localStorage.setItem('userType', this.user_type)
-                this.$router.push('/register/2')
+                //localStorage.setItem('phone', this.phone)
+                //localStorage.setItem('userType', this.user_type)
+                //this.$router.push('/register/2')
+                axios.get
             }
             
         },
@@ -112,7 +113,7 @@ export default {
     validations: {      
         phone: {required, minLength: minLength(16)},
         sms: {required},
-        user_type: {required}
+        //user_type: {required}
     },
     directives: {
         imask: IMaskDirective
@@ -149,21 +150,6 @@ export default {
         }
         .invalid-feedback{
             color: #ff0000;
-        }
-    }
-    .radio-hide{
-        width: 20px;
-        height: 20px;
-    }
-    .authentication-template__form-item-item{
-        align-items: center;
-        display: flex;
-        &:last-child{
-            margin-left: 30px;
-        }
-        label{
-            font-size: 18px;
-            margin-left: 10px;
         }
     }
 </style>
