@@ -1,14 +1,18 @@
 <template>
     <div class="sidebar">
         <a class="sidebar__logo">
-            <img src="" alt="logo">
-            <div class="sidebar__text">Logo</div>
+            <img src="../../assets/acvee-auth-logo.svg" alt="logo">
         </a>
         <nav class="sidebar__body">
             <ul>
+                <router-link tag="li" active-class="active" to="/admin/projects/borrower" >
+                    <a href="" class="sidebar__link">
+                        <span>Заемщики</span>
+                    </a>
+                </router-link>
                 <router-link tag="li" active-class="active" to="/admin/projects" >
                     <a href="" class="sidebar__link">
-                        <span>Общие данные</span>
+                        <span>Инвестора</span>
                     </a>
                 </router-link>
             </ul>

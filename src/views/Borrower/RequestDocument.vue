@@ -1,35 +1,53 @@
 <template>
-    <div class="request-document">
-        <div class="request-document__inner">
+    <div class="request-documents">
+        <div class="request-documents__inner">
             <h2>Подписание Договора Факторинга</h2>
-            <div class="request-document__content">
-                <div class="request-document__document">
-                    <a id="pdf" href="http://127.0.0.1:8000/api/v1/borrower/agreement-factoring-pdf/" target="_blank" class="request-document__btn button">
-                        Посмотреть документ
-                    </a>
-                    <a id="pdfdownload" href="http://127.0.0.1:8000/api/v1/borrower/factoring-download/"  class="request-document__btn button">
-                            Скачать PDF
-                    </a>
-                    <!--<a href="#" class="request-document__btn button">
-                            Скачать Word
-                    </a>-->
-                    <a @click.prevent="singingTheAgreement()" href="" class="request-document__btn button request-document__btn-key">Подпись Договора через ЭЦП онлайн</a>
-                </div>
-                <!--<div class="request-document__buttons">
-                    <div class="request-document__buttons-top">
-                        <a id="pdfdownload" href="http://127.0.0.1:8000/api/v1/borrower/factoring-download/"  class="request-document__btn button">
-                            Скачать PDF
-                        </a>
-                        <a href="#" class="request-document__btn button">
-                            Скачать Word
-                        </a>
+            <div class="request-documents__documents">
+                <div class="request-documents__item request-documents__title">
+                    <div class="">
+                        Название документа
                     </div>
-                    <a href="#" class="request-document__btn request-document__btn-share">
-                        Поделится
-                    </a>
-                </div>-->
+                    <div class="">
+                        Просмотр документа
+                    </div>
+                    <div class="">
+                        Скачивание документа
+                    </div>
+                </div>
+                <div class="request-documents__item">
+                    <div class="">
+                        Договор факторинга
+                    </div>
+                    <div class="">
+                        <a target="_blank" href="">Посмотреть документ</a>
+                    </div>
+                    <div class="">
+                        <a id="DownloadIDCard" target="_self" href="">Скачать документ</a>
+                    </div>
+                </div>
+                <div class="request-documents__item">
+                    <div class="">
+                        Название договора 2
+                    </div>
+                    <div class="">
+                        <a target="_blank" href="">Посмотреть документ</a>
+                    </div>
+                    <div class="">
+                        <a id="DownloadIDCard" target="_self" href="">Скачать документ</a>
+                    </div>
+                </div>
+                <div class="request-documents__item">
+                    <div class="">
+                        Название договора 3
+                    </div>
+                    <div class="">
+                        <a target="_blank" href="">Посмотреть документ</a>
+                    </div>
+                    <div class="">
+                        <a id="DownloadIDCard" target="_self" href="">Скачать документ</a>
+                    </div>
+                </div>
             </div>
-            <a @click.prevent="singingTheAgreement()" href="" class="request-document__btn button request-document__btn-key">Подпись Договора через ЭЦП онлайн</a>
         </div>
     </div>
 </template>
@@ -78,81 +96,43 @@ computed:{
 }
 </script>
 
-<style lang="scss" scoped>
-    .request-document {
-        margin: 30px 0 0 0;
+<style lang="scss">
+.request-documents {
+        background: #fff;
+        box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
+        border-radius: 10px;
+        padding: 30px;
 		&__inner {
 		}
 
-		&__content {
-            display: flex;
-            margin: 35px;
-            background: #ffffff;
-            box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
-            border-radius: 10px;
-            padding: 25px 0 25px 40px;
-            width: 790px;
-            height: 200px;
+		&__documents {
 		}
 
-		&__document {
-            flex: 1 1 400px;
-            overflow: auto;
-            padding: 0 20px 0 0;
-            font-size: 16px;
-            scrollbar-color: #0345FF rgba(3, 69, 255, 0.6);
-            scrollbar-width: thin;
-            padding: 50px 0 0 0;
-            a{
-                margin-left: 10px;
-            }
-            &::-webkit-scrollbar{
-                width: 4.5px;
-            }
-            &::-webkit-scrollbar-track{
-                background: rgba(3, 69, 255, 0.6);
-                width: 0.5px;
-            }
-            &::-webkit-scrollbar-thumb{
-                background: #0345FF;
-                border-radius: 5px;
-            }
-		}
-
-		&__buttons {
+		&__item {
             display: flex;
-            flex-direction: column;
             justify-content: space-between;
-            margin: 0 0 0 20px;
+            div{
+                flex: 0 0 25%;
+            }
+            margin: 20px 0 0 0;
+            font-size: 18px;
+            a{
+                color: #0345FF;
+            }
 		}
-
-        &__buttons-top{
-            display: flex;
-            flex-direction: column;
+        h3{
+            margin: 40px 0 0 0;
         }
-
-		&__btn {
-            
-            color: #fff;
-            padding: 20px;
-            background: #0345FF;
-            border-radius: 10px;
-            text-align: center;
-		}
-
-		&__btn-share {
-            background: rgba(3, 69, 255, 0.1);
-            box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);    
-            color: #0345FF;
-            flex: 0 0 auto;
-		}
-
-        &__btn-key{
-            display: inline-block;
-            margin: 25px 0 0 82px;
-        }
+        
 }
-.button {
+
+.request-documents__title{
+    font-size: 22px;
+    font-weight: 500;
+    background: #0345FF;
+    padding: 10px;
+    color: #fff;
+    border-radius: 10px;
 }
 
 </style>

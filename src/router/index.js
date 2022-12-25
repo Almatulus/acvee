@@ -160,12 +160,17 @@ const routes = [
     meta: {layout: 'investor'},
     component: () => import('../views/Investor/InvestorAfterQuestionnaire.vue')
   },
-  
   {
-    path: '/admin/projects',
-    name: 'admin-projects',
+    path: '/admin',
+    name: 'admin',
     meta: {layout: 'admin'},
-    component: () => import('../views/Admin/AdminProjects.vue')
+    component: () => import('../views/Admin/Admin.vue')
+  },
+  {
+    path: '/admin/projects/borrower',
+    name: 'admin-projects-borrower',
+    meta: {layout: 'admin'},
+    component: () => import('../views/Admin/AdminProjectsBorrower.vue')
   },
 ]
 
