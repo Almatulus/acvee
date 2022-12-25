@@ -10,7 +10,7 @@
                         <span>Заемщики</span>
                     </a>
                 </router-link>
-                <router-link tag="li" active-class="active" to="/admin/projects" >
+                <router-link tag="li" active-class="active" to="/admin/projects/investor" >
                     <a href="" class="sidebar__link">
                         <span>Инвестора</span>
                     </a>

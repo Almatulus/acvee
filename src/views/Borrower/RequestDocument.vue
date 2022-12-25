@@ -19,10 +19,10 @@
                         Договор факторинга
                     </div>
                     <div class="">
-                        <a target="_blank" href="">Посмотреть документ</a>
+                        <a id="factoringPDFView" target="_blank" href="http://127.0.0.1:8000/api/v1/borrower/agreement-factoring-pdf/">Посмотреть документ</a>
                     </div>
                     <div class="">
-                        <a id="DownloadIDCard" target="_self" href="">Скачать документ</a>
+                        <a id="factoringPDFViewDownload" target="_self" href="http://127.0.0.1:8000/api/v1/borrower/factoring-download/">Скачать документ</a>
                     </div>
                 </div>
                 <div class="request-documents__item">
@@ -61,10 +61,10 @@ export default {
 },
 mounted() {
     getTagA:{
-        var a = document.getElementById('pdf')
+        var a = document.getElementById('factoringPDFView')
         //a.href = a.href + String(this.PROJECTSTATUS) + '/'
         a.href = a.href + localStorage.getItem('userID')
-        var b = document.getElementById('pdfdownload')
+        var b = document.getElementById('factoringPDFViewDownload')
         b.href = b.href + localStorage.getItem('userID')
         //b.href = b.href + String(this.PROJECTSTATUS) + '/'
     }
