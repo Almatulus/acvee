@@ -50,7 +50,7 @@
                         type="text" 
                         class="questionnaire__questions-input questionnaire__input"
                         maxlength="12"
-                        v-model.trim="form.BIN"
+                        v-model="form.cityID"
                         :class="$v.form.BIN.$error ? 'questionnaire-input-invalid' : ''"
                         @keypress="isNumber"
                     >
@@ -518,7 +518,6 @@ export default {
             this.cities = this.COUNTRIES.filter(item => {
                 return item.id == this.form.countryID;
             })[0].cities;
-        
         }
     },
     components: {
