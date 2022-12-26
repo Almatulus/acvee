@@ -50,7 +50,7 @@
                         type="text" 
                         class="questionnaire__questions-input questionnaire__input"
                         maxlength="12"
-                        v-model="form.cityID"
+                        v-model.trim="form.BIN"
                         :class="$v.form.BIN.$error ? 'questionnaire-input-invalid' : ''"
                         @keypress="isNumber"
                     >
