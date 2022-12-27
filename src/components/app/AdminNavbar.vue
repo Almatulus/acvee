@@ -5,6 +5,11 @@
         </a>
         <nav class="sidebar__body">
             <ul>
+                <router-link tag="li" active-class="active" to="/admin/users" >
+                    <a href="" class="sidebar__link">
+                        <span>Пользователи</span>
+                    </a>
+                </router-link>
                 <router-link tag="li" active-class="active" to="/admin/projects/borrower" >
                     <a href="" class="sidebar__link">
                         <span>Заемщики</span>

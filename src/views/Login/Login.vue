@@ -38,11 +38,13 @@
                             maxlength="16"
                             :class="$v.phone.$error ? 'invalid' : ''"
                             v-model.trim="phone"
-                            @keypress="isNumber"
-                            v-imask="phoneNumberMask" 
+                            
+                             
                             @accept="onAccept" 
                             @complete="onComplete" 
                         >
+                        v-imask="phoneNumberMask"
+                        @keypress="isNumber"
                         <p v-if="$v.phone.$dirty && !$v.phone.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                         <p v-if="$v.phone.$dirty && !$v.phone.minLength" class="invalid-feedback">Данное поле должно содержать номер телефона</p>
                     </div>

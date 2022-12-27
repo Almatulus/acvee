@@ -167,6 +167,12 @@ const routes = [
     component: () => import('../views/Admin/Admin.vue')
   },
   {
+    path: '/admin/users',
+    name: 'admin-users',
+    meta: {layout: 'admin'},
+    component: () => import('../views/Admin/AdminUsers.vue')
+  },
+  {
     path: '/admin/projects/borrower',
     name: 'admin-projects-borrower',
     meta: {layout: 'admin'},
