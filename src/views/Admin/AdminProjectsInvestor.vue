@@ -11,74 +11,77 @@
                         </button>
                     </form>
                 </div>
-                
             </div>
-            <div class="request-table">
-                <div class="request-table__inner">
-                    <div class="request-table__content">
-                        <div class="request-table__row request-table__title">
-                            <div class="request-table__item request-table__title-ml">
-                                № запроса
-                            </div>
-                            <div class="request-table__item request-table__title-ml">
-                                № договора
-                            </div>
-                            <div class="request-table__item request-table__title-ml">
-                                Название продукта
-                            </div>
-                            <div class="request-table__item request-table__title-ml">
-                                Дата
-                            </div>
-                            <div class="request-table__item request-table__title-ml">
-                                Сумма
-                            </div>
-                            <div class="request-table__item request-table__title-ml">
-                                Статус
-                            </div>
-                        </div>
-                        <div v-for="adminproject in ADMINPROJECTS" :key="adminproject.id" class="request-table__row request-table__data" @click.prevent ="activeEl = myproject, updateDescription(myproject)" :class="{'active-el': activeEl === myproject}">
-                            <div class="request-table__item">
-                                {{adminproject.request_number}}
-                            </div>
-                            <div class="request-table__item">
-                                {{adminproject.contract_number}}
-                            </div>
-                            <div class="request-table__item">
-                                {{adminproject.project_name}}
-                            </div>
-                            <div class="request-table__item">
-                                {{adminproject.request_date}}
-                            </div>
-                            <div class="request-table__item">
-                                {{adminproject.get_needed_sum}}тг
-                            </div>
-                            <div class="request-table__item">
-                                {{adminproject.status}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ФИО</th>
+
+                        <th>Телефон</th>
+
+                        <th>Почта</th>
+
+                        <th>Заявки на инвестицию</th>
+
+                        <th>Сумма заявки</th>
+
+                        <th>Статус</th>
+
+                        <th>Ссылка</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr v-for="investor in investors" :key="investor.id">
+
+                        <td>{{investor.user_name}}</td>
+
+                        <td>{{investor.phone_number}}</td>
+
+                        <td>{{investor.email}}</td>
+
+                        <td>{{investor.investor_app_form}}</td>
+
+                        <td>{{investor.investment_sum}}</td>
+
+                        <td>{{investor.treaty_status}}</td>
+
+                        <td>Перейти</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
         </div>
     </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex'
+
 export default {
-    computed: {
-        ...mapGetters([
-            'ADMINPROJECTS'
-        ])
-    },
-    methods:{
-        ...mapActions([
-            'GET_ADMINPROJECTS_FROM_API'
-        ])
-    },
+    data: () => ({
+        investors: []
+    }),
     mounted(){
-        this.GET_ADMINPROJECTS_FROM_API()
-        console.log(this.ADMINPROJECTS)
+        axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/admin/investor/',
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+        )
+        .then((response) => {
+            this.investors = response.data
+        })
     }
 }
 </script>
@@ -139,51 +142,36 @@ export default {
 		}
 }
 
-.request-table {
-        background: #fff;
-        box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
-        border-radius: 10px;
-        margin: 50px 0 0 0;
-		&__inner {
-            padding: 35px;
-		}
+.table {
 
-		&__content {
-            
-		}
+	width: 100%;
 
-		&__row {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            cursor: pointer;
-		}
+	margin-bottom: 20px;
 
-		&__title {
-            font-weight: 600;
-            font-size: 20px;
-            line-height: 24px;
-		}
+	border: 1px solid #0345FF;
 
-        &__title-ml{
-            
-        }
+	border-collapse: collapse; 
+    margin: 20px 0 0 0;
+}
 
-		&__item {
-		}
+.table th {
 
-        &__data{
-            background: rgba(3, 69, 255, 0.03);
-            box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
-            border-radius: 10px;
-            padding: 25px 20px;
-            margin: 20px 0 0 0;
-            font-weight: 500;
-            font-size: 18px;
-            line-height: 21px;
-            &:first-child{
-                margin-top: 27px;
-            }
-        }
+	font-weight: bold;
+
+	padding: 5px;
+
+	background: #0345FF;
+    color: #fff;
+    padding: 15px;
+	border: 1px solid #0345FF;
+    font-size: 18px;
+}
+
+.table td {
+
+	padding: 15px;
+    text-align: center;
+    font-size: 16px
 }
 
 </style>

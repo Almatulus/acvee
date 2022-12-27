@@ -14,55 +14,50 @@
                         </form>
                     </div>
                 </div>-->
-                <div class="admin-users__row">
-                    <div class="admin-users__item admin-users__title">
-                        ID
-                    </div>
-                    <div class="admin-users__item admin-users__title">
-                        ФИО
-                    </div>
-                    <div class="admin-users__item admin-users__title">
-                        Телефон
-                    </div>
-                    <div class="admin-users__item admin-users__title">
-                        Почта
-                    </div>
-                    <div class="admin-users__item admin-users__title">
-                        Роль
-                    </div>
-                    <div class="admin-users__item admin-users__title">
-                        Cсылка
-                    </div>
-                </div>
-                <div v-for="user in users" :key="user.id" class="admin-users__row">
-                    <div class="admin-users__item">
-                        {{user.id}}
-                    </div>
-                    <div class="admin-users__item">
-                        {{user.first_name}} {{user.second_name}}
-                    </div>
-                    <div class="admin-users__item">
-                        {{user.phone_number}}
-                    </div>
-                    <div class="admin-users__item">
-                        {{user.email}}
-                    </div>
-                    <div class="admin-users__item">
-                        <div v-if="user.user_type == 'borrower'" class="">
-                            Заемщик
-                        </div>
-                        <div v-if="user.user_type == 'investor'" class="">
-                            Инвестор
-                        </div>
-                        <div v-if="user.user_type == 'admin'" class="">
-                            Админ
-                        </div>
-                    </div>
-                    <div class="admin-users__item">
-                        <a href="">Ссылка</a>
-                    </div>
-                </div>
             </div>
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>ФИО</th>
+
+                        <th>Телефон</th>
+
+                        <th>Почта</th>
+
+                        <th>Роль</th>
+
+                        <th>Cсылка</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr v-for="user in users" :key="user.id">
+
+                        <td>{{user.id}}</td>
+
+                        <td>{{user.first_name}} {{user.second_name}}</td>
+
+                        <td>{{user.phone_number}}</td>
+
+                        <td>{{user.email}}</td>
+
+                        <td>4</td>
+
+                        <td>0.1</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
         </div>
     </div>
 </template>

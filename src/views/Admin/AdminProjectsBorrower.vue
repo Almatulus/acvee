@@ -13,72 +13,75 @@
                 </div>
                 
             </div>
-            <div class="request-table">
-                <div class="request-table__inner">
-                    <div class="request-table__content">
-                        <div class="request-table__row request-table__title">
-                            <div class="request-table__item request-table__title-ml">
-                                № запроса
-                            </div>
-                            <div class="request-table__item request-table__title-ml">
-                                № договора
-                            </div>
-                            <div class="request-table__item request-table__title-ml">
-                                Название продукта
-                            </div>
-                            <div class="request-table__item request-table__title-ml">
-                                Дата
-                            </div>
-                            <div class="request-table__item request-table__title-ml">
-                                Сумма
-                            </div>
-                            <div class="request-table__item request-table__title-ml">
-                                Статус
-                            </div>
-                        </div>
-                        <div v-for="adminproject in ADMINPROJECTS" :key="adminproject.id" class="request-table__row request-table__data" @click.prevent ="activeEl = myproject, updateDescription(myproject)" :class="{'active-el': activeEl === myproject}">
-                            <div class="request-table__item">
-                                {{adminproject.request_number}}
-                            </div>
-                            <div class="request-table__item">
-                                {{adminproject.contract_number}}
-                            </div>
-                            <div class="request-table__item">
-                                {{adminproject.project_name}}
-                            </div>
-                            <div class="request-table__item">
-                                {{adminproject.request_date}}
-                            </div>
-                            <div class="request-table__item">
-                                {{adminproject.get_needed_sum}}тг
-                            </div>
-                            <div class="request-table__item">
-                                {{adminproject.status}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ФИО</th>
+
+                        <th>Компания</th>
+
+                        <th>Займы</th>
+
+                        <th>Сумма займа</th>
+
+                        <th>Сумма оставшегося долга</th>
+
+                        <th>Управление статусом займа</th>
+
+                        <th>Управление кабинетом</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr v-for="borrower in borrowers" :key="borrower.id">
+
+                        <td>{{borrower.user_name}}</td>
+
+                        <td>{{borrower.project_name}}</td>
+
+                        <td>{{borrower.amount_received}}</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+            {{borrowers}}
         </div>
     </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex'
+
 export default {
+    data: () => ({
+        borrowers: []
+    }),
     computed: {
-        ...mapGetters([
-            'ADMINPROJECTS'
-        ])
+        
     },
     methods:{
-        ...mapActions([
-            'GET_ADMINPROJECTS_FROM_API'
-        ])
+        
     },
     mounted(){
-        this.GET_ADMINPROJECTS_FROM_API()
-        console.log(this.ADMINPROJECTS)
+        axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/admin/borrower/project-list/',
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+        )
+        .then((response) => {
+            this.borrowers = response.data
+        })
     }
 }
 </script>
@@ -139,51 +142,36 @@ export default {
 		}
 }
 
-.request-table {
-        background: #fff;
-        box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
-        border-radius: 10px;
-        margin: 50px 0 0 0;
+.admin-users {
+
 		&__inner {
-            padding: 35px;
 		}
 
 		&__content {
-            
+            margin: 20px 0 0 0;
 		}
 
 		&__row {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            cursor: pointer;
+            display: flex;
+            
+            margin: 20px 0 0 0;
+            text-align: center;
 		}
 
 		&__title {
-            font-weight: 600;
-            font-size: 20px;
-            line-height: 24px;
-		}
-
-        &__title-ml{
+            border: 2px solid #0345FF;
+            background: #0345FF;
+            color: #fff;
             
-        }
+		}
 
 		&__item {
-		}
-
-        &__data{
-            background: rgba(3, 69, 255, 0.03);
-            box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
-            border-radius: 10px;
-            padding: 25px 20px;
-            margin: 20px 0 0 0;
-            font-weight: 500;
+            flex: 0 0 14%;
             font-size: 18px;
-            line-height: 21px;
-            &:first-child{
-                margin-top: 27px;
-            }
-        }
+            padding: 15px;
+            align-items: center;
+            display: flex;
+		}
 }
 
 </style>
