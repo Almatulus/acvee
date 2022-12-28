@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="admin-loan__status">
-                    <h3>Текущий статус:</h3> <span>{{}}</span>
+                    <div style="display: flex; align-items: center;" class=""><h2>Текущий статус:</h2> <span>{{status_name}}</span></div>
                 
                     <form @submit.prevent="submitHandler()" action="">
                         <div v-for="(stage_item, index) in stages_list" :key="stage_item.id" class="">
@@ -96,13 +96,14 @@ export default {
         sum: '',
         status: '',
         stages_list: [],
+        status_name: '',
         stage_value: ''
     }),
     mounted(){
         axios(
                 {
                     method: 'GET',
-                    url: 'http://127.0.0.1:8000/api/v1/admin/investor/investment/' + localStorage.getItem('id'),
+                    url: 'http://127.0.0.1:8000/api/v1/admin/investor/investment/' + localStorage.getItem('id') + '/',
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken')
                     }
@@ -111,7 +112,8 @@ export default {
         .then((response) => {
             this.id = response.data.id,
             this.investor_name = response.data.user_name,
-            this.sum = response.data.investment_sum
+            this.sum = response.data.investment_sum,
+            this.status_name = response.data.stage_name
         }),
         axios(
                 {
@@ -217,6 +219,11 @@ form{
 
 .admin-loan__status{
     margin: 20px 0 0 0;
+    span{
+        font-size: 25px;
+        font-weight: 500;
+        margin-left: 15px;
+    }
 }
 
 input{

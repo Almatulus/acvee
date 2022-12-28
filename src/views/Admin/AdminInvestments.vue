@@ -29,7 +29,7 @@
                             <td>{{investment.id}}</td>
                             <td>{{investment.user_name}}</td>
                             <td>{{investment.investment_sum}}</td>
-                            <td>{{investment.status}}</td>
+                            <td>{{investment.stage}}</td>
                             <td>
                                 <router-link :to="{name: 'admin-investment', params: {id: investment.id}}">
                                     <a  @click="getID(investment.id)" href="">Перейти</a>

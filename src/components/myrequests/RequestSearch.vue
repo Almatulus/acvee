@@ -109,4 +109,48 @@ export default {
 		}
 }
 
+.filter {
+        background: #FFFFFF;
+        box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
+        border-radius: 10px;
+        margin: 20px 0 0 0;
+		&__inner {
+            padding: 35px;
+		}
+
+		&__row {
+            display: flex;
+            justify-content: space-around;
+		}
+
+		&__column {
+		}
+
+		&__title {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 24px;
+            padding: 0 0 27px 0;
+            border-bottom: 0.5px solid rgba(51, 51, 51, 0.6);;
+		}
+
+		&__filters {
+            display: flex;
+            flex-direction: column;
+		}
+
+		&__el {
+            margin: 15px 0 0 0;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 21px;
+            &:first-child{
+                margin: 20px 0 0 0;
+            }
+            &:hover{
+                color: #6E64E7;
+            }
+		}
+}
+
 </style>

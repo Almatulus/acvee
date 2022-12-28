@@ -3,17 +3,38 @@
         <div class="admin-users__inner">
             <h2>Все пользователи</h2>
             <div class="admin-users__content">
-                <!--<div id='request-search' class="request-search">
+                <div id='request-search' class="request-search">
                     <div class="request-search__inner">
                         <form action="" class="request-search__form">
                             <input v-model="searchValue" placeholder="Вводите название запроса" type="text" class="request-search__input">
                             <a v-on:click.prevent='isVisible = !isVisible' :class="{'filter-active':isVisible}" href="" class="request-search__filter icon-filter"></a>
-                            <button @click.prevent="search(searchValue)" class="request-search__btn button">
+                            <button @click.prevent="sortProjectsBySearchValue(searchValue)" class="request-search__btn button">
                                 <img src="../../assets/img/icons/search.svg" alt="search">
                             </button>
                         </form>
                     </div>
-                </div>-->
+                    <div v-if="isVisible == true" class="filter">
+                        <div class="filter__inner">
+                            <div class="filter__row">
+                                <div class="filter__column">
+                                    <div class="filter__title">
+                                        Роль
+                                    </div>
+                                    <div class="filter__filters">
+                                        <input id="borrower" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" value="borrower" class="filter__el">
+                                        <label class="filter__el" for="borrower">Заемщики</label>
+                                        <div @click="clearInvestor()" class="">X</div>
+                                    </div>
+                                    <div class="filter__filters">
+                                        <input id="investor" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" value="investor" class="filter__el">
+                                        <label class="filter__el" for="investor">Инвестора</label>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <table class="table">
 
@@ -39,7 +60,7 @@
 
                 <tbody>
 
-                    <tr v-for="user in users" :key="user.id">
+                    <tr v-for="user in filteredProjects" :key="user.id">
 
                         <td>{{user.id}}</td>
 
@@ -70,21 +91,78 @@
 <script>
 export default {
     data: () => ({
-        users: []
+        users: [],
+        searchValue: '',
+        sortedProjects: [],
+        isVisible: false,
+        ordering: ''
     }),
     mounted(){
-        axios(
+        this.getUserList()
+    },
+    methods: {
+        sortProjectsBySearchValue(value){
+            this.sortedProjects = this.users
+            if(value){
+                this.sortedProjects = this.sortedProjects.filter(function(item){
+                    return item.first_name.toLowerCase().includes(value.toLowerCase())
+                }) 
+            }   else{
+                    this.sortedProjects = this.users;
+                }
+        },
+        sortByRole(value){
+            axios(
                 {
                     method: 'GET',
                     url: 'http://127.0.0.1:8000/api/v1/admin/user/user-list/',
+                    params: {
+                        role: value
+                    },
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken')
                     }
                 },
         )
-        .then((response) => {
-            this.users = response.data
-        })
+        },
+        getUserList(value){
+            axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/admin/user/user-list/',
+                    params: {
+                        role: value
+                    },
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+            )
+            .then((response) => {
+                this.users = response.data
+            })
+        },
+        clearInvestor(){
+            this.ordering = ''
+        }
+    },
+    watch: {
+        SEARCH_VALUE(){
+            this.sortProjectsBySearchValue(this.searchValue)
+        },
+        ordering() {
+            this.getUserList(this.ordering)
+        }
+    },
+    computed:{
+        filteredProjects(){
+            if(this.sortedProjects.length){
+                return this.sortedProjects
+            }
+            else{
+                return this.users
+            }
+        }
     }
 }
 </script>
@@ -152,4 +230,56 @@ export default {
     font-size: 16px
 }
 
+
+.request-search {
+
+		&__inner {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0 0 0;
+		}
+
+		&__form {
+            display: flex;
+            align-items: center;
+		}
+
+		&__input {
+            width: 770px - 80px;
+            height: 70px;
+            background: #FFFFFF;
+            padding: 0 0 0 30px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            font-weight: 500;
+            font-size: 23px;
+            line-height: 27px;
+		}
+
+		&__filter {
+            padding: 0 20px;
+            font-size: 18px;
+            background: #FFFFFF;
+		}
+
+		&__btn {
+            width: 80px;
+            height: 70px;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+		}
+
+		&__add-btn {
+            display: block;
+            width: 261px;
+            height: 70px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 26px;
+            padding: 22px 30px;
+            color: rgba(255, 255, 255, 1);
+            margin: 0 0 0 20px;
+		}
+}
 </style>
