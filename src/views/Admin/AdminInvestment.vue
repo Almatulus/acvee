@@ -125,6 +125,19 @@ export default {
         .then((response) => {
             this.stages_list = response.data
         })
+    },
+    methods:{
+        submitHandler(){
+            axios.post('api/v1/admin/investor/update-stage/' + localStorage.getItem('id') + '/',
+            {
+                step: this.stage_value
+            },
+            {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+                }
+            })
+        }
     }
 }
 </script>

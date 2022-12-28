@@ -37,8 +37,7 @@
                             <td>{{loan.user_name}}</td>
                             <td>{{loan.project_name}}</td>
                             <td>
-                                <div style="color: green;" v-if="loan.status == 'approved'" class="">Одобрено</div>
-                                <div style="color: black;" v-if="loan.status == 'pending'" class="">В ожидании</div>
+                                {{loan.stage}}
                             </td>
                             <td>{{loan.amount_received}}</td>
                             <td>
