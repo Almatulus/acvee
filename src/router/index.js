@@ -202,6 +202,12 @@ const routes = [
     meta: {layout: 'admin'},
     component: () => import('../views/Admin/AdminInvestments.vue')
   },
+  {
+    path: '/admin/investment/:id',
+    name: 'admin-investment',
+    meta: {layout: 'admin'},
+    component: () => import('../views/Admin/AdminInvestment.vue')
+  },
 ]
 
 const router = new VueRouter({

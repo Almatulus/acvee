@@ -31,7 +31,9 @@
                             <td>{{investment.investment_sum}}</td>
                             <td>{{investment.status}}</td>
                             <td>
-                                <router-link to="">Перейти</router-link>
+                                <router-link :to="{name: 'admin-investment', params: {id: investment.id}}">
+                                    <a  @click="getID(investment.id)" href="">Перейти</a>
+                                </router-link>
                             </td>
                         </tr>
 
@@ -61,6 +63,11 @@ export default {
         .then((response) => {
             this.investments = response.data
         })
+    },
+    methods: {
+        getID(value){
+            localStorage.setItem('id', value)
+        }
     }
 }
 </script>
@@ -97,5 +104,8 @@ export default {
 	padding: 15px;
     text-align: center;
     font-size: 16px
+}
+a{
+    color: #0345FF;
 }
 </style>
