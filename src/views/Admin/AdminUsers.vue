@@ -49,9 +49,14 @@
 
                         <td>{{user.email}}</td>
 
-                        <td>4</td>
+                        <td>
+                            <div v-if="user.user_type == 'investor'" class="">Инвестор</div>
+                            <div v-if="user.user_type == 'borrower'" class="">Заемщик</div>
+                        </td>
 
-                        <td>0.1</td>
+                        <td>
+                            <router-link to="">Перейти</router-link>
+                        </td>
 
                     </tr>
 
@@ -84,7 +89,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .admin-users {
 
 		&__inner {
@@ -113,6 +118,38 @@ export default {
             font-size: 18px;
             padding: 15px;
 		}
+}
+
+.table {
+
+	width: 100%;
+
+	margin-bottom: 20px;
+
+	border: 1px solid #0345FF;
+
+	border-collapse: collapse; 
+    margin: 20px 0 0 0;
+}
+
+.table th {
+
+	font-weight: bold;
+
+	padding: 5px;
+
+	background: #0345FF;
+    color: #fff;
+    padding: 15px;
+	border: 1px solid #0345FF;
+    font-size: 18px;
+}
+
+.table td {
+
+	padding: 15px;
+    text-align: center;
+    font-size: 16px
 }
 
 </style>

@@ -38,11 +38,11 @@
                             <td>{{loan.project_name}}</td>
                             <td>
                                 <div style="color: green;" v-if="loan.status == 'approved'" class="">Одобрено</div>
-                                <div style="color: green;" v-if="loan.status == ''" class="">Отказано</div>
+                                <div style="color: black;" v-if="loan.status == 'pending'" class="">В ожидании</div>
                             </td>
                             <td>{{loan.amount_received}}</td>
                             <td>
-                                <router-link to="">Перейти</router-link>
+                                <router-link :to="{name: 'admin-loan', params: {id: loan.id}}"><a @click="getID(loan.id)" href="">Перейти</a></router-link>
                             </td>
                         </tr>
 
@@ -74,6 +74,50 @@ export default {
         .then((response) => {
             this.loans = response.data
         })
+    },
+    methods: {
+        getID(value){
+            localStorage.setItem('id', value)
+        }
     }
 }
 </script>
+
+
+<style lang="scss" scoped>
+.table {
+
+	width: 100%;
+
+	margin-bottom: 20px;
+
+	border: 1px solid #0345FF;
+
+	border-collapse: collapse; 
+    margin: 20px 0 0 0;
+}
+
+.table th {
+
+	font-weight: bold;
+
+	padding: 5px;
+
+	background: #0345FF;
+    color: #fff;
+    padding: 15px;
+	border: 1px solid #0345FF;
+    font-size: 18px;
+}
+
+.table td {
+
+	padding: 15px;
+    text-align: center;
+    font-size: 16px
+}
+
+a{
+    color: #0345FF;
+}
+</style>

@@ -64,3 +64,38 @@ export default {
     }
 }
 </script>
+
+
+<style lang="scss" scoped>
+.table {
+
+	width: 100%;
+
+	margin-bottom: 20px;
+
+	border: 1px solid #0345FF;
+
+	border-collapse: collapse; 
+    margin: 20px 0 0 0;
+}
+
+.table th {
+
+	font-weight: bold;
+
+	padding: 5px;
+
+	background: #0345FF;
+    color: #fff;
+    padding: 15px;
+	border: 1px solid #0345FF;
+    font-size: 18px;
+}
+
+.table td {
+
+	padding: 15px;
+    text-align: center;
+    font-size: 16px
+}
+</style>

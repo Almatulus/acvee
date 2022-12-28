@@ -185,6 +185,12 @@ const routes = [
     component: () => import('../views/Admin/AdminLoans.vue')
   },
   {
+    path: '/admin/loan/:id',
+    name: 'admin-loan',
+    meta: {layout: 'admin'},
+    component: () => import('../views/Admin/AdminLoan.vue')
+  },
+  {
     path: '/admin/projects/investor',
     name: 'admin-projects-investor',
     meta: {layout: 'admin'},
