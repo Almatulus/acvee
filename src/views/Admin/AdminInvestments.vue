@@ -40,7 +40,7 @@
                     </tbody>
 
             </table>
-            {{investments}}
+            
         </div>
     </div>
 </template>

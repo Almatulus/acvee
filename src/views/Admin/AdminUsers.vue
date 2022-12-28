@@ -17,16 +17,16 @@
                         <div class="filter__inner">
                             <div class="filter__row">
                                 <div class="filter__column">
-                                    <div class="filter__title">
+                                    <div style="display:flex;" class="filter__title">
                                         Роль
+                                        <div style="margin-left: 15px;" @click="clearInvestor()" class="">X</div>
                                     </div>
                                     <div class="filter__filters">
-                                        <input id="borrower" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" value="borrower" class="filter__el">
+                                        <input id="borrower" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" value="borrower" class="filter__el filter__input">
                                         <label class="filter__el" for="borrower">Заемщики</label>
-                                        <div @click="clearInvestor()" class="">X</div>
                                     </div>
                                     <div class="filter__filters">
-                                        <input id="investor" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" value="investor" class="filter__el">
+                                        <input id="investor" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" value="investor" class="filter__el filter__input">
                                         <label class="filter__el" for="investor">Инвестора</label>
                                     </div>
                                     
@@ -230,8 +230,10 @@ export default {
     font-size: 16px
 }
 
-
-.request-search {
+.filter-active{
+        color: #0345FF;
+    }
+    .request-search {
 
 		&__inner {
             display: flex;
@@ -242,6 +244,7 @@ export default {
 		&__form {
             display: flex;
             align-items: center;
+            
 		}
 
 		&__input {
@@ -260,6 +263,9 @@ export default {
             padding: 0 20px;
             font-size: 18px;
             background: #FFFFFF;
+            input{
+                display: none;
+            }
 		}
 
 		&__btn {
@@ -281,5 +287,53 @@ export default {
             color: rgba(255, 255, 255, 1);
             margin: 0 0 0 20px;
 		}
+}
+
+.filter {
+        background: #FFFFFF;
+        box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
+        border-radius: 10px;
+        margin: 20px 0 0 0;
+		&__inner {
+            padding: 35px;
+		}
+
+		&__row {
+            display: flex;
+            justify-content: space-around;
+		}
+
+		&__column {
+		}
+
+		&__title {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 24px;
+            padding: 0 0 27px 0;
+            border-bottom: 0.5px solid rgba(51, 51, 51, 0.6);;
+		}
+
+		&__filters {
+            display: flex;
+            flex-direction: column;
+		}
+
+		&__el {
+            margin: 15px 0 0 0;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 21px;
+            &:first-child{
+                margin: 20px 0 0 0;
+            }
+            &:hover{
+                color: #6E64E7;
+            }
+		}
+}
+
+.filter__input{
+    display: none;
 }
 </style>

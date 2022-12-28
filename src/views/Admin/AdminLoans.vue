@@ -3,6 +3,34 @@
         <div class="admin-loans__inner">
             <h2>Займы</h2>
             <div class="admin-loans__content">
+                <div id='request-search' class="request-search">
+                    <div class="request-search__inner">
+                        <form action="" class="request-search__form">
+                            <input v-model="searchValue" placeholder="Вводите название запроса" type="text" class="request-search__input">
+                            <a v-on:click.prevent='isVisible = !isVisible' :class="{'filter-active':isVisible}" href="" class="request-search__filter icon-filter"></a>
+                            <button @click.prevent="sortProjectsBySearchValue(searchValue)" class="request-search__btn button">
+                                <img src="../../assets/img/icons/search.svg" alt="search">
+                            </button>
+                        </form>
+                    </div>
+                    <div v-if="isVisible == true" class="filter">
+                        <div class="filter__inner">
+                            <div class="filter__row">
+                                <div class="filter__column">
+                                    <div class="filter__title">
+                                        Статус
+                                    </div>
+                                    <div v-for="stage in status_list" :key="stage.id" class="filter__filters">
+                                        <input :id="stage.step" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" :value="stage.step" class="filter__el">
+                                        <label class="filter__el" :for="stage.step">{{stage.stage_name}}</label>
+                                        <div @click="clearInvestor()" class="">X</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <table class="table">
 
                     <thead>
@@ -37,7 +65,7 @@
                             <td>{{loan.user_name}}</td>
                             <td>{{loan.project_name}}</td>
                             <td>
-                                {{loan.stage}}
+                                {{loan.stage.stage_name}}
                             </td>
                             <td>{{loan.amount_received}}</td>
                             <td>
@@ -46,10 +74,10 @@
                         </tr>
 
                     </tbody>
-
+                    
                 </table>
             </div>
-            {{loans}}
+            
         </div>
     </div>
 </template>
@@ -58,25 +86,54 @@
 <script>
 export default {
     data: () => ({
-        loans: []
+        loans: [],
+        isVisible: false,
+        status_list: [],
+        ordering: ''
     }),
     mounted(){
-        axios(
+        this.getLoansList(),
+        this.getStatusList()
+    },
+    methods: {
+        getID(value){
+            localStorage.setItem('id', value)
+        },
+        getStatusList(){
+            axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/admin/borrower/stages-list/',
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+            )
+            .then((response) => {
+                this.status_list = response.data
+            })
+        },
+        getLoansList(value){
+            axios(
                 {
                     method: 'GET',
                     url: 'http://127.0.0.1:8000/api/v1/admin/loan-list/',
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    },
+                    params: {
+                        stage: value
                     }
                 },
-        )
-        .then((response) => {
-            this.loans = response.data
-        })
+            )
+            .then((response) => {
+                this.loans = response.data
+            })
+        }
     },
-    methods: {
-        getID(value){
-            localStorage.setItem('id', value)
+    watch: {
+        ordering() {
+            this.getLoansList(this.ordering)
         }
     }
 }
@@ -118,5 +175,57 @@ export default {
 
 a{
     color: #0345FF;
+}
+
+.request-search {
+
+		&__inner {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0 0 0;
+		}
+
+		&__form {
+            display: flex;
+            align-items: center;
+		}
+
+		&__input {
+            width: 770px - 80px;
+            height: 70px;
+            background: #FFFFFF;
+            padding: 0 0 0 30px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            font-weight: 500;
+            font-size: 23px;
+            line-height: 27px;
+		}
+
+		&__filter {
+            padding: 0 20px;
+            font-size: 18px;
+            background: #FFFFFF;
+		}
+
+		&__btn {
+            width: 80px;
+            height: 70px;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+		}
+
+		&__add-btn {
+            display: block;
+            width: 261px;
+            height: 70px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 26px;
+            padding: 22px 30px;
+            color: rgba(255, 255, 255, 1);
+            margin: 0 0 0 20px;
+		}
 }
 </style>

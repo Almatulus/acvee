@@ -63,7 +63,7 @@
                 </tbody>
 
             </table>
-            {{borrowers}}
+            
         </div>
     </div>
 </template>
