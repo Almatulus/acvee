@@ -128,7 +128,7 @@ export default {
     },
     methods:{
         submitHandler(){
-            axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/update-stage' + localStorage.getItem('id'),
+            axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/update-stage/' + localStorage.getItem('id'),
             {
                 step: this.stage_value
             },
