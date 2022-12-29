@@ -8,7 +8,7 @@
                         <form action="" class="request-search__form">
                             <input v-model="searchValue" placeholder="Вводите название запроса" type="text" class="request-search__input">
                             <a v-on:click.prevent='isVisible = !isVisible' :class="{'filter-active':isVisible}" href="" class="request-search__filter icon-filter"></a>
-                            <button @click.prevent="sortProjectsBySearchValue(searchValue)" class="request-search__btn button">
+                            <button class="request-search__btn button">
                                 <img src="../../assets/img/icons/search.svg" alt="search">
                             </button>
                         </form>
@@ -22,12 +22,12 @@
                                         
                                     </div>
                                     <div class="filter__filters">
-                                        <input id="borrower" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" value="borrower" class="filter__el filter__input">
+                                        <input id="borrower"  v-model="ordering" type="radio" name="status" value="borrower" class="filter__el filter__input">
                                         <label class="filter__el" for="borrower">Заемщики</label>
                                         <div style="margin-left: 15px;" @click="clearInvestor()" class="close">&#9587;</div>
                                     </div>
                                     <div class="filter__filters">
-                                        <input id="investor" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" value="investor" class="filter__el filter__input">
+                                        <input id="investor"  v-model="ordering" type="radio" name="status" value="investor" class="filter__el filter__input">
                                         <label class="filter__el" for="investor">Инвестора</label>
                                         <div style="margin-left: 15px;" @click="clearInvestor()" class="close">&#9587;</div>
                                     </div>
@@ -60,7 +60,7 @@
 
                 <tbody>
 
-                    <tr v-for="user in filteredProjects" :key="user.id">
+                    <tr v-for="user in users" :key="user.id">
 
                         <td>{{user.id}}</td>
 
@@ -97,16 +97,6 @@ export default {
         this.getUserList()
     },
     methods: {
-        sortProjectsBySearchValue(value){
-            this.sortedProjects = this.users
-            if(value){
-                this.sortedProjects = this.sortedProjects.filter(function(item){
-                    return item.first_name.toLowerCase().includes(value.toLowerCase())
-                }) 
-            }   else{
-                    this.sortedProjects = this.users;
-                }
-        },
         sortByRole(value){
             axios(
                 {
@@ -127,7 +117,7 @@ export default {
                     method: 'GET',
                     url: 'http://127.0.0.1:8000/api/v1/admin/user/user-list/',
                     params: {
-                        role: value
+                        user: value
                     },
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken')
@@ -143,22 +133,12 @@ export default {
         }
     },
     watch: {
-        SEARCH_VALUE(){
-            this.sortProjectsBySearchValue(this.searchValue)
-        },
         ordering() {
             this.getUserList(this.ordering)
         }
     },
     computed:{
-        filteredProjects(){
-            if(this.sortedProjects.length){
-                return this.sortedProjects
-            }
-            else{
-                return this.users
-            }
-        }
+        
     }
 }
 </script>
