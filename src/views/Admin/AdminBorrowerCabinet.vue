@@ -346,13 +346,17 @@ export default {
         SubmitFinance(){
             axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/financing-save/',
                     {
-                        id: localStorage.getItem('id'),
                         debt_amount: this.financingDebtAmount,
                         income_amount: this.financingIncomeAmount,
                         date: this.financingDate,
                         source_of_funds: this.financingSourceOfFunds,
                         balance_owed: this.financingBalanceOwnded,
                         debt_status: this.financingDebtStatus
+                    },
+                    {
+                        headers:{
+                            Authorization: 'Token ' + localStorage.getItem('usertoken')
+                        }
                     }
                 )
         }
