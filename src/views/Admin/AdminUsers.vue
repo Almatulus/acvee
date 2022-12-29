@@ -8,7 +8,7 @@
                         <form action="" class="request-search__form">
                             <input v-model="searchValue" placeholder="Вводите название запроса" type="text" class="request-search__input">
                             <a v-on:click.prevent='isVisible = !isVisible' :class="{'filter-active':isVisible}" href="" class="request-search__filter icon-filter"></a>
-                            <button class="request-search__btn button">
+                            <button @click="searchUser(searchValue)" class="request-search__btn button">
                                 <img src="../../assets/img/icons/search.svg" alt="search">
                             </button>
                         </form>
@@ -97,20 +97,6 @@ export default {
         this.getUserList()
     },
     methods: {
-        sortByRole(value){
-            axios(
-                {
-                    method: 'GET',
-                    url: 'http://127.0.0.1:8000/api/v1/admin/user/user-list/',
-                    params: {
-                        role: value
-                    },
-                    headers:{
-                        Authorization: 'Token ' + localStorage.getItem('usertoken')
-                    }
-                },
-        )
-        },
         getUserList(value){
             axios(
                 {
@@ -118,6 +104,23 @@ export default {
                     url: 'http://127.0.0.1:8000/api/v1/admin/user/user-list/',
                     params: {
                         user: value
+                    },
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+            )
+            .then((response) => {
+                this.users = response.data
+            })
+        },
+        searchUser(value){
+            axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/admin/user/user-list/',
+                    params: {
+                        full_name__contains: value
                     },
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken')
