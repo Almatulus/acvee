@@ -354,9 +354,7 @@ export default {
                         balance_owed: this.financingBalanceOwnded,
                         debt_status: this.financingDebtStatus
                     }
-                ).then((response) => {
-                    
-                })
+                )
         }
     },
     mounted(){
