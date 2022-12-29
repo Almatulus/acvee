@@ -49,12 +49,150 @@
                                 <li @click="financing = false, warehouse = false, shipments = true, earnings = false, activeEl = 3" :class="{'active-el': activeEl === 3}">Отгрузки</li>
                                 <li class="last-tab" @click="financing = false, warehouse = false, shipments = false, earnings = true, activeEl = 4" :class="{'active-el': activeEl === 4}">Заработок</li>
                             </ul>
-                            <div v-if="financing == true" class="admin-cabinet__inputs">
-                                <div class="admin-cabinet__input">
-                                    <input type="text">
-                                    <label for="">sda</label>
+                            <form @submit="SubmitFinance()" v-if="financing == true">
+                                <div class="admin-cabinet__inputs">
+                                    <div class="admin-cabinet__column">
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Сумма долга</label></div>
+                                            <div class=""><input v-model.trim="financingDebtAmount" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Сумма прихода</label></div>
+                                            <div class=""><input v-model.trim="financingIncomeAmount" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Дата</label></div>
+                                            <div class=""><input v-model.trim="financingDate" type="date"></div>
+                                        </div>
+                                    </div>
+                                    <div class="admin-cabinet__column">
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Источник средств</label></div>
+                                            <div class=""><input v-model.trim="financingSourceOfFunds" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Остаток долга</label></div>
+                                            <div class=""><input v-model.trim="financingBalanceOwnded" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Статус долга</label></div>
+                                            <div class="">
+                                                <select v-model.trim="financingDebtStatus" type="text">
+                                                    <option :value="true">Открыт</option>
+                                                    <option :value="false">Закрыт</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <button type="submit" class="button admin-cabinet__button">Сохранить</button>
+                            </form>
+                            <form v-if="warehouse == true" class="admin-cabinet__inputs">
+                                <div class="admin-cabinet__column">
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Артикул</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Наименование товара</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Цена товара</label></div>
+                                        <div class=""><input type="date"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Единица измерения</label></div>
+                                        <div class=""><input type="date"></div>
+                                    </div>
+                                </div>
+                                <div class="admin-cabinet__column">
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Кол-во</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Дата поступления на склад</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Остаток на складе кол-во</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">цена</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                </div>
+                            </form>
+                            <form v-if="shipments == true" class="admin-cabinet__inputs">
+                                <div class="admin-cabinet__column">
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Закупочная цена товара</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Цена продажи</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Отгружено, кол-во</label></div>
+                                        <div class=""><input type="date"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Отгружено на сумму</label></div>
+                                        <div class=""><input type="date"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Получатель груза</label></div>
+                                        <div class=""><input type="date"></div>
+                                    </div>
+                                </div>
+                                <div class="admin-cabinet__column">
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">№ ТТН</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">№ Счета</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Получено cредств</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Комиссия FullFilment</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Заработок</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                </div>
+                            </form>
+                            <form v-if="earnings == true" class="admin-cabinet__inputs">
+                                <div class="admin-cabinet__column">
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">ТТН</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Сумма прихода по отгруженному товару</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                </div>
+                                <div class="admin-cabinet__column">
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Комиссия Фулфимлента 8%</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                    <div class="admin-cabinet__input">
+                                        <div class=""><label for="">Заработок</label></div>
+                                        <div class=""><input type="text"></div>
+                                    </div>
+                                </div>
+                            </form>
                             <div v-if="financing == true" class="project-details__financing">
                                 <h3>Платежи по долгу</h3>
                                 <table class="table">
@@ -177,14 +315,20 @@ export default {
         financingData: [],
         warehouseData: [],
         shipmentsData: [],
-        earningsData: []
+        earningsData: [],
+        financingDebtAmount: '',
+        financingIncomeAmount: '',
+        financingDate: '',
+        financingSourceOfFunds: '',
+        financingBalanceOwnded: '',
+        financingDebtStatus: ''
     }),
     methods:{
         getProjectDetails(){
             axios(
                 {
                     method: 'GET',
-                    url: 'http://127.0.0.1:8000/api/v1/borrower/financing/' + localStorage.getItem('ID'),
+                    url: 'http://127.0.0.1:8000/api/v1/borrower/financing/' + localStorage.getItem('id'),
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken')
                     }
@@ -196,7 +340,23 @@ export default {
                 this.shipmentsData = response.data.shipment
                 this.earningsData = response.data.earning
                 console.log(response.data)
+                
             }) 
+        },
+        SubmitFinance(){
+            axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/financing-save/',
+                    {
+                        id: localStorage.getItem('id'),
+                        debt_amount: this.financingDebtAmount,
+                        income_amount: this.financingIncomeAmount,
+                        date: this.financingDate,
+                        source_of_funds: this.financingSourceOfFunds,
+                        balance_owed: this.financingBalanceOwnded,
+                        debt_status: this.financingDebtStatus
+                    }
+                ).then((response) => {
+                    
+                })
         }
     },
     mounted(){
@@ -304,5 +464,40 @@ export default {
 .active-el{
     background: #0345FF;
     color: #FFFFFF;
+}
+
+.admin-cabinet {
+
+		&__inputs {
+            display: flex;
+            justify-content: space-around;
+		}
+
+		&__column {
+            flex: 0 1 50%;
+		}
+
+		&__input {
+            display: flex;
+            align-items: center;
+            margin: 20px 0 0 0;
+            label{
+                font-size: 18px;
+                font-weight: 500;
+            }
+            input{
+                background: #FFFFFF;
+                box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
+                border-radius: 10px;
+                height: 50px;
+                width: 200px;
+                margin-left: 15px;
+            }
+		}
+}
+
+.admin-cabinet__button{
+    padding: 10px;
+    margin: 10px 0 0 0;
 }
 </style>
