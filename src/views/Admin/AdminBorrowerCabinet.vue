@@ -364,6 +364,9 @@ export default {
     },
     mounted(){
         this.getProjectDetails()
+    },
+    watch(){
+        this.getProjectDetails()
     }
 }
 </script>
