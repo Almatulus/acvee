@@ -26,10 +26,10 @@
 
                         <tr v-for="investment in investments" :key="investment.id">
 
-                            <td>{{investment.id}}</td>
+                            <td style="width: 100px;">{{investment.id}}</td>
                             <td>{{investment.user_name}}</td>
                             <td>{{investment.investment_sum}}</td>
-                            <td>{{investment.stage}}</td>
+                            <td>{{investment.treaty_status.name}}</td>
                             <td>
                                 <router-link :to="{name: 'admin-investment', params: {id: investment.id}}">
                                     <a  @click="getID(investment.id)" href="">Перейти</a>

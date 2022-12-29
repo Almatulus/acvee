@@ -29,8 +29,6 @@
 
                         <th>Сумма оставшегося долга</th>
 
-                        <th>Управление статусом займа</th>
-
                         <th>Управление кабинетом</th>
 
                     </tr>
@@ -48,12 +46,9 @@
                         <td>{{borrower.borrower_application}}</td>
                         
                         <td>{{borrower.amount_received}}</td>
+                        
 
                         <td>{{}}</td>
-
-                        <td>
-                            <router-link to="">Перейти</router-link>
-                        </td>
 
                         <td>
                             <router-link :to="{name: 'admin-projects-borrower-cabinet', params: {id: borrower.id}}"><a @click="getID(borrower.id)" href="">Перейти</a></router-link>
@@ -61,7 +56,7 @@
                     </tr>
 
                 </tbody>
-
+                
             </table>
             
         </div>

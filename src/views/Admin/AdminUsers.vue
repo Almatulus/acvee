@@ -54,8 +54,6 @@
 
                         <th>Роль</th>
 
-                        <th>Cсылка</th>
-
                     </tr>
 
                 </thead>
@@ -75,10 +73,6 @@
                         <td>
                             <div v-if="user.user_type == 'investor'" class="">Инвестор</div>
                             <div v-if="user.user_type == 'borrower'" class="">Заемщик</div>
-                        </td>
-
-                        <td>
-                            <router-link to="">Перейти</router-link>
                         </td>
 
                     </tr>

@@ -50,12 +50,12 @@
 
                         <td>{{investor.investment_sum}}</td>
 
-                        <td>{{investor.treaty_status}}</td>
+                        <td>{{investor.treaty_status.name}}</td>
 
                         <td>Перейти</td>
 
                     </tr>
-
+                
                 </tbody>
 
             </table>
