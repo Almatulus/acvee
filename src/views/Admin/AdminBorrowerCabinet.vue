@@ -99,11 +99,11 @@
                                     </div>
                                     <div class="admin-cabinet__input">
                                         <div class=""><label for="">Цена товара</label></div>
-                                        <div class=""><input type="date"></div>
+                                        <div class=""><input type="text"></div>
                                     </div>
                                     <div class="admin-cabinet__input">
                                         <div class=""><label for="">Единица измерения</label></div>
-                                        <div class=""><input type="date"></div>
+                                        <div class=""><input type="text"></div>
                                     </div>
                                 </div>
                                 <div class="admin-cabinet__column">
@@ -137,15 +137,15 @@
                                     </div>
                                     <div class="admin-cabinet__input">
                                         <div class=""><label for="">Отгружено, кол-во</label></div>
-                                        <div class=""><input type="date"></div>
+                                        <div class=""><input type="text"></div>
                                     </div>
                                     <div class="admin-cabinet__input">
                                         <div class=""><label for="">Отгружено на сумму</label></div>
-                                        <div class=""><input type="date"></div>
+                                        <div class=""><input type="text"></div>
                                     </div>
                                     <div class="admin-cabinet__input">
                                         <div class=""><label for="">Получатель груза</label></div>
-                                        <div class=""><input type="date"></div>
+                                        <div class=""><input type="text"></div>
                                     </div>
                                 </div>
                                 <div class="admin-cabinet__column">
@@ -489,6 +489,13 @@ export default {
                 border-radius: 10px;
                 height: 50px;
                 width: 200px;
+                margin-left: 15px;
+                padding: 10px;
+            }
+            select{
+                width: 100px;
+                height: 40px;
+                padding: 10px;
                 margin-left: 15px;
             }
 		}
