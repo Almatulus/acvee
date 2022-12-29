@@ -366,7 +366,8 @@ export default {
         this.getProjectDetails()
     },
     watch(){
-        this.getProjectDetails()
+        this.getProjectDetails(),
+        this.SubmitFinance()
     }
 }
 </script>
