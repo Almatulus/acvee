@@ -30,6 +30,18 @@
                        <p v-if="$v.secondName.$dirty && !$v.secondName.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                         
                     </div>
+                    <div class="authentication-template__form-item">
+                        <p>Электронная почта</p>
+                        <input 
+                        type="text"
+                        v-model.trim="email"
+                        :class="$v.email.$error ? 'invalid' : ''"
+                        
+                        >
+                       <p v-if="$v.email.$dirty && !$v.email.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                       <p v-if="$v.email.$dirty && !$v.email.email" class="invalid-feedback">Данное поле должно содержать почту</p>
+                        
+                    </div>
                     <div class="authentication-template__button">
                         <button class="button" type="submit">
                             {{buttonText}}
@@ -42,24 +54,26 @@
 </template>
 
 <script>
-import { required} from 'vuelidate/lib/validators'
+import { required, email} from 'vuelidate/lib/validators'
 
 export default {
     data: () => ({
         title: 'Регистрация',
         buttonText: 'Далее',
         firstName: '',
-        secondName: ''
+        secondName: '',
+        email: ''
     }),
     methods:{
         submitHandler(){
-            //this.$v.$touch()
+            this.$v.$touch()
                 if(!this.$v.$error){
                     axios.post('http://127.0.0.1:8000/api/v1/registr-profile/',
                     {
                         first_name: this.firstName,
                         second_name: this.secondName,
-                        user: localStorage.getItem('user_id')
+                        user: localStorage.getItem('user_id'),
+                        email: this.email
                     }
                     ). 
                     then((response) => {
@@ -81,7 +95,8 @@ export default {
     },
     validations: {
         firstName: {required},
-        secondName: {required}
+        secondName: {required},
+        email: {required, email}
     },
 }
 </script>
@@ -95,4 +110,10 @@ export default {
             margin: 30px 0 0 0;
         }
     }
+    .invalid{
+            border-bottom: 0.5px solid #ff0000;
+        }
+        .invalid-feedback{
+            color: #ff0000;
+        }
 </style>

@@ -227,7 +227,7 @@
 
 
 <script>
-import FilePreview from '@/components/documents/FilePreview.vue'
+
 import {mapActions, mapGetters} from 'vuex'
 import { required } from 'vuelidate/lib/validators'
 export default {
@@ -251,7 +251,7 @@ export default {
         },
     }),
     components: {
-        FilePreview
+        
     },
     methods:{
         submitHandler(){

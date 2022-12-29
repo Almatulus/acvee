@@ -350,8 +350,7 @@
 import { required, minLength, email } from 'vuelidate/lib/validators'
 import { IMaskDirective } from 'vue-imask'
 import {mapActions, mapGetters} from 'vuex'
-import FilePreview from '@/components/documents/FilePreview.vue'
-import PreviewFile from '@/components/documents/PreviewFile.vue'
+
 export default {
     data: () => ({
         country: '',
@@ -521,8 +520,7 @@ export default {
         }
     },
     components: {
-        FilePreview,
-        PreviewFile
+        
     }
 }
 </script>

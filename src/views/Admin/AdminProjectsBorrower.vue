@@ -56,7 +56,7 @@
                         </td>
 
                         <td>
-                            <router-link to="">Перейти</router-link>
+                            <router-link :to="{name: 'admin-projects-borrower-cabinet', params: {id: borrower.id}}"><a @click="getID(borrower.id)" href="">Перейти</a></router-link>
                         </td>
                     </tr>
 
@@ -78,7 +78,9 @@ export default {
         
     },
     methods:{
-        
+        getID(value){
+            localStorage.setItem('id', value)
+        }
     },
     mounted(){
         axios(
@@ -215,6 +217,10 @@ export default {
 	padding: 15px;
     text-align: center;
     font-size: 16px
+}
+
+a{
+    color: #0345FF;
 }
 
 </style>

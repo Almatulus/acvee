@@ -19,15 +19,17 @@
                                 <div class="filter__column">
                                     <div style="display:flex;" class="filter__title">
                                         Роль
-                                        <div style="margin-left: 15px;" @click="clearInvestor()" class="">X</div>
+                                        
                                     </div>
                                     <div class="filter__filters">
                                         <input id="borrower" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" value="borrower" class="filter__el filter__input">
                                         <label class="filter__el" for="borrower">Заемщики</label>
+                                        <div style="margin-left: 15px;" @click="clearInvestor()" class="close">&#9587;</div>
                                     </div>
                                     <div class="filter__filters">
                                         <input id="investor" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" value="investor" class="filter__el filter__input">
                                         <label class="filter__el" for="investor">Инвестора</label>
+                                        <div style="margin-left: 15px;" @click="clearInvestor()" class="close">&#9587;</div>
                                     </div>
                                     
                                 </div>
@@ -316,7 +318,7 @@ export default {
 
 		&__filters {
             display: flex;
-            flex-direction: column;
+            align-items: center;
 		}
 
 		&__el {
@@ -335,5 +337,18 @@ export default {
 
 .filter__input{
     display: none;
+}
+
+.active-el{
+    background: #0345FF;
+    color: #FFFFFF;
+}
+
+.close{
+    cursor: pointer;
+    margin-top: 13px;
+    &:hover{
+        color: #0345FF;
+    }
 }
 </style>
