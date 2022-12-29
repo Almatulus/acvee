@@ -141,15 +141,15 @@
                                         </div>
                                         <div class="admin-cabinet__input">
                                             <div class=""><label for="">Отгружено, кол-во</label></div>
-                                            <div class=""><input v-model="shipmentCargoReceiver" type="text"></div>
+                                            <div class=""><input v-model="shipmentShippedAmount" type="text"></div>
                                         </div>
                                         <div class="admin-cabinet__input">
                                             <div class=""><label for="">Отгружено на сумму</label></div>
-                                            <div class=""><input v-model="shipmentFullFillmentComission" type="text"></div>
+                                            <div class=""><input v-model="shipmentShippedSum" type="text"></div>
                                         </div>
                                         <div class="admin-cabinet__input">
                                             <div class=""><label for="">Получатель груза</label></div>
-                                            <div class=""><input v-model="shipmentFundsReceived" type="text"></div>
+                                            <div class=""><input v-model="shipmentCargoReceiver" type="text"></div>
                                         </div>
                                     </div>
                                     <div class="admin-cabinet__column">
@@ -163,15 +163,15 @@
                                         </div>
                                         <div class="admin-cabinet__input">
                                             <div class=""><label for="">Получено cредств</label></div>
-                                            <div class=""><input v-model="shipmentEarnings" type="text"></div>
+                                            <div class=""><input v-model="shipmentFundsReceived" type="text"></div>
                                         </div>
                                         <div class="admin-cabinet__input">
                                             <div class=""><label for="">Комиссия FullFilment</label></div>
-                                            <div class=""><input v-model="shipment" type="text"></div>
+                                            <div class=""><input v-model="shipmentFullFillmentComission" type="text"></div>
                                         </div>
                                         <div class="admin-cabinet__input">
                                             <div class=""><label for="">Заработок</label></div>
-                                            <div class=""><input v-model="shipment" type="text"></div>
+                                            <div class=""><input v-model="shipmentEarnings" type="text"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -331,6 +331,7 @@ export default {
         financingSourceOfFunds: '',
         financingBalanceOwnded: '',
         financingDebtStatus: '',
+
         warehouseVendorCode: '',
         warehouseProductName: '',
         warehouseVendorPrice: '',
@@ -339,15 +340,18 @@ export default {
         warehouseDate: '',
         warehouseStockBalance: '',
         warehousePrice: '',
+
         shipmentPurchasePrice: '',
         shipmentSellingPrice: '',
         shipmentShippedSum: '',
+        shipmentShippedAmount: '',
         shipmentCargoReceiver: '',
         shipmentTTH: '',
         shipmentAccountNumber: '',
         shipmentFundsReceived: '',
         shipmentFullFillmentComission: '',
         shipmentEarnings: '',
+
         earningTTH: '',
         earningShippingReceiptAmount: '',
         earningFullFillmentComission: '',
@@ -416,12 +420,13 @@ export default {
                 })
         },
         SubmitShipment(){
-            axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/financing-save/',
+            axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/shipment-save/',
                     {
                         project: localStorage.getItem('id'),
                         purchase_price: this.shipmentPurchasePrice,
                         selling_price: this.shipmentSellingPrice,
                         shipped_sum: this.shipmentShippedSum,
+                        shipped_amount: this.shipmentShippedAmount,
                         cargo_receiver: this.shipmentCargoReceiver,
                         TTH: this.shipmentTTH,
                         account_number: this.shipmentAccountNumber,
@@ -439,7 +444,7 @@ export default {
                 })
         },
         SubmitEarnings(){
-            axios.post('http://127.0.0.1:8000/api/v1/borrower/earning-save/',
+            axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/earning-save/',
                     {
                         project: localStorage.getItem('id'),
                         TTH: this.earningTTH,
