@@ -87,111 +87,120 @@
                                 </div>
                                 <button type="submit" class="button admin-cabinet__button">Сохранить</button>
                             </form>
-                            <form v-if="warehouse == true" class="admin-cabinet__inputs">
-                                <div class="admin-cabinet__column">
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Артикул</label></div>
-                                        <div class=""><input type="text"></div>
+                            <form @submit="SubmitWarehouse()" v-if="warehouse == true">
+                                <div class="admin-cabinet__inputs">
+                                    <div class="admin-cabinet__column">
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Артикул</label></div>
+                                            <div class=""><input v-model="warehouseVendorCode" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Наименование товара</label></div>
+                                            <div class=""><input v-model="warehouseProductName" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Цена товара</label></div>
+                                            <div class=""><input v-model="warehouseVendorPrice" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Единица измерения</label></div>
+                                            <div class=""><input v-model="warehouseUnit" type="text"></div>
+                                        </div>
                                     </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Наименование товара</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Цена товара</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Единица измерения</label></div>
-                                        <div class=""><input type="text"></div>
+                                    <div class="admin-cabinet__column">
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Кол-во</label></div>
+                                            <div class=""><input v-model="warehouseAmount" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Дата поступления на склад</label></div>
+                                            <div class=""><input v-model="warehouseDate" type="date"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Остаток на складе кол-во</label></div>
+                                            <div class=""><input v-model="warehouseStockBalance" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Цена</label></div>
+                                            <div class=""><input v-model="warehousePrice" type="text"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="admin-cabinet__column">
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Кол-во</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Дата поступления на склад</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Остаток на складе кол-во</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">цена</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                </div>
+                                <button type="submit" class="button admin-cabinet__button">Сохранить</button>
                             </form>
-                            <form v-if="shipments == true" class="admin-cabinet__inputs">
-                                <div class="admin-cabinet__column">
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Закупочная цена товара</label></div>
-                                        <div class=""><input type="text"></div>
+                            <form @submit="SubmitShipment()" v-if="shipments == true">
+                                <div class="admin-cabinet__inputs">
+                                    <div class="admin-cabinet__column">
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Закупочная цена товара</label></div>
+                                            <div class=""><input v-model="shipmentPurchasePrice" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Цена продажи</label></div>
+                                            <div class=""><input v-model="shipmentSellingPrice" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Отгружено, кол-во</label></div>
+                                            <div class=""><input v-model="shipmentCargoReceiver" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Отгружено на сумму</label></div>
+                                            <div class=""><input v-model="shipmentFullFillmentComission" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Получатель груза</label></div>
+                                            <div class=""><input v-model="shipmentFundsReceived" type="text"></div>
+                                        </div>
                                     </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Цена продажи</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Отгружено, кол-во</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Отгружено на сумму</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Получатель груза</label></div>
-                                        <div class=""><input type="text"></div>
+                                    <div class="admin-cabinet__column">
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">№ ТТН</label></div>
+                                            <div class=""><input v-model="shipmentTTH" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">№ Счета</label></div>
+                                            <div class=""><input v-model="shipmentAccountNumber" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Получено cредств</label></div>
+                                            <div class=""><input v-model="shipmentEarnings" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Комиссия FullFilment</label></div>
+                                            <div class=""><input v-model="shipment" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Заработок</label></div>
+                                            <div class=""><input v-model="shipment" type="text"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="admin-cabinet__column">
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">№ ТТН</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">№ Счета</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Получено cредств</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Комиссия FullFilment</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Заработок</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                </div>
+                                <button type="submit" class="button admin-cabinet__button">Сохранить</button>
                             </form>
-                            <form v-if="earnings == true" class="admin-cabinet__inputs">
-                                <div class="admin-cabinet__column">
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">ТТН</label></div>
-                                        <div class=""><input type="text"></div>
+                            <form @submit="SubmitEarnings()" v-if="earnings == true">
+                                <div class="admin-cabinet__inputs">
+                                    <div class="admin-cabinet__column">
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">ТТН</label></div>
+                                            <div class=""><input v-model="earningTTH" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Сумма прихода по отгруженному товару</label></div>
+                                            <div class=""><input v-model="earningShippingReceiptAmount" type="text"></div>
+                                        </div>
                                     </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Сумма прихода по отгруженному товару</label></div>
-                                        <div class=""><input type="text"></div>
+                                    <div class="admin-cabinet__column">
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Комиссия Фулфимлента 8%</label></div>
+                                            <div class=""><input v-model="earningFullFillmentComission" type="text"></div>
+                                        </div>
+                                        <div class="admin-cabinet__input">
+                                            <div class=""><label for="">Заработок</label></div>
+                                            <div class=""><input v-model="earningEarning" type="text"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="admin-cabinet__column">
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Комиссия Фулфимлента 8%</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                    <div class="admin-cabinet__input">
-                                        <div class=""><label for="">Заработок</label></div>
-                                        <div class=""><input type="text"></div>
-                                    </div>
-                                </div>
+                                <button type="submit" class="button admin-cabinet__button">Сохранить</button>
                             </form>
                             <div v-if="financing == true" class="project-details__financing">
                                 <h3>Платежи по долгу</h3>
@@ -321,7 +330,28 @@ export default {
         financingDate: '',
         financingSourceOfFunds: '',
         financingBalanceOwnded: '',
-        financingDebtStatus: ''
+        financingDebtStatus: '',
+        warehouseVendorCode: '',
+        warehouseProductName: '',
+        warehouseVendorPrice: '',
+        warehouseUnit: '',
+        warehouseAmount: '',
+        warehouseDate: '',
+        warehouseStockBalance: '',
+        warehousePrice: '',
+        shipmentPurchasePrice: '',
+        shipmentSellingPrice: '',
+        shipmentShippedSum: '',
+        shipmentCargoReceiver: '',
+        shipmentTTH: '',
+        shipmentAccountNumber: '',
+        shipmentFundsReceived: '',
+        shipmentFullFillmentComission: '',
+        shipmentEarnings: '',
+        earningTTH: '',
+        earningShippingReceiptAmount: '',
+        earningFullFillmentComission: '',
+        earningEarning: ''
     }),
     methods:{
         getProjectDetails(){
@@ -353,6 +383,69 @@ export default {
                         source_of_funds: this.financingSourceOfFunds,
                         balance_owed: this.financingBalanceOwnded,
                         debt_status: this.financingDebtStatus
+                    },
+                    {
+                        headers:{
+                            Authorization: 'Token ' + localStorage.getItem('usertoken')
+                        }
+                    }
+                ).then((response) => {
+                    this.getProjectDetails()
+                })
+        },
+        SubmitWarehouse(){
+            axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/warehouse-save/',
+                    {
+                        project: localStorage.getItem('id'),
+                        vendor_code: this.warehouseVendorCode,
+                        product_name: this.warehouseProductName,
+                        product_price: this.warehouseVendorPrice,
+                        unit: this.warehouseUnit,
+                        amount: this.warehouseAmount,
+                        date: this.warehouseDate,
+                        stock_balance: this.warehouseStockBalance,
+                        price: this.warehousePrice
+                    },
+                    {
+                        headers:{
+                            Authorization: 'Token ' + localStorage.getItem('usertoken')
+                        }
+                    }
+                ).then((response) => {
+                    this.getProjectDetails()
+                })
+        },
+        SubmitShipment(){
+            axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/financing-save/',
+                    {
+                        project: localStorage.getItem('id'),
+                        purchase_price: this.shipmentPurchasePrice,
+                        selling_price: this.shipmentSellingPrice,
+                        shipped_sum: this.shipmentShippedSum,
+                        cargo_receiver: this.shipmentCargoReceiver,
+                        TTH: this.shipmentTTH,
+                        account_number: this.shipmentAccountNumber,
+                        funds_received: this.shipmentFundsReceived,
+                        fulfilment_commission: this.shipmentFullFillmentComission,
+                        earnings: this.shipmentEarnings
+                    },
+                    {
+                        headers:{
+                            Authorization: 'Token ' + localStorage.getItem('usertoken')
+                        }
+                    }
+                ).then((response) => {
+                    this.getProjectDetails()
+                })
+        },
+        SubmitEarnings(){
+            axios.post('http://127.0.0.1:8000/api/v1/borrower/earning-save/',
+                    {
+                        project: localStorage.getItem('id'),
+                        TTH: this.earningTTH,
+                        shipping_receipt_amount: this.earningShippingReceiptAmount,
+                        fullfilment_commission: this.earningFullFillmentComission,
+                        earning: this.earningEarning
                     },
                     {
                         headers:{
