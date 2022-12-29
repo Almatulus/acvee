@@ -8,7 +8,7 @@
             <div class="project-details">
                 <div class="project-details__inner">
                     <div class="project-details__content">
-                        <div class="project-details__main">
+                        <!--<div class="project-details__main">
                             <div class="project-details__item">
                                 <div class="project-details__header">
                                     Сумма финансирования
@@ -41,7 +41,7 @@
                                     30000 тг
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="project-details__tables">
                             <ul class="table-tabs">
                                 <li class="first-tab" @click="financing = true, warehouse = false, shipments = false, earnings = false, activeEl = 1" :class="{'active-el': activeEl === 1}">Финансирование</li>
