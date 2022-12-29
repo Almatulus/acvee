@@ -106,7 +106,7 @@ export default {
     },
     methods: {
         submitHandler(){
-            this.$v.$touch()
+            //this.$v.$touch()
             if(!this.$v.$error){
                 
                 axios.post('http://127.0.0.1:8000/api/v1/auth/token/login/',
