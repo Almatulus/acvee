@@ -359,7 +359,9 @@ export default {
                             Authorization: 'Token ' + localStorage.getItem('usertoken')
                         }
                     }
-                )
+                ).then((response) => {
+                    this.getProjectDetails()
+                })
         }
     },
     mounted(){
@@ -433,7 +435,7 @@ export default {
 	border: 1px solid #dddddd;
 
 	border-collapse: collapse; 
-    margin: 40px 0 0 0;
+    margin-top: 40px;
 }
 
 .table th {
