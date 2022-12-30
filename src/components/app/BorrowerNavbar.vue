@@ -6,7 +6,7 @@
         </a>
         <nav class="sidebar__body">
             <ul>
-                <router-link tag="li" active-class="active" to="/myrequest/questionnaire" >
+                <router-link tag="li" active-class="active" to="/questionnaire" >
                     <a href="" class="sidebar__link icon-my-application">
                         <span>Анкета</span>
                     </a>

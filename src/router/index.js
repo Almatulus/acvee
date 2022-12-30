@@ -71,7 +71,7 @@ const routes = [
     component: () => import('../views/Borrower/BorrowerAfterQuestionnaire.vue')
   },
   {
-    path: '/myrequest/questionnaire',
+    path: '/questionnaire',
     name: 'myrequest-questionnaire',
     meta: {layout: 'borrower'},
     component: () => import('../views/Borrower/Questionnaire.vue')

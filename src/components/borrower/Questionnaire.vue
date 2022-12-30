@@ -77,6 +77,7 @@
                         @keypress="isNumber"
                     >
                     <p v-if="$v.form.UIN.$dirty && !$v.form.UIN.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
+                    <p v-if="$v.form.UIN.$dirty && !$v.form.UIN.minLength" class="questionnaire-invalid-feedback">Данное поле должно содержать 12 символов</p>
 
                     <input placeholder="Контактный номер" 
                         type="text" 
@@ -100,7 +101,7 @@
                         :class="$v.form.email.$error ? 'questionnaire-input-invalid' : ''"
                     >
                     <p v-if="$v.form.email.$dirty && !$v.form.email.required" class="questionnaire-invalid-feedback">Обязательное поле для заполнения</p>
-
+                    <p v-if="$v.form.email.$dirty && !$v.form.email.email" class="questionnaire-invalid-feedback">Данное поле должно содержать электронную почту</p>
                     <input 
                         v-model="form.businessDescription"
                         placeholder="Опишите ваш бизнес" 
@@ -130,6 +131,7 @@
                                     placeholder="Цена" 
                                     class="questionnaire__input" 
                                     type="text"
+                                    maxlength="8"
                                     v-model.trim="form.productPrice"
                                     @keypress="isNumber"
                                     :class="$v.form.productPrice.$error ? 'questionnaire-input-invalid' : ''"
@@ -175,7 +177,7 @@
                                     placeholder="Прибыль" 
                                     class="questionnaire__input" 
                                     type="text"
-                                    maxlength="10"
+                                    maxlength="8"
                                     v-model.trim="form.profit"
                                     @keypress="isNumber"
                                     :class="$v.form.profit.$error ? 'questionnaire-input-invalid' : ''"
@@ -194,7 +196,7 @@
                                             type="radio" 
                                             name="credit" 
                                             id="creditChoiceYes" 
-                                            maxlength="10"
+                                            maxlength="8"
                                             :value="true" 
                                             v-model.trim="form.hasCredit"
                                             :class="$v.form.hasCredit.$error ? 'questionnaire-input-invalid' : ''"
@@ -223,7 +225,7 @@
                                         placeholder="Сумма" 
                                         class="questionnaire__input" 
                                         type="text"
-                                        maxlength="10"
+                                        maxlength="8"
                                         v-model.trim="form.creditSum"
                                         @keypress="isNumber"
                                         :class="$v.form.creditSum.$error ? 'questionnaire-input-invalid' : ''"
@@ -249,6 +251,7 @@
                                         placeholder="Ежемесячные выплаты" 
                                         class="questionnaire__input" 
                                         type="text"
+                                        maxlength="8"
                                         v-model.trim="form.creditMonthlyPayment"
                                         @keypress="isNumber"
                                         :class="$v.form.creditMonthlyPayment.$error ? 'questionnaire-input-invalid' : ''"
@@ -277,7 +280,7 @@
                                     placeholder="Сумма" 
                                     class="questionnaire__input" 
                                     
-                                    maxlength="10"
+                                    maxlength="8"
                                     v-model.trim="form.neededSum"
                                     @keypress="isNumber"
                                     :class="$v.form.neededSum.$error ? 'questionnaire-input-invalid' : ''"
@@ -451,7 +454,7 @@ export default {
             }
         },*/
         submitHandler(value){
-            //this.$v.form.$touch()
+            this.$v.form.$touch()
             if(!this.$v.form.$error){
                 //this.GET_QUESTIONNAIREFORMSTATE_TO_VUEX(value)
                 localStorage.setItem('questionnaire', JSON.stringify(value))
