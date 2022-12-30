@@ -6,11 +6,19 @@
                 <div id='request-search' class="request-search">
                     <div class="request-search__inner">
                         <form action="" class="request-search__form">
-                            <input v-model="searchValue" placeholder="Вводите название запроса" type="text" class="request-search__input">
+                            <input v-if="isName == true" v-model="searchName" placeholder="Введите имя пользователя" type="text" class="request-search__input">
+                            <input v-if="isName == false" v-model="searchEmail" placeholder="Вводите почту пользователя" type="text" class="request-search__input">
                             <a v-on:click.prevent='isVisible = !isVisible' :class="{'filter-active':isVisible}" href="" class="request-search__filter icon-filter"></a>
-                            <button @click="searchUser(searchValue)" class="request-search__btn button">
+                            <button v-if="isName == true" @click="searchUser(searchName, '')" class="request-search__btn button">
                                 <img src="../../assets/img/icons/search.svg" alt="search">
                             </button>
+                            <button v-if="isName == false" @click="searchUser('', searchEmail)" class="request-search__btn button">
+                                <img src="../../assets/img/icons/search.svg" alt="search">
+                            </button>
+                            <select style="margin-left: 15px; font-size: 15px; border-radius: 0" v-model="isName" name="" id="">
+                                <option :value="true">Поиск по имени</option>
+                                <option :value="false">Поиск по почте</option>
+                            </select>
                         </form>
                     </div>
                     <div v-if="isVisible == true" class="filter">
@@ -88,10 +96,12 @@
 export default {
     data: () => ({
         users: [],
-        searchValue: '',
+        searchName: '',
         sortedProjects: [],
         isVisible: false,
-        ordering: ''
+        ordering: '',
+        searchEmail: '',
+        isName: true
     }),
     mounted(){
         this.getUserList()
@@ -114,13 +124,14 @@ export default {
                 this.users = response.data
             })
         },
-        searchUser(value){
+        searchUser(searchName, searchEmail){
             axios(
                 {
                     method: 'GET',
                     url: 'http://127.0.0.1:8000/api/v1/admin/user/user-list/',
                     params: {
-                        full_name__contains: value
+                        full_name__contains: searchName,
+                        email__contains: searchEmail
                     },
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken')
