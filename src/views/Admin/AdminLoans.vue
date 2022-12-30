@@ -21,9 +21,9 @@
                                         Статус
                                     </div>
                                     <div v-for="stage in status_list" :key="stage.id" class="filter__filters">
-                                        <input :id="stage.step" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" :value="stage.step" class="filter__el">
+                                        <input :id="stage.step" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" :value="stage.step" class="filter__el filter__input">
                                         <label class="filter__el" :for="stage.step">{{stage.stage_name}}</label>
-                                        <div @click="clearInvestor()" class="">X</div>
+                                        <div @click="clearInvestor()" style="margin-left: 15px;" class="close">&#9587;</div>
                                     </div>
                                     
                                 </div>
@@ -129,6 +129,9 @@ export default {
             .then((response) => {
                 this.loans = response.data
             })
+        },
+        clearInvestor(){
+            this.ordering = ''
         }
     },
     watch: {
@@ -227,5 +230,61 @@ a{
             color: rgba(255, 255, 255, 1);
             margin: 0 0 0 20px;
 		}
+}
+
+.filter {
+        background: #FFFFFF;
+        box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
+        border-radius: 10px;
+        margin: 20px 0 0 0;
+		&__inner {
+            padding: 35px;
+		}
+
+		&__row {
+            display: flex;
+            justify-content: space-around;
+		}
+
+		&__column {
+		}
+
+		&__title {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 24px;
+            padding: 0 0 27px 0;
+            border-bottom: 0.5px solid rgba(51, 51, 51, 0.6);;
+		}
+
+		&__filters {
+            display: flex;
+            align-items: center;
+		}
+
+		&__el {
+            margin: 15px 0 0 0;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 21px;
+            &:first-child{
+                margin: 20px 0 0 0;
+            }
+            &:hover{
+                color: #6E64E7;
+            }
+		}
+}
+
+.close{
+    cursor: pointer;
+    margin-top: 13px;
+    &:hover{
+        color: #0345FF;
+    }
+}
+
+.filter__input{
+    display: none;
 }
 </style>
