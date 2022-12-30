@@ -451,7 +451,7 @@ export default {
             }
         },*/
         submitHandler(value){
-            this.$v.form.$touch()
+            //this.$v.form.$touch()
             if(!this.$v.form.$error){
                 //this.GET_QUESTIONNAIREFORMSTATE_TO_VUEX(value)
                 localStorage.setItem('questionnaire', JSON.stringify(value))

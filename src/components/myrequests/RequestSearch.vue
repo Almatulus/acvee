@@ -3,7 +3,7 @@
         <div class="request-search__inner">
             <form action="" class="request-search__form">
                 <input v-model="searchValue" placeholder="Вводите название запроса" type="text" class="request-search__input">
-                <a v-on:click.prevent='isVisible = !isVisible' :class="{'filter-active':isVisible}" href="" class="request-search__filter icon-filter"></a>
+                <!--<a v-on:click.prevent='isVisible = !isVisible' :class="{'filter-active':isVisible}" href="" class="request-search__filter icon-filter"></a>-->
                 <button @click.prevent="search(searchValue)" class="request-search__btn button">
                     <img src="../../assets/img/icons/search.svg" alt="search">
                 </button>

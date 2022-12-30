@@ -191,7 +191,7 @@
                                     </div>
                                     <div class="admin-cabinet__column">
                                         <div class="admin-cabinet__input">
-                                            <div class=""><label for="">Комиссия Фулфимлента 8%</label></div>
+                                            <div class=""><label for="">Комиссия Фулфимлента %</label></div>
                                             <div class=""><input v-model="earningFullFillmentComission" type="text"></div>
                                         </div>
                                         <div class="admin-cabinet__input">

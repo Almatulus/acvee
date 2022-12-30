@@ -6,11 +6,17 @@
         </a>
         <nav class="sidebar__body">
             <ul>
+                <router-link tag="li" active-class="active" to="/myrequest/questionnaire" >
+                    <a href="" class="sidebar__link icon-my-application">
+                        <span>Анкета</span>
+                    </a>
+                </router-link>
                 <router-link tag="li" active-class="active" to="/myrequest" >
                     <a href="" class="sidebar__link icon-my-application">
                         <span>Мои заявки</span>
                     </a>
                 </router-link>
+                
                 <!--<router-link tag="li" active-class="active" to="/datarequest" >
                     <a href="" class="sidebar__link icon-data-application">
                         <span>Данные заявки</span>
