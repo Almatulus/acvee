@@ -30,7 +30,7 @@
 
                         <th>Статус</th>
 
-                        <th>Ссылка</th>
+                        <th>Управление кабинетом</th>
 
                     </tr>
 
@@ -52,7 +52,9 @@
 
                         <td>{{investor.treaty_status.name}}</td>
 
-                        <td>Перейти</td>
+                        <td>
+                            <router-link :to="{name: 'admin-projects-investor-cabinet', params: {id: investor.id}}"><a href="">Перейти</a></router-link>
+                        </td>
 
                     </tr>
                 
@@ -172,6 +174,10 @@ export default {
 	padding: 15px;
     text-align: center;
     font-size: 16px
+}
+
+a{
+    color: #0345FF;
 }
 
 </style>

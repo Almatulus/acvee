@@ -3,7 +3,7 @@
         <div class="request-search__inner">
             <form action="" class="request-search__form">
                 <input v-model="searchValue" placeholder="Вводите название запроса" type="text" class="request-search__input">
-                <!--<a v-on:click.prevent='isVisible = !isVisible' :class="{'filter-active':isVisible}" href="" class="request-search__filter icon-filter"></a>-->
+                <a v-on:click.prevent='isVisible = !isVisible' :class="{'filter-active':isVisible}" href="" class="request-search__filter icon-filter"></a>
                 <button @click.prevent="search(searchValue)" class="request-search__btn button">
                     <img src="../../assets/img/icons/search.svg" alt="search">
                 </button>
@@ -12,7 +12,97 @@
                 <a href="" class="request-search__add-btn button">+ Добавить заявку</a>
             </router-link>
         </div>
-        <RequestFilter v-show="isVisible"/>
+        <!--<RequestFilter v-show="isVisible"/>-->
+        <div v-show="isVisible" class="filter">
+            <div class="filter__inner">
+                <div class="filter__row">
+                    <div class="filter__column">
+                        <div class="filter__title">
+                            Статус
+                        </div>
+                        <div class="filter__filters">
+                            <input v-model="filter.status" type="radio" name="status" @click="filterHandler()" value="approved" href="#" class="filter__el">
+                            <label class="filter__el" for="">Одобренно</label>
+                            <input v-model="filter.status" name="status" type="radio"  @click="filterHandler()" value="denied" href="#" class="filter__el">
+                            <label for="">В ожидании</label>
+        
+                        </div>
+                    </div>
+                    <div class="filter__column">
+                        <div class="filter__title">
+                            Название
+                        </div>
+                        <div class="filter__filters">
+                            <input v-model.trim="filter.ordering" type="radio" name="alphabet" @click="filterHandler()" value="project_name" href="#" class="filter__el">
+                            <label class="filter__el" for="">Порядок: А-Я</label>
+                            <input v-model.trim="filter.ordering" name="alphabet" type="radio" @click="filterHandler()" value="-project_name" href="#" class="filter__el">
+                            <label for="">Порядок: Я-А</label>
+                        </div>
+                        
+                    </div>
+                    <div class="filter__column">
+                        <div class="filter__title">
+                            Сумма
+                        </div>
+                        <div class="filter__filters">
+                            <!--<input v-model="filter.rangeSum" type="radio" @click="filterHandler()" value[0]="0" value[1]="500000" href="#" class="filter__el">
+                            <label for="">до 500.000</label>-->
+                            <input v-model="filter.neededSum_max" type="radio" name="status" @click="filterHandler()" value="neededSum_max=500000" href="#" class="filter__el">
+                            <label class="filter__el" for="">до 500.000</label>
+                            <input v-model="filter.status" type="radio" name="status" @click="filterHandler()" value="approved" href="#" class="filter__el">
+                            <label class="filter__el" for="">В 500.000 - 1.000.000 тг</label>
+                            <input v-model="filter.status" type="radio" name="status" @click="filterHandler()" value="approved" href="#" class="filter__el">
+                            <label class="filter__el" for="">от 1.000.000</label>
+                            <!--<a href="#" class="filter__el">
+                                В 500.000 - 1.000.000 тг
+                            </a>
+                            <a href="#" class="filter__el">
+                                от 1.000.000
+                            </a>-->
+                        </div>
+                    </div>
+                    <div class="filter__column">
+                        <div class="filter__title">
+                            № запроса
+                        </div>
+                        <div class="filter__filters">
+                            <a href="#" class="filter__el">
+                                
+                            </a>
+                            <a href="#" class="filter__el">
+                                
+                            </a>
+                        </div>
+                    </div>
+                    <div class="filter__column">
+                        <div class="filter__title">
+                            № договора
+                        </div>
+                        <div class="filter__filters">
+                            <a href="#" class="filter__el">
+                                
+                            </a>
+                            <a href="#" class="filter__el">
+                                
+                            </a>
+                        </div>
+                    </div>
+                    <div class="filter__column">
+                        <div class="filter__title">
+                            Дата
+                        </div>
+                        <div class="filter__filters">
+                            <a href="#" class="filter__el">
+                                
+                            </a>
+                            <a href="#" class="filter__el">
+                                
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -23,7 +113,12 @@ import {mapActions, mapGetters} from 'vuex'
 export default {
     data: () => ({
         isVisible: false,
-        searchValue: ''
+        searchValue: '',
+        filter: {
+            ordering: '',
+            status: '',
+            neededSum_max: ''
+        },
     }),
     components:{
         RequestFilter
@@ -41,8 +136,15 @@ export default {
             this.GET_SEARCH_VALUE_TO_VUEX(value)
         },
         ...mapActions([
-            'GET_SEARCH_VALUE_TO_VUEX'
-        ])
+            'GET_SEARCH_VALUE_TO_VUEX',
+            'GET_MYPROJECTS_FROM_API'
+        ]),
+        filterHandler(){ 
+            this.GET_MYPROJECTS_FROM_API(this.filter)
+        },
+        ...mapActions([
+            'GET_MYPROJECTS_FROM_API'
+        ]),
     },
     computed:{
         ...mapGetters([

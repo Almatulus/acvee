@@ -2,47 +2,41 @@
     <div class="fin-info__projects">
         <div class="fin-info__projects-item">
             <div class="fin-info__projects-name">
-                Nomadcon
+                Сумма вклада
             </div>
             <div class="fin-info__projects-sum">
-                90 000 тенге
+                5 000 000 тенге
             </div>
-            <div class="fin-info__projects-stat">
+            <!--<div class="fin-info__projects-stat">
                 2,02%
-            </div>
+            </div>-->
         </div>
         <div class="fin-info__projects-item">
             <div class="fin-info__projects-name">
-                Nomadcon
+                Использованная сумма 
             </div>
             <div class="fin-info__projects-sum">
-                90 000 тенге
+                710 000 тенге
             </div>
-            <div class="fin-info__projects-stat">
-                2,02%
-            </div>
+            
         </div>
         <div class="fin-info__projects-item">
             <div class="fin-info__projects-name">
-                Nomadcon
+                Неиспользованная сумма 
             </div>
             <div class="fin-info__projects-sum">
-                90 000 тенге
+                4 290 000 тенге
             </div>
-            <div class="fin-info__projects-stat">
-                2,02%
-            </div>
+            
         </div>
         <div class="fin-info__projects-item">
             <div class="fin-info__projects-name">
-                Nomadcon
+                Инвестиционный доход
             </div>
             <div class="fin-info__projects-sum">
-                90 000 тенге
+                0 тенге
             </div>
-            <div class="fin-info__projects-stat">
-                2,02%
-            </div>
+           
         </div>
     </div>
 </template>

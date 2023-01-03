@@ -117,7 +117,7 @@ export default {
                 ).then((response) => {
                     console.log('респонсе дата',response.data)
                     localStorage.setItem('usertoken', response.data.auth_token)
-                    this.$router.push('/')
+                    //this.$router.push('/')
                 }).catch((error) => {
                     if(error.response.data.non_field_errors){
                         this.error = 'Неверный номер или пароль'

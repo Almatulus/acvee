@@ -5,7 +5,7 @@
             <InvestorFinInfoProjects/>
             <div class="fin-info__details">
                 <InvestorFinInfoTable/>
-                <InvestorFinInfoSchedule/>
+                <!--<InvestorFinInfoSchedule/>-->
             </div>
         </div>
     </div>
@@ -78,8 +78,7 @@ export default {
             display: flex;
             justify-content: space-between;
             overflow: auto;
-            height: 567px;
-            width: 700px;
+            width: 100%;
             scrollbar-color: #0345FF rgba(3, 69, 255, 0.6);
             scrollbar-width: thin;
             &::-webkit-scrollbar{
@@ -101,10 +100,11 @@ export default {
             line-height: 21px;
             color: #000000;
             margin: 0 5px 0 0;
+            height: 80px;
         }
 
         &__table-list{
-            
+            margin-left: 25px;
             &:first-child{
                 margin: 0;
             }
@@ -113,6 +113,7 @@ export default {
                 font-size: 16px;
                 line-height: 19px;
                 margin: 20px 0 0 0;
+                text-align: center;
             }
             ul{
                 flex: 0 0 33.33%;
@@ -137,7 +138,7 @@ export default {
         }
 
         &__table-list-last{
-            margin-right: 50px;
+            
         }
 
         &__schedule{

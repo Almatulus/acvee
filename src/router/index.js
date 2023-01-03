@@ -112,6 +112,12 @@ const routes = [
     component: () => import('../components/myrequests/RequestDocuments.vue')
   },
   {
+    path: '/investor',
+    name: 'investor',
+    meta: {layout: 'investor'},
+    component: () => import('../views/Investor/Investor.vue')
+  },
+  {
     path: '/investor/my-projects',
     name: 'investor-myProjects',
     meta: {layout: 'investor'},
@@ -201,6 +207,12 @@ const routes = [
     name: 'admin-projects-investor',
     meta: {layout: 'admin'},
     component: () => import('../views/Admin/AdminProjectsInvestor.vue')
+  },
+  {
+    path: '/admin/projects/investor/cabinet/:id',
+    name: 'admin-projects-investor-cabinet',
+    meta: {layout: 'admin'},
+    component: () => import('../views/Admin/AdminInvestorCabinet.vue')
   },
   {
     path: '/admin/investments',
