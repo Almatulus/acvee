@@ -16,6 +16,7 @@
                     <label style="margin-left: 10px; font-size: 20px; font-weight: 600;" for="invesor-type1">Индивидуальный предприниматель</label>
                     <input style="margin-left: 20px; width: 20px; height: 20px;" id="invesor-type2" name="invesor-type" value="1" v-model="form.investor_type" type="radio">
                     <label style="margin-left: 10px; font-size: 20px; font-weight: 600;" for="invesor-type2">Физическое лицо</label>
+                    <p v-if="$v.form.investor_type.$dirty && !$v.form.investor_type.required" class="invalid-feedback">Обязательно для выбора</p>
                 <div class="investor-questionnaire__form-body">
                     <div class="investor-questionnaire__form-column">
                         <p class="investor-questionnaire__form-label">Наименование ИП<span>/Ф.И.О</span></p>
@@ -47,6 +48,7 @@
                             <label style="margin-left: 10px; font-size: 17px;" for="investment1">6 месяцев</label>
                             <input style="margin-left: 30px; width: 17px; height: 17px;" v-model="form.investment_term" value="12" type="radio" name="investment" id="investment2">
                             <label style="margin-left: 10px; font-size: 17px;" for="investment2">12 месяцев</label>
+                            <p v-if="$v.form.investment_term.$dirty && !$v.form.investment_term.required" class="invalid-feedback">Обязательно для выбора</p>
                         </div>
                         <p class="investor-questionnaire__form-label">Номер счета</p>
                         <input 
@@ -55,8 +57,9 @@
                             type="text"
                             maxlength="50"
                             v-model.trim="form.IBAN"
-                            
+                            :class="$v.form.city.$error ? 'invalid' : ''"
                            >
+                        <p v-if="$v.form.IBAN.$dirty && !$v.form.IBAN.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                         <p class="investor-questionnaire__form-label">Название банка</p>
                         <input 
                             placeholder="Название банка" 
@@ -64,8 +67,9 @@
                             type="text"
                             maxlength="50"
                             v-model.trim="form.bank_name"
-                            
-                            >
+                            :class="$v.form.city.$error ? 'invalid' : ''"
+                        >
+                        <p v-if="$v.form.bank_name.$dirty && !$v.form.bank_name.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                     </div>
                     <div class="investor-questionnaire__form-column">
                         <p class="investor-questionnaire__form-label">Город регистрации<span>/проживание</span></p>
@@ -89,28 +93,15 @@
                         <p v-if="$v.form.email.$dirty && !$v.form.email.email" class="invalid-feedback">Данное поле должно содержать адрес электронной почты</p>
 
                         <p class="investor-questionnaire__form-label">Сумма инвестирования</p>
-                        <!--<select class="investor-questionnaire__form-input" name="" id="">
-                            <option value="5000">
-                                от 500 000 до 5 000 000 тенге 
-                            </option>
-                            <option value="">
-                                 от 5 000 000 до 10 000 000 тенге 
-                            </option>
-                            <option value="">
-                                от 10 000 000 до 50 000 000 тенге 
-                            </option>
-                            <option value="">
-                                свыше 50 000 000 тенге
-                            </option>
-                        </select>-->
                         <div style="margin: 10px 0 0 0; font-weight: 600;" class="">От 500000 до 1000000</div>
                         <br>
                         <input v-model="form.investment_sum" type="text"
                         class="investor-questionnaire__form-input"
                         placeholder="Сумма инвестирования"
+                        :class="$v.form.email.$error ? 'invalid' : ''"
                         maxlength="10"
                         @keypress="isNumber">
-                        
+                        <p v-if="$v.form.investment_sum.$dirty && !$v.form.investment_sum.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                         <br>
 
                         <input 
@@ -243,7 +234,10 @@ export default {
             investment_sum: {required},
             email: {required, email},
             desired_sum: {required},
-            ID_card_img: {required}
+            ID_card_img: {required},
+            investment_term: {required},
+            IBAN: {required},
+            bank_name: {required}
         },
         confirmation1: {required},
         confirmation2: {required},
@@ -278,16 +272,16 @@ export default {
             this.modal = false
         },
         submitHandler(){
-            //this.$v.form.$touch()
+            this.$v.form.$touch()
             /*let docForm = document.getElementById('docForm')
             let formData = new FormData(docForm)
             for(let i in this.form) {formData.append(i, this.form[i])}*/
-            this.$router.push('/investor/questionnaire/after')
+            
             if(!this.$v.form.$error){
                 axios.post('http://127.0.0.1:8000/api/v1/investor/save-form/', 
-                //formData,
+                
                 this.form,
-                //obj,
+                
                 {
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken'),
@@ -296,8 +290,8 @@ export default {
                 }
                 
                 ).then(function(){
-                    //this.$router.push('/investor/questionnaire/after')
-                console.log('SUCCESS!!');
+                    this.$router.push('/investor/questionnaire/after')
+                    console.log('SUCCESS!!');
                 })
                 .catch(function(){
                 console.log('FAILURE!!');

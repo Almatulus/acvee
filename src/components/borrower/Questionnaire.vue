@@ -404,7 +404,7 @@ export default {
             BIN: {required, minLength: minLength(12)},
             directorName: {required},
             UIN: {required, minLength: minLength(12)},
-            phoneNumber: {required, minLength: minLength(16)},
+            phoneNumber: {required, minLength: minLength(12)},
             email: {required, email},
             businessDescription: {},
             productName: {required},
@@ -455,8 +455,8 @@ export default {
             }
         },*/
         submitHandler(value){
-            //this.$v.form.$touch()
-            
+            this.$v.form.$touch()
+            console.log(this.$v.form.$errors)
             if(!this.$v.form.$error){
                 //this.GET_QUESTIONNAIREFORMSTATE_TO_VUEX(value)
                 localStorage.setItem('questionnaire', JSON.stringify(value))
