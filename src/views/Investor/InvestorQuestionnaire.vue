@@ -42,12 +42,13 @@
                         <p v-if="$v.form.UID_BIN.$dirty && !$v.form.UID_BIN.minLength" class="invalid-feedback">Данное поле должно содержать 12 символов</p>
 
                         <p class="investor-questionnaire__form-label">Срок инвестирования</p>
-                        <!--<input v-model="form.investment_term" type="range" value="0" min="2" max="25">-->
+                        
                         <div style="margin-top: 10px;" class="">
                             <input style="width: 17px; height: 17px;" v-model="form.investment_term" type="radio" value="6" name="investment" id="investment1">
                             <label style="margin-left: 10px; font-size: 17px;" for="investment1">6 месяцев</label>
                             <input style="margin-left: 30px; width: 17px; height: 17px;" v-model="form.investment_term" value="12" type="radio" name="investment" id="investment2">
                             <label style="margin-left: 10px; font-size: 17px;" for="investment2">12 месяцев</label>
+                            {{form.investment_term}}
                             <p v-if="$v.form.investment_term.$dirty && !$v.form.investment_term.required" class="invalid-feedback">Обязательно для выбора</p>
                         </div>
                         <p class="investor-questionnaire__form-label">Номер счета</p>
@@ -274,29 +275,38 @@ export default {
             this.modal = false
         },
         submitHandler(){
-            this.$v.form.$touch()
+            //this.$v.form.$touch()
             /*let docForm = document.getElementById('docForm')
             let formData = new FormData(docForm)
             for(let i in this.form) {formData.append(i, this.form[i])}*/
             
             if(!this.$v.form.$error){
                 axios.post('http://127.0.0.1:8000/api/v1/investor/save-form/', 
-                
-                this.form,
-                
+                {
+                    investor_type: this.form.investor_type,
+                    name: this.form.name,
+                    UID_BIN: this.form.UID_BIN,
+                    investment_term: this.form.investment_term,
+                    city: this.form.city,
+                    investment_sum: this.form.investment_sum,
+                    desired_sum: this.form.desired_sum,
+                    email: this.form.email,
+                    description: this.form.description,
+                    IBAN: this.form.IBAN,
+                    bank_name: this.form.bank_name
+                },
                 {
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken'),
-                        //'Content-Type': 'multipart/form-data'
+                        
                     }
                 }
                 
                 ).then(function(){
                     this.$router.push('/investor/questionnaire/after')
-                    console.log('SUCCESS!!');
                 })
                 .catch(function(){
-                console.log('FAILURE!!');
+                    console.log('FAILURE!!');
                 });
             }
         },
