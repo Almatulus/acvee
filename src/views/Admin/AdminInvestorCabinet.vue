@@ -1,9 +1,55 @@
 <template>
     <div class="">
-        <div class="">
-
-        </div>
-        <h2>Финансовая информация</h2>
+        <form @submit="submitHandler()">
+            <div class="admin-cabinet__inputs">
+                <div class="admin-cabinet__column">
+                    <div class="admin-cabinet__input">
+                        <div class=""><label for="">Дата финансирования</label></div>
+                        <div class=""><input v-model.trim="funding_date" type="date"></div>
+                    </div>
+                    <div class="admin-cabinet__input">
+                        <div class=""><label for="">Сумма использованных среств инвестора</label></div>
+                        <div class=""><input v-model.trim="funds_used" type="text"></div>
+                    </div>
+                    <div class="admin-cabinet__input">
+                        <div class=""><label for="">Наименование сделки</label></div>
+                        <div class=""><input v-model.trim="transaction_name" type="text"></div>
+                    </div>
+                    <div class="admin-cabinet__input">
+                        <div class=""><label for="">БИН</label></div>
+                        <div class=""><input v-model.trim="BIN" type="text"></div>
+                    </div>
+                    <div class="admin-cabinet__input">
+                        <div class=""><label for="">Сумма фиансирования сделки</label></div>
+                        <div class=""><input v-model.trim="funding_sum" type="text"></div>
+                    </div>
+                </div>
+                <div class="admin-cabinet__column">
+                    <div class="admin-cabinet__input">
+                        <div class=""><label for="">Сумма Долга финансируемой сделки</label></div>
+                        <div class=""><input v-model.trim="debt_sum" type="text"></div>
+                    </div>
+                    <div class="admin-cabinet__input">
+                        <div class=""><label for="">Доход от финансируемой сделки</label></div>
+                        <div class=""><input v-model.trim="income" type="text"></div>
+                    </div>
+                    <div class="admin-cabinet__input">
+                        <div class=""><label for="">Дата возврата денежных средств</label></div>
+                        <div class=""><input v-model.trim="return_date" type="date"></div>
+                    </div>
+                    <div class="admin-cabinet__input">
+                        <div class=""><label for="">Доля полученного дохода инвестора в %</label></div>
+                        <div class=""><input v-model.trim="income_percentage" type="text"></div>
+                    </div>
+                    <div class="admin-cabinet__input">
+                        <div class=""><label for="">Доход инвестора</label></div>
+                        <div class=""><input v-model.trim="investor_income" type="text"></div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="button admin-cabinet__button">Сохранить</button>
+        </form>
+        <h2 style="margin-top: 20px;">Финансовая информация</h2>
         <div class="fin-info__table">
             <ul class="fin-info__table-list">
                 <li class="fin-info__table-title">Дата финансирования</li>
@@ -87,6 +133,31 @@ export default {
                 console.log(response.data)
                 this.investments = response.data
             })
+        },
+        submitHandler(){
+            axios.post('http://127.0.0.1:8000/api/v1/admin/investor/investment-save/',
+                    {
+                        user: '',
+                        treaty: localStorage.getItem('id'),
+                        funding_date: this.funding_date,
+                        funds_used: this.funds_used,
+                        transaction_name: this.transaction_name,
+                        BIN: this.BIN,
+                        funding_sum: this.funding_sum,
+                        debt_sum: this.debt_sum,
+                        income: this.income,
+                        return_date: this.return_date,
+                        income_percentage: this.income_percentage,
+                        investor_income: this.investor_income
+                    },
+                    {
+                        headers:{
+                            Authorization: 'Token ' + localStorage.getItem('usertoken')
+                        }
+                    }
+                ).then((response) => {
+                    this.getInvestmentsList()
+                })
         }
     },
     mounted(){
@@ -275,5 +346,47 @@ export default {
             margin: auto 0 0 0;
             align-self: flex-end;
         }
+}
+
+.admin-cabinet {
+
+		&__inputs {
+            display: flex;
+            justify-content: space-around;
+		}
+
+		&__column {
+            flex: 0 1 50%;
+		}
+
+		&__input {
+            display: flex;
+            align-items: center;
+            margin: 20px 0 0 0;
+            label{
+                font-size: 18px;
+                font-weight: 500;
+            }
+            input{
+                background: #FFFFFF;
+                box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
+                border-radius: 10px;
+                height: 50px;
+                width: 200px;
+                margin-left: 15px;
+                padding: 10px;
+            }
+            select{
+                width: 100px;
+                height: 40px;
+                padding: 10px;
+                margin-left: 15px;
+            }
+		}
+}
+
+.admin-cabinet__button{
+    padding: 10px;
+    margin: 10px 0 0 0;
 }
 </style>

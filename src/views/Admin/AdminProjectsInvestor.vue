@@ -53,7 +53,7 @@
                         <td>{{investor.treaty_status.name}}</td>
 
                         <td>
-                            <router-link :to="{name: 'admin-projects-investor-cabinet', params: {id: investor.id}}"><a href="">Перейти</a></router-link>
+                            <router-link :to="{name: 'admin-projects-investor-cabinet', params: {id: investor.id}}"><a @click="getID(borrower.id)" href="">Перейти</a></router-link>
                         </td>
 
                     </tr>
@@ -84,6 +84,11 @@ export default {
         .then((response) => {
             this.investors = response.data
         })
+    },
+    methods:{
+        getID(value){
+            localStorage.setItem('id', value)
+        }
     }
 }
 </script>
