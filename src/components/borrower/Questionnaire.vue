@@ -248,6 +248,7 @@
                                 <div style="display: flex;" class="">
                                     <div class="">
                                         <input 
+                                        style="margin-top: 15px;"
                                         placeholder="Ежемесячные выплаты" 
                                         class="questionnaire__input" 
                                         type="text"
@@ -260,6 +261,7 @@
                                     </div>
                                     <div style="margin-left: 25px;" class="">
                                         <input 
+                                        style="margin-top: 15px;"
                                         placeholder="Срок погашения" 
                                         class="questionnaire__input questionnaire__input-date" 
                                         type="date"

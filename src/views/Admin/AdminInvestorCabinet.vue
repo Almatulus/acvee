@@ -7,98 +7,51 @@
         <div class="fin-info__table">
             <ul class="fin-info__table-list">
                 <li class="fin-info__table-title">Дата финансирования</li>
-                <li class="fin-info__table-sum-color">90 000тг</li>
-                <li class="fin-info__table-sum-color">90 000тг</li>
-                <li class="fin-info__table-sum-color">90 000тг</li>
-                <li class="fin-info__table-sum-color">90 000тг</li>
-                <li class="fin-info__table-sum-color">90 000тг</li>
+                <li v-for="investment in investments" :key="investment.id" class="fin-info__table-sum-color">{{investment.funding_date}}</li>
             </ul>
             <ul class="fin-info__table-list">
                 <li class="fin-info__table-title">Сумма использованных среств инвестора</li>
-                <li class="fin-info__table-data-color">09.02.2022</li>
-                <li class="fin-info__table-data-color">09.02.2022</li>
-                <li class="fin-info__table-data-color">09.02.2022</li>
-                <li class="fin-info__table-data-color">09.02.2022</li>
-                <li class="fin-info__table-data-color">09.02.2022</li>
-                <li class="fin-info__table-data-color">09.02.2022</li>
+                <li v-for="investment in investments" :key="investment.id" class="fin-info__table-data-color">{{investment.funds_used}}</li>
             </ul>
             <ul class="fin-info__table-list">
                 <li class="fin-info__table-title">Наименование сделки</li>
-                <li class="fin-info__table-profit-color">+1 818тг</li>
-                <li class="fin-info__table-profit-color">+1 818тг</li>
-                <li class="fin-info__table-profit-color">+1 818тг</li>
-                <li class="fin-info__table-profit-color">+1 818тг</li>
-                <li class="fin-info__table-profit-color">+1 818тг</li>
-                <li class="fin-info__table-profit-color">+1 818тг</li>
+                <li v-for="investment in investments" :key="investment.id" class="fin-info__table-profit-color">{{investment.transaction_name}}</li>
+                
             </ul>
-            <ul class="fin-info__table-list">
+            <ul class="fin-info__table-list fin-info__table-list-last">
                 <li class="fin-info__table-title">БИН</li>
-                <li class="fin-info__table-profit-color">+1 818тг</li>
-                <li class="fin-info__table-profit-color">+1 818тг</li>
-                <li class="fin-info__table-profit-color">+1 818тг</li>
-                <li class="fin-info__table-profit-color">+1 818тг</li>
-                <li class="fin-info__table-profit-color">+1 818тг</li>
-                <li class="fin-info__table-profit-color">+1 818тг</li>
+                <li v-for="investment in investments" :key="investment.id" class="fin-info__table-balance-color">{{investment.BIN}}</li>
+                
             </ul>
             <ul class="fin-info__table-list fin-info__table-list-last">
                 <li class="fin-info__table-title">Сумма фиансирования сделки</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
+                <li v-for="investment in investments" :key="investment.id" class="fin-info__table-balance-color">{{investment.funding_sum}}</li>
+                
             </ul>
             <ul class="fin-info__table-list fin-info__table-list-last">
                 <li class="fin-info__table-title">Сумма Долга финансируемой сделки</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
+                <li v-for="investment in investments" :key="investment.id" class="fin-info__table-balance-color">{{investment.debt_sum}}</li>
+                
             </ul>
             <ul class="fin-info__table-list fin-info__table-list-last">
                 <li class="fin-info__table-title">Доход от финансируемой сделки</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
+                <li v-for="investment in investments" :key="investment.id" class="fin-info__table-balance-color">{{investment.income}}</li>
+                
             </ul>
             <ul class="fin-info__table-list fin-info__table-list-last">
                 <li class="fin-info__table-title">Дата возврата денежных средств</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
+                <li v-for="investment in investments" :key="investment.id" class="fin-info__table-balance-color">{{investment.return_date}}</li>
+                
             </ul>
             <ul class="fin-info__table-list fin-info__table-list-last">
                 <li class="fin-info__table-title">Доля полученного дохода инвестора в %</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
+                <li v-for="investment in investments" :key="investment.id" class="fin-info__table-balance-color">{{investment.income_percentage}} %</li>
+                
             </ul>
             <ul class="fin-info__table-list fin-info__table-list-last">
                 <li class="fin-info__table-title">Доход инвестора</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
-                <li class="fin-info__table-balance-color">0 тг</li>
+                <li v-for="investment in investments" :key="investment.id" class="fin-info__table-balance-color">{{investment.investor_income}}</li>
+                
             </ul>
         </div>
     </div>
@@ -116,13 +69,28 @@ export default {
         income: '',
         return_date: '',
         income_percentage: '',
-        investor_income: ''
+        investor_income: '',
+        investments: []
     }),
     methods:{
-
+        getInvestmentsList(){
+            axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/admin/investor/investments/',
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+            )
+            .then((response) => {
+                console.log(response.data)
+                this.investments = response.data
+            })
+        }
     },
     mounted(){
-
+        this.getInvestmentsList()
     }
 }
 </script>
@@ -213,7 +181,7 @@ export default {
             }
             li{
                 font-weight: 600;
-                font-size: 16px;
+                font-size: 14px;
                 line-height: 19px;
                 margin: 20px 0 0 0;
                 text-align: center;
