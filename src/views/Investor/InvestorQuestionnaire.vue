@@ -275,7 +275,7 @@ export default {
             this.modal = false
         },
         submitHandler(){
-            //this.$v.form.$touch()
+            this.$v.form.$touch()
             /*let docForm = document.getElementById('docForm')
             let formData = new FormData(docForm)
             for(let i in this.form) {formData.append(i, this.form[i])}*/
@@ -302,9 +302,9 @@ export default {
                     }
                 }
                 
-                ).then(function(){
+                ).then(
                     this.$router.push('/investor/questionnaire/after')
-                })
+                )
                 .catch(function(){
                     console.log('FAILURE!!');
                 });
