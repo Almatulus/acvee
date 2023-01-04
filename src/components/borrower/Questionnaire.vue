@@ -40,9 +40,8 @@
                         v-model="form.cityID"
                         :class="$v.form.cityID.$error ? 'questionnaire-input-invalid' : ''">
                         <option value="">Выберите город</option>
-                        <option value="1">1</option>
-                        <option v-for="city in cities" :key="city.id" :value="form.cityID">{{city.name}}</option>
-                        
+                        <option value="1">Almaty</option>
+                        <option v-for="city in cities" :key="city.id" :value="form.cityID">{{/*city.name*/}}</option>
                     </select>
                     <p v-if="$v.form.cityID.$dirty && !$v.form.cityID.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
                     
@@ -456,7 +455,8 @@ export default {
             }
         },*/
         submitHandler(value){
-            this.$v.form.$touch()
+            //this.$v.form.$touch()
+            
             if(!this.$v.form.$error){
                 //this.GET_QUESTIONNAIREFORMSTATE_TO_VUEX(value)
                 localStorage.setItem('questionnaire', JSON.stringify(value))
@@ -492,9 +492,6 @@ export default {
             e.returnValue = false;
             if (e.preventDefault) e.preventDefault();
             }
-        },
-        inputRangeSteps(){
-            
         }
     },
     computed: {

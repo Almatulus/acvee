@@ -16,7 +16,9 @@
 
                             <th>Статус</th>
 
-                            <th>Ссылка</th>
+                            <th>Управление статусом</th>
+
+                            <th>Управление кабинетом</th>
 
                         </tr>
 
@@ -32,6 +34,11 @@
                             <td>{{investment.treaty_status.name}}</td>
                             <td>
                                 <router-link :to="{name: 'admin-investment', params: {id: investment.id}}">
+                                    <a  @click="getID(investment.id)" href="">Перейти</a>
+                                </router-link>
+                            </td>
+                            <td>
+                                <router-link :to="{name: 'admin-projects-investor-cabinet', params: {id: investment.id}}">
                                     <a  @click="getID(investment.id)" href="">Перейти</a>
                                 </router-link>
                             </td>

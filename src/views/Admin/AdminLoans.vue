@@ -49,7 +49,9 @@
 
                             <th>Сумма финансирования</th>
 
-                            <th>Ссылка</th>
+                            <th>Управление статусом</th>
+
+                            <th>Управление кабинетом</th>
 
                         </tr>
 
@@ -70,6 +72,9 @@
                             <td>{{loan.amount_received}}</td>
                             <td>
                                 <router-link :to="{name: 'admin-loan', params: {id: loan.id}}"><a @click="getID(loan.id)" href="">Перейти</a></router-link>
+                            </td>
+                            <td>
+                                <router-link :to="{name: 'admin-projects-borrower-cabinet', params: {id: loan.id}}"><a @click="getID(loan.id)" href="">Перейти</a></router-link>
                             </td>
                         </tr>
 

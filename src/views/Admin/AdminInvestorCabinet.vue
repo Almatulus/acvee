@@ -1,5 +1,6 @@
 <template>
     <div class="">
+        
         <form @submit="submitHandler()">
             <div class="admin-cabinet__inputs">
                 <div class="admin-cabinet__column">
@@ -86,7 +87,7 @@
             </ul>
             <ul class="fin-info__table-list fin-info__table-list-last">
                 <li class="fin-info__table-title">Дата возврата денежных средств</li>
-                <li v-for="investment in investments" :key="investment.id" class="fin-info__table-balance-color">{{investment.return_date}}</li>
+                <li v-for="investment in investments" :key="investment.id">{{investment.return_date}}</li>
                 
             </ul>
             <ul class="fin-info__table-list fin-info__table-list-last">

@@ -118,6 +118,15 @@ export default {
                     console.log('респонсе дата',response.data)
                     localStorage.setItem('usertoken', response.data.auth_token)
                     //this.$router.push('/')
+                    axios(
+                        {
+                            method: 'GET',
+                            url: 'http://127.0.0.1:8000/api/v1/current-user/',
+                            headers:{
+                                Authorization: 'Token ' + localStorage.getItem('usertoken')
+                            }
+                        },
+                    ).then((response))
                 }).catch((error) => {
                     if(error.response.data.non_field_errors){
                         this.error = 'Неверный номер или пароль'
