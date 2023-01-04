@@ -123,64 +123,64 @@
                 <label class="button-certify btn" for="ID_card_img" id="ID_card_img" ref="ID_card_img">Удостоверение личности</label>-->
                 <div  class="investor-questionnaire__chechboxes">
                     <div class="investor-questionnaire__checbox">
-                        <input type="checkbox" id="confirmation1">
+                        <input v-model="form.confirmation1" type="checkbox" id="confirmation1">
                         <label for="confirmation1">Настоящим даю согласие на сбор, обработку и использование моих персональных данных в соответствие с законом Республики Казахстана "О персональных данных и их защите",в том числе на получение информации обо мне и из любых возможных публичных источников.</label>
-                        <p v-if="$v.confirmation1.$dirty && !$v.confirmation1.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
+                        <p v-if="$v.form.confirmation1.$dirty && !$v.form.confirmation1.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
                     </div>
                     <div class="investor-questionnaire__checbox">
-                        <input type="checkbox" id="confirmation2">
+                        <input v-model="form.confirmation2" type="checkbox" id="confirmation2">
                         <label for="confirmation2">Я подтверждаю, что деньги, которые я предполагаю инвестировать являются легальными и не получены в результате незаконной деятельности</label>
-                        <p v-if="$v.confirmation2.$dirty && !$v.confirmation1.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
+                        <p v-if="$v.form.confirmation2.$dirty && !$v.form.confirmation2.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
                     </div>
                     <div class="investor-questionnaire__checbox">
-                        <input type="checkbox" id="confirmation3">
+                        <input v-model="form.confirmation3" type="checkbox" id="confirmation3">
                         <label for="confirmation3">Я подтверждаю, что не являюсь политически значимой личностью (PEP)</label>
-                        <p v-if="$v.confirmation3.$dirty && !$v.confirmation1.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
+                        <p v-if="$v.form.confirmation3.$dirty && !$v.form.confirmation3.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
                     </div>
                     <div class="investor-questionnaire__checbox">
-                        <input type="checkbox" id="confirmation4">
+                        <input v-model="form.confirmation4" type="checkbox" id="confirmation4">
                         <label for="confirmation4">Я подтверждаю, что предоставленная мною информация является точной и не вводит в заблуждение;</label>
-                        <p v-if="$v.confirmation4.$dirty && !$v.confirmation1.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
+                        <p v-if="$v.form.confirmation4.$dirty && !$v.form.confirmation4.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
                     </div>
                     <div class="investor-questionnaire__checbox">
-                        <input type="checkbox" id="confirmation5">
+                        <input v-model="form.confirmation5" type="checkbox" id="confirmation5">
                         <label for="confirmation5">Я подтверждаю, что никто не будет иметь доступа к предоставленным мне данным о Компании;</label>
-                        <p v-if="$v.confirmation5.$dirty && !$v.confirmation1.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
+                        <p v-if="$v.form.confirmation5.$dirty && !$v.form.confirmation5.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
                     </div>
                     <div class="investor-questionnaire__checbox">
-                        <input type="checkbox" id="confirmation6">
+                        <input v-model="form.confirmation6" type="checkbox" id="confirmation6">
                         <label for="confirmation6">Я подтверждаю, что я дееспособен и могу вступать в юридически обязывающие меня отношения с Компанией;</label>
-                        <p v-if="$v.confirmation6.$dirty && !$v.confirmation1.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
+                        <p v-if="$v.form.confirmation6.$dirty && !$v.form.confirmation6.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
                     </div>
                     <div class="investor-questionnaire__checbox">
-                        <input type="checkbox" id="confirmation7">
+                        <input v-model="form.confirmation7" type="checkbox" id="confirmation7">
                         <label for="confirmation7">Я подтверждаю, что действую от своего лица и не представляю ничьи интересы;</label>
-                        <p v-if="$v.confirmation7.$dirty && !$v.confirmation1.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
+                        <p v-if="$v.form.confirmation7.$dirty && !$v.form.confirmation7.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
                     </div>
                     <div class="investor-questionnaire__checbox">
-                        <input type="checkbox" id="confirmation9">
+                        <input v-model="form.confirmation9" type="checkbox" id="confirmation9">
                         <label for="confirmation9">Я подтверждаю, что понимаю, что, подписывая Договор Инвестиции или Займа через краудфандинговую платформу Acvee Crowdfinding, я предоставляю финансирование Компании напрямую;</label>
-                        <p v-if="$v.confirmation9.$dirty && !$v.confirmation1.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
+                        <p v-if="$v.form.confirmation9.$dirty && !$v.form.confirmation9.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
                     </div>
                     <div class="investor-questionnaire__checbox">
-                        <input type="checkbox" id="confirmation10">
+                        <input v-model="form.confirmation10" type="checkbox" id="confirmation10">
                         <label for="confirmation10">Я подтверждаю, что Компании, представленные на краудфандинговой платформе Acvee Crowdfinding, могут понести убытки либо обанкротиться, и, соответственно, Инвестиция или Заем такой Компании является рискованной, включая риск потери части либо всех моих денег, задержки платежей или получения прочих выгод от Компании;</label>
-                        <p v-if="$v.confirmation10.$dirty && !$v.confirmation1.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
+                        <p v-if="$v.form.confirmation10.$dirty && !$v.form.confirmation10.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
                     </div>
                     <div class="investor-questionnaire__checbox">
-                        <input type="checkbox" id="confirmation11">
+                        <input v-model="form.confirmation11" type="checkbox" id="confirmation11">
                         <label for="confirmation11">Я подтверждаю, что если не диверсифицировать портфолио инвестиций и займов это может привести к большим потерям в случае дефолта одной конкретной Компании;</label>
-                        <p v-if="$v.confirmation11.$dirty && !$v.confirmation1.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
+                        <p v-if="$v.form.confirmation11.$dirty && !$v.form.confirmation11.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
                     </div>
                     <div class="investor-questionnaire__checbox">
-                        <input type="checkbox" id="confirmation12">
+                        <input v-model="form.confirmation12" type="checkbox" id="confirmation12">
                         <label for="confirmation12">Я подтверждаю, что Я могу не иметь возможности уступить выданный заём или продать инвестиции третьим лицам в момент, когда я этого захочу;</label>
-                        <p v-if="$v.confirmation12.$dirty && !$v.confirmation1.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
+                        <p v-if="$v.form.confirmation12.$dirty && !$v.form.confirmation12.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
                     </div>
                     <div class="investor-questionnaire__checbox">
-                        <input type="checkbox" id="confirmation13">
+                        <input v-model="form.confirmation13" type="checkbox" id="confirmation13">
                         <label for="confirmation13">Я подтверждаю, что если по любой причине краудфандинговая платформа Acvee Crowdfinding не сможет продолжать свою деятельность, я могу потерять свои деньги, понести дополнительные затраты либо испытать задержки в получении выплат;</label>
-                        <p v-if="$v.confirmation13.$dirty && !$v.confirmation1.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
+                        <p v-if="$v.form.confirmation13.$dirty && !$v.form.confirmation13.required" class="invalid-feedback">Пожалуйста, примите пользовательское соглашение</p>
                     </div>
                 </div>
                 <button type="submit" class="button investor-questionnaire__form-button">
@@ -209,21 +209,22 @@ export default {
             description: '',
             //ID_card_img: '',
             IBAN: '',
-            bank_name: ''
+            bank_name: '',
+            confirmation1: '',
+            confirmation2: '',
+            confirmation3: '',
+            confirmation4: '',
+            confirmation5: '',
+            confirmation6: '',
+            confirmation7: '',
+            confirmation8: '',
+            confirmation9: '',
+            confirmation10: '',
+            confirmation11: '',
+            confirmation12: '',
+            confirmation13: '',
         },
-        confirmation1: '',
-        confirmation2: '',
-        confirmation3: '',
-        confirmation4: '',
-        confirmation5: '',
-        confirmation6: '',
-        confirmation7: '',
-        confirmation8: '',
-        confirmation9: '',
-        confirmation10: '',
-        confirmation11: '',
-        confirmation12: '',
-        confirmation13: '',
+        
     }),
     validations: {
         form:{
@@ -237,21 +238,22 @@ export default {
             ID_card_img: {required},
             investment_term: {required},
             IBAN: {required},
-            bank_name: {required}
+            bank_name: {required},
+            confirmation1: {required},
+            confirmation2: {required},
+            confirmation3: {required},
+            confirmation4: {required},
+            confirmation5: {required},
+            confirmation6: {required},
+            confirmation7: {required},
+            confirmation8: {required},
+            confirmation9: {required},
+            confirmation10: {required},
+            confirmation11: {required},
+            confirmation12: {required},
+            confirmation13: {required},
         },
-        confirmation1: {required},
-        confirmation2: {required},
-        confirmation3: {required},
-        confirmation4: {required},
-        confirmation5: {required},
-        confirmation6: {required},
-        confirmation7: {required},
-        confirmation8: {required},
-        confirmation9: {required},
-        confirmation10: {required},
-        confirmation11: {required},
-        confirmation12: {required},
-        confirmation13: {required},
+        
     },
     methods: {
         isNumber (e) {
