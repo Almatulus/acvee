@@ -1,13 +1,5 @@
 <template>
-    <div class="authentication-template">
-        <div class="authentication-template__inner">
-            <div class="authentication-template__content">
-                <div class="authentication-template__form-stage">
-                    Этап 1 из 3
-                </div>
-                <h2>{{ title }}</h2>
-                <form @submit.prevent="submitHandler" class="authentication-template__form" action="">
-                    <!--<div class="authentication-template__form-item">
+<!--<div class="authentication-template__form-item">
                         <p>Выберите тип пользователя</p>
                         <div style="margin: 15px 0 0 0; display: flex;" class="">
                             <div class="authentication-template__form-item-item">
@@ -21,6 +13,15 @@
                         </div>
                         <p v-if="$v.user_type.$dirty && !$v.user_type.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                     </div>-->
+    <div class="authentication-template">
+        <div class="authentication-template__inner">
+            <div class="authentication-template__content">
+                <div class="authentication-template__form-stage">
+                    Этап 1 из 3
+                </div>
+                <h2>{{ title }}</h2>
+                <form @submit.prevent="submitHandler" class="authentication-template__form" action="">
+                    
                     <div class="authentication-template__form-item">
                         <p>Номер телефона</p>
                         <input
@@ -36,9 +37,10 @@
                         >
                         <p v-if="$v.phone.$dirty && !$v.phone.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                         <p v-if="$v.phone.$dirty && !$v.phone.minLength" class="invalid-feedback">Данное поле должно содержать номер телефона</p>
-                        <p v-if="phone_status == 'error'" class="invalid-feedback">Данный номер телефона уже существует</p>
+                        
+                        <!--<p v-if="phone_status == 'error'" class="invalid-feedback">Данный номер телефона уже существует</p>-->
                     </div>
-                    <div class="authentication-template__form-item">
+                    <!--<div class="authentication-template__form-item">
                         <p>СМС код подтверждение</p>
                         <input type="password"
                         maxlength="4"
@@ -48,7 +50,7 @@
                         <div class="authentication-template__sms">
                             Повторно <a href="#">отправить код</a> 
                         </div>
-                    </div>
+                    </div>-->
                     <div class="authentication-template__enter">
                         Еще нет аккаунта? <router-link tag="a" :to="url"><a href="#">Войти</a></router-link>
                     </div>
@@ -58,6 +60,7 @@
                         </button>
                     </div>
                 </form>
+                
             </div>
         </div>
     </div>
@@ -87,11 +90,12 @@ export default {
     }),
     methods: {
         submitHandler(){
-            //this.$v.$touch()
+            this.$v.$touch()
+            console.log(this.$v.$error)
+            console.log(this.$v.$errors)
+            console.log(this.$v.$invalid)
             if(!this.$v.$error){
-                //localStorage.setItem('phone', this.phone)
-                //localStorage.setItem('userType', this.user_type)
-                //this.$router.push('/register/2')
+                
                 axios.post('http://127.0.0.1:8000/api/v1/check-number/', 
                     {
                         phone_number: this.phone
@@ -104,11 +108,16 @@ export default {
                     }
                 })
             }
+
+            
             
         },
         onAccept(e){
             const maskRef = e.detail
             this.phone = maskRef.value
+            //localStorage.setItem('phone', this.phone)
+                //localStorage.setItem('userType', this.user_type)
+                //this.$router.push('/register/2')
         },
         onComplete(e){
             const maskRef = e.detail

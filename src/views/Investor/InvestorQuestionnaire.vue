@@ -58,7 +58,7 @@
                             type="text"
                             maxlength="50"
                             v-model.trim="form.IBAN"
-                            :class="$v.form.city.$error ? 'invalid' : ''"
+                            :class="$v.form.IBAN.$error ? 'invalid' : ''"
                            >
                         <p v-if="$v.form.IBAN.$dirty && !$v.form.IBAN.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                         <p class="investor-questionnaire__form-label">Название банка</p>
@@ -68,7 +68,7 @@
                             type="text"
                             maxlength="50"
                             v-model.trim="form.bank_name"
-                            :class="$v.form.city.$error ? 'invalid' : ''"
+                            :class="$v.form.bank_name.$error ? 'invalid' : ''"
                         >
                         <p v-if="$v.form.bank_name.$dirty && !$v.form.bank_name.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                     </div>
@@ -276,10 +276,7 @@ export default {
         },
         submitHandler(){
             this.$v.form.$touch()
-            /*let docForm = document.getElementById('docForm')
-            let formData = new FormData(docForm)
-            for(let i in this.form) {formData.append(i, this.form[i])}*/
-            
+            console.log(this.$invalid)
             if(!this.$v.form.$error){
                 axios.post('http://127.0.0.1:8000/api/v1/investor/save-form/', 
                 {
@@ -298,7 +295,6 @@ export default {
                 {
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken'),
-                        
                     }
                 }
                 

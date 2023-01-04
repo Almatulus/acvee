@@ -33,15 +33,16 @@
                         <option v-for="country in COUNTRIES" :key="country.id" :value="country.id">{{country.name}}</option>
                     </select>
                     <p v-if="$v.form.countryID.$dirty && !$v.form.countryID.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
-                    
+                    {{form.cityID}}
+                    {{this.COUNTRIES[0].cities}}
                     <select 
                         type="text" 
                         class="questionnaire__questions-input questionnaire__input"
                         v-model="form.cityID"
                         :class="$v.form.cityID.$error ? 'questionnaire-input-invalid' : ''">
                         <option value="">Выберите город</option>
-                        <option value="1">Almaty</option>
-                        <option v-for="city in cities" :key="city.id" :value="form.cityID">{{/*city.name*/}}</option>
+                        
+                        <option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
                     </select>
                     <p v-if="$v.form.cityID.$dirty && !$v.form.cityID.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
                     
