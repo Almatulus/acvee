@@ -22,10 +22,10 @@
                                 Просмотр документа
                             </div>
                             <div class="">
-                                Подпись(админ)
+                                Подпись(инвестор)
                             </div>
                             <div class="">
-                                Подпись(инвестор)
+                                Подпись(админ)
                             </div>
                         </div>
                         <div class="request-documents__item">
@@ -37,12 +37,13 @@
                             </div>
                             
                             <div class="">
-                                <p v-if="a_notice_to_the_debtor_is_signed == true">Подписан</p>
-                                <p v-if="a_notice_to_the_debtor_is_signed == false">В ожидании</p>
+                                <p v-if="i_notice_to_the_debtor_is_signed == true">Подписан</p>
+                                <p v-if="i_notice_to_the_debtor_is_signed == false">В ожидании</p>
                             </div>
                             <div class="">
-                                <p v-if="i_notice_to_the_debtor_is_signed == true">Подписан</p>
-                                <button @click="signAgreement(notice_to_the_debtor)" class="document-button button" v-if="i_notice_to_the_debtor_is_signed == false">Подписать</button>
+                                <p v-if="a_notice_to_the_debtor_is_signed">Подписан</p>
+                                <button @click="signAgreement(notice_to_the_debtor)" class="document-button button" v-if="!a_notice_to_the_debtor_is_signed">Подписать</button>
+                                
                             </div>
                         </div>
                         <div class="request-documents__item">
@@ -53,12 +54,12 @@
                                 <a target="_blank" href="">Посмотреть документ</a>
                             </div>
                             <div class="">
-                                <p v-if="a_contract_of_pledge_of_movable_property_is_signed == true">Подписан</p>
-                                <p v-if="a_contract_of_pledge_of_movable_property_is_signed == false">В ожидании</p>
+                                <p v-if="i_contract_of_pledge_of_movable_property_is_signed == true">Подписан</p>
+                                <p v-if="i_contract_of_pledge_of_movable_property_is_signed == false">В ожидании</p>
                             </div>
                             <div class="">
-                                <p v-if="i_contract_of_pledge_of_movable_property_is_signed == true">Подписан</p>
-                                <button @click="signAgreement(contract_of_pledge_of_movable_property)" class="document-button button" v-if="i_contract_of_pledge_of_movable_property_is_signed == false">Подписать</button>
+                                <p v-if="a_contract_of_pledge_of_movable_property_is_signed">Подписан</p>
+                                <button @click="signAgreement(contract_of_pledge_of_movable_property)" class="document-button button" v-if="!a_contract_of_pledge_of_movable_property_is_signed">Подписать</button>
                             </div>
                         </div>
                         <div class="request-documents__item">
@@ -69,12 +70,12 @@
                                 <a target="_blank" href="">Посмотреть документ</a>
                             </div>
                             <div class="">
-                                <p v-if="a_factoring_agreement_is_signed == true">Подписан</p>
-                                <p v-if="a_factoring_agreement_is_signed == false">В ожидании</p>
+                                <p v-if="i_factoring_agreement_is_signed == true">Подписан</p>
+                                <p v-if="i_factoring_agreement_is_signed == false">В ожидании</p>
                             </div>
                             <div class="">
-                                <p v-if="i_factoring_agreement_is_signed == true">Подписан</p>
-                                <button @click="signAgreement(factoring_agreement)" class="document-button button" v-if="i_factoring_agreement_is_signed == false">Подписать</button>
+                                <p v-if="a_factoring_agreement_is_signed == true">Подписан</p>
+                                <button @click="signAgreement(factoring_agreement)" class="document-button button" v-if="!a_factoring_agreement_is_signed">Подписать</button>
                             </div>
                         </div>
                         <div class="request-documents__item">
@@ -85,12 +86,12 @@
                                 <a target="_blank" href="">Посмотреть документ</a>
                             </div>
                             <div class="">
-                                <p v-if="a_receivables_assignment_agreement == true">Подписан</p>
-                                <p v-if="a_receivables_assignment_agreement == false">В ожидании</p>
+                                <p v-if="i_receivables_assignment_agreement == true">Подписан</p>
+                                <p v-if="i_receivables_assignment_agreement == false">В ожидании</p>
                             </div>
                             <div class="">
-                                <p v-if="i_receivables_assignment_agreement == true">Подписан</p>
-                                <button @click="signAgreement(receivables_assignment_agreement)" class="document-button button" v-if="i_receivables_assignment_agreement == false">Подписать</button>
+                                <p v-if="a_receivables_assignment_agreement == true">Подписан</p>
+                                <button @click="signAgreement(receivables_assignment_agreement)" class="document-button button" v-if="!a_receivables_assignment_agreement">Подписать</button>
                             </div>
                         </div>
                     </div>
@@ -143,6 +144,15 @@ export default {
         // Договор цессии дебиторской задолженности 
         i_receivables_assignment_agreement: '',
 
+        //Кнопка Уведомление о передаче прав требования 
+        button_notice_to_the_debtor_is_signed: true,
+        //Кнопка Договор залога движимого имущества 
+        button_contract_of_pledge_of_movable_property_is_signed: true,
+        //Кнопка Договор факторинга 
+        button_factoring_agreement_is_signed: '',
+        //Кнопка Договор цессии дебиторской задолженности 
+        button_receivables_assignment_agreement: '',
+
         //Уведомление о передаче прав требования
         notice_to_the_debtor: 'notice_to_the_debtor',
         //Договор залога движимого имущества
@@ -150,42 +160,19 @@ export default {
         //Договор факторинга 
         factoring_agreement: 'factoring_agreement',
         // Договор цессии дебиторской задолженности 
-        receivables_assignment_agreement: 'receivables_assignment_agreement'
+        receivables_assignment_agreement: 'receivables_assignment_agreement',
+
+        //Уведомление о передаче прав требования 
+        i_notice_to_the_debtor_is_signed: '',
+        // Договор залога движимого имущества 
+        i_contract_of_pledge_of_movable_property_is_signed: '',
+        //Договор факторинга 
+        i_factoring_agreement_is_signed: '',
+        // Договор цессии дебиторской задолженности 
+        i_receivables_assignment_agreement: '',
     }),
     mounted(){
-        axios(
-                {
-                    method: 'GET',
-                    url: 'http://127.0.0.1:8000/api/v1/admin/investor/investment/' + localStorage.getItem('id') + '/',
-                    headers:{
-                        Authorization: 'Token ' + localStorage.getItem('usertoken')
-                    }
-                },
-        )
-        .then((response) => {
-            this.id = response.data.id,
-            this.investor_name = response.data.user_name,
-            this.sum = response.data.investment_sum,
-            this.status_name = response.data.stage_name
-            console.log(response.data.a_notice_to_the_debtor_is_signed),
-            //Уведомление о передаче прав требования 
-            this.a_notice_to_the_debtor_is_signed = response.data.a_notice_to_the_debtor_is_signed,
-            // Договор залога движимого имущества 
-            this.a_contract_of_pledge_of_movable_property_is_signed = response.data.a_contract_of_pledge_of_movable_property_is_signed,
-            //Договор факторинга 
-            this.a_factoring_agreement_is_signed = response.data.a_factoring_agreement_is_signed,
-            // Договор цессии дебиторской задолженности 
-            this.a_receivables_assignment_agreement = response.data.a_receivables_assignment_agreement
-
-            //Уведомление о передаче прав требования 
-            this.i_notice_to_the_debtor_is_signed = response.data.i_notice_to_the_debtor_is_signed,
-            // Договор залога движимого имущества 
-            this.i_contract_of_pledge_of_movable_property_is_signed = response.data.i_contract_of_pledge_of_movable_property_is_signed,
-            //Договор факторинга 
-            this.i_factoring_agreement_is_signed = response.data.i_factoring_agreement_is_signed,
-            // Договор цессии дебиторской задолженности 
-            this.i_receivables_assignment_agreement = response.data.i_receivables_assignment_agreement
-        }),
+        this.getInvestmentData(),
         axios(
                 {
                     method: 'GET',
@@ -212,7 +199,7 @@ export default {
             })
         },
         signAgreement(value){
-            axios.post('http://127.0.0.1:8000/api/v1/investor/my-agreements/' + localStorage.getItem('id') + '/',
+            axios.post('http://127.0.0.1:8000/api/v1/admin/investor/sign-agreement/' + localStorage.getItem('id') + '/',
             {
                 document: value
             },
@@ -220,6 +207,43 @@ export default {
                 headers:{
                     Authorization: 'Token ' + localStorage.getItem('usertoken')
                 }
+            }).then(function(){
+                this.getInvestmentData()
+            })
+        },
+        getInvestmentData(){
+            axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/admin/investor/investment/' + localStorage.getItem('id') + '/',
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+            )
+            .then((response) => {
+                this.id = response.data.id,
+                this.investor_name = response.data.user_name,
+                this.sum = response.data.investment_sum,
+                this.status_name = response.data.stage_name
+                console.log(response.data.a_notice_to_the_debtor_is_signed),
+                //Уведомление о передаче прав требования 
+                this.a_notice_to_the_debtor_is_signed = response.data.a_notice_to_the_debtor_is_signed,
+                // Договор залога движимого имущества 
+                this.a_contract_of_pledge_of_movable_property_is_signed = response.data.a_contract_of_pledge_of_movable_property_is_signed,
+                //Договор факторинга 
+                this.a_factoring_agreement_is_signed = response.data.a_factoring_agreement_is_signed,
+                // Договор цессии дебиторской задолженности 
+                this.a_receivables_assignment_agreement = response.data.a_receivables_assignment_agreement
+
+                //Уведомление о передаче прав требования 
+                this.i_notice_to_the_debtor_is_signed = response.data.i_notice_to_the_debtor_is_signed,
+                // Договор залога движимого имущества 
+                this.i_contract_of_pledge_of_movable_property_is_signed = response.data.i_contract_of_pledge_of_movable_property_is_signed,
+                //Договор факторинга 
+                this.i_factoring_agreement_is_signed = response.data.i_factoring_agreement_is_signed,
+                // Договор цессии дебиторской задолженности 
+                this.i_receivables_assignment_agreement = response.data.i_receivables_assignment_agreement
             })
         }
     }
