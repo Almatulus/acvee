@@ -164,11 +164,12 @@ export default {
         financingData: [],
         warehouseData: [],
         shipmentsData: [],
-        earningsData: []
+        earningsData: [],
+        activeEl: 0
     }),
     methods:{
         makeActive: function(item){
-            this.active = item;
+            this.activeEl = item;
         },
     },
     mounted(){
@@ -186,7 +187,7 @@ export default {
             this.warehouseData = response.data.warehouse
             this.shipmentsData = response.data.shipment
             this.earningsData = response.data.earning
-            console.log(response.data)
+            
         }) 
     }
 }

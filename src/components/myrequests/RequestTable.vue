@@ -57,7 +57,10 @@
                     <router-link class="request-description__button request-button button" v-if="selectedProject.status == 'approved'" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
                         Проверить договор
                     </router-link>
-                
+
+                    <router-link class="request-description__button request-button button" v-if="selectedProject.status == 'approved'" :to="{name: 'myrequest-project-details', params: {id: selectedProject.id}}" >
+                        Посмотреть детали
+                    </router-link>
                 <!--<router-link class="request-button button" v-if="selectedProject.status == 'approved'" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
                     Проверить договор
                 </router-link>-->
@@ -125,7 +128,7 @@
                     <div v-if="myproject.status == 'approved'" class="request-table__item">
                         <!--{{myproject.status}}-->
                         
-                        <router-link class="request-table__details-link" tag="a"  :to="{name: 'myrequest-project-details', params: {id: myproject.id}}"><a @click="localStorage.setItem('userID', myproject.id)" href="">Посмотреть детали</a></router-link>
+                        <!-- <router-link class="request-table__details-link" tag="a"  :to="{name: 'myrequest-project-details', params: {id: myproject.id}}"><a @click="localStorage.setItem('userID', myproject.id)" href="">Посмотреть детали</a></router-link> -->
                     </div>
                 </div>
             </div>
@@ -222,7 +225,7 @@ export default {
 
 		&__row {
             display: grid;
-            grid-template-columns: repeat(7, 1fr);
+            grid-template-columns: repeat(6, 1fr);
             cursor: pointer;
 		}
 

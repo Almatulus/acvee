@@ -201,7 +201,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .request-documents {
         background: #fff;
         box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
