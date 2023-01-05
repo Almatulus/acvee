@@ -187,7 +187,7 @@
                 <button type="submit" class="button investor-questionnaire__form-button">
                     Сохранить
                 </button>
-                {{$v}}
+                
             </form>
         </div>
     </div>
