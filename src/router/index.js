@@ -161,6 +161,13 @@ const routes = [
     component: () => import('../views/Investor/InvestorRequestStages.vue')
   },
   {
+    path: '/investor/requests/documents/:id',
+    name: 'investor-requests-documents',
+    params: true,
+    meta: {layout: 'investor'},
+    component: () => import('../views/Investor/InvestorDocuments.vue')
+  },
+  {
     path: '/investor/questionnaire/after',
     name: 'investor-questionnaire-after',
     meta: {layout: 'investor'},

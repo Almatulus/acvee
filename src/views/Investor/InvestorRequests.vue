@@ -50,10 +50,10 @@
                             </router-link>
                         
                         
-                            <router-link class="request-description__button request-button button" v-if="selectedProject.get_status == 'approved'" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
-                                Проверить договор
+                            <router-link class="request-description__button request-button button"  :to="{name: 'investor-requests-documents', params: {id: selectedProject.id}}" >
+                                Проверить договора
                             </router-link>
-                        
+                        <!-- v-if="selectedProject.get_status == 'approved'" -->
                         <!--<router-link class="request-button button" v-if="selectedProject.status == 'approved'" :to="{name: 'myrequest-request-document', params: {id: selectedProject.id}}" >
                             Проверить договор
                         </router-link>-->
