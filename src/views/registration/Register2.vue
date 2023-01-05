@@ -7,6 +7,7 @@
                 </div>
                 <h2>{{ title }}</h2>
                 <form @submit.prevent="submitHandler" class="authentication-template__form" action="">
+                    <p>Выберите тип пользователя</p>
                     <div style="margin: 15px 0 0 0; display: flex;" class="">
                         <div class="authentication-template__form-item-item">
                             <input v-model="user_type" value="borrower" name="role" id="Borrower" class="radio-hide" type="radio">
@@ -16,8 +17,9 @@
                             <input v-model="user_type" value="investor" name="role" id="Investor" class="radio-hide" type="radio">
                             <label for="Investor">Инвестор</label>
                         </div>
-                        <p v-if="$v.user_type.$dirty && !$v.user_type.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                        
                     </div>
+                    <p style="margin: 15px 0 0 0;" v-if="$v.user_type.$dirty && !$v.user_type.required" class="invalid-feedback">Обязательно для выбора</p>
                     <div class="authentication-template__form-item">
                         <p>Пароль</p>
                         <input 
@@ -66,8 +68,8 @@ export default {
     }),
     methods: {
         submitHandler(){
-            //this.$v.$touch()
-            if(!this.$v.$error){
+            this.$v.$touch()
+            if(!this.$v.$invalid){
                 
                 axios.post('http://127.0.0.1:8000/api/v1/registr/',
                     {
@@ -92,7 +94,7 @@ export default {
     },
     validations: {
         password: {required, minLength: minLength(8)},
-        repeatPassword: {required, minLength: minLength(8), sameAsPassword: sameAs('form.password')},
+        repeatPassword: {required, minLength: minLength(8), sameAsPassword: sameAs('password')},
         user_type: {required}
     }
 }
@@ -130,5 +132,8 @@ export default {
             font-size: 18px;
             margin-left: 10px;
         }
+    }
+    p{
+        font-size: 16px;
     }
 </style>

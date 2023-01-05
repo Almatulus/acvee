@@ -100,7 +100,7 @@
                         class="investor-questionnaire__form-input"
                         placeholder="Сумма инвестирования"
                         :class="$v.form.email.$error ? 'invalid' : ''"
-                        maxlength="10"
+                        maxlength="8"
                         @keypress="isNumber">
                         <p v-if="$v.form.investment_sum.$dirty && !$v.form.investment_sum.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                         <br>
@@ -112,7 +112,7 @@
                         v-model.trim="form.desired_sum"
                         :class="$v.form.desired_sum.$error ? 'invalid' : ''"
                         @keypress="isNumber"
-                        maxlength="10"
+                        maxlength="8"
                         >
                         <p v-if="$v.form.desired_sum.$dirty && !$v.form.desired_sum.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                     </div>
@@ -187,6 +187,7 @@
                 <button type="submit" class="button investor-questionnaire__form-button">
                     Сохранить
                 </button>
+                {{$v}}
             </form>
         </div>
     </div>
@@ -208,7 +209,6 @@ export default {
             desired_sum: '',
             email: '',
             description: '',
-            //ID_card_img: '',
             IBAN: '',
             bank_name: '',
             confirmation1: '',
@@ -218,14 +218,13 @@ export default {
             confirmation5: '',
             confirmation6: '',
             confirmation7: '',
-            confirmation8: '',
             confirmation9: '',
             confirmation10: '',
             confirmation11: '',
             confirmation12: '',
             confirmation13: '',
         },
-        
+        submitStatus: null
     }),
     validations: {
         form:{
@@ -236,7 +235,6 @@ export default {
             investment_sum: {required},
             email: {required, email},
             desired_sum: {required},
-            ID_card_img: {required},
             investment_term: {required},
             IBAN: {required},
             bank_name: {required},
@@ -247,7 +245,6 @@ export default {
             confirmation5: {required},
             confirmation6: {required},
             confirmation7: {required},
-            confirmation8: {required},
             confirmation9: {required},
             confirmation10: {required},
             confirmation11: {required},
@@ -276,8 +273,9 @@ export default {
         },
         submitHandler(){
             this.$v.form.$touch()
-            console.log(this.$invalid)
-            if(!this.$v.form.$error){
+            console.log(this.$v.$invalid)
+            
+            if(!this.$v.$invalid){
                 axios.post('http://127.0.0.1:8000/api/v1/investor/save-form/', 
                 {
                     investor_type: this.form.investor_type,

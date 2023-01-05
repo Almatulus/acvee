@@ -92,7 +92,7 @@ export default {
             lazy: true
         },
         isLoginPage: true,
-        url: '/register',
+        url: '/register/1',
         buttonText: 'Войти в кабинет',
         error: ''
     }),
@@ -106,8 +106,8 @@ export default {
     },
     methods: {
         submitHandler(){
-            //this.$v.$touch()
-            if(!this.$v.$error){
+            this.$v.$touch()
+            if(!this.$v.$invalid){
                 
                 axios.post('http://127.0.0.1:8000/api/v1/auth/token/login/',
                     {
@@ -127,7 +127,15 @@ export default {
                             }
                         },
                     ).then((response) => {
-                        
+                        if(response.data.user_type == 'borrower'){
+                            this.$router.push('/')
+                        }
+                        if(response.data.user_type == 'investor'){
+                            this.$router.push('/investor')
+                        }
+                        if(response.data.user_type == 'admin'){
+                            this.$router.push('/admin')
+                        }
                     })
                 }).catch((error) => {
                     if(error.response.data.non_field_errors){

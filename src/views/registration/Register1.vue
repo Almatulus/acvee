@@ -21,7 +21,7 @@
                 </div>
                 <h2>{{ title }}</h2>
                 <form @submit.prevent="submitHandler" class="authentication-template__form" action="">
-                    
+                
                     <div class="authentication-template__form-item">
                         <p>Номер телефона</p>
                         <input
@@ -58,6 +58,7 @@
                         <button class="button" type="submit">
                             {{buttonText}}
                         </button>
+                        
                     </div>
                 </form>
                 
@@ -85,8 +86,9 @@ export default {
             mask: '+{7}(000)000-00-00',
             lazy: true
         },
-        phone_status: ''
+        phone_status: '',
         //user_type: ''
+        submitStatus: null
     }),
     methods: {
         submitHandler(){
@@ -94,7 +96,23 @@ export default {
             console.log(this.$v.$error)
             console.log(this.$v.$errors)
             console.log(this.$v.$invalid)
-            if(!this.$v.$error){
+            // if(!this.$v.$invalid){
+            //     this.submitStatus = 'ERROR'
+            // }else{
+            //     this.submitStatus = 'PENDING'
+            //     axios.post('http://127.0.0.1:8000/api/v1/check-number/', 
+            //         {
+            //             phone_number: this.phone
+            //         }
+            //     ).then((response) => {
+            //         this.phone_status = response.data.status
+            //         if(this.phone_status == 'success'){
+            //             localStorage.setItem('phone', this.phone)
+            //             //this.$router.push('/register/2')
+            //         }
+            //     })
+            // }
+            if(!this.$v.$invalid){
                 
                 axios.post('http://127.0.0.1:8000/api/v1/check-number/', 
                     {
@@ -132,9 +150,7 @@ export default {
         },
     },
     validations: {      
-        phone: {required, minLength: minLength(16)},
-        sms: {required},
-        //user_type: {required}
+        phone: {required, minLength: minLength(16)}
     },
     directives: {
         imask: IMaskDirective

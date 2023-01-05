@@ -33,8 +33,7 @@
                         <option v-for="country in COUNTRIES" :key="country.id" :value="country.id">{{country.name}}</option>
                     </select>
                     <p v-if="$v.form.countryID.$dirty && !$v.form.countryID.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
-                    {{form.cityID}}
-                    {{this.COUNTRIES[0].cities}}
+                    
                     <select 
                         type="text" 
                         class="questionnaire__questions-input questionnaire__input"
@@ -328,6 +327,7 @@
                                 </div>
                                 <p style="color: #ff0000" v-if="$v.form.accessCompanyHistory.$dirty && !$v.form.accessCompanyHistory.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
                                 <button class="button questionnaire__btn" type="submit">Далее</button>
+                                {{$v}}
                             </div>
                         </div>
                     </div>
@@ -457,8 +457,8 @@ export default {
         },*/
         submitHandler(value){
             this.$v.form.$touch()
-            console.log(this.$v.form.$errors)
-            if(!this.$v.form.$error){
+            
+            if(!this.$v.$invalid){
                 //this.GET_QUESTIONNAIREFORMSTATE_TO_VUEX(value)
                 localStorage.setItem('questionnaire', JSON.stringify(value))
                 console.log(localStorage.getItem('questionnaire'))
