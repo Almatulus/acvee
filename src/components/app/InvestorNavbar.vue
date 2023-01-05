@@ -15,11 +15,11 @@
                         <span>Мои заявки</span>
                     </a>
                 </router-link>
-                <router-link tag="li" active-class="active" to="/investor/my-projects" >
+                <!--<router-link tag="li" active-class="active" to="/investor/my-projects" >
                     <a href="" class="sidebar__link">
                         <span>Мои проекты</span>
                     </a>
-                </router-link>
+                </router-link>-->
                 <router-link tag="li" active-class="active" to="/investor/financial-information" >
                     <a href="" class="sidebar__link">
                         <span>Аналитика</span>

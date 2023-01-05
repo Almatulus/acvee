@@ -207,7 +207,7 @@ export default {
                 headers:{
                     Authorization: 'Token ' + localStorage.getItem('usertoken')
                 }
-            }).then(function(){
+            }).then((response) => {
                 this.getInvestmentData()
             })
         },
