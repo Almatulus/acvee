@@ -11,7 +11,7 @@
                         Просмотр документа
                     </div>-->
                     <div class="">
-                        Скачивание документа
+                        Просмотр документа
                     </div>
                 </div>
                 <div class="request-documents__item">
@@ -22,7 +22,7 @@
                         <a target="_blank" href="">Посмотреть документ</a>
                     </div>-->
                     <div class="">
-                        <a id="DownloadIDCard" target="_self" href="">Скачать документ</a>
+                        <a id="DownloadIDCard" target="_self" href="">Посмотреть документ</a>
                     </div>
                 </div>
                 <div class="request-documents__item">
@@ -33,7 +33,7 @@
                         <a target="_blank" href="">Посмотреть документ</a>
                     </div>-->
                     <div class="">
-                        <a id="DownloadRegistrationCertificate" href="">Скачать документ</a>
+                        <a id="DownloadRegistrationCertificate" href="">Посмотреть документ</a>
                     </div>
                 </div>
                 <div class="request-documents__item">
@@ -44,7 +44,7 @@
                         <a href="">Посмотреть документ</a>
                     </div>-->
                     <div class="">
-                        <a id="DownloadContractSale" href="">Скачать документ</a>
+                        <a id="DownloadContractSale" href="">Посмотреть документ</a>
                     </div>
                 </div>
                 <div class="request-documents__item">
@@ -55,7 +55,7 @@
                         <a href="">Посмотреть документ</a>
                     </div>-->
                     <div class="">
-                        <a id="DownloadPurchaseAgreement" href="">Скачать документ</a>
+                        <a id="DownloadPurchaseAgreement" href="">Посмотреть документ</a>
                     </div>
                 </div>
                 <div class="request-documents__item">
@@ -66,7 +66,7 @@
                         <a href="">Посмотреть документ</a>
                     </div>-->
                     <div class="">
-                        <a id="invoice" href="">Скачать документ</a>
+                        <a id="invoice" href="">Посмотреть документ</a>
                     </div>
                 </div>
                 <div class="request-documents__item">
@@ -77,7 +77,7 @@
                         <a href="">Посмотреть документ</a>
                     </div>-->
                     <div class="">
-                        <a id="DownloadABPConfirm" href="">Скачать документ</a>
+                        <a id="DownloadABPConfirm" href="">Посмотреть документ</a>
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                         <a href="">Посмотреть документ</a>
                     </div>-->
                     <div class="">
-                        <a id="DownloadFirstAct" href="">Скачать документ</a>
+                        <a id="DownloadFirstAct" href="">Посмотреть документ</a>
                     </div>
                 </div>
                 <div v-if="DownloadSecondAct !== null" class="request-documents__item">
@@ -113,7 +113,7 @@
                         <a href="">Посмотреть документ</a>
                     </div>-->
                     <div class="">
-                        <a id="DownloadSecondAct" href="">Скачать документ</a>
+                        <a id="DownloadSecondAct" href="">Посмотреть документ</a>
                     </div>
                 </div>
                 <div v-if="DownloadThirdAct !== null" class="request-documents__item">
@@ -124,7 +124,7 @@
                         <a href="">Посмотреть документ</a>
                     </div>-->
                     <div class="">
-                        <a id="DownloadThirdAct" href="">Скачать документ</a>
+                        <a id="DownloadThirdAct" href="">Посмотреть документ</a>
                     </div>
                 </div>
             </div>

@@ -160,16 +160,7 @@ export default {
         //Договор факторинга 
         factoring_agreement: 'factoring_agreement',
         // Договор цессии дебиторской задолженности 
-        receivables_assignment_agreement: 'receivables_assignment_agreement',
-
-        //Уведомление о передаче прав требования 
-        i_notice_to_the_debtor_is_signed: '',
-        // Договор залога движимого имущества 
-        i_contract_of_pledge_of_movable_property_is_signed: '',
-        //Договор факторинга 
-        i_factoring_agreement_is_signed: '',
-        // Договор цессии дебиторской задолженности 
-        i_receivables_assignment_agreement: '',
+        receivables_assignment_agreement: 'receivables_assignment_agreement'
     }),
     mounted(){
         this.getInvestmentData(),

@@ -37,7 +37,7 @@
                         >
                         <p v-if="$v.phone.$dirty && !$v.phone.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                         <p v-if="$v.phone.$dirty && !$v.phone.minLength" class="invalid-feedback">Данное поле должно содержать номер телефона</p>
-                        
+                        <p v-if="error != ''" class="invalid-feedback">{{error}}</p>
                         <!--<p v-if="phone_status == 'error'" class="invalid-feedback">Данный номер телефона уже существует</p>-->
                     </div>
                     <!--<div class="authentication-template__form-item">
@@ -88,7 +88,8 @@ export default {
         },
         phone_status: '',
         //user_type: ''
-        submitStatus: null
+        submitStatus: null,
+        error: ''
     }),
     methods: {
         submitHandler(){
@@ -120,9 +121,13 @@ export default {
                     }
                 ).then((response) => {
                     this.phone_status = response.data.status
+                    console.log(response.data)
                     if(this.phone_status == 'success'){
                         localStorage.setItem('phone', this.phone)
                         this.$router.push('/register/2')
+                    }
+                    if(this.phone_status == 'error'){
+                        this.error = 'Данный номер телефона уже существует'
                     }
                 })
             }

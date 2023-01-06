@@ -66,9 +66,7 @@
                             <td>{{loan.request_date}}</td>
                             <td>{{loan.user_name}}</td>
                             <td>{{loan.project_name}}</td>
-                            <td>
-                                {{loan.stage.stage_name}}
-                            </td>
+                            <td>{{loan.stage.stage_name}}</td>
                             <td>{{loan.amount_received}}</td>
                             <td>
                                 <router-link :to="{name: 'admin-loan', params: {id: loan.id}}"><a @click="getID(loan.id)" href="">Перейти</a></router-link>
@@ -91,6 +89,7 @@
 <script>
 export default {
     data: () => ({
+        list: [],
         loans: [],
         isVisible: false,
         status_list: [],
@@ -133,6 +132,7 @@ export default {
             )
             .then((response) => {
                 this.loans = response.data
+                console.log(response)
             })
         },
         clearInvestor(){
