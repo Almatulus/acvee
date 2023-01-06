@@ -16,6 +16,11 @@
                         <span>Мои заявки</span>
                     </a>
                 </router-link>
+                <router-link tag="li" active-class="active" to="/notifications" >
+                    <a href="" class="sidebar__link icon-my-application">
+                        <span>Уведомления</span>
+                    </a>
+                </router-link>
                 
                 <!--<router-link tag="li" active-class="active" to="/datarequest" >
                     <a href="" class="sidebar__link icon-data-application">

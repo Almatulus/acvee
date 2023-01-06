@@ -61,11 +61,15 @@ export default {
         exit(){
             axios.post('http://127.0.0.1:8000/api/v1/auth/token/logout/', 
                 {
+                    
+                },
+                {
                    headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken')
                     } 
                 }
             ).then(
+                localStorage.clear(),
                 this.$router.push('/login')
             )
         }
