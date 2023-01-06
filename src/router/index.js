@@ -60,13 +60,13 @@ const routes = [
   },
   {
     path: '/scoring',
-    name: 'questionnaire',
+    name: 'scoring',
     meta: {layout: 'borrower'},
     component: () => import('../components/borrower/Scoring')
   },
   {
     path: '/scoring/after',
-    name: 'questionnaire',
+    name: 'scoring-after',
     meta: {layout: 'borrower'},
     component: () => import('../views/Borrower/BorrowerAfterQuestionnaire.vue')
   },

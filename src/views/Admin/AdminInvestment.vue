@@ -226,7 +226,7 @@ export default {
                 this.investor_name = response.data.user_name,
                 this.sum = response.data.investment_sum,
                 this.status_name = response.data.stage_name
-                console.log(response.data.a_notice_to_the_debtor_is_signed),
+                
                 //Уведомление о передаче прав требования 
                 this.a_notice_to_the_debtor_is_signed = response.data.a_notice_to_the_debtor_is_signed,
                 // Договор залога движимого имущества 

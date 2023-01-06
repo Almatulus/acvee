@@ -318,7 +318,7 @@
                                 </div>
                                 <p style="color: #ff0000" v-if="$v.form.accessCompanyHistory.$dirty && !$v.form.accessCompanyHistory.required" class="questionnaire-invalid-feedback">Обязательно для выбора</p>
                                 <button class="button questionnaire__btn" type="submit">Далее</button>
-                                {{$v}}
+                                
                             </div>
                         </div>
                     </div>

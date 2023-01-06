@@ -13,6 +13,9 @@
                     <div v-if="userType == 'borrower'" class="header__role">
                         Заемщик
                     </div>
+                    <div v-if="userType == 'admin'" class="header__role">
+                        Админ
+                    </div>
                 </div>
             </div>
             <a href="" class="header__notification">
