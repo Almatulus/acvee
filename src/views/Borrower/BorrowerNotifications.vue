@@ -1,6 +1,7 @@
 <template>
     <div class="investor-notifications">
         <div class="investor-notifications__inner">
+            
             <h2>Уведомления</h2>
             <div class="investor-notifications__content">
                 <div class="investor-notifications__item">
@@ -38,6 +39,7 @@
 <style lang="scss" scoped>
 .investor-notifications {
         font-size: 20px;
+        font-weight: 500;
 		&__inner {
 		}
 
@@ -47,13 +49,13 @@
 		&__item {
             padding: 10px;
             margin: 20px 0 0 0;
-            border: 2px solid #c9bbbb;
+            border: 2px solid #0345FF;
             border-radius: 10px;
 		}
 
 		&__name {
-            border-bottom: 1px solid #000;
-            padding: 10px 0;
+            border-bottom: 1px solid #0345FF;
+            padding: 15px 0;
 		}
 
 		&__time {

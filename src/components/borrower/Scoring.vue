@@ -1,16 +1,7 @@
 <template>
     <div class="scoring">
         <div class="scoring__inner">
-            <div class="modal__wrapper">
-                <div v-if="modal" class="scoring__modal">
-                    <div class="scoring__text">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae nesciunt repellat maxime facilis quidem culpa quia neque magni veniam animi natus necessitatibus odio, atque beatae eos dignissimos deserunt explicabo quos.
-                    </div>
-                    <a @click.prevent="hideModal()" class="modal__button button">
-                        Я соглашаюсь со всеми условиями
-                    </a>
-                </div>
-            </div>
+            
             <h2>Скоринг</h2>
             <form id="docForm" ref="docForm" action="" @submit.prevent="submitHandler()">
                 <div class="scoring__item-wrapper">
@@ -476,32 +467,7 @@ export default {
     justify-content: space-around;
 }
 
-.scoring__modal{
-    position: fixed;
-    z-index: 10;
-    top: 20%;
-    left: 40%;
-    width: 600px;
-    height: 500px;
-    background: #fff;
-    box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);
-    border-radius: 10px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 4px solid #0345FF;
-    font-size: 17px;
-}
-.modal__button{
-    display: inline-block;
-    width: 225px;
-    height: 60px;
-    cursor: pointer;
-    margin: 0 auto;
-    padding: 16px;
-    text-align: center;
-}
+
 .questionnaire-nav {
     display: flex;
     align-items: center;
