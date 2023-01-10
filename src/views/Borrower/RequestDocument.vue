@@ -11,43 +11,65 @@
                         Просмотр документа
                     </div>
                     <div class="">
-                        Скачивание документа
+                        Подпись(админ)
+                    </div>
+                    <div class="">
+                        Подпись(заемщик)
                     </div>
                 </div>
                 <div class="request-documents__item">
                     <div class="">
-                        Договор факторинга
+                        Факторинга
                     </div>
                     <div class="">
                         <a id="factoringPDFView" target="_blank" href="http://127.0.0.1:8000/api/v1/borrower/agreement-factoring-pdf/">Посмотреть документ</a>
                     </div>
                     <div class="">
-                        <a id="factoringPDFViewDownload" target="_self" href="http://127.0.0.1:8000/api/v1/borrower/factoring-download/">Скачать документ</a>
+                        <p v-if="statusList.a_factoring_agreement_is_signed == true">Подписан</p>
+                        <p v-if="statusList.a_factoring_agreement_is_signed == false">В ожидании</p>
+                    </div>
+                    <div class="">
+                        <p v-if="statusList.b_factoring_agreement_is_signed">Подписан</p>
+                        <button @click="signAgreement('factoring_acgreement')" class="document-button button" v-if="!statusList.b_factoring_agreement_is_signed">Подписать</button>
+                                
                     </div>
                 </div>
                 <div class="request-documents__item">
                     <div class="">
-                        Название договора 2
+                        Залога движимого имущества
                     </div>
                     <div class="">
                         <a target="_blank" href="">Посмотреть документ</a>
                     </div>
                     <div class="">
-                        <a id="DownloadIDCard" target="_self" href="">Скачать документ</a>
+                        <p v-if="statusList.a_contract_of_pledge_of_movable_property_is_signed == true">Подписан</p>
+                        <p v-if="statusList.a_contract_of_pledge_of_movable_property_is_signed == false">В ожидании</p>
+                    </div>
+                    <div class="">
+                        <p v-if="statusList.b_contract_of_pledge_of_movable_property_is_signed">Подписан</p>
+                        <button @click="signAgreement('contract_of_pledge_of_movable_property')" class="document-button button" v-if="!statusList.b_contract_of_pledge_of_movable_property_is_signed">Подписать</button>
+                                
                     </div>
                 </div>
                 <div class="request-documents__item">
                     <div class="">
-                        Название договора 3
+                        Цессии дебиторской задолженности
                     </div>
                     <div class="">
                         <a target="_blank" href="">Посмотреть документ</a>
                     </div>
                     <div class="">
-                        <a id="DownloadIDCard" target="_self" href="">Скачать документ</a>
+                        <p v-if="statusList.a_receivables_assignment_agreement_is_signed == true">Подписан</p>
+                        <p v-if="statusList.a_receivables_assignment_agreement_is_signed == false">В ожидании</p>
+                    </div>
+                    <div class="">
+                        <p v-if="statusList.b_receivables_assignment_agreement_is_signed">Подписан</p>
+                        <button @click="signAgreement('receivables_assignment_agreement')" class="document-button button" v-if="!statusList.b_receivables_assignment_agreement_is_signed">Подписать</button>
+                                
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </template>
@@ -56,20 +78,52 @@
 import VueDocPreview from 'vue-doc-preview'
 import {mapActions, mapGetters} from 'vuex'
 export default {
- components: {
+data:() => ({
+    statusList: []
+}),
+components: {
     VueDocPreview
 },
 mounted() {
-    getTagA:{
-        var a = document.getElementById('factoringPDFView')
-        //a.href = a.href + String(this.PROJECTSTATUS) + '/'
-        a.href = a.href + localStorage.getItem('userID')
-        var b = document.getElementById('factoringPDFViewDownload')
-        b.href = b.href + localStorage.getItem('userID')
-        //b.href = b.href + String(this.PROJECTSTATUS) + '/'
-    }
+    // getTagA:{
+    //     var a = document.getElementById('factoringPDFView')
+    //     //a.href = a.href + String(this.PROJECTSTATUS) + '/'
+    //     a.href = a.href + localStorage.getItem('userID')
+    //     var b = document.getElementById('factoringPDFViewDownload')
+    //     b.href = b.href + localStorage.getItem('userID')
+    //     //b.href = b.href + String(this.PROJECTSTATUS) + '/'
+    // }
+    this.getStatusData()
 },
 methods:{
+    getStatusData(){
+            axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/borrower/my-agreements/' + localStorage.getItem('userID') + '/',
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+            )
+            .then((response) => {
+                this.statusList = response.data
+                console.log(response.data)
+            })
+    },
+    signAgreement(value){
+            axios.post('http://127.0.0.1:8000/api/v1/borrower/sign-agreement/' + localStorage.getItem('userID') + '/',
+            {
+                document: value
+            },
+            {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+                }
+            }).then((response) => {
+                this.getStatusData()
+            })
+        },
     singingTheAgreement(){
         axios.post( 'http://127.0.0.1:8000/api/v1/borrower/signing/' + localStorage.getItem('userID'), 
                 {
@@ -133,6 +187,10 @@ computed:{
     padding: 10px;
     color: #fff;
     border-radius: 10px;
+}
+
+.document-button{
+    padding: 10px;
 }
 
 </style>
