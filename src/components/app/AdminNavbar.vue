@@ -30,6 +30,11 @@
                         <span>Инвестиции</span>
                     </a>
                 </router-link>
+                <router-link tag="li" active-class="active" to="/admin/notifications" >
+                    <a href="" class="sidebar__link">
+                        <span>Уведомления</span>
+                    </a>
+                </router-link>
             </ul>
         </nav>
     </div>
