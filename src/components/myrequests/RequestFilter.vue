@@ -8,9 +8,9 @@
                     </div>
                     
                     <div class="filter__filters">
-                        <input v-model="status" type="radio" name="status" @click="filterByStatus()" value="status=approved" href="#" class="filter__el">
+                        <input v-model="statusData" type="radio" name="status" @change="filterByStatus()" value="status=approved" href="#" class="filter__el">
                         <label class="filter__el" for="">Одобренно</label>
-                        <input v-model="status" name="status" type="radio"  @click="filterByStatus()" value="status=denied" href="#" class="filter__el">
+                        <input v-model="statusData" name="status" type="radio" @change="filterByStatus()" value="status=denied" href="#" class="filter__el">
                         <label for="">В ожидании</label>
     
                     </div>
@@ -63,11 +63,11 @@ export default {
         status: '',
         neededSum_max: ''
     },
-    status: ''
+    statusData: '',
    }),
    methods: {
     filterByStatus(){ 
-        this.GET_MYPROJECTS_FROM_API(this.status)
+        this.GET_MYPROJECTS_FROM_API(this.statusData)
     },
     ...mapActions([
         'GET_MYPROJECTS_FROM_API'
@@ -84,6 +84,11 @@ export default {
     mounted(){
         
     },
+    // watch:{
+    //     statusData(value){
+    //         this.GET_MYPROJECTS_FROM_API(value)
+    //     }
+    // }
 }
 </script>
 

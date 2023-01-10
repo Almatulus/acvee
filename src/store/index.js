@@ -117,7 +117,8 @@ export default new Vuex.Store({
       })
       .then((myProjects) => {
           commit('SET_MYPROJECTS_TO_STATE', myProjects.data)
-          return myProjects
+          // console.log(value)
+          // return myProjects
       })
     },
     GET_MYPROJECTS_INVESTOR_FROM_API({commit}, value){

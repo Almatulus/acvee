@@ -191,7 +191,7 @@ export default {
         ...mapGetters([
             'MYPROJECTS',
             'SEARCH_VALUE',
-            'PROJECTSTATUS',
+            'PROJECTSTATUS'
         ]),
         filteredProjects(){
             if(this.sortedProjects.length){
