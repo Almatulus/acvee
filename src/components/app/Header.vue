@@ -18,10 +18,10 @@
                     </div>
                 </div>
             </div>
-            <a href="" class="header__notification">
+            <!-- <a href="" class="header__notification">
                 <img src="../../assets/img/icons/notification.svg" alt="bell">
                 <span>3</span>
-            </a>
+            </a> -->
             <div class="header__lang">
                 <!--<a href="" class="header__lang-item">ҚАЗ</a>
                 <a href="" class="header__lang-item">РУС</a>

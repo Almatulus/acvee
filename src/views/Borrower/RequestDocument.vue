@@ -30,7 +30,7 @@
                     </div>
                     <div class="">
                         <p v-if="statusList.b_factoring_agreement_is_signed">Подписан</p>
-                        <button @click="signAgreement('factoring_acgreement')" class="document-button button" v-if="!statusList.b_factoring_agreement_is_signed">Подписать</button>
+                        <button @click="signAgreement('factoring_agreement')" class="document-button button" v-if="!statusList.b_factoring_agreement_is_signed">Подписать</button>
                                 
                     </div>
                 </div>

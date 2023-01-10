@@ -12,61 +12,77 @@
                 <div class="admin-loan__item">
                     Сумма займа: <span>{{needed_sum}}</span>
                 </div>
-                <div class="admin-loan__item admin-loan__documents">
-                    <div class="request-documents__documents">
-                        <div class="request-documents__item request-documents__title">
-                            <div class="">
-                                Название документа
+                <div class="request-documents">
+                    <div class="request-documents__inner">
+                        <h2>Подписание Договора Факторинга</h2>
+                        <div class="request-documents__documents">
+                            <div class="request-documents__item request-documents__title">
+                                <div class="">
+                                    Название документа
+                                </div>
+                                <div class="">
+                                    Просмотр документа
+                                </div>
+                                <div class="">
+                                    Подпись(заемщик)
+                                </div>
+                                <div class="">
+                                    Подпись(админ)
+                                </div>
                             </div>
-                            <div class="">
-                                Просмотр документа
+                            <div class="request-documents__item">
+                                <div class="">
+                                    Факторинга
+                                </div>
+                                <div class="">
+                                    <a id="factoringPDFView" target="_blank" href="http://127.0.0.1:8000/api/v1/borrower/agreement-factoring-pdf/">Посмотреть документ</a>
+                                </div>
+                                <div class="">
+                                    <p v-if="statusList.b_factoring_agreement_is_signed == true">Подписан</p>
+                                    <p v-if="statusList.b_factoring_agreement_is_signed == false">В ожидании</p>
+                                </div>
+                                <div class="">
+                                    <p v-if="statusList.a_factoring_agreement_is_signed">Подписан</p>
+                                    <button @click="signAgreement('factoring_agreement')" class="document-button button" v-if="!statusList.a_factoring_agreement_is_signed">Подписать</button>
+                                            
+                                </div>
+                            </div>
+                            <div class="request-documents__item">
+                                <div class="">
+                                    Залога движимого имущества
+                                </div>
+                                <div class="">
+                                    <a target="_blank" href="">Посмотреть документ</a>
+                                </div>
+                                <div class="">
+                                    <p v-if="statusList.b_contract_of_pledge_of_movable_property_is_signed == true">Подписан</p>
+                                    <p v-if="statusList.b_contract_of_pledge_of_movable_property_is_signed == false">В ожидании</p>
+                                </div>
+                                <div class="">
+                                    <p v-if="statusList.a_contract_of_pledge_of_movable_property_is_signed">Подписан</p>
+                                    <button @click="signAgreement('contract_of_pledge_of_movable_property')" class="document-button button" v-if="!statusList.a_contract_of_pledge_of_movable_property_is_signed">Подписать</button>
+                                            
+                                </div>
+                            </div>
+                            <div class="request-documents__item">
+                                <div class="">
+                                    Цессии дебиторской задолженности
+                                </div>
+                                <div class="">
+                                    <a target="_blank" href="">Посмотреть документ</a>
+                                </div>
+                                <div class="">
+                                    <p v-if="statusList.b_receivables_assignment_agreement_is_signed == true">Подписан</p>
+                                    <p v-if="statusList.b_receivables_assignment_agreement_is_signed == false">В ожидании</p>
+                                </div>
+                                <div class="">
+                                    <p v-if="statusList.a_receivables_assignment_agreement_is_signed">Подписан</p>
+                                    <button @click="signAgreement('receivables_assignment_agreement')" class="document-button button" v-if="!statusList.a_receivables_assignment_agreement_is_signed">Подписать</button>
+                                            
+                                </div>
                             </div>
                         </div>
-                        <div class="request-documents__item">
-                            <div class="">
-                                Акт сверки с производителем/дистрибьютером
-                            </div>
-                            <div class="">
-                                <a id="factoringPDFView" target="_blank" href="http://127.0.0.1:8000/api/v1/borrower/agreement-factoring-pdf/">Посмотреть документ</a>
-                            </div>
-                            
-                        </div>
-                        <div class="request-documents__item">
-                            <div class="">
-                                Договор с производителем/дистрибьютером
-                            </div>
-                            <div class="">
-                                <a target="_blank" href="">Посмотреть документ</a>
-                            </div>
-                            
-                        </div>
-                        <div class="request-documents__item">
-                            <div class="">
-                                Счет от производителя
-                            </div>
-                            <div class="">
-                                <a target="_blank" href="">Посмотреть документ</a>
-                            </div>
-                            
-                        </div>
-                        <div class="request-documents__item">
-                            <div class="">
-                                Акт сверки с клиентом
-                            </div>
-                            <div class="">
-                                <a target="_blank" href="">Посмотреть документ</a>
-                            </div>
-                            
-                        </div>
-                        <div class="request-documents__item">
-                            <div class="">
-                                Счета авставленные клиенту
-                            </div>
-                            <div class="">
-                                <a target="_blank" href="">Посмотреть документ</a>
-                            </div>
-                            
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="admin-loan__status">
@@ -96,7 +112,8 @@ export default {
         needed_sum: '',
         status: '',
         stages_list: [],
-        stage_value: ''
+        stage_value: '',
+        statusList: []
     }),
     mounted(){
         axios(
@@ -124,7 +141,8 @@ export default {
         )
         .then((response) => {
             this.stages_list = response.data
-        })
+        }),
+        this.getStatusData()
     },
     methods:{
         submitHandler(){
@@ -137,7 +155,36 @@ export default {
                     Authorization: 'Token ' + localStorage.getItem('usertoken')
                 }
             })
-        }
+        },
+        getStatusData(){
+            axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/admin/borrower/my-agreements/' + localStorage.getItem('id') + '/',
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+            )
+            .then((response) => {
+                this.statusList = response.data
+                console.log(response.data)
+            })
+        },
+        signAgreement(value){
+            axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/sign-agreement/' + localStorage.getItem('id') + '/',
+            {
+                document: value
+            },
+            {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+                }
+            }).then((response) => {
+                this.getStatusData()
+            })
+        },
+
     }
 }
 </script>
@@ -178,7 +225,7 @@ export default {
             display: flex;
             justify-content: space-between;
             div{
-                flex: 0 0 50%;
+                flex: 0 0 25%;
             }
             margin: 20px 0 0 0;
             font-size: 18px;
@@ -232,5 +279,8 @@ label{
 .admin-loan__status-button{
     padding: 15px;
     font-size: 18px;
+}
+.document-button{
+    padding: 10px;
 }
 </style>
