@@ -6,12 +6,13 @@
                 <div id='request-search' class="request-search">
                     <div class="request-search__inner">
                         <form action="" class="request-search__form">
-                            <input v-model="searchValue" placeholder="Вводите название запроса" type="text" class="request-search__input">
+                            <input v-model="searchCompany" placeholder="Вводите название запроса" type="text" class="request-search__input">
                             <a v-on:click.prevent='isVisible = !isVisible' :class="{'filter-active':isVisible}" href="" class="request-search__filter icon-filter"></a>
-                            <button @click.prevent="sortProjectsBySearchValue(searchValue)" class="request-search__btn button">
+                            <button @click.prevent="search(searchCompany)" class="request-search__btn button">
                                 <img src="../../assets/img/icons/search.svg" alt="search">
                             </button>
                         </form>
+                        {{searchCompany}}
                     </div>
                     <div v-if="isVisible == true" class="filter">
                         <div class="filter__inner">
@@ -20,6 +21,7 @@
                                     <div class="filter__title">
                                         Статус
                                     </div>
+                                    {{ordering}}
                                     <div v-for="stage in status_list" :key="stage.id" class="filter__filters">
                                         <input :id="stage.step" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" :value="stage.step" class="filter__el filter__input">
                                         <label class="filter__el" :for="stage.step">{{stage.stage_name}}</label>
@@ -93,7 +95,8 @@ export default {
         loans: [],
         isVisible: false,
         status_list: [],
-        ordering: ''
+        ordering: '',
+        searchCompany: ''
     }),
     mounted(){
         this.getLoansList(),
@@ -115,6 +118,23 @@ export default {
             )
             .then((response) => {
                 this.status_list = response.data
+            })
+        },
+        search(searchCompany){
+            axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/admin/loan-list/',
+                    params: {
+                        project_name__contains: searchCompany
+                    },
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+            )
+            .then((response) => {
+                this.loans = response.data
             })
         },
         getLoansList(value){

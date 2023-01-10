@@ -6,10 +6,11 @@
                     <div class="filter__title">
                         Статус
                     </div>
+                    
                     <div class="filter__filters">
-                        <input v-model="filter.status" type="radio" name="status" @click="filterHandler()" value="approved" href="#" class="filter__el">
+                        <input v-model="status" type="radio" name="status" @click="filterByStatus()" value="status=approved" href="#" class="filter__el">
                         <label class="filter__el" for="">Одобренно</label>
-                        <input v-model="filter.status" name="status" type="radio"  @click="filterHandler()" value="denied" href="#" class="filter__el">
+                        <input v-model="status" name="status" type="radio"  @click="filterByStatus()" value="status=denied" href="#" class="filter__el">
                         <label for="">В ожидании</label>
     
                     </div>
@@ -35,9 +36,9 @@
                         <label for="">до 500.000</label>-->
                         <input v-model="filter.neededSum_max" type="radio" name="status" @click="filterHandler()" value="neededSum_max=500000" href="#" class="filter__el">
                         <label class="filter__el" for="">до 500.000</label>
-                        <input v-model="filter.status" type="radio" name="status" @click="filterHandler()" value="approved" href="#" class="filter__el">
+                        <input v-model="filter.status" type="radio" name="status" @click="filterHandler()" value="neededSum_min=500000&neededSum_max=1000000" href="#" class="filter__el">
                         <label class="filter__el" for="">В 500.000 - 1.000.000 тг</label>
-                        <input v-model="filter.status" type="radio" name="status" @click="filterHandler()" value="approved" href="#" class="filter__el">
+                        <input v-model="filter.status" type="radio" name="status" @click="filterHandler()" value="neededSum_min=1000000" href="#" class="filter__el">
                         <label class="filter__el" for="">от 1.000.000</label>
                         <!--<a href="#" class="filter__el">
                             В 500.000 - 1.000.000 тг
@@ -47,45 +48,7 @@
                         </a>-->
                     </div>
                 </div>
-                <div class="filter__column">
-                    <div class="filter__title">
-                        № запроса
-                    </div>
-                    <div class="filter__filters">
-                        <a href="#" class="filter__el">
-                            
-                        </a>
-                        <a href="#" class="filter__el">
-                            
-                        </a>
-                    </div>
-                </div>
-                <div class="filter__column">
-                    <div class="filter__title">
-                        № договора
-                    </div>
-                    <div class="filter__filters">
-                        <a href="#" class="filter__el">
-                            
-                        </a>
-                        <a href="#" class="filter__el">
-                            
-                        </a>
-                    </div>
-                </div>
-                <div class="filter__column">
-                    <div class="filter__title">
-                        Дата
-                    </div>
-                    <div class="filter__filters">
-                        <a href="#" class="filter__el">
-                            
-                        </a>
-                        <a href="#" class="filter__el">
-                            
-                        </a>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -100,11 +63,11 @@ export default {
         status: '',
         neededSum_max: ''
     },
-
+    status: ''
    }),
    methods: {
-    filterHandler(){ 
-        this.GET_MYPROJECTS_FROM_API(this.filter)
+    filterByStatus(){ 
+        this.GET_MYPROJECTS_FROM_API(this.status)
     },
     ...mapActions([
         'GET_MYPROJECTS_FROM_API'
@@ -124,7 +87,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .filter {
         background: #FFFFFF;
         box-shadow: 0px 5px 15px rgba(51, 51, 51, 0.02);

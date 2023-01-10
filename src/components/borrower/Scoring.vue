@@ -6,6 +6,7 @@
             <form id="docForm" ref="docForm" action="" @submit.prevent="submitHandler()">
                 <div class="scoring__item-wrapper">
                     <div class="scoring__content flex-wrap">
+                        {{$v}}
                         <div class="scoring__item">
                             <div class="scoring__title">
                                 Личные данные
@@ -17,8 +18,9 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input name="IDCard" class="document__send" type="file" id="file" ref="IDCard" v-on:change="handleFileUpload()"/>
+                                            <input required name="IDCard" class="document__send"  type="file" id="file" ref="IDCard" v-on:change="handleFileUpload()"/>
                                         </label>
+                                        <!-- @change="model.file = e.target.files" <p class="questionnaire-invalid-feedback" v-if="$v.model.file.$error">Пожалуйста, прикрепите документ</p> -->
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
                                             <img src="" alt="">
@@ -38,7 +40,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input name="registrationCertificate" class="document__send" type="file" id="file" ref="IDCard" v-on:change="handleFileUpload()"/>
+                                            <input required name="registrationCertificate" class="document__send" type="file" id="file" ref="IDCard" v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -59,7 +61,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input name="contractSale" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
+                                            <input required name="contractSale" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -80,7 +82,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input name="purchaseAgreement" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
+                                            <input required name="purchaseAgreement" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -101,7 +103,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input name="invoice" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
+                                            <input required name="invoice" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -125,7 +127,7 @@
                                 <div class="document">
                                     <div class="document__inner">
                                         <label>+ Добавить документ
-                                            <input name="firstAct" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
+                                            <input required name="firstAct" class="document__send" type="file" id="file" ref="file"  v-on:change="handleFileUpload()"/>
                                         </label>
                                             <!--<button class="document__button button" v-on:click="submitFile()">Загрузить файл</button>-->
                                         <div class="document__preview">
@@ -178,8 +180,8 @@
                     </div>
                     <h3>Электронная счет фактура (подтверждение текущим актам сверкам)</h3>
                     <div class="scoring__add-doc">
-                        <input name="ABPConfirm" id="ABPConfirm" type="file">
-                        <label for="ABPConfirm">Вложить документ</label>
+                        <input required name="ABPConfirm" id="ABPConfirm" type="file">
+                        <label style="display: none;" for="ABPConfirm">Вложить документ</label>
                     </div>
                     <!--<div class="scoring__agreement">
                         <input name="consentVerification" v-model="scoring.purchaseAgreement" :value="true" id="agreement" type="checkbox"> 
@@ -220,7 +222,7 @@
 <script>
 
 import {mapActions, mapGetters} from 'vuex'
-import { required } from 'vuelidate/lib/validators'
+import { required, requiredIf } from 'vuelidate/lib/validators'
 export default {
     data: () => ({
         modal: true,
@@ -240,63 +242,66 @@ export default {
             ABPConfirm: '',
             consentVerification: ''
         },
+        model: {
+            file: []
+        }
     }),
-    components: {
-        
-    },
     methods:{
         submitHandler(){
-            let docForm = document.getElementById('docForm')
-            //console.log(this.QUESTIONNAIREFORMSTATE.organizationName, this.QUESTIONNAIREFORMSTATE)
-            let formData = new FormData(docForm);
-            //formData.append('file', this.scoring.IDCard);
-            //let localitems = localStorage.getItem('questionnaire')
-            //for(let i in this.acts){formData.append(i, this.acts[i])}
-            console.log(formData)
-            //let questionnaire = JSON.parse(localStorage.getItem('questionnaire'))
-            //let questionnaireData = JSON.parse(localStorage.getItem('questionnaire'))
-
-            //console.log(questionnaireData)
-
-            //var obj = Object.assign(formData, questionnaireData)
-
-            //console.log(obj)
-            let form = JSON.parse(localStorage.getItem('questionnaire'))
-            for(let i in form) {formData.append(i, form[i]);}
-            //formData.append('form', localStorage.getItem('questionnaire'))
-            //for(var i in questionnaire){formData.append(i, questionnaire[i])};
-            //for(var i in localitems){formData.append(i, localitems[i])}
+            //this.$v.model.$touch()
             
-            /*const data = JSON.parse(localStorage.getItem('questionnaire'))
-            for (let k in data) {
-                if(typeof data[k] == 'object'){
-                    for(let i in data[k]) formData.append(k+'['+i+']', data[k][i])
-                }
-                else formData.append(k, data[k]);
-            }*/
-            //console.log(localStorage.getItem('questionnaire'))
-            //console.log(data)
-            //formData.append(JSON.parse(localStorage.getItem('questionnaire')))
-            this.$router.push('/scoring/after')
-            //formData.append(this.QUESTIONNAIREFORMSTATE.organizationName)
-            //formData.append('form', this.QUESTIONNAIREFORMSTATE);
-            //formData.append('', this.scoring.registrationCertificate)
-            axios.post( 'http://127.0.0.1:8000/api/v1/borrower/create/', 
-                formData,
-                //obj,
-                {
-                    headers:{
-                        Authorization: 'Token ' + localStorage.getItem('usertoken')
-                    }
-                }
+                let docForm = document.getElementById('docForm')
+                //console.log(this.QUESTIONNAIREFORMSTATE.organizationName, this.QUESTIONNAIREFORMSTATE)
+                let formData = new FormData(docForm);
+                //formData.append('file', this.scoring.IDCard);
+                //let localitems = localStorage.getItem('questionnaire')
+                //for(let i in this.acts){formData.append(i, this.acts[i])}
+                console.log(formData)
+                //let questionnaire = JSON.parse(localStorage.getItem('questionnaire'))
+                //let questionnaireData = JSON.parse(localStorage.getItem('questionnaire'))
+
+                //console.log(questionnaireData)
+
+                //var obj = Object.assign(formData, questionnaireData)
+
+                //console.log(obj)
+                let form = JSON.parse(localStorage.getItem('questionnaire'))
+                for(let i in form) {formData.append(i, form[i]);}
+                //formData.append('form', localStorage.getItem('questionnaire'))
+                //for(var i in questionnaire){formData.append(i, questionnaire[i])};
+                //for(var i in localitems){formData.append(i, localitems[i])}
                 
-            ).then(function(){
-                this.$router.push('/scoring/after')
-                console.log('SUCCESS!!');
-            })
-            .catch(function(){
-                console.log('FAILURE!!');
-            });
+                /*const data = JSON.parse(localStorage.getItem('questionnaire'))
+                for (let k in data) {
+                    if(typeof data[k] == 'object'){
+                        for(let i in data[k]) formData.append(k+'['+i+']', data[k][i])
+                    }
+                    else formData.append(k, data[k]);
+                }*/
+                //console.log(localStorage.getItem('questionnaire'))
+                //console.log(data)
+                //formData.append(JSON.parse(localStorage.getItem('questionnaire')))
+                // this.$router.push('/scoring/after')
+                //formData.append(this.QUESTIONNAIREFORMSTATE.organizationName)
+                //formData.append('form', this.QUESTIONNAIREFORMSTATE);
+                //formData.append('', this.scoring.registrationCertificate)
+                axios.post( 'http://127.0.0.1:8000/api/v1/borrower/create/', 
+                    formData,
+                    //obj,
+                    {
+                        headers:{
+                            Authorization: 'Token ' + localStorage.getItem('usertoken')
+                        }
+                    }
+                    
+                ).then(function(){
+                    this.$router.push('/scoring/after')
+                    console.log('SUCCESS!!');
+                })
+                .catch(function(){
+                    console.log('FAILURE!!');
+                });
+            
         },
         handleFileUpload(value, e){
             this.acts[value] = e.target.files[0]
@@ -324,9 +329,16 @@ export default {
             'QUESTIONNAIREFORMSTATE'
         ]),
     },
-    validations: {
-
-    }
+    // validations: {
+    //     model: {
+    //         title: { required },
+    //         file: {
+    //             required: requiredIf(function (nestedModel) {
+    //                 return this.model.file.length == 0; // New changes
+    //             })
+    //         }
+    //     }
+    // }
 }
 
 //form: this.QUESTIONNAIREFORMSTATE,
@@ -386,8 +398,8 @@ export default {
                 
                 input{
                     opacity: 1;
-                    border-radius: 0;
-                    margin: 25px 0 0 0;
+                    // border-radius: 0;
+                    margin: 50px 0 0 0;
                 }
             }
 		}
@@ -414,7 +426,8 @@ export default {
         &__add-doc{
             margin: 25px 0 0 0;
             input{
-                display: none;
+                // display: none;
+                // border-radius: 0;
             }
             label{
                 display: inline-block;
@@ -510,6 +523,42 @@ export default {
 
 .scoring__button{
     padding: 17px 20px;
+}
+
+.questionnaire-input-invalid{
+   border: 1px solid #ff0000;
+}
+
+.questionnaire-invalid-feedback{
+    color: #ff0000;
+    margin: 4px 0 0 0;
+}
+
+input:invalid {
+    border: 1px solid #ff0000;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+input:valid{
+    border: 1px solid #0345FF;
+    // padding: 5px;
+}
+
+input::file-selector-button {
+    font-weight: bold;
+    color: #fff;
+    padding: 0.5em;
+    border: thin solid #0345FF;
+    //border-radius: 3px;
+    background: #0345FF;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    &:hover{
+        opacity: .5;
+        transition: .8s;
+        cursor: pointer;
+    }
 }
 </style>
 
