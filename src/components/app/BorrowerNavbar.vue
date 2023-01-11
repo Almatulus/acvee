@@ -19,6 +19,9 @@
                 <router-link tag="li" active-class="active" to="/notifications" >
                     <a href="" class="sidebar__link icon-my-application">
                         <span>Уведомления</span>
+                        <span class="notification-counter">
+                            {{counter}}
+                        </span>
                     </a>
                 </router-link>
                 
@@ -34,11 +37,44 @@
 
 <script>
 export default {
-    props: [
-        'name',
-        'url',
-        'menuClass'
-    ]
+    data: () => ({
+        counter: ''
+    }),
+    methods:{
+        getNotificationCounter(){
+            axios(
+                {
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/api/v1/messages-amount/',
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                },
+            )
+            .then((response) => {
+                this.counter = response.data.messages_amount
+                
+                
+            }) 
+        }
+    },
+    mounted(){
+        this.getNotificationCounter()
+    }
 }
 </script>
+
+<style lang="scss" scoped>
+.notification-counter{
+    background: #0345FF;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 13px;
+    // padding-bottom: 2px;
+    
+}
+</style>
 

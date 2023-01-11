@@ -124,7 +124,7 @@ export default {
             axios(
                 {
                     method: 'GET',
-                    url: 'http://127.0.0.1:8000/api/v1/admin/investor/investments/',
+                    url: 'http://127.0.0.1:8000/api/v1/admin/investor/investments/' + localStorage.getItem('id') + '/',
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken')
                     }
