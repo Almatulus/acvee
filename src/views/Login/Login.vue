@@ -109,7 +109,7 @@ export default {
             this.$v.$touch()
             if(!this.$v.$invalid){
                 
-                axios.post('http://87.255.194.55:1337/api/v1/auth/token/login/',
+                axios.post('http://127.0.0.1:8000/api/v1/auth/token/login/',
                     {
                         phone_number: this.phone,
                         password: this.password
@@ -121,7 +121,7 @@ export default {
                     axios(
                         {
                             method: 'GET',
-                            url: 'http://87.255.194.55:1337/api/v1/current-user/',
+                            url: 'http://127.0.0.1:8000/api/v1/current-user/',
                             headers:{
                                 Authorization: 'Token ' + localStorage.getItem('usertoken')
                             }

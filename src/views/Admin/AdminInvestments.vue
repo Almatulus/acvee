@@ -2,6 +2,36 @@
     <div class="admin-investments">
         <div class="admin-investments__inner">
             <h2>Инвестиции</h2>
+            <div id='request-search' class="request-search">
+                    <div class="request-search__inner">
+                        <form action="" class="request-search__form">
+                            <input v-model="searchCompany" placeholder="Вводите название запроса" type="text" class="request-search__input">
+                            <a v-on:click.prevent='isVisible = !isVisible' :class="{'filter-active':isVisible}" href="" class="request-search__filter icon-filter"></a>
+                            <button @click.prevent="search(searchCompany)" class="request-search__btn button">
+                                <img src="../../assets/img/icons/search.svg" alt="search">
+                            </button>
+                        </form>
+                        
+                    </div>
+                    <div v-if="isVisible == true" class="filter">
+                        <div class="filter__inner">
+                            <div class="filter__row">
+                                <div class="filter__column">
+                                    <div class="filter__title">
+                                        Статус
+                                    </div>
+                                    
+                                    <div v-for="stage in status_list" :key="stage.id" class="filter__filters">
+                                        <input :id="stage.step" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" :value="stage.step" class="filter__el filter__input">
+                                        <label class="filter__el" :for="stage.step">{{stage.stage_name}}</label>
+                                        <div @click="clearInvestor()" style="margin-left: 15px;" class="close">&#9587;</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
             <table class="table">
 
                     <thead>

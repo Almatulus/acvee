@@ -68,7 +68,7 @@ export default {
         submitHandler(){
             this.$v.$touch()
                 if(!this.$v.$invalid){
-                    axios.post('http://87.255.194.55:1337/api/v1/registr-profile/',
+                    axios.post('http://127.0.0.1:8000/api/v1/registr-profile/',
                     {
                         first_name: this.firstName,
                         second_name: this.secondName,

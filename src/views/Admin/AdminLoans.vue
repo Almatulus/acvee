@@ -12,7 +12,7 @@
                                 <img src="../../assets/img/icons/search.svg" alt="search">
                             </button>
                         </form>
-                        {{searchCompany}}
+                        
                     </div>
                     <div v-if="isVisible == true" class="filter">
                         <div class="filter__inner">
@@ -21,7 +21,7 @@
                                     <div class="filter__title">
                                         Статус
                                     </div>
-                                    {{ordering}}
+                                    
                                     <div v-for="stage in status_list" :key="stage.id" class="filter__filters">
                                         <input :id="stage.step" @click="sortByRole(ordering)" v-model="ordering" type="radio" name="status" :value="stage.step" class="filter__el filter__input">
                                         <label class="filter__el" :for="stage.step">{{stage.stage_name}}</label>
