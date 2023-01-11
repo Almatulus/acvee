@@ -6,7 +6,7 @@
             <form id="docForm" ref="docForm" action="" @submit.prevent="submitHandler()">
                 <div class="scoring__item-wrapper">
                     <div class="scoring__content flex-wrap">
-                        {{$v}}
+                        
                         <div class="scoring__item">
                             <div class="scoring__title">
                                 Личные данные
@@ -205,10 +205,10 @@
                     <ul class="questionnaire-nav__menu">
                         
                         <li>
-                            <a @click.prevent="scrollTo('scoring'), activeEl = 2" href="#" :class="{'active-template': activeEl === 2}" class="questionnaire-nav__menu-link">1</a>
+                            <a  class="questionnaire-nav__menu-link">1</a>
                         </li>
                         <li>
-                            <a style="color: #0345FF;" @click.prevent="scrollTo('scoring'), activeEl = 2" href="#" :class="{'active-template': activeEl === 2}" class="questionnaire-nav__menu-link">2</a>
+                            <a style="color: #0345FF;" class="questionnaire-nav__menu-link">2</a>
                         </li>
         
                     </ul>

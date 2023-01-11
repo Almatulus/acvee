@@ -184,7 +184,10 @@ export default {
                 this.getStatusData()
             })
         },
-
+        setIdToHref(){
+            let factoringPDFView = document.getElementById('factoringPDFView')
+            factoringPDFView.href = factoringPDFView.href + localStorage.getItem('id') + '/'
+        }
     }
 }
 </script>
