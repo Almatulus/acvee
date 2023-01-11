@@ -142,7 +142,8 @@ export default {
         .then((response) => {
             this.stages_list = response.data
         }),
-        this.getStatusData()
+        this.getStatusData(),
+        this.setIdToHref()
     },
     methods:{
         submitHandler(){
