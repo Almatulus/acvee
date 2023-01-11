@@ -42,6 +42,7 @@
                                 </div>
                             </div>
                         </div>-->
+                        {{$v}}
                         <div class="project-details__tables">
                             <ul class="table-tabs">
                                 <li class="first-tab" @click="financing = true, warehouse = false, shipments = false, earnings = false, activeEl = 1" :class="{'active-el': activeEl === 1}">Финансирование</li>
