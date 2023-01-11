@@ -411,7 +411,7 @@ export default {
                 this.warehouseData = response.data.warehouse
                 this.shipmentsData = response.data.shipment
                 this.earningsData = response.data.earning
-                console.log(response.data)
+                
                 
             }) 
         },
@@ -433,6 +433,8 @@ export default {
                     }
                 ).then((response) => {
                     this.getProjectDetails()
+                }).catch((error)=>{
+                    console.log(error)
                 })
             
         },
