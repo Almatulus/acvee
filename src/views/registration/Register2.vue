@@ -71,7 +71,7 @@ export default {
             this.$v.$touch()
             if(!this.$v.$invalid){
                 
-                axios.post('http://127.0.0.1:8000/api/v1/registr/',
+                axios.post('http://87.255.194.55:1337/api/v1/registr/',
                     {
                         phone_number: localStorage.getItem('phone'),
                         user_type: this.user_type,
