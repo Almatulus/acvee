@@ -54,7 +54,8 @@
                                     <div class="admin-cabinet__column">
                                         <div class="admin-cabinet__input">
                                             <div class=""><label for="">Сумма долга</label></div>
-                                            <div class=""><input v-model.trim="financingDebtAmount" type="text"></div>
+                                            <div class=""><input v-model.trim="financingDebtAmount" type="text" :class="$v.financingDebtAmount.$error ? 'invalid' : ''"></div>
+                                            <p v-if="$v.financingDebtAmount.$dirty && !$v.financingDebtAmount.required" class="invalid-feedback">Обязательное поле для заполнения</p>
                                         </div>
                                         <div class="admin-cabinet__input">
                                             <div class=""><label for="">Сумма прихода</label></div>
@@ -315,6 +316,7 @@
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators'
 export default {
     data: () => ({
         financing: false,
@@ -325,6 +327,7 @@ export default {
         warehouseData: [],
         shipmentsData: [],
         earningsData: [],
+
         financingDebtAmount: '',
         financingIncomeAmount: '',
         financingDate: '',
@@ -357,6 +360,39 @@ export default {
         earningFullFillmentComission: '',
         earningEarning: ''
     }),
+    validations: {
+        financingDebtAmount: {required},
+        financingIncomeAmount: {required},
+        financingDate: {required},
+        financingSourceOfFunds: {required},
+        financingBalanceOwnded: {required},
+        financingDebtStatus: {required},
+
+        warehouseVendorCode: {required},
+        warehouseProductName: {required},
+        warehouseVendorPrice: {required},
+        warehouseUnit: {required},
+        warehouseAmount: {required},
+        warehouseDate: {required},
+        warehouseStockBalance: {required},
+        warehousePrice: {required},
+
+        shipmentPurchasePrice: {required},
+        shipmentSellingPrice: {required},
+        shipmentShippedSum: {required},
+        shipmentShippedAmount: {required},
+        shipmentCargoReceiver: {required},
+        shipmentTTH: {required},
+        shipmentAccountNumber: {required},
+        shipmentFundsReceived: {required},
+        shipmentFullFillmentComission: {required},
+        shipmentEarnings: {required},
+
+        earningTTH: {required},
+        earningShippingReceiptAmount: {required},
+        earningFullFillmentComission: {required},
+        earningEarning: {required}
+    },
     methods:{
         getProjectDetails(){
             axios(
@@ -378,7 +414,9 @@ export default {
             }) 
         },
         SubmitFinance(){
-            axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/financing-save/',
+            this.$v.touch()
+            if(!this.$v.invalid){
+                axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/financing-save/',
                     {
                         project: localStorage.getItem('id'),
                         debt_amount: this.financingDebtAmount,
@@ -396,6 +434,7 @@ export default {
                 ).then((response) => {
                     this.getProjectDetails()
                 })
+            }
         },
         SubmitWarehouse(){
             axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/warehouse-save/',
@@ -613,5 +652,12 @@ export default {
 .admin-cabinet__button{
     padding: 10px;
     margin: 10px 0 0 0;
+}
+
+.invalid{
+        border-bottom: 0.5px solid #ff0000;
+    }
+.invalid-feedback{
+        color: #ff0000;
 }
 </style>
