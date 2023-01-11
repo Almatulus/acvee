@@ -9,6 +9,7 @@ import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+
 Vue.config.productionTip = false
 export const show = new Vue()
 Vue.use(Vuelidate)
@@ -19,3 +20,4 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+

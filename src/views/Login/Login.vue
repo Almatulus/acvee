@@ -76,8 +76,7 @@
 <script>
 import { required, minLength } from 'vuelidate/lib/validators'
 import { IMaskDirective } from 'vue-imask'
-import AuthenticationTemplateRoles from '@/components/authentication/authentication-template-roles.vue'
-import AuthenticationTemplateContent from '@/components/authentication/authentication-template-content.vue'
+
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
@@ -100,10 +99,10 @@ export default {
         phone: {required, minLength: minLength(16)},
         password: {required, minLength: minLength(8)}
     },
-    components: {
-        AuthenticationTemplateRoles,
-        AuthenticationTemplateContent
-    },
+    // components: {
+    //     AuthenticationTemplateRoles,
+    //     AuthenticationTemplateContent
+    // },
     methods: {
         submitHandler(){
             this.$v.$touch()
@@ -128,7 +127,7 @@ export default {
                         },
                     ).then((response) => {
                         if(response.data.user_type == 'borrower'){
-                            this.$router.push('/')
+                            this.$router.push('/borrower')
                         }
                         if(response.data.user_type == 'investor'){
                             this.$router.push('/investor')

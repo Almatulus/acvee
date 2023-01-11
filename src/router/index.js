@@ -6,9 +6,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'home',
-    meta: {layout: 'borrower'},
-    component: () => import('../views/HomeView.vue')
+    redirect: { name: 'login' } 
   },
   {
     path: '/login',
@@ -39,6 +37,12 @@ const routes = [
     name: 'register-4',
     meta: {layout: 'auth'},
     component: () => import('../views/registration/Register4.vue')
+  },
+  {
+    path: '/borrower',
+    name: 'borrower',
+    meta: {layout: 'borrower'},
+    component: () => import('../views/Borrower/Borrower.vue')
   },
   {
     path: '/myrequest',
