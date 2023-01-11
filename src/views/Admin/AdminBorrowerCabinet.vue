@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                         </div>-->
-                        {{$v}}
+                        
                         <div class="project-details__tables">
                             <ul class="table-tabs">
                                 <li class="first-tab" @click="financing = true, warehouse = false, shipments = false, earnings = false, activeEl = 1" :class="{'active-el': activeEl === 1}">Финансирование</li>
@@ -55,8 +55,8 @@
                                     <div class="admin-cabinet__column">
                                         <div class="admin-cabinet__input">
                                             <div class=""><label for="">Сумма долга</label></div>
-                                            <div class=""><input v-model.trim="financingDebtAmount" type="text" :class="$v.financingDebtAmount.$error ? 'invalid' : ''"></div>
-                                            <p v-if="$v.financingDebtAmount.$dirty && !$v.financingDebtAmount.required" class="invalid-feedback">Обязательное поле для заполнения</p>
+                                            <div class=""><input v-model.trim="financingDebtAmount" type="text" ></div>
+                                            <!-- <p v-if="$v.financingDebtAmount.$dirty && !$v.financingDebtAmount.required" class="invalid-feedback">Обязательное поле для заполнения</p> -->
                                         </div>
                                         <div class="admin-cabinet__input">
                                             <div class=""><label for="">Сумма прихода</label></div>
@@ -320,6 +320,7 @@
 import { required } from 'vuelidate/lib/validators'
 export default {
     data: () => ({
+        activeEl: 0,
         financing: false,
         warehouse: false,
         shipments: false,
@@ -361,39 +362,39 @@ export default {
         earningFullFillmentComission: '',
         earningEarning: ''
     }),
-    validations: {
-        financingDebtAmount: {required},
-        financingIncomeAmount: {required},
-        financingDate: {required},
-        financingSourceOfFunds: {required},
-        financingBalanceOwnded: {required},
-        financingDebtStatus: {required},
+    // validations: {
+    //     financingDebtAmount: {required},
+    //     financingIncomeAmount: {required},
+    //     financingDate: {required},
+    //     financingSourceOfFunds: {required},
+    //     financingBalanceOwnded: {required},
+    //     financingDebtStatus: {required},
 
-        warehouseVendorCode: {required},
-        warehouseProductName: {required},
-        warehouseVendorPrice: {required},
-        warehouseUnit: {required},
-        warehouseAmount: {required},
-        warehouseDate: {required},
-        warehouseStockBalance: {required},
-        warehousePrice: {required},
+    //     warehouseVendorCode: {required},
+    //     warehouseProductName: {required},
+    //     warehouseVendorPrice: {required},
+    //     warehouseUnit: {required},
+    //     warehouseAmount: {required},
+    //     warehouseDate: {required},
+    //     warehouseStockBalance: {required},
+    //     warehousePrice: {required},
 
-        shipmentPurchasePrice: {required},
-        shipmentSellingPrice: {required},
-        shipmentShippedSum: {required},
-        shipmentShippedAmount: {required},
-        shipmentCargoReceiver: {required},
-        shipmentTTH: {required},
-        shipmentAccountNumber: {required},
-        shipmentFundsReceived: {required},
-        shipmentFullFillmentComission: {required},
-        shipmentEarnings: {required},
+    //     shipmentPurchasePrice: {required},
+    //     shipmentSellingPrice: {required},
+    //     shipmentShippedSum: {required},
+    //     shipmentShippedAmount: {required},
+    //     shipmentCargoReceiver: {required},
+    //     shipmentTTH: {required},
+    //     shipmentAccountNumber: {required},
+    //     shipmentFundsReceived: {required},
+    //     shipmentFullFillmentComission: {required},
+    //     shipmentEarnings: {required},
 
-        earningTTH: {required},
-        earningShippingReceiptAmount: {required},
-        earningFullFillmentComission: {required},
-        earningEarning: {required}
-    },
+    //     earningTTH: {required},
+    //     earningShippingReceiptAmount: {required},
+    //     earningFullFillmentComission: {required},
+    //     earningEarning: {required}
+    // },
     methods:{
         getProjectDetails(){
             axios(
@@ -415,8 +416,6 @@ export default {
             }) 
         },
         SubmitFinance(){
-            this.$v.touch()
-            if(!this.$v.invalid){
                 axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/financing-save/',
                     {
                         project: localStorage.getItem('id'),
@@ -435,7 +434,7 @@ export default {
                 ).then((response) => {
                     this.getProjectDetails()
                 })
-            }
+            
         },
         SubmitWarehouse(){
             axios.post('http://127.0.0.1:8000/api/v1/admin/borrower/warehouse-save/',
@@ -504,11 +503,11 @@ export default {
     },
     mounted(){
         this.getProjectDetails()
-    },
-    watch(){
-        this.getProjectDetails(),
-        this.SubmitFinance()
     }
+    // watch(){
+    //     this.getProjectDetails(),
+    //     this.SubmitFinance()
+    // }
 }
 </script>
 
